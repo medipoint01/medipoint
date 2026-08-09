@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEDI POINT - Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>MEDI POINT | Admin Panel</title>
 
 <style>
 *{
@@ -14,121 +15,23 @@
 
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:#eef8f9;
-  color:#174f58;
+  background:#f5fafb;
+  color:#173f46;
 }
 
-.login-page{
-  min-height:100vh;
+/* HEADER */
+
+header{
+  height:72px;
+  background:#fff;
+  border-bottom:1px solid #e1eeee;
   display:flex;
   align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.login-box{
-  width:390px;
-  background:white;
-  padding:35px;
-  border-radius:16px;
-  box-shadow:0 12px 35px rgba(0,0,0,.12);
-}
-
-.logo{
-  text-align:center;
-  margin-bottom:25px;
-}
-
-.logo-icon{
-  width:55px;
-  height:55px;
-  background:#148d9e;
-  color:white;
-  display:grid;
-  place-items:center;
-  border-radius:10px;
-  font-size:38px;
-  margin:auto;
-}
-
-.logo h1{
-  margin-top:10px;
-  font-size:25px;
-}
-
-.logo p{
-  color:#78898c;
-  font-size:13px;
-  margin-top:4px;
-}
-
-input,select,textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #d7e6e7;
-  border-radius:7px;
-  margin-bottom:14px;
-  outline:none;
-  font-size:14px;
-}
-
-textarea{
-  height:100px;
-  resize:none;
-}
-
-label{
-  display:block;
-  font-size:13px;
-  font-weight:bold;
-  margin-bottom:6px;
-}
-
-button{
-  cursor:pointer;
-}
-
-.login-btn,
-.add-btn{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:7px;
-  background:#148d9e;
-  color:white;
-  font-weight:bold;
-  font-size:15px;
-}
-
-.login-btn:hover,
-.add-btn:hover{
-  background:#0d7482;
-}
-
-.error{
-  color:#d33;
-  text-align:center;
-  font-size:13px;
-  margin-top:12px;
-  display:none;
-}
-
-
-/* ADMIN */
-
-.admin-page{
-  display:none;
-  min-height:100vh;
-}
-
-.topbar{
-  height:70px;
-  background:white;
-  border-bottom:1px solid #dceaea;
-  display:flex;
   justify-content:space-between;
-  align-items:center;
   padding:0 6%;
+  position:sticky;
+  top:0;
+  z-index:20;
 }
 
 .brand{
@@ -137,169 +40,482 @@ button{
   gap:10px;
 }
 
-.brand-icon{
-  width:38px;
-  height:38px;
+.brand-mark{
+  width:42px;
+  height:42px;
+  border-radius:8px;
   background:#148d9e;
   color:#fff;
   display:grid;
   place-items:center;
-  border-radius:6px;
-  font-size:27px;
+  font-size:28px;
   font-weight:bold;
 }
 
 .brand h2{
+  color:#174f58;
   font-size:19px;
 }
 
+.brand small{
+  color:#7c898b;
+  font-size:9px;
+}
+
 .logout{
-  background:#e95757;
-  color:white;
   border:0;
-  padding:9px 18px;
-  border-radius:6px;
+  background:#eaf6f7;
+  color:#17606a;
+  padding:10px 17px;
+  border-radius:7px;
   font-weight:bold;
+  cursor:pointer;
 }
 
-.container{
-  width:90%;
-  max-width:1200px;
-  margin:35px auto;
+.logout:hover{
+  background:#d8eff1;
 }
 
-.heading{
+/* LOGIN */
+
+.login-page{
+  min-height:calc(100vh - 72px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px 20px;
+}
+
+.login-box{
+  width:100%;
+  max-width:430px;
+  background:#fff;
+  padding:32px;
+  border-radius:18px;
+  border:1px solid #e0eeee;
+  box-shadow:0 12px 40px rgba(0,0,0,.08);
+}
+
+.login-icon{
+  width:65px;
+  height:65px;
+  border-radius:16px;
+  background:#e5f7f8;
+  display:grid;
+  place-items:center;
+  font-size:32px;
+  margin:0 auto 18px;
+}
+
+.login-box h1{
+  text-align:center;
+  color:#174f58;
+  font-size:25px;
+  margin-bottom:7px;
+}
+
+.login-box p{
+  text-align:center;
+  color:#7b898b;
+  font-size:13px;
   margin-bottom:25px;
 }
 
-.heading h1{
-  font-size:30px;
+.form-group{
+  margin-bottom:18px;
 }
 
-.heading p{
-  color:#718387;
-  margin-top:6px;
+.form-group label{
+  display:block;
+  color:#174f58;
+  font-size:14px;
+  font-weight:bold;
+  margin-bottom:8px;
 }
 
-.dashboard{
-  display:grid;
-  grid-template-columns:380px 1fr;
-  gap:25px;
-  align-items:start;
-}
-
-.panel{
-  background:white;
-  border-radius:13px;
-  padding:25px;
-  box-shadow:0 6px 22px rgba(0,0,0,.06);
-}
-
-.panel h2{
-  margin-bottom:20px;
-  font-size:20px;
-}
-
-.preview{
+.form-group input,
+.form-group select,
+.form-group textarea{
   width:100%;
-  height:180px;
-  border:2px dashed #cbdfe1;
-  border-radius:10px;
-  display:grid;
-  place-items:center;
-  margin-bottom:15px;
-  overflow:hidden;
-  background:#f7fbfb;
-  color:#91a2a5;
+  border:1px solid #d8e7e8;
+  border-radius:9px;
+  padding:13px 14px;
+  outline:none;
+  font-size:14px;
+  color:#173f46;
+  background:#fff;
 }
 
-.preview img{
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:#148d9e;
+  box-shadow:0 0 0 3px rgba(20,141,158,.08);
+}
+
+.form-group textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.login-btn,
+.save-btn{
   width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.medicine-list{
-  display:grid;
-  gap:13px;
-}
-
-.medicine{
-  display:flex;
-  gap:15px;
-  border:1px solid #e2eeee;
-  padding:12px;
-  border-radius:10px;
-  align-items:center;
-}
-
-.medicine-img{
-  width:85px;
-  height:85px;
-  border-radius:8px;
-  overflow:hidden;
-  background:#eef8f9;
-  flex-shrink:0;
-}
-
-.medicine-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.medicine-info{
-  flex:1;
-}
-
-.medicine-info h3{
-  font-size:16px;
-  margin-bottom:5px;
-}
-
-.medicine-info p{
-  font-size:12px;
-  color:#77888a;
-  margin:3px 0;
-}
-
-.delete-btn{
-  background:#e95757;
-  color:white;
   border:0;
-  padding:8px 11px;
-  border-radius:5px;
-  font-size:12px;
+  border-radius:9px;
+  padding:13px;
+  background:#148d9e;
+  color:#fff;
+  font-weight:bold;
+  font-size:15px;
+  cursor:pointer;
 }
 
-.empty{
-  text-align:center;
-  padding:35px;
-  color:#89999b;
+.login-btn:hover,
+.save-btn:hover{
+  background:#0d7482;
 }
 
-.success{
+.error{
   display:none;
-  background:#e3f7e9;
-  color:#28733b;
+  background:#fff0f0;
+  color:#c44;
   padding:10px;
-  border-radius:6px;
+  border-radius:7px;
+  font-size:12px;
   margin-bottom:15px;
+  text-align:center;
+}
+
+/* ADMIN */
+
+.admin-page{
+  display:none;
+  padding:35px 6% 60px;
+}
+
+.admin-title{
+  max-width:1000px;
+  margin:0 auto 25px;
+}
+
+.admin-title h1{
+  color:#174f58;
+  font-size:30px;
+  margin-bottom:7px;
+}
+
+.admin-title p{
+  color:#7b898b;
   font-size:13px;
 }
 
-@media(max-width:850px){
-  .dashboard{
+/* FORM */
+
+.form-section{
+  max-width:1000px;
+  margin:0 auto 30px;
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  border:1px solid #e1eeee;
+  box-shadow:0 8px 30px rgba(0,0,0,.05);
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding-bottom:20px;
+  margin-bottom:25px;
+  border-bottom:1px solid #e6eeee;
+}
+
+.section-icon{
+  width:52px;
+  height:52px;
+  border-radius:13px;
+  background:#e5f7f8;
+  display:grid;
+  place-items:center;
+  font-size:26px;
+}
+
+.section-title h2{
+  color:#174f58;
+  font-size:22px;
+  margin-bottom:4px;
+}
+
+.section-title p{
+  color:#7b898b;
+  font-size:12px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.form-group small{
+  display:block;
+  color:#899698;
+  font-size:11px;
+  margin-top:6px;
+}
+
+/* PRICE */
+
+.price-box{
+  position:relative;
+}
+
+.price-symbol{
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#148d9e;
+  font-weight:bold;
+  font-size:17px;
+}
+
+.price-box input{
+  padding-left:34px;
+}
+
+/* IMAGE */
+
+.upload-box{
+  border:2px dashed #cfe3e4;
+  background:#f9fcfc;
+  border-radius:14px;
+  padding:28px 20px;
+  text-align:center;
+}
+
+.upload-box:hover{
+  border-color:#148d9e;
+}
+
+.upload-icon{
+  font-size:38px;
+  margin-bottom:8px;
+}
+
+.upload-box h3{
+  color:#174f58;
+  font-size:17px;
+  margin-bottom:6px;
+}
+
+.upload-box p{
+  color:#849395;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+.choose-btn{
+  display:inline-block;
+  background:#148d9e;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:7px;
+  font-size:13px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.choose-btn:hover{
+  background:#0d7482;
+}
+
+.preview{
+  margin-top:15px;
+  display:none;
+  text-align:center;
+}
+
+.preview img{
+  width:180px;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
+  border:1px solid #dce8e8;
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
+}
+
+/* SAVE */
+
+.save-btn{
+  margin-top:5px;
+  font-size:15px;
+  padding:14px;
+}
+
+/* PRODUCTS */
+
+.products-section{
+  max-width:1000px;
+  margin:0 auto;
+}
+
+.products-section h2{
+  color:#174f58;
+  margin-bottom:15px;
+}
+
+.product-list{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.admin-product{
+  background:#fff;
+  border:1px solid #e1eeee;
+  border-radius:13px;
+  overflow:hidden;
+  box-shadow:0 5px 18px rgba(0,0,0,.05);
+}
+
+.admin-product-img{
+  height:170px;
+  background:#eef8f8;
+  display:grid;
+  place-items:center;
+  font-size:55px;
+  overflow:hidden;
+}
+
+.admin-product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.admin-product-info{
+  padding:15px;
+}
+
+.admin-product-info h3{
+  color:#174f58;
+  font-size:16px;
+  margin-bottom:6px;
+}
+
+.category-name{
+  display:inline-block;
+  background:#eaf7f8;
+  color:#148697;
+  font-size:11px;
+  padding:5px 8px;
+  border-radius:5px;
+  margin-bottom:8px;
+}
+
+.admin-price{
+  color:#148d9e;
+  font-size:18px;
+  font-weight:bold;
+  margin:5px 0;
+}
+
+.admin-desc{
+  color:#7b898b;
+  font-size:12px;
+  line-height:1.5;
+  margin-bottom:12px;
+}
+
+.delete-btn{
+  width:100%;
+  border:0;
+  border-radius:7px;
+  padding:9px;
+  background:#fff0f0;
+  color:#c44;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.delete-btn:hover{
+  background:#ffe0e0;
+}
+
+.empty-products{
+  background:#fff;
+  border:1px solid #e1eeee;
+  border-radius:12px;
+  padding:35px;
+  text-align:center;
+  color:#7b898b;
+}
+
+/* MESSAGE */
+
+.message{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#123f47;
+  color:#fff;
+  padding:13px 18px;
+  border-radius:8px;
+  display:none;
+  z-index:100;
+  box-shadow:0 6px 20px rgba(0,0,0,.15);
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+  .form-grid{
     grid-template-columns:1fr;
   }
 
-  .topbar{
+  .full{
+    grid-column:auto;
+  }
+
+  .product-list{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media(max-width:550px){
+
+  header{
     padding:0 4%;
   }
 
-  .container{
-    width:94%;
+  .brand small{
+    display:none;
   }
+
+  .admin-page{
+    padding:25px 15px 50px;
+  }
+
+  .form-section{
+    padding:20px;
+  }
+
+  .admin-title h1{
+    font-size:25px;
+  }
+
+  .product-list{
+    grid-template-columns:1fr;
+  }
+
 }
 </style>
 </head>
@@ -307,505 +523,978 @@ button{
 <body>
 
 
-<!-- LOGIN -->
+<!-- HEADER -->
 
-<div class="login-page" id="loginPage">
+<header>
 
-<div class="login-box">
+  <div class="brand">
 
-<div class="logo">
+    <div class="brand-mark">+</div>
 
-<div class="logo-icon">+</div>
+    <div>
+      <h2>MEDI POINT</h2>
+      <small>Admin Management Panel</small>
+    </div>
 
-<h1>MEDI POINT</h1>
+  </div>
 
-<p>Admin Panel</p>
-
-</div>
-
-<form onsubmit="login(event)">
-
-<label>Username</label>
-
-<input
-type="text"
-id="username"
-placeholder="Enter username"
-required
->
-
-<label>Password</label>
-
-<input
-type="password"
-id="password"
-placeholder="Enter password"
-required
->
-
-<button class="login-btn">
-Login
-</button>
-
-<div class="error" id="loginError">
-Invalid username or password
-</div>
-
-</form>
-
-</div>
-
-</div>
-
-
-<!-- ADMIN -->
-
-<div class="admin-page" id="adminPage">
-
-<header class="topbar">
-
-<div class="brand">
-
-<div class="brand-icon">+</div>
-
-<h2>MEDI POINT Admin</h2>
-
-</div>
-
-<button class="logout" onclick="logout()">
-Logout
-</button>
+  <button
+    class="logout"
+    id="logoutBtn"
+    onclick="logout()"
+    style="display:none"
+  >
+    Logout
+  </button>
 
 </header>
 
 
-<div class="container">
+<!-- LOGIN PAGE -->
 
-<div class="heading">
+<div class="login-page" id="loginPage">
 
-<h1>Medicine Management</h1>
+  <div class="login-box">
 
-<p>
-Add medicines with pictures and assign them to categories.
-</p>
+    <div class="login-icon">
+      🔐
+    </div>
 
-</div>
+    <h1>Admin Login</h1>
 
+    <p>
+      Login to manage MEDI POINT medicines
+    </p>
 
-<div class="dashboard">
-
-
-<!-- ADD MEDICINE -->
-
-<div class="panel">
-
-<h2>Add Medicine</h2>
-
-<div class="success" id="success">
-Medicine added successfully!
-</div>
-
-<form onsubmit="addMedicine(event)">
-
-<label>Medicine Name</label>
-
-<input
-type="text"
-id="medicineName"
-placeholder="Example: Paracetamol 500mg"
-required
->
+    <div
+      class="error"
+      id="loginError"
+    >
+      Incorrect username or password
+    </div>
 
 
-<label>Category</label>
+    <div class="form-group">
 
-<select id="medicineCategory" required>
+      <label for="username">
+        👤 Username
+      </label>
 
-<option value="">Select Category</option>
+      <input
+        type="text"
+        id="username"
+        placeholder="Enter admin username"
+      >
 
-<option value="antibiotic">Antibiotic</option>
-<option value="cough-cold">Cough & Cold</option>
-<option value="cut-pain">Cut & Pain</option>
-<option value="wound-fever">Wound & Fever</option>
-<option value="baby-care">Baby Care</option>
-<option value="eye-care">Eye Care</option>
-<option value="skin-hair-care">Skin & Hair Care</option>
-<option value="itching">Itching</option>
-<option value="allergy">Allergy</option>
-<option value="multi-vitamin">Multi Vitamin</option>
-<option value="sexual-wellness">Sexual Wellness</option>
-<option value="feminine-care-hygiene">
-Feminine Care / Hygiene
-</option>
-<option value="period-care">Period Care</option>
-<option value="fracture-care">Fracture Care</option>
-<option value="sanitary-antiseptic">
-Sanitary & Antiseptic
-</option>
-<option value="baby-food">Baby Food</option>
-<option value="gastric-acidity">
-Gastric & Acidity
-</option>
-<option value="diabetes-bp-care">
-Diabetes & BP Care
-</option>
-<option value="calcium-iron">
-Calcium & Iron
-</option>
-<option value="first-aid-medical-supplies">
-First Aid & Medical Supplies
-</option>
-
-</select>
+    </div>
 
 
-<label>Price</label>
+    <div class="form-group">
 
-<input
-type="number"
-id="medicinePrice"
-placeholder="Enter price"
-min="0"
->
+      <label for="password">
+        🔐 Password
+      </label>
 
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter admin password"
+      >
 
-<label>Medicine Details</label>
-
-<textarea
-id="medicineDetails"
-placeholder="Enter medicine details"
-></textarea>
+    </div>
 
 
-<label>Medicine Picture</label>
+    <button
+      class="login-btn"
+      onclick="login()"
+    >
+      Login to Admin Panel
+    </button>
 
-<input
-type="file"
-id="medicineImage"
-accept="image/*"
-onchange="previewImage(event)"
->
-
-
-<div class="preview" id="preview">
-Medicine image preview
-</div>
-
-
-<button class="add-btn">
-+ Add Medicine
-</button>
-
-</form>
+  </div>
 
 </div>
 
 
-<!-- MEDICINE LIST -->
-
-<div class="panel">
-
-<h2>Added Medicines</h2>
+<!-- ADMIN PAGE -->
 
 <div
-class="medicine-list"
-id="medicineList">
-</div>
+  class="admin-page"
+  id="adminPage"
+>
+
+  <div class="admin-title">
+
+    <h1>Admin Dashboard</h1>
+
+    <p>
+      Add and manage medicines available on MEDI POINT.
+    </p>
+
+  </div>
+
+
+  <!-- ADD MEDICINE -->
+
+  <div class="form-section">
+
+    <div class="section-title">
+
+      <div class="section-icon">
+        💊
+      </div>
+
+      <div>
+
+        <h2>Add New Medicine</h2>
+
+        <p>
+          Enter medicine information below
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-grid">
+
+
+      <!-- MEDICINE NAME -->
+
+      <div class="form-group">
+
+        <label for="medicineName">
+          💊 Medicine Name
+        </label>
+
+        <input
+          type="text"
+          id="medicineName"
+          placeholder="Example: Paracetamol 500mg"
+        >
+
+        <small>
+          Enter complete medicine name and strength.
+        </small>
+
+      </div>
+
+
+      <!-- CATEGORY -->
+
+      <div class="form-group">
+
+        <label for="medicineCategory">
+          🗂️ Category
+        </label>
+
+        <select id="medicineCategory">
+
+          <option value="">
+            Select medicine category
+          </option>
+
+          <option value="antibiotic">
+            Antibiotic
+          </option>
+
+          <option value="cough-cold">
+            Cough & Cold
+          </option>
+
+          <option value="cut-pain">
+            Cut & Pain
+          </option>
+
+          <option value="wound-fever">
+            Wound & Fever
+          </option>
+
+          <option value="baby-care">
+            Baby Care
+          </option>
+
+          <option value="eye-care">
+            Eye Care
+          </option>
+
+          <option value="skin-hair-care">
+            Skin & Hair Care
+          </option>
+
+          <option value="itching">
+            Itching
+          </option>
+
+          <option value="allergy">
+            Allergy
+          </option>
+
+          <option value="multi-vitamin">
+            Multi Vitamin
+          </option>
+
+          <option value="sexual-wellness">
+            Sexual Wellness
+          </option>
+
+          <option value="feminine-care-hygiene">
+            Feminine Care / Hygiene
+          </option>
+
+          <option value="period-care">
+            Period Care
+          </option>
+
+          <option value="fracture-care">
+            Fracture Care
+          </option>
+
+          <option value="sanitary-antiseptic">
+            Sanitary & Antiseptic
+          </option>
+
+          <option value="baby-food">
+            Baby Food
+          </option>
+
+          <option value="gastric-acidity">
+            Gastric & Acidity
+          </option>
+
+          <option value="diabetes-bp-care">
+            Diabetes & BP Care
+          </option>
+
+          <option value="calcium-iron">
+            Calcium & Iron
+          </option>
+
+          <option value="first-aid-medical-supplies">
+            First Aid & Medical Supplies
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <!-- PRICE -->
+
+      <div class="form-group">
+
+        <label for="medicinePrice">
+          💰 Price
+        </label>
+
+        <div class="price-box">
+
+          <span class="price-symbol">₹</span>
+
+          <input
+            type="number"
+            id="medicinePrice"
+            placeholder="Enter price"
+            min="0"
+            step="0.01"
+          >
+
+        </div>
+
+      </div>
+
+
+      <!-- DETAILS -->
+
+      <div class="form-group">
+
+        <label for="medicineDetails">
+          📝 Medicine Details
+        </label>
+
+        <input
+          type="text"
+          id="medicineDetails"
+          placeholder="Example: Used for fever and mild pain"
+        >
+
+      </div>
+
+
+      <!-- IMAGE -->
+
+      <div class="form-group full">
+
+        <label>
+          🖼️ Medicine Picture
+        </label>
+
+        <div class="upload-box">
+
+          <div class="upload-icon">
+            📷
+          </div>
+
+          <h3>
+            Upload Medicine Image
+          </h3>
+
+          <p>
+            Use a clear JPG, PNG or WEBP image
+          </p>
+
+          <label
+            for="medicineImage"
+            class="choose-btn"
+          >
+            Choose Image
+          </label>
+
+          <input
+            type="file"
+            id="medicineImage"
+            accept="image/*"
+            onchange="previewImage(event)"
+            hidden
+          >
+
+        </div>
+
+
+        <div
+          class="preview"
+          id="imagePreview"
+        >
+
+          <img id="previewImg">
+
+        </div>
+
+      </div>
+
+
+      <!-- SAVE -->
+
+      <div class="form-group full">
+
+        <button
+          class="save-btn"
+          onclick="addMedicine()"
+        >
+          💾 Add Medicine
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MEDICINE LIST -->
+
+  <div class="products-section">
+
+    <h2>
+      📦 Added Medicines
+    </h2>
+
+    <div
+      class="product-list"
+      id="productList"
+    ></div>
+
+  </div>
 
 </div>
 
-</div>
 
-</div>
+<!-- MESSAGE -->
 
-</div>
+<div
+  class="message"
+  id="message"
+></div>
 
 
 <script>
 
-/* LOGIN */
+/* ==========================================
+   ADMIN LOGIN
+========================================== */
+
+/*
+   Yahan apna username/password change
+   kar sakte ho.
+*/
 
 const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "admin123";
+const ADMIN_PASSWORD = "1234";
 
 
-function login(event){
+function login(){
 
-event.preventDefault();
+  const username =
+    document
+    .getElementById("username")
+    .value
+    .trim();
 
-const username =
-document.getElementById("username").value;
+  const password =
+    document
+    .getElementById("password")
+    .value;
 
-const password =
-document.getElementById("password").value;
 
-if(
-username === ADMIN_USERNAME &&
-password === ADMIN_PASSWORD
-){
+  if(
+    username === ADMIN_USERNAME &&
+    password === ADMIN_PASSWORD
+  ){
 
-localStorage.setItem("mediPointAdmin","true");
+    sessionStorage.setItem(
+      "mediPointAdmin",
+      "true"
+    );
 
-showAdmin();
+    showAdmin();
 
-}else{
+  }else{
 
-document.getElementById("loginError").style.display="block";
+    document
+      .getElementById("loginError")
+      .style.display = "block";
+
+  }
 
 }
 
-}
 
+/* ==========================================
+   SHOW ADMIN
+========================================== */
 
 function showAdmin(){
 
-document.getElementById("loginPage").style.display="none";
+  document
+    .getElementById("loginPage")
+    .style.display = "none";
 
-document.getElementById("adminPage").style.display="block";
+  document
+    .getElementById("adminPage")
+    .style.display = "block";
 
-loadMedicines();
+  document
+    .getElementById("logoutBtn")
+    .style.display = "block";
+
+  renderProducts();
 
 }
 
+
+/* ==========================================
+   LOGOUT
+========================================== */
 
 function logout(){
 
-localStorage.removeItem("mediPointAdmin");
+  sessionStorage.removeItem(
+    "mediPointAdmin"
+  );
 
-location.reload();
+  location.reload();
 
 }
 
 
-if(localStorage.getItem("mediPointAdmin")==="true"){
-showAdmin();
-}
-
-
-/* IMAGE PREVIEW */
+/* ==========================================
+   IMAGE PREVIEW
+========================================== */
 
 let selectedImage = "";
 
+
 function previewImage(event){
 
-const file = event.target.files[0];
+  const file =
+    event.target.files[0];
 
-if(!file) return;
+  if(!file){
 
-const reader = new FileReader();
+    selectedImage = "";
 
-reader.onload=function(e){
+    document
+      .getElementById("imagePreview")
+      .style.display = "none";
 
-selectedImage=e.target.result;
+    return;
 
-document.getElementById("preview").innerHTML=
-`<img src="${e.target.result}" alt="Medicine">`;
-
-};
-
-reader.readAsDataURL(file);
-
-}
+  }
 
 
-/* ADD MEDICINE */
-
-function addMedicine(event){
-
-event.preventDefault();
-
-const name =
-document.getElementById("medicineName").value.trim();
-
-const category =
-document.getElementById("medicineCategory").value;
-
-const price =
-document.getElementById("medicinePrice").value;
-
-const details =
-document.getElementById("medicineDetails").value.trim();
+  const reader =
+    new FileReader();
 
 
-const medicine={
+  reader.onload = function(e){
 
-id:Date.now(),
+    selectedImage = e.target.result;
 
-name:name,
+    document
+      .getElementById("previewImg")
+      .src = selectedImage;
 
-category:category,
+    document
+      .getElementById("imagePreview")
+      .style.display = "block";
 
-price:price,
-
-details:details,
-
-image:selectedImage
-
-};
+  };
 
 
-const medicines =
-JSON.parse(
-localStorage.getItem("mediPointMedicines") || "[]"
-);
-
-medicines.push(medicine);
-
-localStorage.setItem(
-"mediPointMedicines",
-JSON.stringify(medicines)
-);
-
-
-/* RESET */
-
-event.target.reset();
-
-selectedImage="";
-
-document.getElementById("preview").innerHTML=
-"Medicine image preview";
-
-document.getElementById("success").style.display="block";
-
-setTimeout(function(){
-
-document.getElementById("success").style.display="none";
-
-},2000);
-
-
-loadMedicines();
+  reader.readAsDataURL(file);
 
 }
 
 
-/* LOAD MEDICINES */
+/* ==========================================
+   SHOW MESSAGE
+========================================== */
 
-function loadMedicines(){
+function showMessage(text){
 
-const medicines =
-JSON.parse(
-localStorage.getItem("mediPointMedicines") || "[]"
-);
+  const message =
+    document.getElementById("message");
 
-const list =
-document.getElementById("medicineList");
+  message.textContent = text;
 
+  message.style.display = "block";
 
-if(medicines.length===0){
+  setTimeout(function(){
 
-list.innerHTML=`
-<div class="empty">
-No medicines added yet.
-</div>
-`;
+    message.style.display = "none";
 
-return;
+  },1800);
 
 }
 
 
-list.innerHTML=medicines.map(function(m){
+/* ==========================================
+   ADD MEDICINE
+========================================== */
 
-return `
+function addMedicine(){
 
-<div class="medicine">
+  const name =
+    document
+    .getElementById("medicineName")
+    .value
+    .trim();
 
-<div class="medicine-img">
 
-${
-m.image
-?
-`<img src="${m.image}" alt="${escapeHtml(m.name)}">`
-:
-`<div style="
-height:100%;
-display:grid;
-place-items:center;
-font-size:35px;
-">💊</div>`
+  const category =
+    document
+    .getElementById("medicineCategory")
+    .value;
+
+
+  const price =
+    document
+    .getElementById("medicinePrice")
+    .value;
+
+
+  const details =
+    document
+    .getElementById("medicineDetails")
+    .value
+    .trim();
+
+
+  /* VALIDATION */
+
+  if(!name){
+
+    alert("Please enter medicine name.");
+
+    return;
+
+  }
+
+
+  if(!category){
+
+    alert("Please select medicine category.");
+
+    return;
+
+  }
+
+
+  if(price === ""){
+
+    alert("Please enter medicine price.");
+
+    return;
+
+  }
+
+
+  /* OLD PRODUCTS */
+
+  let products =
+    JSON.parse(
+      localStorage.getItem(
+        "mediPointProducts"
+      ) || "[]"
+    );
+
+
+  /* NEW MEDICINE */
+
+  const medicine = {
+
+    id:Date.now(),
+
+    name:name,
+
+    category:category,
+
+    price:Number(price),
+
+    desc:details,
+
+    description:details,
+
+    image:selectedImage,
+
+    createdAt:new Date().toISOString()
+
+  };
+
+
+  /* SAVE */
+
+  products.push(medicine);
+
+
+  localStorage.setItem(
+    "mediPointProducts",
+    JSON.stringify(products)
+  );
+
+
+  /* CLEAR FORM */
+
+  document
+    .getElementById("medicineName")
+    .value = "";
+
+  document
+    .getElementById("medicineCategory")
+    .value = "";
+
+  document
+    .getElementById("medicinePrice")
+    .value = "";
+
+  document
+    .getElementById("medicineDetails")
+    .value = "";
+
+  document
+    .getElementById("medicineImage")
+    .value = "";
+
+
+  selectedImage = "";
+
+  document
+    .getElementById("imagePreview")
+    .style.display = "none";
+
+
+  /* UPDATE LIST */
+
+  renderProducts();
+
+
+  showMessage(
+    "Medicine added successfully ✓"
+  );
+
 }
 
-</div>
 
-
-<div class="medicine-info">
-
-<h3>
-${escapeHtml(m.name)}
-</h3>
-
-<p>
-Category: ${escapeHtml(m.category)}
-</p>
-
-${m.price ? `
-<p>
-Price: ₹${escapeHtml(m.price)}
-</p>
-` : ""}
-
-${m.details ? `
-<p>
-${escapeHtml(m.details)}
-</p>
-` : ""}
-
-</div>
-
-
-<button
-class="delete-btn"
-onclick="deleteMedicine(${m.id})">
-Delete
-</button>
-
-</div>
-
-`;
-
-}).join("");
-
-}
-
-
-/* DELETE */
+/* ==========================================
+   DELETE MEDICINE
+========================================== */
 
 function deleteMedicine(id){
 
-if(!confirm("Delete this medicine?")) return;
+  if(
+    !confirm(
+      "Are you sure you want to delete this medicine?"
+    )
+  ){
 
-let medicines =
-JSON.parse(
-localStorage.getItem("mediPointMedicines") || "[]"
-);
+    return;
 
-medicines =
-medicines.filter(function(m){
-return m.id !== id;
-});
+  }
 
-localStorage.setItem(
-"mediPointMedicines",
-JSON.stringify(medicines)
-);
 
-loadMedicines();
+  let products =
+    JSON.parse(
+      localStorage.getItem(
+        "mediPointProducts"
+      ) || "[]"
+    );
+
+
+  products =
+    products.filter(
+      p => Number(p.id) !== Number(id)
+    );
+
+
+  localStorage.setItem(
+    "mediPointProducts",
+    JSON.stringify(products)
+  );
+
+
+  renderProducts();
+
+
+  showMessage(
+    "Medicine deleted ✓"
+  );
 
 }
 
 
-/* SECURITY */
+/* ==========================================
+   CATEGORY DISPLAY NAMES
+========================================== */
 
-function escapeHtml(text){
+const categoryNames = {
 
-return String(text)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+  "antibiotic":
+    "Antibiotic",
+
+  "cough-cold":
+    "Cough & Cold",
+
+  "cut-pain":
+    "Cut & Pain",
+
+  "wound-fever":
+    "Wound & Fever",
+
+  "baby-care":
+    "Baby Care",
+
+  "eye-care":
+    "Eye Care",
+
+  "skin-hair-care":
+    "Skin & Hair Care",
+
+  "itching":
+    "Itching",
+
+  "allergy":
+    "Allergy",
+
+  "multi-vitamin":
+    "Multi Vitamin",
+
+  "sexual-wellness":
+    "Sexual Wellness",
+
+  "feminine-care-hygiene":
+    "Feminine Care / Hygiene",
+
+  "period-care":
+    "Period Care",
+
+  "fracture-care":
+    "Fracture Care",
+
+  "sanitary-antiseptic":
+    "Sanitary & Antiseptic",
+
+  "baby-food":
+    "Baby Food",
+
+  "gastric-acidity":
+    "Gastric & Acidity",
+
+  "diabetes-bp-care":
+    "Diabetes & BP Care",
+
+  "calcium-iron":
+    "Calcium & Iron",
+
+  "first-aid-medical-supplies":
+    "First Aid & Medical Supplies"
+
+};
+
+
+/* ==========================================
+   RENDER PRODUCTS
+========================================== */
+
+function renderProducts(){
+
+  const list =
+    document.getElementById(
+      "productList"
+    );
+
+
+  const products =
+    JSON.parse(
+      localStorage.getItem(
+        "mediPointProducts"
+      ) || "[]"
+    );
+
+
+  if(!products.length){
+
+    list.innerHTML = `
+
+      <div class="empty-products">
+
+        💊
+
+        <br><br>
+
+        No medicines added yet.
+
+        <br>
+
+        Add your first medicine above.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    products
+    .slice()
+    .reverse()
+    .map(function(p){
+
+      const image =
+        p.image || "";
+
+
+      const category =
+        categoryNames[p.category]
+        || p.category
+        || "Medicine";
+
+
+      return `
+
+        <div class="admin-product">
+
+          <div class="admin-product-img">
+
+            ${
+              image
+
+              ?
+
+              `<img
+                src="${image}"
+                alt="${p.name}"
+              >`
+
+              :
+
+              "💊"
+            }
+
+          </div>
+
+
+          <div class="admin-product-info">
+
+            <span class="category-name">
+              ${category}
+            </span>
+
+            <h3>
+              ${escapeHTML(p.name)}
+            </h3>
+
+            <div class="admin-price">
+              ₹${Number(p.price || 0).toLocaleString("en-IN")}
+            </div>
+
+            <div class="admin-desc">
+              ${escapeHTML(
+                p.desc ||
+                p.description ||
+                "No details added"
+              )}
+            </div>
+
+            <button
+              class="delete-btn"
+              onclick="deleteMedicine(${Number(p.id)})"
+            >
+              🗑️ Delete Medicine
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    })
+    .join("");
+
+}
+
+
+/* ==========================================
+   HTML ESCAPE
+========================================== */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ==========================================
+   CHECK LOGIN
+========================================== */
+
+if(
+  sessionStorage.getItem(
+    "mediPointAdmin"
+  ) === "true"
+){
+
+  showAdmin();
 
 }
 
