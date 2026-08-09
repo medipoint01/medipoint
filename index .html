@@ -3,191 +3,1322 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MEDI POINT | Good Health, Better Life</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Arial,Helvetica,sans-serif;color:#173f46;background:#fff}
-a{text-decoration:none;color:inherit}
-header{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;background:#fff;border-bottom:1px solid #e5eeee;position:sticky;top:0;z-index:20}
-.brand{display:flex;align-items:center;gap:9px}
-.brand-mark{width:36px;height:36px;border-radius:5px;background:#1692a2;color:#fff;display:grid;place-items:center;font-size:27px;font-weight:700}
-.brand h2{font-size:18px;letter-spacing:.5px;color:#174b53}
-.brand small{display:block;font-size:7px;color:#77888a;letter-spacing:.3px;margin-top:1px}
-nav{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:600}
-nav a:hover{color:#118899}
-.call{background:#13899a;color:#fff;border:0;border-radius:6px;padding:10px 22px;font-weight:700;cursor:pointer}
-.menu{display:none;border:0;background:none;font-size:27px;color:#174b53}
-.hero{min-height:375px;display:flex;align-items:center;padding:42px 7%;background:
-linear-gradient(90deg,#e4f6f7 0%,rgba(228,246,247,.94) 34%,rgba(228,246,247,.38) 68%,rgba(228,246,247,.15) 100%),
-url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1800&q=85');
-background-size:cover;background-position:center}
-.hero-content{max-width:450px}
-.hero h1{font-size:48px;line-height:1.02;color:#145766;margin-bottom:15px}
-.hero p{font-size:14px;line-height:1.6;color:#3e6268;max-width:320px;margin-bottom:19px}
-.actions{display:flex;gap:9px}
-.btn{border:0;border-radius:5px;padding:11px 20px;font-weight:700;cursor:pointer}
-.primary{background:#148d9e;color:#fff}.wa{background:#fff;color:#167a69;border:1px solid #d5e2e2}
-.quick{width:90%;margin:-30px auto 0;position:relative;z-index:5;background:#fff;border-radius:7px;box-shadow:0 8px 28px rgba(0,0,0,.12);display:grid;grid-template-columns:repeat(6,1fr);overflow:hidden}
-.quick-item{min-height:92px;display:grid;place-items:center;text-align:center;padding:12px 5px;border-right:1px solid #e6eeee;font-size:11px;font-weight:700;color:#34595f;transition:.2s}
-.quick-item:last-child{border:0}.quick-item:hover{background:#f0fbfc}.icon{font-size:23px;margin-bottom:6px}
-section{padding:72px 7%}.title{text-align:center;margin-bottom:38px}.title h2{font-size:31px;color:#174f58;margin-bottom:8px}.title p{color:#718387;font-size:14px}
-.services{background:#f7fbfb}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.card{background:#fff;border:1px solid #e5eeee;border-radius:12px;padding:25px;box-shadow:0 5px 18px rgba(0,0,0,.05);transition:.25s}
-.card:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(0,0,0,.09)}
-.card-icon{width:54px;height:54px;border-radius:12px;background:#e4f6f7;display:grid;place-items:center;font-size:26px;margin-bottom:16px}
-.card h3{font-size:18px;color:#174f58;margin-bottom:8px}.card p{font-size:13px;color:#718286;line-height:1.65}
-.about{background:#eaf8f9}.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}.about-img{height:330px;border-radius:15px;background:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85') center/cover}.about h2{font-size:34px;color:#174f58;margin-bottom:15px}.about p{color:#64797c;line-height:1.75;margin-bottom:12px}.ticks{list-style:none;margin-top:17px}.ticks li{margin:10px 0;font-weight:700;color:#345e64}.ticks li:before{content:'✓';color:#118e9e;margin-right:9px}
-.products{background:#fff}.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{border:1px solid #e1eded;border-radius:12px;overflow:hidden}.product-img{height:175px;background:#f0f9fa;display:grid;place-items:center;font-size:65px}.product-info{padding:16px}.product h3{font-size:16px;margin-bottom:7px;color:#174f58}.product p{font-size:12px;color:#77878a;margin-bottom:10px}.price{font-weight:800;color:#148b9c}
-.contact{background:#f7fbfb}.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:25px}.contact-box{background:#e8f7f8;border-radius:13px;padding:28px}.contact-box h3{font-size:25px;margin-bottom:16px;color:#174f58}.contact-box p{color:#667c80;line-height:1.7;margin:13px 0}.form{background:#fff;padding:28px;border-radius:13px}.form input,.form textarea{width:100%;padding:13px;border:1px solid #dce9e9;border-radius:7px;margin-bottom:13px;outline:none}.form textarea{height:120px;resize:none}.form button{background:#148d9e;color:#fff;border:0;padding:12px 24px;border-radius:7px;font-weight:700;cursor:pointer}
-footer{background:#123f47;color:#fff;padding:40px 7% 18px}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;margin-bottom:30px}.footer-grid h3{margin-bottom:12px}.footer-grid p,.footer-grid li{font-size:13px;color:#b9ced1;line-height:1.7;list-style:none;margin:5px 0}.copy{text-align:center;border-top:1px solid #ffffff22;padding-top:17px;color:#aac1c4;font-size:12px}
-.float{position:fixed;right:22px;bottom:22px;width:53px;height:53px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;font-size:25px;box-shadow:0 6px 18px #0002;z-index:30}
-@media(max-width:900px){nav{display:none}.menu{display:block}.quick{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(2,1fr)}.product-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:650px){.hero{min-height:500px;padding:45px 7%;background-position:65% center}.hero h1{font-size:39px}.quick{grid-template-columns:repeat(2,1fr);margin-top:-15px}.grid,.about-wrap,.contact-wrap,.product-grid,.footer-grid{grid-template-columns:1fr}.about-img{height:260px}section{padding:58px 6%}.title h2{font-size:27px}}
-nav.open{display:flex}@media(max-width:650px){nav.open{position:absolute;top:72px;left:0;width:100%;background:#fff;flex-direction:column;align-items:stretch;gap:0;padding:8px 0;box-shadow:0 10px 20px #0001}nav.open a{padding:14px 6%;border-bottom:1px solid #eee}nav.open .call{margin:10px 6%}} 
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
+html{
+  scroll-behavior:smooth;
+}
 
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:#173f46;
+  background:#fff;
+}
 
+a{
+  text-decoration:none;
+  color:inherit;
+}
 
+/* HEADER */
 
-.product{display:flex;flex-direction:column}
-.product-info{flex:1}
+header{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+  background:#fff;
+  border-bottom:1px solid #e5eeee;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
 
+.brand{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
 
-.no-products{text-align:center;color:#7b898b;display:none;padding:30px}
+.brand-mark{
+  width:36px;
+  height:36px;
+  border-radius:5px;
+  background:#1692a2;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:27px;
+  font-weight:700;
+}
 
+.brand h2{
+  font-size:18px;
+  letter-spacing:.5px;
+  color:#174b53;
+}
 
+.brand small{
+  display:block;
+  font-size:7px;
+  color:#77888a;
+  letter-spacing:.3px;
+  margin-top:1px;
+}
 
+nav{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  font-size:13px;
+  font-weight:600;
+}
 
+nav a:hover{
+  color:#118899;
+}
 
+.call{
+  background:#13899a;
+  color:#fff;
+  border:0;
+  border-radius:6px;
+  padding:10px 22px;
+  font-weight:700;
+  cursor:pointer;
+}
 
+.menu{
+  display:none;
+  border:0;
+  background:none;
+  font-size:27px;
+  color:#174b53;
+  cursor:pointer;
+}
 
-.cart-row small{display:block;color:#7c898b;margin-top:3px}
+/* HERO */
 
+.hero{
+  min-height:375px;
+  display:flex;
+  align-items:center;
+  padding:42px 7%;
 
+  background:
+  linear-gradient(
+    90deg,
+    #e4f6f7 0%,
+    rgba(228,246,247,.94) 34%,
+    rgba(228,246,247,.38) 68%,
+    rgba(228,246,247,.15) 100%
+  ),
+  url("https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1800&q=85");
 
+  background-size:cover;
+  background-position:center;
+}
 
+.hero-content{
+  max-width:450px;
+}
 
-@media(max-width:650px){.cart-row .qty,.cart-row }
-.product-img img{width:100%;height:100%;object-fit:cover}.product-img{overflow:hidden}.view-category-btn{width:100%;margin-top:8px;padding:10px;border:0;border-radius:7px;background:#148d9e;color:#fff;font-weight:700;cursor:pointer}.view-category-btn:hover{background:#0d7482}</style>
+.hero h1{
+  font-size:48px;
+  line-height:1.02;
+  color:#145766;
+  margin-bottom:15px;
+}
+
+.hero p{
+  font-size:14px;
+  line-height:1.6;
+  color:#3e6268;
+  max-width:320px;
+  margin-bottom:19px;
+}
+
+.actions{
+  display:flex;
+  gap:9px;
+}
+
+.btn{
+  border:0;
+  border-radius:5px;
+  padding:11px 20px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.primary{
+  background:#148d9e;
+  color:#fff;
+}
+
+.wa{
+  background:#fff;
+  color:#167a69;
+  border:1px solid #d5e2e2;
+}
+
+/* QUICK */
+
+.quick{
+  width:90%;
+  margin:-30px auto 0;
+  position:relative;
+  z-index:5;
+  background:#fff;
+  border-radius:7px;
+  box-shadow:0 8px 28px rgba(0,0,0,.12);
+
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  overflow:hidden;
+}
+
+.quick-item{
+  min-height:92px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:12px 5px;
+  border-right:1px solid #e6eeee;
+  font-size:11px;
+  font-weight:700;
+  color:#34595f;
+  transition:.2s;
+}
+
+.quick-item:last-child{
+  border:0;
+}
+
+.quick-item:hover{
+  background:#f0fbfc;
+}
+
+.icon{
+  font-size:23px;
+  margin-bottom:6px;
+}
+
+/* SECTIONS */
+
+section{
+  padding:72px 7%;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:38px;
+}
+
+.title h2{
+  font-size:31px;
+  color:#174f58;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#718387;
+  font-size:14px;
+}
+
+/* CATEGORIES */
+
+.products{
+  background:#fff;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.product{
+  border:1px solid #e1eded;
+  border-radius:12px;
+  overflow:hidden;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  transition:.25s;
+}
+
+.product:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 28px rgba(0,0,0,.09);
+}
+
+.product-img{
+  height:175px;
+  background:#f0f9fa;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+}
+
+.product-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.product-info{
+  padding:16px;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.product h3{
+  font-size:16px;
+  margin-bottom:7px;
+  color:#174f58;
+}
+
+.product p{
+  font-size:12px;
+  color:#77878a;
+  line-height:1.5;
+  margin-bottom:12px;
+}
+
+.view-category-btn{
+  width:100%;
+  margin-top:auto;
+  padding:10px;
+  border:0;
+  border-radius:7px;
+  background:#148d9e;
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.view-category-btn:hover{
+  background:#0d7482;
+}
+
+.no-products{
+  text-align:center;
+  color:#7b898b;
+  display:none;
+  padding:30px;
+}
+
+/* ABOUT */
+
+.about{
+  background:#eaf8f9;
+}
+
+.about-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:45px;
+  align-items:center;
+}
+
+.about-img{
+  height:330px;
+  border-radius:15px;
+
+  background:
+  url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85")
+  center/cover;
+}
+
+.about h2{
+  font-size:34px;
+  color:#174f58;
+  margin-bottom:15px;
+}
+
+.about p{
+  color:#64797c;
+  line-height:1.75;
+  margin-bottom:12px;
+}
+
+.ticks{
+  list-style:none;
+  margin-top:17px;
+}
+
+.ticks li{
+  margin:10px 0;
+  font-weight:700;
+  color:#345e64;
+}
+
+.ticks li:before{
+  content:"✓";
+  color:#118e9e;
+  margin-right:9px;
+}
+
+/* BLOG */
+
+#blog{
+  background:#fff;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #e5eeee;
+  border-radius:12px;
+  padding:25px;
+  box-shadow:0 5px 18px rgba(0,0,0,.05);
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 12px 28px rgba(0,0,0,.09);
+}
+
+.card-icon{
+  width:54px;
+  height:54px;
+  border-radius:12px;
+  background:#e4f6f7;
+  display:grid;
+  place-items:center;
+  font-size:26px;
+  margin-bottom:16px;
+}
+
+.card h3{
+  font-size:18px;
+  color:#174f58;
+  margin-bottom:8px;
+}
+
+.card p{
+  font-size:13px;
+  color:#718286;
+  line-height:1.65;
+}
+
+/* CONTACT */
+
+.contact{
+  background:#f7fbfb;
+}
+
+.contact-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
+}
+
+.contact-box{
+  background:#e8f7f8;
+  border-radius:13px;
+  padding:28px;
+}
+
+.contact-box h3{
+  font-size:25px;
+  margin-bottom:16px;
+  color:#174f58;
+}
+
+.contact-box p{
+  color:#667c80;
+  line-height:1.7;
+  margin:13px 0;
+}
+
+.form{
+  background:#fff;
+  padding:28px;
+  border-radius:13px;
+}
+
+.form input,
+.form textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #dce9e9;
+  border-radius:7px;
+  margin-bottom:13px;
+  outline:none;
+}
+
+.form textarea{
+  height:120px;
+  resize:none;
+}
+
+.form button{
+  background:#148d9e;
+  color:#fff;
+  border:0;
+  padding:12px 24px;
+  border-radius:7px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+  background:#123f47;
+  color:#fff;
+  padding:40px 7% 18px;
+}
+
+.footer-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr 1fr;
+  gap:30px;
+  margin-bottom:30px;
+}
+
+.footer-grid h3{
+  margin-bottom:12px;
+}
+
+.footer-grid p,
+.footer-grid li{
+  font-size:13px;
+  color:#b9ced1;
+  line-height:1.7;
+  list-style:none;
+  margin:5px 0;
+}
+
+.copy{
+  text-align:center;
+  border-top:1px solid #ffffff22;
+  padding-top:17px;
+  color:#aac1c4;
+  font-size:12px;
+}
+
+/* WHATSAPP */
+
+.float{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  width:53px;
+  height:53px;
+  border-radius:50%;
+  background:#25d366;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:25px;
+  box-shadow:0 6px 18px #0002;
+  z-index:30;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  nav{
+    display:none;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .quick{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .product-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .footer-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:650px){
+
+  .hero{
+    min-height:500px;
+    padding:45px 7%;
+    background-position:65% center;
+  }
+
+  .hero h1{
+    font-size:39px;
+  }
+
+  .quick{
+    grid-template-columns:repeat(2,1fr);
+    margin-top:-15px;
+  }
+
+  .grid,
+  .about-wrap,
+  .contact-wrap,
+  .product-grid,
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about-img{
+    height:260px;
+  }
+
+  section{
+    padding:58px 6%;
+  }
+
+  .title h2{
+    font-size:27px;
+  }
+
+  nav.open{
+    display:flex;
+    position:absolute;
+    top:72px;
+    left:0;
+    width:100%;
+    background:#fff;
+    flex-direction:column;
+    align-items:stretch;
+    gap:0;
+    padding:8px 0;
+    box-shadow:0 10px 20px #0001;
+  }
+
+  nav.open a{
+    padding:14px 6%;
+    border-bottom:1px solid #eee;
+  }
+
+  nav.open .call{
+    margin:10px 6%;
+  }
+}
+</style>
 </head>
+
 <body>
 
+<!-- HEADER -->
+
 <header>
-  <a class="brand" href="#home">
-    <div class="brand-mark">+</div>
-    <div><h2>MEDI POINT</h2><small>Your Trusted Healthcare Partner</small></div>
-  </a>
-  <button class="menu" onclick="toggleMenu()">☰</button>
-  <nav id="nav">
-    <a href="#home">Home</a><a href="#about">About Us</a><a href="#services">Services</a>
-    <a href="#products">Products</a><a href="#blog">Blog</a><a href="login.html">Account</a><a href="#contact">Contact</a>
-    <button class="call" onclick="callNow()">Call Now</button>
-  </nav>
+
+<a class="brand" href="#home">
+
+<div class="brand-mark">+</div>
+
+<div>
+<h2>MEDI POINT</h2>
+<small>Your Trusted Healthcare Partner</small>
+</div>
+
+</a>
+
+<button class="menu" onclick="toggleMenu()">☰</button>
+
+<nav id="nav">
+
+<a href="#home">Home</a>
+<a href="#about">About Us</a>
+<a href="#services">Services</a>
+<a href="#products">Products</a>
+<a href="#blog">Blog</a>
+<a href="login.html">Account</a>
+<a href="#contact">Contact</a>
+
+<button class="call" onclick="callNow()">
+Call Now
+</button>
+
+</nav>
+
 </header>
 
+
 <main id="home">
+
+<!-- HERO -->
+
 <section class="hero">
-  <div class="hero-content">
-    <h1>Good Health,<br>Better Life</h1>
-    <p>Your one-stop solution for medicines and healthcare needs.</p>
-    <div class="actions">
-      <button class="btn primary" onclick="orderNow()">Order Now</button>
-      <button class="btn wa" onclick="whatsapp()">◉ WhatsApp</button>
-    </div>
-  </div>
+
+<div class="hero-content">
+
+<h1>
+Good Health,<br>
+Better Life
+</h1>
+
+<p>
+Your one-stop solution for medicines and healthcare needs.
+</p>
+
+<div class="actions">
+
+<button class="btn primary" onclick="orderNow()">
+Order Now
+</button>
+
+<button class="btn wa" onclick="whatsapp()">
+◉ WhatsApp
+</button>
+
+</div>
+
+</div>
+
 </section>
 
+
+<!-- QUICK SERVICES -->
+
 <div class="quick">
-  <div class="quick-item"><div><div class="icon">💊</div>Prescription<br>Medicines</div></div>
-  <div class="quick-item"><div><div class="icon">💉</div>OTC<br>Medicines</div></div>
-  <div class="quick-item"><div><div class="icon">🔬</div>Lab Test<br>Booking</div></div>
-  <div class="quick-item"><div><div class="icon">🩸</div>Home Blood<br>Collection</div></div>
-  <div class="quick-item"><div><div class="icon">🏠</div>Home<br>Delivery</div></div>
-  <div class="quick-item"><div><div class="icon">🩺</div>Healthcare<br>Products</div></div>
+
+<div class="quick-item">
+<div>
+<div class="icon">💊</div>
+Prescription<br>Medicines
+</div>
+</div>
+
+<div class="quick-item">
+<div>
+<div class="icon">💉</div>
+OTC<br>Medicines
+</div>
+</div>
+
+<div class="quick-item">
+<div>
+<div class="icon">🔬</div>
+Lab Test<br>Booking
+</div>
+</div>
+
+<div class="quick-item">
+<div>
+<div class="icon">🩸</div>
+Home Blood<br>Collection
+</div>
+</div>
+
+<div class="quick-item">
+<div>
+<div class="icon">🏠</div>
+Home<br>Delivery
+</div>
+</div>
+
+<div class="quick-item">
+<div>
+<div class="icon">🩺</div>
+Healthcare<br>Products
+</div>
+</div>
+
 </div>
 
 
+<!-- CATEGORIES -->
+
 <section class="products" id="products">
-  <div class="title">
-    <h2>Healthcare Categories</h2>
-    <p>Choose a category to explore medicines and healthcare products.</p>
-  </div>
 
-  <div id="productGrid" class="product-grid"></div>
+<div class="title">
 
-  <p id="noProducts" class="no-products">No categories found.</p>
+<h2>Healthcare Categories</h2>
+
+<p>
+Choose a category to explore medicines and healthcare products.
+</p>
+
+</div>
+
+<div id="productGrid" class="product-grid"></div>
+
+<p id="noProducts" class="no-products">
+No categories found.
+</p>
+
 </section>
+
+
+<!-- ABOUT -->
 
 <section class="about" id="about">
-  <div class="about-wrap">
-    <div class="about-img"></div>
-    <div><h2>Your Health Is Our Priority</h2><p>At MEDI POINT, we believe healthcare should be simple, reliable and accessible.</p><p>We provide medicines, healthcare products, diagnostic services and convenient home delivery solutions.</p>
-    <ul class="ticks"><li>Genuine Healthcare Products</li><li>Easy Medicine Ordering</li><li>Fast Home Delivery</li><li>Trusted Healthcare Support</li></ul></div>
-  </div>
+
+<div class="about-wrap">
+
+<div class="about-img"></div>
+
+<div>
+
+<h2>Your Health Is Our Priority</h2>
+
+<p>
+At MEDI POINT, we believe healthcare should be simple,
+reliable and accessible.
+</p>
+
+<p>
+We provide medicines, healthcare products, diagnostic
+services and convenient home delivery solutions.
+</p>
+
+<ul class="ticks">
+
+<li>Genuine Healthcare Products</li>
+<li>Easy Medicine Ordering</li>
+<li>Fast Home Delivery</li>
+<li>Trusted Healthcare Support</li>
+
+</ul>
+
+</div>
+
+</div>
+
 </section>
+
+
+<!-- BLOG -->
 
 <section id="blog">
-  <div class="title"><h2>Health & Wellness</h2><p>Helpful information for a healthier lifestyle.</p></div>
-  <div class="grid">
-    <article class="card"><div class="card-icon">🥗</div><h3>Healthy Eating</h3><p>Simple habits that can support a healthy lifestyle.</p></article>
-    <article class="card"><div class="card-icon">🏃</div><h3>Stay Active</h3><p>Regular physical activity is an important part of overall wellness.</p></article>
-    <article class="card"><div class="card-icon">😴</div><h3>Better Sleep</h3><p>Create a healthy and consistent sleep routine.</p></article>
-  </div>
+
+<div class="title">
+
+<h2>Health & Wellness</h2>
+
+<p>
+Helpful information for a healthier lifestyle.
+</p>
+
+</div>
+
+<div class="grid">
+
+<article class="card">
+
+<div class="card-icon">🥗</div>
+
+<h3>Healthy Eating</h3>
+
+<p>
+Simple habits that can support a healthy lifestyle.
+</p>
+
+</article>
+
+
+<article class="card">
+
+<div class="card-icon">🏃</div>
+
+<h3>Stay Active</h3>
+
+<p>
+Regular physical activity is an important part of
+overall wellness.
+</p>
+
+</article>
+
+
+<article class="card">
+
+<div class="card-icon">😴</div>
+
+<h3>Better Sleep</h3>
+
+<p>
+Create a healthy and consistent sleep routine.
+</p>
+
+</article>
+
+</div>
+
 </section>
 
+
+<!-- CONTACT -->
+
 <section class="contact" id="contact">
-  <div class="title"><h2>Contact MEDI POINT</h2><p>Have a question? We are here to help.</p></div>
-  <div class="contact-wrap">
-    <div class="contact-box"><h3>Get In Touch</h3><p><b>📍 Address</b><br>Your Medical Store Address, Your City, India</p><p><b>📞 Phone</b><br>6206408813</p><p><b>📧 Email</b><br>medicalpointt001@gmail.com</p><p><b>🕒 Opening Hours</b><br>Monday - Sunday: 8:00 AM - 10:00 PM</p></div>
-    <form class="form" onsubmit="sendMessage(event)"><input placeholder="Your Name" required><input type="tel" placeholder="Phone Number" required><input type="email" placeholder="Email Address"><textarea placeholder="Your Message" required></textarea><button>Send Message</button></form>
-  </div>
+
+<div class="title">
+
+<h2>Contact MEDI POINT</h2>
+
+<p>
+Have a question? We are here to help.
+</p>
+
+</div>
+
+
+<div class="contact-wrap">
+
+
+<div class="contact-box">
+
+<h3>Get In Touch</h3>
+
+<p>
+<b>📍 Address</b><br>
+Your Medical Store Address, Your City, India
+</p>
+
+<p>
+<b>📞 Phone</b><br>
+6206408813
+</p>
+
+<p>
+<b>📧 Email</b><br>
+medicalpointt001@gmail.com
+</p>
+
+<p>
+<b>🕒 Opening Hours</b><br>
+Monday - Sunday: 8:00 AM - 10:00 PM
+</p>
+
+</div>
+
+
+<form class="form" onsubmit="sendMessage(event)">
+
+<input
+type="text"
+placeholder="Your Name"
+required
+>
+
+<input
+type="tel"
+placeholder="Phone Number"
+required
+>
+
+<input
+type="email"
+placeholder="Email Address"
+>
+
+<textarea
+placeholder="Your Message"
+required
+></textarea>
+
+<button type="submit">
+Send Message
+</button>
+
+</form>
+
+</div>
+
 </section>
+
 </main>
 
 
+<!-- FOOTER -->
 
 <footer>
-  <div class="footer-grid">
-    <div><h3>MEDI POINT</h3><p>Your trusted healthcare partner for quality medicines and healthcare services.</p></div>
-    <div><h3>Quick Links</h3><ul><li><a href="#home">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#services">Services</a></li><li><a href="#products">Products</a></li></ul></div>
-    <div><h3>Services</h3><ul><li>Medicines</li><li>Lab Tests</li><li>Home Delivery</li><li>Healthcare</li></ul></div>
-    <div><h3>Contact</h3><p>📞 6206408813</p><p>📧 medicalpointt001@gmail.com</p></div>
-  </div>
-  <div class="copy">© 2026 MEDI POINT. All Rights Reserved.</div>
+
+<div class="footer-grid">
+
+
+<div>
+
+<h3>MEDI POINT</h3>
+
+<p>
+Your trusted healthcare partner for quality medicines
+and healthcare services.
+</p>
+
+</div>
+
+
+<div>
+
+<h3>Quick Links</h3>
+
+<ul>
+
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About Us</a></li>
+<li><a href="#products">Products</a></li>
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+</div>
+
+
+<div>
+
+<h3>Services</h3>
+
+<ul>
+
+<li>Medicines</li>
+<li>Lab Tests</li>
+<li>Home Delivery</li>
+<li>Healthcare</li>
+
+</ul>
+
+</div>
+
+
+<div>
+
+<h3>Contact</h3>
+
+<p>📞 6206408813</p>
+<p>📧 medicalpointt001@gmail.com</p>
+
+</div>
+
+
+</div>
+
+
+<div class="copy">
+© 2026 MEDI POINT. All Rights Reserved.
+</div>
+
 </footer>
 
-<a class="float" href="https://wa.me/916206408813" target="_blank">💬</a>
+
+<!-- WHATSAPP -->
+
+<a
+class="float"
+href="https://wa.me/916206408813"
+target="_blank"
+>
+💬
+</a>
+
 
 <script>
-function toggleMenu(){document.getElementById('nav').classList.toggle('open')}
-function callNow(){location.href='tel:+916206408813'}
-function orderNow(){window.open('https://wa.me/916206408813?text=Hello%20MEDI%20POINT,%20I%20want%20to%20order%20medicine.','_blank')}
-function whatsapp(){window.open('https://wa.me/916206408813?text=Hello%20MEDI%20POINT,%20I%20need%20help.','_blank')}
-function sendMessage(e){e.preventDefault();alert('Thank you! Your message has been submitted.');e.target.reset()}
 
-const categories = [{"slug": "antibiotic", "name": "Antibiotic", "icon": "💊", "desc": "Antibiotic medicines and healthcare products.", "image": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=900&q=85"}, {"slug": "cough-cold", "name": "Cough & Cold", "icon": "🤧", "desc": "Medicines and care products for cough and cold.", "image": "https://5.imimg.com/data5/SELLER/Default/2023/6/316286345/KC/RM/RP/53638459/cough-and-cold-syrup-500x500.jpg"}, {"slug": "cut-pain", "name": "Cut & Pain", "icon": "🩹", "desc": "Care products for cuts, minor pain and injuries.", "image": "https://images.unsplash.com/photo-1603398938378-e54eab446446?auto=format&fit=crop&w=900&q=85"}, {"slug": "wound-fever", "name": "Wound & Fever", "icon": "🌡️", "desc": "Wound care and fever-related healthcare products.", "image": "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=900&q=85"}, {"slug": "baby-care", "name": "Baby Care", "icon": "👶", "desc": "Gentle healthcare and personal care for babies.", "image": "https://ohsogo.com/cdn/shop/products/product_1.jpg?v=1696545516"}, {"slug": "eye-care", "name": "Eye Care", "icon": "👁️", "desc": "Everyday eye care and related healthcare products.", "image": "https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?auto=format&fit=crop&w=900&q=85"}, {"slug": "skin-hair-care", "name": "Skin & Hair Care", "icon": "🧴", "desc": "Skin and hair care healthcare products.", "image": "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=85"}, {"slug": "itching", "name": "Itching", "icon": "🌿", "desc": "Products for everyday itching and skin comfort.", "image": "https://bettervaluepharmacy.com.au/cdn/shop/files/Screenshot2023-06-15at01-22-10DermalTherapyAntiItchSoothingCream85g.png?v=1686766949"}, {"slug": "allergy", "name": "Allergy", "icon": "🤧", "desc": "Healthcare products for common allergy care.", "image": "https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=900&q=85"}, {"slug": "multi-vitamin", "name": "Multi Vitamin", "icon": "💊", "desc": "Multivitamin and daily nutritional support.", "image": "https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=900&q=85"}, {"slug": "sexual-wellness", "name": "Sexual Wellness", "icon": "❤️", "desc": "Personal wellness and intimate care products.", "image": "https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=85"}, {"slug": "feminine-care-hygiene", "name": "Feminine Care / Hygiene", "icon": "🌸", "desc": "Feminine hygiene and personal care products.", "image": "https://i5.walmartimages.com/asr/0a980305-7cc2-4dd7-b724-617ac013266d.395068a6b31cbb1a469034f8e00f480c.jpeg"}, {"slug": "period-care", "name": "Period Care", "icon": "🩷", "desc": "Period care and menstrual hygiene products.", "image": "https://image.made-in-china.com/318f0j00qQyUbzPIJkor/6000301422975-mp4.webp"}, {"slug": "fracture-care", "name": "Fracture Care", "icon": "🦴", "desc": "Supports, braces and fracture-care supplies.", "image": "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=900&q=85"}, {"slug": "sanitary-antiseptic", "name": "Sanitary & Antiseptic", "icon": "🧴", "desc": "Sanitary, disinfectant and antiseptic supplies.", "image": "https://images.unsplash.com/photo-1584483766114-2cea6facdf57?auto=format&fit=crop&w=900&q=85"}, {"slug": "baby-food", "name": "Baby Food", "icon": "🍼", "desc": "Baby nutrition and feeding products.", "image": "https://images.unsplash.com/photo-1519340333755-c1aa5571fd46?auto=format&fit=crop&w=900&q=85"}, {"slug": "gastric-acidity", "name": "Gastric & Acidity", "icon": "🍃", "desc": "Healthcare products for gastric and acidity care.", "image": "https://pharmacyforless.co.nz/cdn/shop/collections/Stomach_Discomfort_1185x1195.jpg?v=1748491490"}, {"slug": "diabetes-bp-care", "name": "Diabetes & BP Care", "icon": "🩺", "desc": "Diabetes, blood pressure and monitoring care.", "image": "https://healthy.thewom.it/content/uploads/sites/5/2025/04/pressione-alta-diabete.jpg"}, {"slug": "calcium-iron", "name": "Calcium & Iron", "icon": "💊", "desc": "Calcium, iron and nutritional supplements.", "image": "https://sushainclinic.s3.ap-south-1.amazonaws.com/uploads/17625142663223.jpg"}, {"slug": "first-aid-medical-supplies", "name": "First Aid & Medical Supplies", "icon": "🧰", "desc": "First-aid kits and essential medical supplies.", "image": "https://images.unsplash.com/photo-1603398938378-e54eab446446?auto=format&fit=crop&w=900&q=85"}];
+/* MENU */
+
+function toggleMenu(){
+
+document
+.getElementById("nav")
+.classList
+.toggle("open");
+
+}
+
+
+/* CALL */
+
+function callNow(){
+
+location.href="tel:+916206408813";
+
+}
+
+
+/* ORDER */
+
+function orderNow(){
+
+window.open(
+"https://wa.me/916206408813?text=Hello%20MEDI%20POINT%2C%20I%20want%20to%20order%20medicine",
+"_blank"
+);
+
+}
+
+
+/* WHATSAPP */
+
+function whatsapp(){
+
+window.open(
+"https://wa.me/916206408813?text=Hello%20MEDI%20POINT%2C%20I%20need%20help",
+"_blank"
+);
+
+}
+
+
+/* CONTACT FORM */
+
+function sendMessage(e){
+
+e.preventDefault();
+
+alert("Thank you! Your message has been submitted.");
+
+e.target.reset();
+
+}
+
+
+/* CATEGORIES */
+
+const categories = [
+
+{
+slug:"antibiotic",
+name:"Antibiotic",
+icon:"💊",
+desc:"Antibiotic medicines and healthcare products.",
+image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"cough-cold",
+name:"Cough & Cold",
+icon:"🤧",
+desc:"Medicines and care products for cough and cold.",
+image:"https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"cut-pain",
+name:"Cut & Pain",
+icon:"🩹",
+desc:"Care products for cuts, minor pain and injuries.",
+image:"https://images.unsplash.com/photo-1603398938378-e54eab446446?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"wound-fever",
+name:"Wound & Fever",
+icon:"🌡️",
+desc:"Wound care and fever-related healthcare products.",
+image:"https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"baby-care",
+name:"Baby Care",
+icon:"👶",
+desc:"Gentle healthcare and personal care for babies.",
+image:"https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"eye-care",
+name:"Eye Care",
+icon:"👁️",
+desc:"Everyday eye care and related healthcare products.",
+image:"https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"skin-hair-care",
+name:"Skin & Hair Care",
+icon:"🧴",
+desc:"Skin and hair care healthcare products.",
+image:"https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"itching",
+name:"Itching",
+icon:"🌿",
+desc:"Products for everyday itching and skin comfort.",
+image:"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"allergy",
+name:"Allergy",
+icon:"🤧",
+desc:"Healthcare products for common allergy care.",
+image:"https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"multi-vitamin",
+name:"Multi Vitamin",
+icon:"💊",
+desc:"Multivitamin and daily nutritional support.",
+image:"https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"sexual-wellness",
+name:"Sexual Wellness",
+icon:"❤️",
+desc:"Personal wellness and intimate care products.",
+image:"https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"feminine-care-hygiene",
+name:"Feminine Care / Hygiene",
+icon:"🌸",
+desc:"Feminine hygiene and personal care products.",
+image:"https://images.unsplash.com/photo-1556229010-aa3f7ff66b2b?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"period-care",
+name:"Period Care",
+icon:"🩷",
+desc:"Period care and menstrual hygiene products.",
+image:"https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"fracture-care",
+name:"Fracture Care",
+icon:"🦴",
+desc:"Supports, braces and fracture-care supplies.",
+image:"https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"sanitary-antiseptic",
+name:"Sanitary & Antiseptic",
+icon:"🧴",
+desc:"Sanitary, disinfectant and antiseptic supplies.",
+image:"https://images.unsplash.com/photo-1584483766114-2cea6facdf57?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"baby-food",
+name:"Baby Food",
+icon:"🍼",
+desc:"Baby nutrition and feeding products.",
+image:"https://images.unsplash.com/photo-1519340333755-c1aa5571fd46?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"gastric-acidity",
+name:"Gastric & Acidity",
+icon:"🍃",
+desc:"Healthcare products for gastric and acidity care.",
+image:"https://images.unsplash.com/photo-1603398938378-e54eab446446?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"diabetes-bp-care",
+name:"Diabetes & BP Care",
+icon:"🩺",
+desc:"Diabetes, blood pressure and monitoring care.",
+image:"https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"calcium-iron",
+name:"Calcium & Iron",
+icon:"💊",
+desc:"Calcium, iron and nutritional supplements.",
+image:"https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=900&q=85"
+},
+
+{
+slug:"first-aid-medical-supplies",
+name:"First Aid & Medical Supplies",
+icon:"🧰",
+desc:"First-aid kits and essential medical supplies.",
+image:"https://images.unsplash.com/photo-1603398938378-e54eab446446?auto=format&fit=crop&w=900&q=85"
+}
+
+];
+
+
+/* RENDER CATEGORIES */
 
 function renderProducts(){
-  const grid=document.getElementById('productGrid');
-  grid.innerHTML=categories.map(c=>`
-    <article class="product">
-      <div class="product-img"><img src="${c.image}" alt="${c.name}" onerror="this.style.display='none';this.parentElement.innerHTML='<span>${c.icon}</span>'"></div>
-      <div class="product-info">
-        <h3>${c.name}</h3>
-        <p>${c.desc}</p>
-        <button class="view-category-btn" onclick="viewCategory('${c.slug}')">View</button>
-      </div>
-    </article>
-  `).join('');
-  document.getElementById('noProducts').style.display=categories.length?'none':'block';
+
+const grid=document.getElementById("productGrid");
+
+grid.innerHTML=categories.map(function(c){
+
+return `
+
+<article class="product">
+
+<div class="product-img">
+
+<img
+src="${c.image}"
+alt="${c.name}"
+onerror="this.style.display='none';this.parentElement.innerHTML='<span style=&quot;font-size:60px&quot;>${c.icon}</span>'"
+>
+
+</div>
+
+<div class="product-info">
+
+<h3>${c.name}</h3>
+
+<p>${c.desc}</p>
+
+<button
+class="view-category-btn"
+onclick="viewCategory('${c.slug}')"
+>
+View
+</button>
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+document.getElementById("noProducts").style.display=
+categories.length ? "none" : "block";
+
 }
+
+
+/* OPEN CATEGORY */
 
 function viewCategory(category){
-  window.location.href='category.html?cat='+encodeURIComponent(category);
+
+window.location.href=
+"category.html?cat="+encodeURIComponent(category);
+
 }
 
+
+/* START */
+
 renderProducts();
+
 </script>
+
 </body>
 </html>
