@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEDI POINT - Admin</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#eef8f9;
+  color:#174f58;
+}
+
+.login-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.login-box{
+  width:390px;
+  background:white;
+  padding:35px;
+  border-radius:16px;
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+
+.logo{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.logo-icon{
+  width:55px;
+  height:55px;
+  background:#148d9e;
+  color:white;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  font-size:38px;
+  margin:auto;
+}
+
+.logo h1{
+  margin-top:10px;
+  font-size:25px;
+}
+
+.logo p{
+  color:#78898c;
+  font-size:13px;
+  margin-top:4px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #d7e6e7;
+  border-radius:7px;
+  margin-bottom:14px;
+  outline:none;
+  font-size:14px;
+}
+
+textarea{
+  height:100px;
+  resize:none;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+button{
+  cursor:pointer;
+}
+
+.login-btn,
+.add-btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:7px;
+  background:#148d9e;
+  color:white;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.login-btn:hover,
+.add-btn:hover{
+  background:#0d7482;
+}
+
+.error{
+  color:#d33;
+  text-align:center;
+  font-size:13px;
+  margin-top:12px;
+  display:none;
+}
+
+
+/* ADMIN */
+
+.admin-page{
+  display:none;
+  min-height:100vh;
+}
+
+.topbar{
+  height:70px;
+  background:white;
+  border-bottom:1px solid #dceaea;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 6%;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brand-icon{
+  width:38px;
+  height:38px;
+  background:#148d9e;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  border-radius:6px;
+  font-size:27px;
+  font-weight:bold;
+}
+
+.brand h2{
+  font-size:19px;
+}
+
+.logout{
+  background:#e95757;
+  color:white;
+  border:0;
+  padding:9px 18px;
+  border-radius:6px;
+  font-weight:bold;
+}
+
+.container{
+  width:90%;
+  max-width:1200px;
+  margin:35px auto;
+}
+
+.heading{
+  margin-bottom:25px;
+}
+
+.heading h1{
+  font-size:30px;
+}
+
+.heading p{
+  color:#718387;
+  margin-top:6px;
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:380px 1fr;
+  gap:25px;
+  align-items:start;
+}
+
+.panel{
+  background:white;
+  border-radius:13px;
+  padding:25px;
+  box-shadow:0 6px 22px rgba(0,0,0,.06);
+}
+
+.panel h2{
+  margin-bottom:20px;
+  font-size:20px;
+}
+
+.preview{
+  width:100%;
+  height:180px;
+  border:2px dashed #cbdfe1;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  margin-bottom:15px;
+  overflow:hidden;
+  background:#f7fbfb;
+  color:#91a2a5;
+}
+
+.preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.medicine-list{
+  display:grid;
+  gap:13px;
+}
+
+.medicine{
+  display:flex;
+  gap:15px;
+  border:1px solid #e2eeee;
+  padding:12px;
+  border-radius:10px;
+  align-items:center;
+}
+
+.medicine-img{
+  width:85px;
+  height:85px;
+  border-radius:8px;
+  overflow:hidden;
+  background:#eef8f9;
+  flex-shrink:0;
+}
+
+.medicine-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.medicine-info{
+  flex:1;
+}
+
+.medicine-info h3{
+  font-size:16px;
+  margin-bottom:5px;
+}
+
+.medicine-info p{
+  font-size:12px;
+  color:#77888a;
+  margin:3px 0;
+}
+
+.delete-btn{
+  background:#e95757;
+  color:white;
+  border:0;
+  padding:8px 11px;
+  border-radius:5px;
+  font-size:12px;
+}
+
+.empty{
+  text-align:center;
+  padding:35px;
+  color:#89999b;
+}
+
+.success{
+  display:none;
+  background:#e3f7e9;
+  color:#28733b;
+  padding:10px;
+  border-radius:6px;
+  margin-bottom:15px;
+  font-size:13px;
+}
+
+@media(max-width:850px){
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .topbar{
+    padding:0 4%;
+  }
+
+  .container{
+    width:94%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- LOGIN -->
+
+<div class="login-page" id="loginPage">
+
+<div class="login-box">
+
+<div class="logo">
+
+<div class="logo-icon">+</div>
+
+<h1>MEDI POINT</h1>
+
+<p>Admin Panel</p>
+
+</div>
+
+<form onsubmit="login(event)">
+
+<label>Username</label>
+
+<input
+type="text"
+id="username"
+placeholder="Enter username"
+required
+>
+
+<label>Password</label>
+
+<input
+type="password"
+id="password"
+placeholder="Enter password"
+required
+>
+
+<button class="login-btn">
+Login
+</button>
+
+<div class="error" id="loginError">
+Invalid username or password
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div class="admin-page" id="adminPage">
+
+<header class="topbar">
+
+<div class="brand">
+
+<div class="brand-icon">+</div>
+
+<h2>MEDI POINT Admin</h2>
+
+</div>
+
+<button class="logout" onclick="logout()">
+Logout
+</button>
+
+</header>
+
+
+<div class="container">
+
+<div class="heading">
+
+<h1>Medicine Management</h1>
+
+<p>
+Add medicines with pictures and assign them to categories.
+</p>
+
+</div>
+
+
+<div class="dashboard">
+
+
+<!-- ADD MEDICINE -->
+
+<div class="panel">
+
+<h2>Add Medicine</h2>
+
+<div class="success" id="success">
+Medicine added successfully!
+</div>
+
+<form onsubmit="addMedicine(event)">
+
+<label>Medicine Name</label>
+
+<input
+type="text"
+id="medicineName"
+placeholder="Example: Paracetamol 500mg"
+required
+>
+
+
+<label>Category</label>
+
+<select id="medicineCategory" required>
+
+<option value="">Select Category</option>
+
+<option value="antibiotic">Antibiotic</option>
+<option value="cough-cold">Cough & Cold</option>
+<option value="cut-pain">Cut & Pain</option>
+<option value="wound-fever">Wound & Fever</option>
+<option value="baby-care">Baby Care</option>
+<option value="eye-care">Eye Care</option>
+<option value="skin-hair-care">Skin & Hair Care</option>
+<option value="itching">Itching</option>
+<option value="allergy">Allergy</option>
+<option value="multi-vitamin">Multi Vitamin</option>
+<option value="sexual-wellness">Sexual Wellness</option>
+<option value="feminine-care-hygiene">
+Feminine Care / Hygiene
+</option>
+<option value="period-care">Period Care</option>
+<option value="fracture-care">Fracture Care</option>
+<option value="sanitary-antiseptic">
+Sanitary & Antiseptic
+</option>
+<option value="baby-food">Baby Food</option>
+<option value="gastric-acidity">
+Gastric & Acidity
+</option>
+<option value="diabetes-bp-care">
+Diabetes & BP Care
+</option>
+<option value="calcium-iron">
+Calcium & Iron
+</option>
+<option value="first-aid-medical-supplies">
+First Aid & Medical Supplies
+</option>
+
+</select>
+
+
+<label>Price</label>
+
+<input
+type="number"
+id="medicinePrice"
+placeholder="Enter price"
+min="0"
+>
+
+
+<label>Medicine Details</label>
+
+<textarea
+id="medicineDetails"
+placeholder="Enter medicine details"
+></textarea>
+
+
+<label>Medicine Picture</label>
+
+<input
+type="file"
+id="medicineImage"
+accept="image/*"
+onchange="previewImage(event)"
+>
+
+
+<div class="preview" id="preview">
+Medicine image preview
+</div>
+
+
+<button class="add-btn">
++ Add Medicine
+</button>
+
+</form>
+
+</div>
+
+
+<!-- MEDICINE LIST -->
+
+<div class="panel">
+
+<h2>Added Medicines</h2>
+
+<div
+class="medicine-list"
+id="medicineList">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* LOGIN */
+
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "admin123";
+
+
+function login(event){
+
+event.preventDefault();
+
+const username =
+document.getElementById("username").value;
+
+const password =
+document.getElementById("password").value;
+
+if(
+username === ADMIN_USERNAME &&
+password === ADMIN_PASSWORD
+){
+
+localStorage.setItem("mediPointAdmin","true");
+
+showAdmin();
+
+}else{
+
+document.getElementById("loginError").style.display="block";
+
+}
+
+}
+
+
+function showAdmin(){
+
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("adminPage").style.display="block";
+
+loadMedicines();
+
+}
+
+
+function logout(){
+
+localStorage.removeItem("mediPointAdmin");
+
+location.reload();
+
+}
+
+
+if(localStorage.getItem("mediPointAdmin")==="true"){
+showAdmin();
+}
+
+
+/* IMAGE PREVIEW */
+
+let selectedImage = "";
+
+function previewImage(event){
+
+const file = event.target.files[0];
+
+if(!file) return;
+
+const reader = new FileReader();
+
+reader.onload=function(e){
+
+selectedImage=e.target.result;
+
+document.getElementById("preview").innerHTML=
+`<img src="${e.target.result}" alt="Medicine">`;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* ADD MEDICINE */
+
+function addMedicine(event){
+
+event.preventDefault();
+
+const name =
+document.getElementById("medicineName").value.trim();
+
+const category =
+document.getElementById("medicineCategory").value;
+
+const price =
+document.getElementById("medicinePrice").value;
+
+const details =
+document.getElementById("medicineDetails").value.trim();
+
+
+const medicine={
+
+id:Date.now(),
+
+name:name,
+
+category:category,
+
+price:price,
+
+details:details,
+
+image:selectedImage
+
+};
+
+
+const medicines =
+JSON.parse(
+localStorage.getItem("mediPointMedicines") || "[]"
+);
+
+medicines.push(medicine);
+
+localStorage.setItem(
+"mediPointMedicines",
+JSON.stringify(medicines)
+);
+
+
+/* RESET */
+
+event.target.reset();
+
+selectedImage="";
+
+document.getElementById("preview").innerHTML=
+"Medicine image preview";
+
+document.getElementById("success").style.display="block";
+
+setTimeout(function(){
+
+document.getElementById("success").style.display="none";
+
+},2000);
+
+
+loadMedicines();
+
+}
+
+
+/* LOAD MEDICINES */
+
+function loadMedicines(){
+
+const medicines =
+JSON.parse(
+localStorage.getItem("mediPointMedicines") || "[]"
+);
+
+const list =
+document.getElementById("medicineList");
+
+
+if(medicines.length===0){
+
+list.innerHTML=`
+<div class="empty">
+No medicines added yet.
+</div>
+`;
+
+return;
+
+}
+
+
+list.innerHTML=medicines.map(function(m){
+
+return `
+
+<div class="medicine">
+
+<div class="medicine-img">
+
+${
+m.image
+?
+`<img src="${m.image}" alt="${escapeHtml(m.name)}">`
+:
+`<div style="
+height:100%;
+display:grid;
+place-items:center;
+font-size:35px;
+">💊</div>`
+}
+
+</div>
+
+
+<div class="medicine-info">
+
+<h3>
+${escapeHtml(m.name)}
+</h3>
+
+<p>
+Category: ${escapeHtml(m.category)}
+</p>
+
+${m.price ? `
+<p>
+Price: ₹${escapeHtml(m.price)}
+</p>
+` : ""}
+
+${m.details ? `
+<p>
+${escapeHtml(m.details)}
+</p>
+` : ""}
+
+</div>
+
+
+<button
+class="delete-btn"
+onclick="deleteMedicine(${m.id})">
+Delete
+</button>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* DELETE */
+
+function deleteMedicine(id){
+
+if(!confirm("Delete this medicine?")) return;
+
+let medicines =
+JSON.parse(
+localStorage.getItem("mediPointMedicines") || "[]"
+);
+
+medicines =
+medicines.filter(function(m){
+return m.id !== id;
+});
+
+localStorage.setItem(
+"mediPointMedicines",
+JSON.stringify(medicines)
+);
+
+loadMedicines();
+
+}
+
+
+/* SECURITY */
+
+function escapeHtml(text){
+
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+</script>
+
+</body>
+</html>

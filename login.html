@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MEDI POINT | Login & Signup</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#e8f8f9,#f8fcfc);min-height:100vh;color:#173f46}
+header{height:72px;background:#fff;border-bottom:1px solid #e2eeee;display:flex;align-items:center;justify-content:space-between;padding:0 7%}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:#174b53}.mark{width:36px;height:36px;border-radius:5px;background:#1692a2;color:#fff;display:grid;place-items:center;font-size:27px;font-weight:bold}.brand h2{font-size:18px}.brand small{display:block;font-size:7px;color:#77888a}.back{background:#eaf6f7;border:0;color:#17606a;padding:10px 18px;border-radius:7px;font-weight:bold;cursor:pointer}
+.wrap{min-height:calc(100vh - 72px);display:grid;place-items:center;padding:35px 18px}.box{width:min(440px,100%);background:#fff;border-radius:15px;padding:30px;box-shadow:0 12px 40px #00000012}
+.logo{text-align:center;margin-bottom:22px}.logo .circle{margin:auto;width:52px;height:52px;border-radius:10px;background:#1692a2;color:#fff;display:grid;place-items:center;font-size:35px;font-weight:bold}.logo h1{font-size:26px;color:#174f58;margin-top:10px}.logo p{font-size:13px;color:#7a898c;margin-top:5px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:#eef7f7;padding:4px;border-radius:8px;margin-bottom:20px}.tab{border:0;background:transparent;padding:10px;border-radius:6px;font-weight:bold;color:#668084;cursor:pointer}.tab.active{background:#fff;color:#148b9c;box-shadow:0 2px 7px #0000000d}
+label{display:block;font-size:13px;font-weight:bold;margin:12px 0 6px;color:#3e5f64}input{width:100%;padding:13px;border:1px solid #d9e7e7;border-radius:7px;outline:none}input:focus{border-color:#148d9e}.submit{width:100%;margin-top:18px;border:0;background:#148d9e;color:#fff;padding:13px;border-radius:7px;font-weight:bold;cursor:pointer}.submit:hover{background:#0d7482}.hint{text-align:center;color:#819093;font-size:12px;line-height:1.5;margin-top:15px}.msg{padding:10px;border-radius:7px;background:#e9f8f2;color:#27705a;font-size:13px;margin-bottom:10px;display:none}
+.dashboard{display:none}.welcome{background:#eaf8f9;padding:18px;border-radius:10px;margin-bottom:15px}.welcome h2{color:#174f58;font-size:20px}.welcome p{font-size:13px;color:#6d8083;margin-top:5px}.dash-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.dash-card{border:1px solid #e2eeee;padding:15px;border-radius:9px}.dash-card strong{display:block;color:#174f58;margin-bottom:5px}.dash-card span{font-size:12px;color:#7c898b}.logout{width:100%;margin-top:15px;padding:11px;border:1px solid #d7e5e5;background:#fff;color:#c45656;border-radius:7px;font-weight:bold;cursor:pointer}
+@media(max-width:500px){header{padding:0 5%}.back{padding:9px 12px}.box{padding:23px}}
+</style>
+</head>
+<body>
+<header>
+<a class="brand" href="medi_point_index.html"><div class="mark">+</div><div><h2>MEDI POINT</h2><small>Your Trusted Healthcare Partner</small></div></a>
+<button class="back" onclick="location.href='medi_point_index.html'">← Back to Website</button>
+</header>
+
+<div class="wrap">
+<div class="box">
+<div id="auth">
+<div class="logo"><div class="circle">+</div><h1>MEDI POINT</h1><p>Your trusted healthcare partner</p></div>
+<div class="tabs"><button id="loginTab" class="tab active" onclick="showLogin()">Login</button><button id="signupTab" class="tab" onclick="showSignup()">Create Account</button></div>
+<div id="message" class="msg"></div>
+
+<form id="loginForm" onsubmit="login(event)">
+<label>Mobile / Email</label><input id="loginId" required placeholder="Enter mobile or email">
+<label>Password</label><input id="loginPass" type="password" required placeholder="Enter password">
+<button class="submit">Login</button>
+<p class="hint">Demo account: use any email/mobile and password.</p>
+</form>
+
+<form id="signupForm" style="display:none" onsubmit="signup(event)">
+<label>Full Name</label><input id="signupName" required placeholder="Your full name">
+<label>Mobile Number</label><input id="signupPhone" type="tel" required placeholder="10 digit mobile number">
+<label>Email</label><input id="signupEmail" type="email" required placeholder="you@example.com">
+<label>Password</label><input id="signupPass" type="password" required minlength="6" placeholder="Minimum 6 characters">
+<button class="submit">Create Account</button>
+<p class="hint">Your demo account will be saved in this browser.</p>
+</form>
+</div>
+
+<div id="dashboard" class="dashboard">
+<div class="logo"><div class="circle">+</div><h1>My Account</h1></div>
+<div class="welcome"><h2 id="welcomeName">Welcome!</h2><p id="welcomeInfo"></p></div>
+<div class="dash-grid">
+<div class="dash-card"><strong>🛒 Orders</strong><span>View your orders in the next version.</span></div>
+<div class="dash-card"><strong>📍 Address</strong><span>Manage your delivery address.</span></div>
+<div class="dash-card"><strong>💊 Medicines</strong><span>Quickly reorder your medicines.</span></div>
+<div class="dash-card"><strong>🎫 Support</strong><span>Contact MEDI POINT support.</span></div>
+</div>
+<button class="logout" onclick="logout()">Logout</button>
+</div>
+</div>
+</div>
+
+<script>
+function getUser(){return JSON.parse(localStorage.getItem("mediPointUser")||"null")}
+function showLogin(){document.getElementById("loginForm").style.display="block";document.getElementById("signupForm").style.display="none";document.getElementById("loginTab").classList.add("active");document.getElementById("signupTab").classList.remove("active");hideMsg()}
+function showSignup(){document.getElementById("loginForm").style.display="none";document.getElementById("signupForm").style.display="block";document.getElementById("signupTab").classList.add("active");document.getElementById("loginTab").classList.remove("active");hideMsg()}
+function showMsg(t){const m=document.getElementById("message");m.textContent=t;m.style.display="block"}
+function hideMsg(){document.getElementById("message").style.display="none"}
+function signup(e){e.preventDefault();const user={name:signupName.value,phone:signupPhone.value,email:signupEmail.value,password:signupPass.value};localStorage.setItem("mediPointUser",JSON.stringify(user));localStorage.setItem("mediPointLoggedIn","true");showDashboard()}
+function login(e){e.preventDefault();const user=getUser();if(!user){showMsg("No account found. Please create an account first.");showSignup();return}if((loginId.value===user.email||loginId.value===user.phone)&&loginPass.value===user.password){localStorage.setItem("mediPointLoggedIn","true");showDashboard()}else showMsg("Incorrect login details.")}
+function showDashboard(){const user=getUser();document.getElementById("auth").style.display="none";document.getElementById("dashboard").style.display="block";document.getElementById("welcomeName").textContent="Welcome, "+user.name+"!";document.getElementById("welcomeInfo").textContent=user.phone+" • "+user.email}
+function logout(){localStorage.removeItem("mediPointLoggedIn");document.getElementById("dashboard").style.display="none";document.getElementById("auth").style.display="block";showLogin()}
+if(localStorage.getItem("mediPointLoggedIn")==="true"&&getUser())showDashboard();
+</script>
+</body>
+</html>
