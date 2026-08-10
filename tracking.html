@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Track Order | MEDI POINT</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f9f9;color:#203b3d}.header{background:#fff;padding:15px 6%;border-bottom:1px solid #e1eeee}.brand{font-size:21px;font-weight:800;color:#087d80}.wrap{width:92%;max-width:650px;margin:45px auto}.box{background:#fff;border:1px solid #e0ebeb;border-radius:18px;padding:25px;box-shadow:0 8px 28px #14464b12}h1{text-align:center;font-size:27px;margin:0 0 8px}p.sub{text-align:center;color:#809193;font-size:12px;margin:0 0 25px}label{font-size:13px;font-weight:700;display:block;margin-bottom:7px}input{width:100%;padding:14px;border:1px solid #d5e4e5;border-radius:10px;outline:none;font-size:14px;text-transform:uppercase}button{width:100%;margin-top:12px;padding:14px;border:0;border-radius:10px;background:#087d80;color:white;font-weight:700;cursor:pointer}.result{margin-top:25px}.status-head{text-align:center;background:#eaf8f8;border-radius:12px;padding:17px}.status-head b{display:block;font-size:19px;color:#087d80;margin-top:6px}.timeline{margin-top:22px}.step{display:flex;gap:13px;position:relative;padding-bottom:22px}.dot{width:30px;height:30px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#dce9e9;color:#71888a;font-size:12px;font-weight:700;z-index:2}.step.active .dot{background:#087d80;color:white}.line{position:absolute;left:14px;top:30px;height:calc(100% - 20px);border-left:2px solid #dce9e9}.step.active .line{border-color:#087d80}.step:last-child{padding-bottom:0}.step h3{margin:4px 0 3px;font-size:14px}.step p{margin:0;color:#8a9b9d;font-size:11px}.details{margin-top:22px;padding-top:17px;border-top:1px dashed #d8e5e5;font-size:12px;line-height:1.8}.back{text-align:center;margin-top:18px}.back a{color:#087d80;font-size:12px;font-weight:700;text-decoration:none}.error{text-align:center;padding:20px;color:#b44;background:#fff4f4;border-radius:10px;font-size:12px}
+</style>
+</head>
+<body>
+<header class="header"><div class="brand">⚕️ MEDI POINT</div></header>
+<main class="wrap"><section class="box">
+<h1>📦 Track Your Order</h1><p class="sub">Enter your Medi Point Order ID</p>
+<form onsubmit="track(event)"><label>Order ID</label><input id="id" placeholder="Example: MP-20260810-12345" required><button>🔎 Track Order</button></form>
+<div id="result" class="result"></div>
+<div class="back"><a href="order.html">← Back to Order Page</a></div>
+</section></main>
+<script>
+const steps=["Order Placed","Order Confirmed","Preparing","Out for Delivery","Delivered"];
+function track(e){e.preventDefault();let id=document.getElementById("id").value.trim().toUpperCase(),raw=localStorage.getItem("mediPointOrder_"+id),r=document.getElementById("result");if(!raw){r.innerHTML='<div class="error">❌ Order not found.<br>Please check your Order ID.</div>';return}let o=JSON.parse(raw);render(o)}
+function render(o){let current=Math.max(0,steps.indexOf(o.status)),html=`<div class="status-head">Current Status<b>${o.status}</b><small>Order ID: ${o.id}</small></div><div class="timeline">`;steps.forEach((s,i)=>{let active=i<=current;html+=`<div class="step ${active?"active":""}"><div class="dot">${active?"✓":i+1}</div>${i<steps.length-1?'<div class="line"></div>':""}<div><h3>${s}</h3><p>${i===current?"Current order status":"Order progress"}</p></div></div>`});html+=`</div><div class="details"><b>Customer:</b> ${esc(o.name)}<br><b>Mobile:</b> ${esc(o.phone)}<br><b>Payment:</b> ${esc(o.payment)}<br><b>Total:</b> ₹${Number(o.total||0).toFixed(2)}</div>`;document.getElementById("result").innerHTML=html}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+const q=new URLSearchParams(location.search).get("id");if(q){document.getElementById("id").value=q;let x=localStorage.getItem("mediPointOrder_"+q.toUpperCase());if(x)render(JSON.parse(x))}
+</script>
+</body>
+</html>
