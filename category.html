@@ -434,7 +434,11 @@ function normalizeCategory(value){
 
   };
 
-  return categoryMap[text] || text.replace(/\s+/g,"-");
+  if(categoryMap[text]) return categoryMap[text];
+  return text
+    .replace(/&/g,"and")
+    .replace(/[^a-z0-9]+/g,"-")
+    .replace(/^-+|-+$/g,"");
 
 }
 
@@ -454,10 +458,18 @@ names[selectedCategory] || "Products";
    LOAD MEDICINES
 -------------------------------- */
 
-let products =
-JSON.parse(
-  localStorage.getItem("mediPointProducts") || "[]"
-);
+function loadProducts(){
+  try{
+    const raw = localStorage.getItem("mediPointProducts");
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  }catch(error){
+    console.error("MEDI POINT products load error:", error);
+    return [];
+  }
+}
+
+let products = loadProducts();
 
 
 /* --------------------------------
@@ -571,6 +583,8 @@ function add(id){
 -------------------------------- */
 
 function render(){
+
+  products = loadProducts();
 
   const search =
     document
@@ -744,12 +758,7 @@ window.addEventListener(
 
     if(e.key === "mediPointProducts"){
 
-      products =
-        JSON.parse(
-          localStorage.getItem(
-            "mediPointProducts"
-          ) || "[]"
-        );
+      products = loadProducts();
 
       render();
 
