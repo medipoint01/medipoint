@@ -285,223 +285,403 @@ oninput="render()"
 <div id="toast" class="toast"></div>
 
 
-<script>
+<script type="module">
 
-/* --------------------------------
-   SELECTED CATEGORY
--------------------------------- */
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-const cat =
-new URLSearchParams(location.search).get("cat") || "medicine";
+import {
+  getFirestore,
+  collection,
+  getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* --------------------------------
-   CATEGORY NAMES
--------------------------------- */
+const firebaseConfig = {
 
-const names = {
+  apiKey:
+    "AIzaSyDDY8sEtMapyVhiQd5AfcRb599dsgFwMcE",
 
-"antibiotic":"Antibiotic",
+  authDomain:
+    "medipoint-f4616.firebaseapp.com",
 
-"cough-cold":"Cough & Cold",
+  projectId:
+    "medipoint-f4616",
 
-"cut-pain":"Cut & Pain",
+  storageBucket:
+    "medipoint-f4616.firebasestorage.app",
 
-"wound-fever":"Wound & Fever",
+  messagingSenderId:
+    "180492377336",
 
-"baby-care":"Baby Care",
+  appId:
+    "1:180492377336:web:5f6566cd6663ed43a12f0d",
 
-"eye-care":"Eye Care",
-
-"skin-hair-care":"Skin & Hair Care",
-
-"itching":"Itching",
-
-"allergy":"Allergy",
-
-"multi-vitamin":"Multi Vitamin",
-
-"sexual-wellness":"Sexual Wellness",
-
-"feminine-care-hygiene":"Feminine Care / Hygiene",
-
-"period-care":"Period Care",
-
-"fracture-care":"Fracture Care",
-
-"sanitary-antiseptic":"Sanitary & Antiseptic",
-
-"baby-food":"Baby Food",
-
-"gastric-acidity":"Gastric & Acidity",
-
-"diabetes-bp-care":"Diabetes & BP Care",
-
-"calcium-iron":"Calcium & Iron",
-
-"first-aid-medical-supplies":"First Aid & Medical Supplies"
+  measurementId:
+    "G-C8X32M4CKF"
 
 };
 
 
-/* --------------------------------
-   CATEGORY NORMALIZATION
--------------------------------- */
+const app =
+  initializeApp(
+    firebaseConfig
+  );
+
+
+const db =
+  getFirestore(app);
+
+
+/* ==========================================
+   CATEGORY
+========================================== */
+
+const names = {
+
+  "antibiotic":
+    "Antibiotic",
+
+  "cough-cold":
+    "Cough & Cold",
+
+  "cut-pain":
+    "Cut & Pain",
+
+  "wound-fever":
+    "Wound & Fever",
+
+  "baby-care":
+    "Baby Care",
+
+  "eye-care":
+    "Eye Care",
+
+  "skin-hair-care":
+    "Skin & Hair Care",
+
+  "itching":
+    "Itching",
+
+  "allergy":
+    "Allergy",
+
+  "multi-vitamin":
+    "Multi Vitamin",
+
+  "sexual-wellness":
+    "Sexual Wellness",
+
+  "feminine-care-hygiene":
+    "Feminine Care / Hygiene",
+
+  "period-care":
+    "Period Care",
+
+  "fracture-care":
+    "Fracture Care",
+
+  "sanitary-antiseptic":
+    "Sanitary & Antiseptic",
+
+  "baby-food":
+    "Baby Food",
+
+  "gastric-acidity":
+    "Gastric & Acidity",
+
+  "diabetes-bp-care":
+    "Diabetes & BP Care",
+
+  "calcium-iron":
+    "Calcium & Iron",
+
+  "first-aid-medical-supplies":
+    "First Aid & Medical Supplies"
+
+};
+
+
+/* ==========================================
+   NORMALIZE CATEGORY
+========================================== */
 
 function normalizeCategory(value){
 
-  if(!value){
-    return "medicine";
-  }
-
-  let text = String(value)
+  return String(value || "")
     .toLowerCase()
-    .trim();
-
-  /* remove extra spaces */
-  text = text.replace(/\s+/g," ");
-
-  /* convert category name to slug */
-  const categoryMap = {
-
-    "antibiotic":"antibiotic",
-
-    "cough & cold":"cough-cold",
-    "cough and cold":"cough-cold",
-    "cough-cold":"cough-cold",
-
-    "cut & pain":"cut-pain",
-    "cut and pain":"cut-pain",
-    "cut-pain":"cut-pain",
-
-    "wound & fever":"wound-fever",
-    "wound and fever":"wound-fever",
-    "wound-fever":"wound-fever",
-
-    "baby care":"baby-care",
-    "baby-care":"baby-care",
-
-    "eye care":"eye-care",
-    "eye-care":"eye-care",
-
-    "skin & hair care":"skin-hair-care",
-    "skin and hair care":"skin-hair-care",
-    "skin-hair-care":"skin-hair-care",
-
-    "itching":"itching",
-
-    "allergy":"allergy",
-
-    "multi vitamin":"multi-vitamin",
-    "multivitamin":"multi-vitamin",
-    "multi-vitamin":"multi-vitamin",
-
-    "sexual wellness":"sexual-wellness",
-    "sexual-wellness":"sexual-wellness",
-
-    "feminine care / hygiene":"feminine-care-hygiene",
-    "feminine care hygiene":"feminine-care-hygiene",
-    "feminine-care-hygiene":"feminine-care-hygiene",
-
-    "period care":"period-care",
-    "period-care":"period-care",
-
-    "fracture care":"fracture-care",
-    "fracture-care":"fracture-care",
-
-    "sanitary & antiseptic":"sanitary-antiseptic",
-    "sanitary and antiseptic":"sanitary-antiseptic",
-    "sanitary-antiseptic":"sanitary-antiseptic",
-
-    "baby food":"baby-food",
-    "baby-food":"baby-food",
-
-    "gastric & acidity":"gastric-acidity",
-    "gastric and acidity":"gastric-acidity",
-    "gastric-acidity":"gastric-acidity",
-
-    "diabetes & bp care":"diabetes-bp-care",
-    "diabetes and bp care":"diabetes-bp-care",
-    "diabetes-bp-care":"diabetes-bp-care",
-
-    "calcium & iron":"calcium-iron",
-    "calcium and iron":"calcium-iron",
-    "calcium-iron":"calcium-iron",
-
-    "first aid & medical supplies":"first-aid-medical-supplies",
-    "first aid and medical supplies":"first-aid-medical-supplies",
-    "first-aid-medical-supplies":"first-aid-medical-supplies"
-
-  };
-
-  if(categoryMap[text]) return categoryMap[text];
-  return text
+    .trim()
     .replace(/&/g,"and")
-    .replace(/[^a-z0-9]+/g,"-")
-    .replace(/^-+|-+$/g,"");
+    .replace(/\//g,"-")
+    .replace(/\s+/g,"-")
+    .replace(/[^a-z0-9-]/g,"")
+    .replace(/-+/g,"-");
 
 }
 
 
-/* --------------------------------
-   SET PAGE TITLE
--------------------------------- */
+/* ==========================================
+   URL CATEGORY
+========================================== */
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
 
 const selectedCategory =
-normalizeCategory(cat);
+  normalizeCategory(
+    params.get("cat")
+  );
 
-document.getElementById("title").textContent =
-names[selectedCategory] || "Products";
+
+/* ==========================================
+   PRODUCTS
+========================================== */
+
+let products = [];
 
 
-/* --------------------------------
-   LOAD MEDICINES
--------------------------------- */
+/* ==========================================
+   ESCAPE
+========================================== */
 
-function loadProducts(){
-  try{
-    const raw = localStorage.getItem("mediPointProducts");
-    const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
-  }catch(error){
-    console.error("MEDI POINT products load error:", error);
-    return [];
-  }
+function esc(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+
 }
 
-let products = loadProducts();
+
+/* ==========================================
+   MONEY
+========================================== */
+
+function money(value){
+
+  return "₹" +
+    Number(
+      value || 0
+    ).toLocaleString(
+      "en-IN"
+    );
+
+}
 
 
-/* --------------------------------
-   LOAD CART
--------------------------------- */
+/* ==========================================
+   FIREBASE LOAD
+========================================== */
 
-let cart =
-JSON.parse(
-  localStorage.getItem("mediPointCart") || "[]"
-);
+async function loadProducts(){
+
+  try{
+
+    const snapshot =
+      await getDocs(
+        collection(
+          db,
+          "medicines"
+        )
+      );
 
 
-/* --------------------------------
-   ESCAPE HTML
--------------------------------- */
+    const result = [];
 
-function esc(v){
 
-  return String(v ?? "").replace(
-    /[&<>"']/g,
+    snapshot.forEach(function(item){
 
-    function(m){
+      result.push({
 
-      return {
+        id: item.id,
 
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
+        ...item.data()
 
-      }[m];
+      });
+
+    });
+
+
+    return result;
+
+
+  }catch(error){
+
+    console.error(
+      "Firebase error:",
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+/* ==========================================
+   CART
+========================================== */
+
+function getCart(){
+
+  try{
+
+    return JSON.parse(
+      localStorage.getItem(
+        "mediPointCart"
+      ) || "[]"
+    );
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+function saveCart(cart){
+
+  localStorage.setItem(
+    "mediPointCart",
+    JSON.stringify(cart)
+  );
+
+}
+
+
+/* ==========================================
+   ADD TO CART
+========================================== */
+
+window.add = function(id){
+
+  const product =
+    products.find(
+      function(p){
+
+        return String(p.id) ===
+          String(id);
+
+      }
+    );
+
+
+  if(!product){
+
+    alert(
+      "Medicine not found."
+    );
+
+    return;
+
+  }
+
+
+  const cart =
+    getCart();
+
+
+  const existing =
+    cart.find(
+      function(item){
+
+        return String(item.id) ===
+          String(id);
+
+      }
+    );
+
+
+  if(existing){
+
+    existing.quantity =
+      Number(
+        existing.quantity || 1
+      ) + 1;
+
+  }else{
+
+    cart.push({
+
+      id: product.id,
+
+      name: product.name,
+
+      price: Number(
+        product.price || 0
+      ),
+
+      image:
+        product.image || "",
+
+      quantity: 1
+
+    });
+
+  }
+
+
+  saveCart(cart);
+
+
+  alert(
+    product.name +
+    " added to cart ✓"
+  );
+
+
+  updateCartCount();
+
+};
+
+
+/* ==========================================
+   CART COUNT
+========================================== */
+
+function updateCartCount(){
+
+  const cart =
+    getCart();
+
+
+  const count =
+    cart.reduce(
+      function(total,item){
+
+        return total +
+          Number(
+            item.quantity || 1
+          );
+
+      },
+      0
+    );
+
+
+  const elements =
+    document.querySelectorAll(
+      ".cart-count"
+    );
+
+
+  elements.forEach(
+    function(element){
+
+      element.textContent =
+        count;
 
     }
   );
@@ -509,133 +689,84 @@ function esc(v){
 }
 
 
-/* --------------------------------
-   PRICE
--------------------------------- */
+/* ==========================================
+   RENDER
+========================================== */
 
-function money(v){
+window.render = function(){
 
-  return "₹" +
-    Number(v || 0).toLocaleString("en-IN");
-
-}
-
-
-/* --------------------------------
-   ADD TO CART
--------------------------------- */
-
-function add(id){
-
-  const p =
-    products.find(
-      x => Number(x.id) === Number(id)
-    );
-
-  if(!p) return;
-
-
-  const old =
-    cart.find(
-      x => Number(x.id) === Number(id)
+  const grid =
+    document.getElementById(
+      "grid"
     );
 
 
-  if(old){
+  if(!grid){
 
-    old.qty++;
-
-  }else{
-
-    cart.push({
-      id:p.id,
-      qty:1
-    });
+    return;
 
   }
 
 
-  localStorage.setItem(
-    "mediPointCart",
-    JSON.stringify(cart)
-  );
+  const searchElement =
+    document.getElementById(
+      "search"
+    );
 
-
-  const t =
-    document.getElementById("toast");
-
-  t.textContent =
-    p.name + " added to cart ✓";
-
-  t.style.display = "block";
-
-
-  setTimeout(
-    () => t.style.display = "none",
-    1600
-  );
-
-}
-
-
-/* --------------------------------
-   RENDER MEDICINES
--------------------------------- */
-
-function render(){
-
-  products = loadProducts();
 
   const search =
-    document
-    .getElementById("search")
-    .value
-    .toLowerCase()
-    .trim();
+    searchElement
+    ?
+    searchElement
+      .value
+      .toLowerCase()
+      .trim()
+    :
+    "";
 
-
-  /*
-    IMPORTANT:
-    Admin se category kisi bhi format mein aaye,
-    normalizeCategory() usko same slug mein convert karega.
-  */
 
   const list =
-    products.filter(function(p){
+    products.filter(
+      function(p){
 
-      const productCategory =
-        normalizeCategory(
-          p.category ||
-          p.cat ||
-          p.categoryName ||
-          "medicine"
+        const category =
+          normalizeCategory(
+            p.category ||
+            p.cat ||
+            p.categoryName ||
+            ""
+          );
+
+
+        const productName =
+          String(
+            p.name || ""
+          )
+          .toLowerCase();
+
+
+        return (
+
+          category ===
+          selectedCategory
+
+        )
+
+        &&
+
+        (
+
+          !search ||
+
+          productName.includes(
+            search
+          )
+
         );
 
+      }
+    );
 
-      const productName =
-        String(
-          p.name || ""
-        ).toLowerCase();
-
-
-      const categoryMatch =
-        productCategory === selectedCategory;
-
-
-      const searchMatch =
-        productName.includes(search);
-
-
-      return categoryMatch && searchMatch;
-
-    });
-
-
-  const grid =
-    document.getElementById("grid");
-
-
-  /* NO MEDICINE */
 
   if(!list.length){
 
@@ -643,10 +774,22 @@ function render(){
 
       <div class="empty">
 
-        <strong>No medicines added yet</strong>
+        <strong>
+          No medicines added yet
+        </strong>
+
+        <br><br>
 
         Admin panel se
-        "${esc(names[selectedCategory] || selectedCategory)}"
+
+        "${esc(
+          names[selectedCategory]
+          ||
+          selectedCategory
+          ||
+          "this"
+        )}"
+
         category mein medicine add karo.
 
       </div>
@@ -658,115 +801,176 @@ function render(){
   }
 
 
-  /* SHOW MEDICINES */
-
   grid.innerHTML =
-    list.map(function(p){
 
-      const image =
-        p.image ||
-        p.photo ||
-        p.imageUrl ||
-        "";
+    list
+    .map(
+      function(p){
+
+        const image =
+          p.image ||
+          p.photo ||
+          p.imageUrl ||
+          "";
 
 
-      return `
+        return `
 
-      <article class="product">
+          <article
+            class="product"
+          >
 
-        <div class="pic">
+            <div class="pic">
 
-          ${
-            image
+              ${
+                image
 
-            ?
+                ?
 
-            `<img
-              src="${esc(image)}"
-              alt="${esc(p.name)}"
-              onerror="
-                this.style.display='none';
-                this.parentElement.innerHTML='💊'
+                `
+                <img
+
+                  src="${esc(image)}"
+
+                  alt="${esc(
+                    p.name
+                  )}"
+
+                  onerror="
+                    this.style.display='none';
+                    this.parentElement.innerHTML='💊';
+                  "
+
+                >
+                `
+
+                :
+
+                `💊`
+
+              }
+
+            </div>
+
+
+            <h3>
+
+              ${esc(
+                p.name
+              )}
+
+            </h3>
+
+
+            <div class="desc">
+
+              ${esc(
+                p.desc ||
+                p.description ||
+                "Quality healthcare product"
+              )}
+
+            </div>
+
+
+            <span class="price">
+
+              ${money(
+                p.price
+              )}
+
+            </span>
+
+
+            <button
+
+              class="add"
+
+              onclick="
+                add('${String(
+                  p.id
+                )}')
               "
-            >`
 
-            :
+            >
 
-            "💊"
-          }
+              + Add to Cart
 
-        </div>
+            </button>
 
 
-        <h3>
-          ${esc(p.name)}
-        </h3>
+          </article>
+
+        `;
+
+      }
+    )
+    .join("");
 
 
-        <div class="desc">
+  updateCartCount();
 
-          ${esc(
-            p.desc ||
-            p.description ||
-            "Quality healthcare product"
-          )}
-
-        </div>
+};
 
 
-        <span class="price">
+/* ==========================================
+   SEARCH
+========================================== */
 
-          ${money(p.price)}
-
-        </span>
-
-
-        <button
-          class="add"
-          onclick="add(${Number(p.id)})"
-        >
-
-          + Add to Cart
-
-        </button>
-
-      </article>
-
-      `;
-
-    }).join("");
-
-}
+const searchInput =
+  document.getElementById(
+    "search"
+  );
 
 
-/* --------------------------------
-   START
--------------------------------- */
+if(searchInput){
 
-render();
-
-
-/*
-   If Admin panel changes localStorage
-   while this page is open, refresh the
-   medicines automatically.
-*/
-
-window.addEventListener(
-  "storage",
-  function(e){
-
-    if(e.key === "mediPointProducts"){
-
-      products = loadProducts();
+  searchInput.addEventListener(
+    "input",
+    function(){
 
       render();
 
     }
+  );
+
+}
+
+
+/* ==========================================
+   PAGE START
+========================================== */
+
+(async function(){
+
+  const grid =
+    document.getElementById(
+      "grid"
+    );
+
+
+  if(grid){
+
+    grid.innerHTML = `
+
+      <div class="empty">
+
+        Loading medicines...
+
+      </div>
+
+    `;
 
   }
-);
 
+
+  products =
+    await loadProducts();
+
+
+  render();
+
+})();
 </script>
 
 </body>
