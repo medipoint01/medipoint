@@ -13,7 +13,7 @@
 
 body{
   margin:0;
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:Arial,sans-serif;
   background:#f4f9f9;
   color:#203b3d;
 }
@@ -41,7 +41,7 @@ body{
   border:1px solid #e0ebeb;
   border-radius:18px;
   padding:25px;
-  box-shadow:0 8px 28px rgba(20,70,75,.08);
+  box-shadow:0 8px 28px #14464b12;
 }
 
 h1{
@@ -50,7 +50,7 @@ h1{
   margin:0 0 8px;
 }
 
-.sub{
+p.sub{
   text-align:center;
   color:#809193;
   font-size:12px;
@@ -76,7 +76,7 @@ input{
 
 input:focus{
   border-color:#087d80;
-  box-shadow:0 0 0 3px rgba(8,125,128,.08);
+  box-shadow:0 0 0 3px #087d8015;
 }
 
 button{
@@ -93,11 +93,6 @@ button{
 
 button:hover{
   background:#06696c;
-}
-
-button:disabled{
-  opacity:.6;
-  cursor:not-allowed;
 }
 
 .result{
@@ -119,9 +114,9 @@ button:disabled{
 }
 
 .status-head small{
+  color:#71888a;
   display:block;
-  margin-top:6px;
-  color:#718789;
+  margin-top:5px;
 }
 
 .timeline{
@@ -187,27 +182,11 @@ button:disabled{
   padding-top:17px;
   border-top:1px dashed #d8e5e5;
   font-size:12px;
-  line-height:1.8;
+  line-height:1.9;
 }
 
-.medicines{
-  margin-top:12px;
-  padding:12px;
-  background:#f7fbfb;
-  border-radius:9px;
-}
-
-.medicine-row{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:7px 0;
-  border-bottom:1px solid #e5eeee;
-  font-size:12px;
-}
-
-.medicine-row:last-child{
-  border-bottom:0;
+.details b{
+  color:#174f58;
 }
 
 .error{
@@ -222,8 +201,8 @@ button:disabled{
 .loading{
   text-align:center;
   padding:20px;
-  color:#718789;
-  font-size:12px;
+  color:#087d80;
+  font-size:13px;
 }
 
 .back{
@@ -236,16 +215,6 @@ button:disabled{
   font-size:12px;
   font-weight:700;
   text-decoration:none;
-}
-
-.refresh{
-  margin-top:12px;
-  background:#eaf8f8;
-  color:#087d80;
-}
-
-.refresh:hover{
-  background:#d9f0f0;
 }
 
 @media(max-width:550px){
@@ -269,8 +238,11 @@ button:disabled{
 <body>
 
 <header class="header">
-  <div class="brand">⚕️ MEDI POINT</div>
+  <div class="brand">
+    ⚕️ MEDI POINT
+  </div>
 </header>
+
 
 <main class="wrap">
 
@@ -282,7 +254,8 @@ button:disabled{
 Enter your Medi Point Order ID
 </p>
 
-<form onsubmit="trackOrder(event)">
+
+<form id="trackForm">
 
 <label>
 Order ID
@@ -290,20 +263,22 @@ Order ID
 
 <input
   id="orderId"
+  type="text"
   placeholder="Example: MP-20260810-12345"
   required
 >
 
-<button
-  id="trackBtn"
-  type="submit"
->
+<button type="submit">
 🔎 Track Order
 </button>
 
 </form>
 
-<div id="result" class="result"></div>
+
+<div id="result" class="result">
+
+</div>
+
 
 <div class="back">
 <a href="order.html">
@@ -318,53 +293,64 @@ Order ID
 
 <script type="module">
 
-/* =========================================
+/* =========================
    FIREBASE
-========================================= */
+========================= */
 
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
   getFirestore,
-  doc,
-  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
   onSnapshot
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-/* =========================================
+/* =========================
    FIREBASE CONFIG
-========================================= */
+========================= */
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyDDY8sEtMapyVhiQd5AfcRb599dsgFwMcE",
+  apiKey:
+    "AIzaSyDDY8sEtMapyVhiQd5AfcRb599dsgFwMcE",
 
-  authDomain: "medipoint-f4616.firebaseapp.com",
+  authDomain:
+    "medipoint-f4616.firebaseapp.com",
 
-  projectId: "medipoint-f4616",
+  projectId:
+    "medipoint-f4616",
 
-  storageBucket: "medipoint-f4616.firebasestorage.app",
+  storageBucket:
+    "medipoint-f4616.firebasestorage.app",
 
-  messagingSenderId: "180492377336",
+  messagingSenderId:
+    "180492377336",
 
-  appId: "1:180492377336:web:5f6566cd6663ed43a12f0d",
+  appId:
+    "1:180492377336:web:5f6566cd6663ed43a12f0d",
 
-  measurementId: "G-C8X32M4CKF"
+  measurementId:
+    "G-C8X32M4CKF"
 
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
+  initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+const db =
+  getFirestore(app);
 
 
-/* =========================================
+/* =========================
    ORDER STATUS
-========================================= */
+========================= */
 
 const steps = [
 
@@ -381,13 +367,26 @@ const steps = [
 ];
 
 
-/* =========================================
-   TRACK ORDER
-========================================= */
+/* =========================
+   FORM
+========================= */
 
-async function trackOrder(event){
+document
+  .getElementById("trackForm")
+  .addEventListener(
+    "submit",
+    searchOrder
+  );
+
+
+/* =========================
+   SEARCH ORDER
+========================= */
+
+async function searchOrder(event){
 
   event.preventDefault();
+
 
   const input =
     document.getElementById("orderId");
@@ -395,108 +394,134 @@ async function trackOrder(event){
   const result =
     document.getElementById("result");
 
-  const button =
-    document.getElementById("trackBtn");
+
+  const orderId =
+    input.value
+      .trim()
+      .toUpperCase();
 
 
-  const id =
-    input.value.trim().toUpperCase();
+  if(!orderId){
 
-
-  if(!id){
+    result.innerHTML = `
+      <div class="error">
+        ❌ Please enter Order ID.
+      </div>
+    `;
 
     return;
 
   }
 
 
-  button.disabled = true;
-
-  button.textContent = "⏳ Searching...";
-
-
   result.innerHTML = `
     <div class="loading">
-      🔎 Searching your order...
+      ⏳ Searching order...
     </div>
   `;
 
 
   try{
 
-    const orderRef =
-      doc(db,"orders",id);
+    const q = query(
 
-    const snap =
-      await getDoc(orderRef);
+      collection(db,"orders"),
+
+      where(
+        "orderId",
+        "==",
+        orderId
+      )
+
+    );
 
 
-    if(!snap.exists()){
+    const snapshot =
+      await getDocs(q);
+
+
+    if(snapshot.empty){
 
       result.innerHTML = `
         <div class="error">
-
           ❌ Order not found.
-
           <br><br>
-
-          Please check your Order ID
-          and try again.
-
+          Please check your Order ID.
         </div>
       `;
-
-      button.disabled = false;
-
-      button.textContent =
-        "🔎 Track Order";
 
       return;
 
     }
 
 
-    /*
-      First display the order
-    */
-
-    renderOrder({
-      id:id,
-      ...snap.data()
-    });
+    const orderDoc =
+      snapshot.docs[0];
 
 
     /*
-      REAL-TIME LISTENER
-
-      Admin changes status
-      → customer tracking updates
+      Firebase realtime listener.
+      Admin status change karega
+      to customer page automatically
+      update ho jayega.
     */
 
     onSnapshot(
-      orderRef,
-      (updatedSnap)=>{
 
-        if(updatedSnap.exists()){
+      orderDoc.ref,
 
-          renderOrder({
+      snap => {
 
-            id:id,
+        if(!snap.exists()){
 
-            ...updatedSnap.data()
+          result.innerHTML = `
+            <div class="error">
+              ❌ This order no longer exists.
+            </div>
+          `;
 
-          });
+          return;
 
         }
 
+
+        const order = {
+
+          id:snap.id,
+
+          ...snap.data()
+
+        };
+
+
+        renderOrder(order);
+
+      },
+
+      error => {
+
+        console.error(
+          "REALTIME ERROR:",
+          error
+        );
+
+        result.innerHTML = `
+          <div class="error">
+            ❌ Unable to track order.
+            <br><br>
+            ${escapeHTML(error.message)}
+          </div>
+        `;
+
       }
+
     );
 
 
   }catch(error){
 
     console.error(
-      "TRACKING ERROR:",
+      "SEARCH ERROR:",
       error
     );
 
@@ -504,7 +529,7 @@ async function trackOrder(event){
     result.innerHTML = `
       <div class="error">
 
-        ❌ Unable to load order.
+        ❌ Firebase Error
 
         <br><br>
 
@@ -515,27 +540,21 @@ async function trackOrder(event){
 
   }
 
-
-  button.disabled = false;
-
-  button.textContent =
-    "🔎 Track Order";
-
 }
 
 
-/* =========================================
+/* =========================
    RENDER ORDER
-========================================= */
+========================= */
 
-function renderOrder(order){
+function renderOrder(o){
 
   const result =
     document.getElementById("result");
 
 
   const status =
-    order.status || "Order Placed";
+    o.status || "Order Placed";
 
 
   let current =
@@ -560,63 +579,76 @@ function renderOrder(order){
       </b>
 
       <small>
-        Order ID: ${escapeHTML(order.id)}
+        Order ID:
+        ${escapeHTML(
+          o.orderId || o.id
+        )}
       </small>
 
     </div>
 
     <div class="timeline">
+
   `;
 
 
-  steps.forEach((step,index)=>{
+  steps.forEach(
+    (step,index)=>{
 
-    const active =
-      index <= current;
+      const active =
+        index <= current;
 
 
-    html += `
+      html += `
 
-      <div class="step ${active ? "active" : ""}">
+        <div
+          class="step ${active ? "active" : ""}"
+        >
 
-        <div class="dot">
-
-          ${active ? "✓" : index + 1}
-
-        </div>
-
-        ${
-          index < steps.length - 1
-          ? `<div class="line"></div>`
-          : ""
-        }
-
-        <div>
-
-          <h3>
-            ${step}
-          </h3>
-
-          <p>
+          <div class="dot">
 
             ${
-              index === current
-              ? "Current order status"
-              : index < current
-              ? "Completed"
-              : "Order progress"
-
+              active
+              ? "✓"
+              : index + 1
             }
 
-          </p>
+          </div>
+
+          ${
+            index < steps.length - 1
+            ?
+            '<div class="line"></div>'
+            :
+            ''
+          }
+
+          <div>
+
+            <h3>
+              ${escapeHTML(step)}
+            </h3>
+
+            <p>
+
+              ${
+                index === current
+                ? "Current order status"
+                : index < current
+                ? "Completed"
+                : "Order progress"
+              }
+
+            </p>
+
+          </div>
 
         </div>
 
-      </div>
+      `;
 
-    `;
-
-  });
+    }
+  );
 
 
   html += `
@@ -625,105 +657,45 @@ function renderOrder(order){
 
     <div class="details">
 
-      <b>👤 Customer:</b>
-      ${escapeHTML(order.name || "N/A")}
+      <b>Customer:</b>
+      ${escapeHTML(
+        o.name ||
+        o.customerName ||
+        "Not available"
+      )}
 
       <br>
 
-      <b>📱 Mobile:</b>
-      ${escapeHTML(order.phone || "N/A")}
+      <b>Mobile:</b>
+      ${escapeHTML(
+        o.phone ||
+        o.mobile ||
+        "Not available"
+      )}
 
       <br>
 
-      <b>💳 Payment:</b>
-      ${escapeHTML(order.payment || "N/A")}
+      <b>Payment:</b>
+      ${escapeHTML(
+        o.payment ||
+        o.paymentMethod ||
+        "Not available"
+      )}
 
       <br>
 
-      <b>💰 Total:</b>
-      ₹${Number(order.total || 0).toFixed(2)}
+      <b>Total:</b>
+      ₹${Number(
+        o.total || 0
+      ).toFixed(2)}
 
-  `;
+      <br>
 
-
-  /*
-    MEDICINES
-  */
-
-  if(
-    Array.isArray(order.items) &&
-    order.items.length
-  ){
-
-    html += `
-
-      <div class="medicines">
-
-        <b>💊 Medicines</b>
-
-    `;
-
-
-    order.items.forEach(item=>{
-
-      const name =
-        item.name ||
-        item.medicineName ||
-        item.title ||
-        "Medicine";
-
-
-      const qty =
-        Number(
-          item.quantity ||
-          item.qty ||
-          item.count ||
-          1
-        );
-
-
-      const price =
-        Number(
-          item.price ||
-          item.medicinePrice ||
-          item.amount ||
-          0
-        );
-
-
-      html += `
-
-        <div class="medicine-row">
-
-          <span>
-            ${escapeHTML(name)}
-            × ${qty}
-          </span>
-
-          <b>
-            ₹${(price * qty).toFixed(2)}
-          </b>
-
-        </div>
-
-      `;
-
-    });
-
-
-    html += `</div>`;
-
-  }
-
-
-  html += `
-
-      <button
-        class="refresh"
-        onclick="location.reload()"
-      >
-        🔄 Refresh Tracking
-      </button>
+      <b>Address:</b>
+      ${escapeHTML(
+        o.address ||
+        "Not available"
+      )}
 
     </div>
 
@@ -735,38 +707,9 @@ function renderOrder(order){
 }
 
 
-/* =========================================
-   ESCAPE HTML
-========================================= */
-
-function escapeHTML(value){
-
-  return String(value)
-
-    .replaceAll("&","&amp;")
-
-    .replaceAll("<","&lt;")
-
-    .replaceAll(">","&gt;")
-
-    .replaceAll('"',"&quot;")
-
-    .replaceAll("'","&#039;");
-
-}
-
-
-/* =========================================
-   MAKE GLOBAL
-========================================= */
-
-window.trackOrder =
-  trackOrder;
-
-
-/* =========================================
-   AUTO TRACK FROM URL
-========================================= */
+/* =========================
+   URL ORDER ID
+========================= */
 
 const params =
   new URLSearchParams(
@@ -774,22 +717,59 @@ const params =
   );
 
 
-const urlId =
+const urlOrderId =
   params.get("id");
 
 
-if(urlId){
+if(urlOrderId){
 
-  document.getElementById("orderId").value =
-    urlId.toUpperCase();
+  document.getElementById(
+    "orderId"
+  ).value =
+    urlOrderId.toUpperCase();
+
 
   /*
     Automatically track order
+    when URL contains ?id=
   */
 
-  trackOrder(
-    new Event("submit")
-  );
+  document
+    .getElementById("trackForm")
+    .dispatchEvent(
+      new Event("submit")
+    );
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
 
