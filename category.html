@@ -6,15 +6,13 @@
 <title>MEDI POINT | Category</title>
 
 <style>
-*{
-  box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
   background:#f7fbfb;
-  color:#173f46
+  color:#173f46;
 }
 
 header{
@@ -27,7 +25,7 @@ header{
   padding:0 6%;
   position:sticky;
   top:0;
-  z-index:5
+  z-index:5;
 }
 
 .brand{
@@ -35,7 +33,7 @@ header{
   gap:10px;
   align-items:center;
   text-decoration:none;
-  color:#174b53
+  color:#174b53;
 }
 
 .mark{
@@ -47,17 +45,22 @@ header{
   display:grid;
   place-items:center;
   font-size:28px;
-  font-weight:bold
+  font-weight:bold;
 }
 
 .brand h2{
   margin:0;
-  font-size:18px
+  font-size:18px;
 }
 
 .brand small{
   font-size:8px;
-  color:#77888a
+  color:#77888a;
+}
+
+.header-buttons{
+  display:flex;
+  gap:8px;
 }
 
 .btn{
@@ -67,42 +70,47 @@ header{
   background:#eaf6f7;
   color:#17606a;
   font-weight:bold;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .cart{
   background:#148d9e;
-  color:#fff
+  color:#fff;
 }
 
 .head{
   text-align:center;
-  padding:38px 20px 25px
+  padding:38px 20px 25px;
 }
 
 .head h1{
   margin:0;
   color:#174f58;
-  font-size:31px
+  font-size:31px;
 }
 
 .head p{
   color:#78888b;
-  font-size:13px
+  font-size:13px;
 }
 
 .tools{
   max-width:1120px;
   margin:auto;
-  padding:0 20px 22px
+  padding:0 20px 22px;
 }
 
 .tools input{
   width:100%;
-  padding:12px;
+  padding:13px;
   border:1px solid #dce8e8;
   border-radius:8px;
-  outline:0
+  outline:0;
+  font-size:14px;
+}
+
+.tools input:focus{
+  border-color:#148d9e;
 }
 
 .grid{
@@ -111,7 +119,7 @@ header{
   padding:0 20px 50px;
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:18px
+  gap:18px;
 }
 
 .product{
@@ -121,7 +129,7 @@ header{
   padding:14px;
   box-shadow:0 6px 20px #123f4710;
   display:flex;
-  flex-direction:column
+  flex-direction:column;
 }
 
 .pic{
@@ -131,26 +139,26 @@ header{
   display:grid;
   place-items:center;
   overflow:hidden;
-  font-size:52px
+  font-size:52px;
 }
 
 .pic img{
   width:100%;
   height:100%;
-  object-fit:cover
+  object-fit:contain;
 }
 
 .product h3{
   margin:14px 0 6px;
   color:#174f58;
-  font-size:16px
+  font-size:16px;
 }
 
 .desc{
   font-size:12px;
   color:#7b898b;
   line-height:1.5;
-  min-height:35px
+  min-height:35px;
 }
 
 .price{
@@ -158,7 +166,7 @@ header{
   margin-top:10px;
   color:#148b9c;
   font-size:19px;
-  font-weight:800
+  font-weight:800;
 }
 
 .add{
@@ -170,11 +178,11 @@ header{
   background:#148d9e;
   color:#fff;
   font-weight:bold;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .add:hover{
-  background:#0d7482
+  background:#0d7482;
 }
 
 .empty{
@@ -184,14 +192,34 @@ header{
   border-radius:12px;
   padding:55px 20px;
   text-align:center;
-  color:#78888b
+  color:#78888b;
 }
 
 .empty strong{
   display:block;
   color:#174f58;
   font-size:19px;
-  margin-bottom:8px
+  margin-bottom:8px;
+}
+
+.loading{
+  grid-column:1/-1;
+  background:#fff;
+  border:1px solid #e2eeee;
+  border-radius:12px;
+  padding:55px 20px;
+  text-align:center;
+  color:#148d9e;
+}
+
+.error{
+  grid-column:1/-1;
+  background:#fff4f4;
+  border:1px solid #f0d5d5;
+  border-radius:12px;
+  padding:35px 20px;
+  text-align:center;
+  color:#b44;
 }
 
 .toast{
@@ -203,22 +231,39 @@ header{
   padding:12px 16px;
   border-radius:8px;
   display:none;
-  z-index:50
+  z-index:50;
 }
 
 @media(max-width:900px){
   .grid{
-    grid-template-columns:repeat(2,1fr)
+    grid-template-columns:repeat(2,1fr);
   }
 }
 
 @media(max-width:550px){
+
+  header{
+    padding:0 4%;
+  }
+
   .brand small{
-    display:none
+    display:none;
+  }
+
+  .brand h2{
+    font-size:16px;
+  }
+
+  .header-buttons .btn:first-child{
+    display:none;
   }
 
   .grid{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
+  }
+
+  .head h1{
+    font-size:26px;
   }
 }
 </style>
@@ -230,28 +275,29 @@ header{
 
 <a class="brand" href="index.html#products">
 
-<div class="mark">+</div>
+  <div class="mark">+</div>
 
-<div>
-<h2>MEDI POINT</h2>
-<small>Your Trusted Healthcare Partner</small>
-</div>
+  <div>
+    <h2>MEDI POINT</h2>
+    <small>Your Trusted Healthcare Partner</small>
+  </div>
 
 </a>
 
-<div>
+<div class="header-buttons">
 
-<button
-class="btn"
-onclick="location.href='index.html#products'">
-← Categories
-</button>
+  <button
+    class="btn"
+    onclick="location.href='index.html#products'">
+    ← Categories
+  </button>
 
-<button
-class="btn cart"
-onclick="location.href='order.html'">
-🛒 Cart
-</button>
+  <button
+    class="btn cart"
+    onclick="location.href='order.html'">
+    🛒 Cart
+    <span id="cartCount"></span>
+  </button>
 
 </div>
 
@@ -260,32 +306,43 @@ onclick="location.href='order.html'">
 
 <div class="head">
 
-<h1 id="title">Medicines</h1>
+  <h1 id="title">Medicines</h1>
 
-<p>
-Only medicines added from the Admin panel are shown here.
-</p>
+  <p>
+    Medicines available in this category
+  </p>
 
 </div>
 
 
 <div class="tools">
 
-<input
-id="search"
-placeholder="🔎 Search medicine..."
-oninput="render()"
->
+  <input
+    id="search"
+    type="text"
+    placeholder="🔎 Search medicine..."
+  >
 
 </div>
 
 
-<div id="grid" class="grid"></div>
+<div id="grid" class="grid">
+
+  <div class="loading">
+    ⏳ Loading medicines...
+  </div>
+
+</div>
+
 
 <div id="toast" class="toast"></div>
 
 
 <script type="module">
+
+/* =========================================
+   FIREBASE
+========================================= */
 
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
@@ -293,10 +350,14 @@ from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 import {
   getFirestore,
   collection,
-  getDocs
+  onSnapshot
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
+/* =========================================
+   FIREBASE CONFIG
+========================================= */
 
 const firebaseConfig = {
 
@@ -320,23 +381,20 @@ const firebaseConfig = {
 
   measurementId:
     "G-C8X32M4CKF"
-
 };
 
 
 const app =
-  initializeApp(
-    firebaseConfig
-  );
+  initializeApp(firebaseConfig);
 
 
 const db =
   getFirestore(app);
 
 
-/* ==========================================
-   CATEGORY
-========================================== */
+/* =========================================
+   CATEGORY NAMES
+========================================= */
 
 const names = {
 
@@ -403,9 +461,9 @@ const names = {
 };
 
 
-/* ==========================================
+/* =========================================
    NORMALIZE CATEGORY
-========================================== */
+========================================= */
 
 function normalizeCategory(value){
 
@@ -416,14 +474,15 @@ function normalizeCategory(value){
     .replace(/\//g,"-")
     .replace(/\s+/g,"-")
     .replace(/[^a-z0-9-]/g,"")
-    .replace(/-+/g,"-");
+    .replace(/-+/g,"-")
+    .replace(/^-|-$/g,"");
 
 }
 
 
-/* ==========================================
-   URL CATEGORY
-========================================== */
+/* =========================================
+   GET CATEGORY FROM URL
+========================================= */
 
 const params =
   new URLSearchParams(
@@ -431,106 +490,205 @@ const params =
   );
 
 
+/*
+   Ab:
+   ?cat=antibiotic
+   ?category=antibiotic
+   dono chalega
+*/
+
+let urlCategory =
+  params.get("cat") ||
+  params.get("category") ||
+  "";
+
+
 const selectedCategory =
-  normalizeCategory(
-    params.get("cat")
-  );
+  normalizeCategory(urlCategory);
 
 
-/* ==========================================
+/* =========================================
+   PAGE TITLE
+========================================= */
+
+const categoryTitle =
+  names[selectedCategory] ||
+  urlCategory ||
+  "Medicines";
+
+
+document.getElementById("title").textContent =
+  categoryTitle;
+
+
+/* =========================================
    PRODUCTS
-========================================== */
+========================================= */
 
 let products = [];
 
 
-/* ==========================================
-   ESCAPE
-========================================== */
+/* =========================================
+   ESCAPE HTML
+========================================= */
 
 function esc(value){
 
-  return String(
-    value ?? ""
-  )
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-/* ==========================================
+/* =========================================
    MONEY
-========================================== */
+========================================= */
 
 function money(value){
 
   return "₹" +
-    Number(
-      value || 0
-    ).toLocaleString(
-      "en-IN"
-    );
+    Number(value || 0).toLocaleString("en-IN");
 
 }
 
 
-/* ==========================================
-   FIREBASE LOAD
-========================================== */
+/* =========================================
+   CATEGORY MATCH
+========================================= */
 
-async function loadProducts(){
+function categoryMatches(productCategory){
 
-  try{
+  const productCat =
+    normalizeCategory(productCategory);
 
-    const snapshot =
-      await getDocs(
-        collection(
-          db,
-          "medicines"
-        )
-      );
+  if(!selectedCategory){
+    return true;
+  }
+
+  /*
+     Direct match
+  */
+
+  if(productCat === selectedCategory){
+    return true;
+  }
+
+  /*
+     Name se match
+     Example:
+     "Cough & Cold"
+     vs
+     "cough-cold"
+  */
+
+  const selectedName =
+    normalizeCategory(
+      names[selectedCategory] ||
+      selectedCategory
+    );
+
+  if(productCat === selectedName){
+    return true;
+  }
+
+  /*
+     Extra fallback
+  */
+
+  const productName =
+    names[productCat] ||
+    productCat;
+
+  if(
+    normalizeCategory(productName) ===
+    selectedCategory
+  ){
+    return true;
+  }
+
+  return false;
+
+}
 
 
-    const result = [];
+/* =========================================
+   LOAD FIREBASE MEDICINES
+========================================= */
+
+function loadMedicines(){
+
+  const grid =
+    document.getElementById("grid");
 
 
-    snapshot.forEach(function(item){
+  onSnapshot(
 
-      result.push({
+    collection(db,"medicines"),
 
-        id: item.id,
+    (snapshot)=>{
 
-        ...item.data()
+      products = [];
+
+
+      snapshot.forEach((docSnap)=>{
+
+        products.push({
+
+          id:docSnap.id,
+
+          ...docSnap.data()
+
+        });
 
       });
 
-    });
+
+      console.log(
+        "Firebase medicines:",
+        products
+      );
 
 
-    return result;
+      render();
+
+    },
+
+    (error)=>{
+
+      console.error(
+        "Firebase medicines error:",
+        error
+      );
 
 
-  }catch(error){
+      grid.innerHTML = `
 
-    console.error(
-      "Firebase error:",
-      error
-    );
+        <div class="error">
 
-    return [];
+          ❌ Firebase Error
 
-  }
+          <br><br>
+
+          ${esc(error.message)}
+
+        </div>
+
+      `;
+
+    }
+
+  );
 
 }
 
 
-/* ==========================================
+/* =========================================
    CART
-========================================== */
+========================================= */
 
 function getCart(){
 
@@ -542,7 +700,7 @@ function getCart(){
       ) || "[]"
     );
 
-  }catch(error){
+  }catch{
 
     return [];
 
@@ -561,27 +719,23 @@ function saveCart(cart){
 }
 
 
-/* ==========================================
+/* =========================================
    ADD TO CART
-========================================== */
+========================================= */
 
-window.add = function(id){
+window.addToCart =
+function(id){
 
   const product =
     products.find(
-      function(p){
-
-        return String(p.id) ===
-          String(id);
-
-      }
+      p => String(p.id) === String(id)
     );
 
 
   if(!product){
 
-    alert(
-      "Medicine not found."
+    showToast(
+      "❌ Medicine not found"
     );
 
     return;
@@ -595,38 +749,36 @@ window.add = function(id){
 
   const existing =
     cart.find(
-      function(item){
-
-        return String(item.id) ===
-          String(id);
-
-      }
+      item =>
+        String(item.id) ===
+        String(id)
     );
 
 
   if(existing){
 
     existing.quantity =
-      Number(
-        existing.quantity || 1
-      ) + 1;
+      Number(existing.quantity || 1) + 1;
 
   }else{
 
     cart.push({
 
-      id: product.id,
+      id:product.id,
 
-      name: product.name,
+      name:product.name || "Medicine",
 
-      price: Number(
+      price:Number(
         product.price || 0
       ),
 
       image:
-        product.image || "",
+        product.image ||
+        product.photo ||
+        product.imageUrl ||
+        "",
 
-      quantity: 1
+      quantity:1
 
     });
 
@@ -636,20 +788,21 @@ window.add = function(id){
   saveCart(cart);
 
 
-  alert(
-    product.name +
-    " added to cart ✓"
-  );
-
-
   updateCartCount();
+
+
+  showToast(
+    "✅ " +
+    (product.name || "Medicine") +
+    " added to cart"
+  );
 
 };
 
 
-/* ==========================================
+/* =========================================
    CART COUNT
-========================================== */
+========================================= */
 
 function updateCartCount(){
 
@@ -659,7 +812,7 @@ function updateCartCount(){
 
   const count =
     cart.reduce(
-      function(total,item){
+      (total,item)=>{
 
         return total +
           Number(
@@ -671,101 +824,96 @@ function updateCartCount(){
     );
 
 
-  const elements =
-    document.querySelectorAll(
-      ".cart-count"
+  const element =
+    document.getElementById(
+      "cartCount"
     );
 
 
-  elements.forEach(
-    function(element){
+  if(element){
 
-      element.textContent =
-        count;
+    element.textContent =
+      count > 0
+      ? ` (${count})`
+      : "";
 
-    }
-  );
+  }
 
 }
 
 
-/* ==========================================
+/* =========================================
    RENDER
-========================================== */
+========================================= */
 
-window.render = function(){
+function render(){
 
   const grid =
-    document.getElementById(
-      "grid"
-    );
+    document.getElementById("grid");
 
 
   if(!grid){
-
     return;
-
   }
 
 
-  const searchElement =
-    document.getElementById(
-      "search"
-    );
+  const searchInput =
+    document.getElementById("search");
 
 
   const search =
-    searchElement
-    ?
-    searchElement
-      .value
-      .toLowerCase()
-      .trim()
-    :
-    "";
+    searchInput
+    ? searchInput.value
+        .toLowerCase()
+        .trim()
+    : "";
 
+
+  /*
+     IMPORTANT:
+     Firebase medicines ko category ke
+     according filter kar rahe hain.
+  */
 
   const list =
-    products.filter(
-      function(p){
+    products.filter(product=>{
 
-        const category =
-          normalizeCategory(
-            p.category ||
-            p.cat ||
-            p.categoryName ||
-            ""
-          );
+      const productCategory =
+        product.category ||
+        product.cat ||
+        product.categoryName ||
+        "";
 
 
-        const productName =
-          String(
-            p.name || ""
-          )
-          .toLowerCase();
-
-
-        return (
-
-          category ===
-          selectedCategory
-
-        )
-
-        &&
-
-        (
-
-          !search ||
-
-          productName.includes(
-            search
-          )
-
+      const categoryOK =
+        categoryMatches(
+          productCategory
         );
 
-      }
-    );
+
+      const nameOK =
+        !search ||
+        String(
+          product.name || ""
+        )
+        .toLowerCase()
+        .includes(search);
+
+
+      return categoryOK && nameOK;
+
+    });
+
+
+  console.log(
+    "Selected category:",
+    selectedCategory
+  );
+
+  console.log(
+    "Matching medicines:",
+    list
+  );
 
 
   if(!list.length){
@@ -775,202 +923,186 @@ window.render = function(){
       <div class="empty">
 
         <strong>
-          No medicines added yet
+          No medicines found
         </strong>
 
-        <br><br>
-
-        Admin panel se
-
-        "${esc(
-          names[selectedCategory]
-          ||
+        ${
           selectedCategory
-          ||
-          "this"
-        )}"
-
-        category mein medicine add karo.
+          ?
+          `
+          Admin panel se
+          <b>${esc(categoryTitle)}</b>
+          category mein medicine add karo.
+          `
+          :
+          `
+          Please select a category.
+          `
+        }
 
       </div>
 
     `;
+
+    updateCartCount();
 
     return;
 
   }
 
 
-  grid.innerHTML =
-
-    list
-    .map(
-      function(p){
-
-        const image =
-          p.image ||
-          p.photo ||
-          p.imageUrl ||
-          "";
+  grid.innerHTML = "";
 
 
-        return `
+  list.forEach(product=>{
 
-          <article
-            class="product"
+    const article =
+      document.createElement("article");
+
+
+    article.className =
+      "product";
+
+
+    const image =
+      product.image ||
+      product.photo ||
+      product.imageUrl ||
+      "";
+
+
+    article.innerHTML = `
+
+      <div class="pic">
+
+        ${
+          image
+
+          ?
+
+          `
+          <img
+            src="${esc(image)}"
+            alt="${esc(
+              product.name || "Medicine"
+            )}"
+            onerror="
+              this.style.display='none';
+              this.parentElement.innerHTML='💊';
+            "
           >
+          `
 
-            <div class="pic">
+          :
 
-              ${
-                image
+          `💊`
+        }
 
-                ?
-
-                `
-                <img
-
-                  src="${esc(image)}"
-
-                  alt="${esc(
-                    p.name
-                  )}"
-
-                  onerror="
-                    this.style.display='none';
-                    this.parentElement.innerHTML='💊';
-                  "
-
-                >
-                `
-
-                :
-
-                `💊`
-
-              }
-
-            </div>
+      </div>
 
 
-            <h3>
-
-              ${esc(
-                p.name
-              )}
-
-            </h3>
-
-
-            <div class="desc">
-
-              ${esc(
-                p.desc ||
-                p.description ||
-                "Quality healthcare product"
-              )}
-
-            </div>
+      <h3>
+        ${esc(
+          product.name ||
+          "Medicine"
+        )}
+      </h3>
 
 
-            <span class="price">
+      <div class="desc">
 
-              ${money(
-                p.price
-              )}
+        ${esc(
+          product.details ||
+          product.desc ||
+          product.description ||
+          "Quality healthcare product"
+        )}
 
-            </span>
-
-
-            <button
-
-              class="add"
-
-              onclick="
-                add('${String(
-                  p.id
-                )}')
-              "
-
-            >
-
-              + Add to Cart
-
-            </button>
+      </div>
 
 
-          </article>
+      <span class="price">
 
-        `;
+        ${money(product.price)}
 
-      }
-    )
-    .join("");
+      </span>
+
+
+      <button
+        class="add"
+        onclick="addToCart('${esc(product.id)}')">
+
+        + Add to Cart
+
+      </button>
+
+    `;
+
+
+    grid.appendChild(article);
+
+  });
 
 
   updateCartCount();
 
-};
+}
 
 
-/* ==========================================
+/* =========================================
    SEARCH
-========================================== */
+========================================= */
 
-const searchInput =
-  document.getElementById(
-    "search"
-  );
-
-
-if(searchInput){
-
-  searchInput.addEventListener(
+document
+  .getElementById("search")
+  .addEventListener(
     "input",
-    function(){
-
-      render();
-
-    }
+    render
   );
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+function showToast(text){
+
+  const toast =
+    document.getElementById("toast");
+
+
+  toast.textContent =
+    text;
+
+
+  toast.style.display =
+    "block";
+
+
+  clearTimeout(
+    window.toastTimer
+  );
+
+
+  window.toastTimer =
+    setTimeout(()=>{
+
+      toast.style.display =
+        "none";
+
+    },3000);
 
 }
 
 
-/* ==========================================
-   PAGE START
-========================================== */
+/* =========================================
+   START
+========================================= */
 
-(async function(){
+loadMedicines();
 
-  const grid =
-    document.getElementById(
-      "grid"
-    );
+updateCartCount();
 
-
-  if(grid){
-
-    grid.innerHTML = `
-
-      <div class="empty">
-
-        Loading medicines...
-
-      </div>
-
-    `;
-
-  }
-
-
-  products =
-    await loadProducts();
-
-
-  render();
-
-})();
 </script>
 
 </body>
