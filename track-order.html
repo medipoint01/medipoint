@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Track Order | MEDI POINT</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f9f9;
+  color:#203b3d;
+}
+
+.header{
+  background:#fff;
+  padding:15px 6%;
+  border-bottom:1px solid #e1eeee;
+}
+
+.brand{
+  font-size:21px;
+  font-weight:800;
+  color:#087d80;
+}
+
+.wrap{
+  width:92%;
+  max-width:650px;
+  margin:45px auto;
+}
+
+.box{
+  background:#fff;
+  border:1px solid #e0ebeb;
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 8px 28px #14464b12;
+}
+
+h1{
+  text-align:center;
+  font-size:27px;
+  margin:0 0 8px;
+}
+
+.sub{
+  text-align:center;
+  color:#809193;
+  font-size:12px;
+  margin:0 0 25px;
+}
+
+label{
+  font-size:13px;
+  font-weight:700;
+  display:block;
+  margin-bottom:7px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border:1px solid #d5e4e5;
+  border-radius:10px;
+  outline:none;
+  font-size:14px;
+  text-transform:uppercase;
+}
+
+input:focus{
+  border-color:#087d80;
+  box-shadow:0 0 0 3px #087d8014;
+}
+
+button{
+  width:100%;
+  margin-top:12px;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#087d80;
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#06696c;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.result{
+  margin-top:25px;
+}
+
+.status-head{
+  text-align:center;
+  background:#eaf8f8;
+  border-radius:12px;
+  padding:17px;
+}
+
+.status-head b{
+  display:block;
+  font-size:19px;
+  color:#087d80;
+  margin-top:6px;
+}
+
+.status-head small{
+  display:block;
+  margin-top:6px;
+  color:#688;
+}
+
+.timeline{
+  margin-top:22px;
+}
+
+.step{
+  display:flex;
+  gap:13px;
+  position:relative;
+  padding-bottom:22px;
+}
+
+.dot{
+  width:30px;
+  height:30px;
+  flex:none;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#dce9e9;
+  color:#71888a;
+  font-size:12px;
+  font-weight:700;
+  z-index:2;
+}
+
+.step.active .dot{
+  background:#087d80;
+  color:white;
+}
+
+.line{
+  position:absolute;
+  left:14px;
+  top:30px;
+  height:calc(100% - 20px);
+  border-left:2px solid #dce9e9;
+}
+
+.step.active .line{
+  border-color:#087d80;
+}
+
+.step h3{
+  margin:4px 0 3px;
+  font-size:14px;
+}
+
+.step p{
+  margin:0;
+  color:#8a9b9d;
+  font-size:11px;
+}
+
+.details{
+  margin-top:22px;
+  padding-top:17px;
+  border-top:1px dashed #d8e5e5;
+  font-size:12px;
+  line-height:1.8;
+}
+
+.details-box{
+  background:#f7fbfb;
+  padding:13px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+.medicine{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:8px 0;
+  border-bottom:1px solid #e8eeee;
+}
+
+.medicine:last-child{
+  border-bottom:0;
+}
+
+.back{
+  text-align:center;
+  margin-top:18px;
+}
+
+.back a{
+  color:#087d80;
+  font-size:12px;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.error{
+  text-align:center;
+  padding:20px;
+  color:#b44;
+  background:#fff4f4;
+  border-radius:10px;
+  font-size:12px;
+}
+
+.loading{
+  text-align:center;
+  padding:20px;
+  color:#087d80;
+  font-size:13px;
+}
+
+.success{
+  text-align:center;
+  padding:20px;
+  background:#eefaf7;
+  color:#34756b;
+  border-radius:10px;
+  font-size:12px;
+}
+
+@media(max-width:550px){
+
+  .wrap{
+    width:94%;
+    margin:25px auto;
+  }
+
+  .box{
+    padding:18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="brand">
+    ⚕️ MEDI POINT
+  </div>
+
+</header>
+
+
+<main class="wrap">
+
+<section class="box">
+
+<h1>📦 Track Your Order</h1>
+
+<p class="sub">
+Enter your Medi Point Order ID
+</p>
+
+
+<form onsubmit="trackOrder(event)">
+
+  <label>
+    Order ID
+  </label>
+
+  <input
+    id="orderId"
+    placeholder="Example: MP-20260810-12345"
+    required
+  >
+
+  <button
+    id="trackBtn"
+    type="submit"
+  >
+    🔎 Track Order
+  </button>
+
+</form>
+
+
+<div
+  id="result"
+  class="result">
+</div>
+
+
+<div class="back">
+
+  <a href="order.html">
+    ← Back to Order Page
+  </a>
+
+</div>
+
+</section>
+
+</main>
+
+
+<script type="module">
+
+/* =========================
+   FIREBASE
+========================= */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  onSnapshot
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+  apiKey:
+    "AIzaSyDDY8sEtMapyVhiQd5AfcRb599dsgFwMcE",
+
+  authDomain:
+    "medipoint-f4616.firebaseapp.com",
+
+  projectId:
+    "medipoint-f4616",
+
+  storageBucket:
+    "medipoint-f4616.firebasestorage.app",
+
+  messagingSenderId:
+    "180492377336",
+
+  appId:
+    "1:180492377336:web:5f6566cd6663ed43a12f0d",
+
+  measurementId:
+    "G-C8X32M4CKF"
+
+};
+
+
+const app =
+  initializeApp(firebaseConfig);
+
+const db =
+  getFirestore(app);
+
+
+/* =========================
+   STATUS
+========================= */
+
+const steps = [
+
+  "Order Placed",
+
+  "Order Confirmed",
+
+  "Preparing",
+
+  "Out for Delivery",
+
+  "Delivered"
+
+];
+
+
+let unsubscribeOrder = null;
+
+
+/* =========================
+   TRACK ORDER
+========================= */
+
+window.trackOrder = async function(event){
+
+  event.preventDefault();
+
+
+  const input =
+    document.getElementById("orderId");
+
+  const result =
+    document.getElementById("result");
+
+  const button =
+    document.getElementById("trackBtn");
+
+
+  const id =
+    input.value.trim().toUpperCase();
+
+
+  if(!id){
+
+    return;
+
+  }
+
+
+  /*
+    Previous realtime listener
+    ko stop karo.
+  */
+
+  if(unsubscribeOrder){
+
+    unsubscribeOrder();
+
+    unsubscribeOrder = null;
+
+  }
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "⏳ Searching...";
+
+
+  result.innerHTML = `
+
+    <div class="loading">
+
+      🔎 Searching your order...
+
+    </div>
+
+  `;
+
+
+  try{
+
+    const q =
+      query(
+
+        collection(db,"orders"),
+
+        where("orderId","==",id)
+
+      );
+
+
+    const snapshot =
+      await getDocs(q);
+
+
+    if(snapshot.empty){
+
+      result.innerHTML = `
+
+        <div class="error">
+
+          ❌ Order not found.
+
+          <br><br>
+
+          Please check your Order ID
+          and try again.
+
+        </div>
+
+      `;
+
+      button.disabled = false;
+
+      button.textContent =
+        "🔎 Track Order";
+
+      return;
+
+    }
+
+
+    const orderDoc =
+      snapshot.docs[0];
+
+
+    /*
+      First render
+    */
+
+    renderOrder({
+
+      id:orderDoc.id,
+
+      ...orderDoc.data()
+
+    });
+
+
+    /*
+      REAL-TIME LISTENER
+
+      Admin status change karega
+      to customer page automatically
+      update hogi.
+    */
+
+    const orderRef =
+      doc(
+        db,
+        "orders",
+        orderDoc.id
+      );
+
+
+    unsubscribeOrder =
+      onSnapshot(
+
+        orderRef,
+
+        liveSnapshot=>{
+
+          if(!liveSnapshot.exists()){
+
+            result.innerHTML = `
+
+              <div class="error">
+
+                ❌ This order is no longer available.
+
+              </div>
+
+            `;
+
+            return;
+
+          }
+
+
+          renderOrder({
+
+            id:liveSnapshot.id,
+
+            ...liveSnapshot.data()
+
+          });
+
+        },
+
+        error=>{
+
+          console.error(
+            "REALTIME ERROR:",
+            error
+          );
+
+        }
+
+      );
+
+
+  }catch(error){
+
+    console.error(
+      "TRACK ERROR:",
+      error
+    );
+
+
+    result.innerHTML = `
+
+      <div class="error">
+
+        ❌ Firebase Error
+
+        <br><br>
+
+        ${escapeHTML(error.message)}
+
+      </div>
+
+    `;
+
+  }
+
+
+  button.disabled = false;
+
+  button.textContent =
+    "🔎 Track Order";
+
+};
+
+
+/* =========================
+   RENDER ORDER
+========================= */
+
+function renderOrder(order){
+
+  const result =
+    document.getElementById("result");
+
+
+  const status =
+    order.status ||
+    "Order Placed";
+
+
+  let current =
+    steps.indexOf(status);
+
+
+  if(current < 0){
+
+    current = 0;
+
+  }
+
+
+  let timeline = "";
+
+
+  steps.forEach((step,index)=>{
+
+    const active =
+      index <= current;
+
+
+    timeline += `
+
+      <div class="step ${active ? "active" : ""}">
+
+        <div class="dot">
+
+          ${active ? "✓" : index + 1}
+
+        </div>
+
+
+        ${
+          index < steps.length - 1
+          ?
+          `<div class="line"></div>`
+          :
+          ""
+        }
+
+
+        <div>
+
+          <h3>
+            ${step}
+          </h3>
+
+          <p>
+
+            ${
+              index === current
+              ?
+              "Current order status"
+              :
+              index < current
+              ?
+              "Completed"
+              :
+              "Waiting"
+
+            }
+
+          </p>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+
+  let medicines = "";
+
+
+  if(
+    Array.isArray(order.items) &&
+    order.items.length
+  ){
+
+    medicines =
+      order.items.map(item=>{
+
+        const name =
+          item.name ||
+          item.medicineName ||
+          item.title ||
+          "Medicine";
+
+
+        const qty =
+          Number(
+            item.quantity ||
+            item.qty ||
+            1
+          );
+
+
+        const price =
+          Number(
+            item.price ||
+            item.medicinePrice ||
+            0
+          );
+
+
+        return `
+
+          <div class="medicine">
+
+            <span>
+
+              ${escapeHTML(name)}
+              × ${qty}
+
+            </span>
+
+            <b>
+              ₹${price.toFixed(2)}
+            </b>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }else{
+
+    medicines = `
+
+      <div class="medicine">
+
+        <span>
+          Medicines
+        </span>
+
+        <span>
+          Order details
+        </span>
+
+      </div>
+
+    `;
+
+  }
+
+
+  result.innerHTML = `
+
+    <div class="status-head">
+
+      Current Status
+
+      <b>
+        ${escapeHTML(status)}
+      </b>
+
+      <small>
+
+        Order ID:
+        ${escapeHTML(
+          order.orderId ||
+          order.id ||
+          ""
+        )}
+
+      </small>
+
+    </div>
+
+
+    <div class="timeline">
+
+      ${timeline}
+
+    </div>
+
+
+    <div class="details">
+
+      <b>👤 Customer</b>
+
+      <div class="details-box">
+
+        ${escapeHTML(
+          order.name ||
+          order.customerName ||
+          "Not available"
+        )}
+
+      </div>
+
+
+      <br>
+
+
+      <b>📱 Mobile</b>
+
+      <div class="details-box">
+
+        ${escapeHTML(
+          order.phone ||
+          order.mobile ||
+          "Not available"
+        )}
+
+      </div>
+
+
+      <br>
+
+
+      <b>📍 Delivery Address</b>
+
+      <div class="details-box">
+
+        ${escapeHTML(
+          order.address ||
+          "Not available"
+        )}
+
+      </div>
+
+
+      <br>
+
+
+      <b>💊 Medicines</b>
+
+      <div class="details-box">
+
+        ${medicines}
+
+      </div>
+
+
+      <br>
+
+
+      <b>💳 Payment</b>
+
+      <div class="details-box">
+
+        ${escapeHTML(
+          order.payment ||
+          order.paymentMethod ||
+          "Not available"
+        )}
+
+      </div>
+
+
+      <br>
+
+
+      <b>💰 Total</b>
+
+      <div class="details-box">
+
+        ₹${Number(
+          order.total || 0
+        ).toFixed(2)}
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+
+    .replaceAll("&","&amp;")
+
+    .replaceAll("<","&lt;")
+
+    .replaceAll(">","&gt;")
+
+    .replaceAll('"',"&quot;")
+
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================
+   AUTO TRACK FROM URL
+========================= */
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const urlOrderId =
+  params.get("id");
+
+
+if(urlOrderId){
+
+  document.getElementById(
+    "orderId"
+  ).value =
+    urlOrderId.toUpperCase();
+
+
+  /*
+    Page open hote hi order
+    automatically track hoga.
+  */
+
+  setTimeout(()=>{
+
+    const form =
+      document.querySelector("form");
+
+    if(form){
+
+      form.requestSubmit();
+
+    }
+
+  },300);
+
+}
+
+</script>
+
+</body>
+</html>
