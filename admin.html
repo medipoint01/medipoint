@@ -70,12 +70,6 @@ header{
   cursor:pointer;
 }
 
-.logout:hover{
-  background:#d8eff1;
-}
-
-/* LOGIN */
-
 .login-page{
   min-height:calc(100vh - 72px);
   display:flex;
@@ -184,8 +178,6 @@ header{
   text-align:center;
 }
 
-/* ADMIN */
-
 .admin-page{
   display:none;
   padding:35px 6% 60px;
@@ -206,8 +198,6 @@ header{
   color:#7b898b;
   font-size:13px;
 }
-
-/* FORM */
 
 .form-section{
   max-width:1000px;
@@ -266,8 +256,6 @@ header{
   margin-top:6px;
 }
 
-/* PRICE */
-
 .price-box{
   position:relative;
 }
@@ -285,8 +273,6 @@ header{
 .price-box input{
   padding-left:34px;
 }
-
-/* IMAGE */
 
 .upload-box{
   border:2px dashed #cfe3e4;
@@ -324,10 +310,6 @@ header{
   cursor:pointer;
 }
 
-.choose-btn:hover{
-  background:#0d7482;
-}
-
 .preview{
   margin-top:15px;
   display:none;
@@ -337,12 +319,10 @@ header{
 .preview img{
   width:180px;
   height:180px;
-  object-fit:contain;
+  object-fit:cover;
   border-radius:12px;
   border:1px solid #dce8e8;
 }
-
-/* PRODUCTS */
 
 .products-section{
   max-width:1000px;
@@ -428,220 +408,14 @@ header{
   cursor:pointer;
 }
 
-.delete-btn:hover{
-  background:#ffe0e0;
-}
-
-/* ================= ORDERS ================= */
-
-.orders-section{
-  max-width:1000px;
-  margin:40px auto 0;
-}
-
-.orders-header{
-  background:#fff;
-  border:1px solid #e1eeee;
-  border-radius:15px;
-  padding:20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:18px;
-}
-
-.orders-header h2{
-  color:#174f58;
-  font-size:22px;
-  margin-bottom:5px;
-}
-
-.orders-header p{
-  color:#7b898b;
-  font-size:12px;
-}
-
-.refresh-orders{
-  border:0;
-  background:#eaf7f8;
-  color:#087d80;
-  padding:10px 15px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.order-card{
-  background:#fff;
-  border:1px solid #e1eeee;
-  border-radius:15px;
-  padding:20px;
-  margin-bottom:15px;
-  box-shadow:0 5px 18px rgba(0,0,0,.05);
-}
-
-.order-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:15px;
-  padding-bottom:15px;
-  border-bottom:1px solid #edf2f2;
-}
-
-.order-id{
-  color:#087d80;
-  font-weight:bold;
-  font-size:15px;
-}
-
-.order-date{
-  color:#899698;
-  font-size:11px;
-  margin-top:5px;
-}
-
-.order-status{
-  padding:7px 10px;
-  border-radius:20px;
-  font-size:11px;
-  font-weight:bold;
-  background:#fff4dc;
-  color:#a36b00;
-  white-space:nowrap;
-}
-
-.order-status.confirmed{
-  background:#e8f8ee;
-  color:#16804b;
-}
-
-.order-status.preparing{
-  background:#e9f3ff;
-  color:#1769aa;
-}
-
-.order-status.delivery{
-  background:#eeeaff;
-  color:#6046b3;
-}
-
-.order-status.delivered{
-  background:#dff8ea;
-  color:#087d50;
-}
-
-.order-status.rejected{
-  background:#fff0f0;
-  color:#c44444;
-}
-
-.order-customer{
-  padding:15px 0;
-}
-
-.order-customer h3{
-  color:#174f58;
-  font-size:15px;
-  margin-bottom:8px;
-}
-
-.order-customer p{
-  color:#687b7d;
-  font-size:12px;
-  line-height:1.8;
-}
-
-.order-items{
-  background:#f8fbfb;
-  border-radius:10px;
-  padding:12px;
-  margin-bottom:15px;
-}
-
-.order-items h4{
-  color:#174f58;
-  font-size:13px;
-  margin-bottom:9px;
-}
-
-.order-item{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:8px 0;
-  border-bottom:1px solid #e7eeee;
-  font-size:12px;
-}
-
-.order-item:last-child{
-  border-bottom:0;
-}
-
-.order-total{
-  display:flex;
-  justify-content:space-between;
-  padding-top:12px;
-  color:#087d80;
-  font-size:17px;
-  font-weight:bold;
-}
-
-.order-actions{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:8px;
-}
-
-.order-action{
-  border:0;
-  border-radius:8px;
-  padding:11px 5px;
-  font-size:11px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-.confirm-btn{
-  background:#e8f8ee;
-  color:#16804b;
-}
-
-.prepare-btn{
-  background:#e9f3ff;
-  color:#1769aa;
-}
-
-.delivery-btn{
-  background:#eeeaff;
-  color:#6046b3;
-}
-
-.delivered-btn{
-  background:#dff8ea;
-  color:#087d50;
-}
-
-.reject-btn{
-  background:#fff0f0;
-  color:#c44444;
-}
-
-.order-action:hover{
-  opacity:.75;
-}
-
-.orders-empty{
+.empty-products{
   background:#fff;
   border:1px solid #e1eeee;
   border-radius:12px;
   padding:35px;
   text-align:center;
   color:#7b898b;
-  font-size:13px;
 }
-
-/* MESSAGE */
 
 .message{
   position:fixed;
@@ -657,8 +431,6 @@ header{
   box-shadow:0 6px 20px rgba(0,0,0,.15);
 }
 
-/* MOBILE */
-
 @media(max-width:800px){
 
   .form-grid{
@@ -672,11 +444,6 @@ header{
   .product-list{
     grid-template-columns:repeat(2,1fr);
   }
-
-  .order-actions{
-    grid-template-columns:1fr 1fr;
-  }
-
 }
 
 @media(max-width:550px){
@@ -697,32 +464,9 @@ header{
     padding:20px;
   }
 
-  .admin-title h1{
-    font-size:25px;
-  }
-
   .product-list{
     grid-template-columns:1fr;
   }
-
-  .orders-header{
-    flex-direction:column;
-    align-items:stretch;
-    gap:12px;
-  }
-
-  .refresh-orders{
-    width:100%;
-  }
-
-  .order-top{
-    flex-direction:column;
-  }
-
-  .order-actions{
-    grid-template-columns:1fr;
-  }
-
 }
 </style>
 </head>
@@ -745,7 +489,7 @@ header{
   <button
     class="logout"
     id="logoutBtn"
-    onclick="logout()"
+    onclick="logoutAdmin()"
     style="display:none">
     Logout
   </button>
@@ -763,21 +507,20 @@ header{
 
     <h1>Admin Login</h1>
 
-    <p>Login to manage MEDI POINT</p>
+    <p>Login to manage MEDI POINT medicines</p>
 
-    <div
-      class="error"
-      id="loginError">
-    </div>
+    <div class="error" id="loginError"></div>
 
     <div class="form-group">
 
-      <label>👤 Username</label>
+      <label>📧 Admin Email</label>
 
       <input
-        type="text"
+        type="email"
         id="username"
-        placeholder="Enter admin username">
+        placeholder="Enter admin email"
+        autocomplete="username"
+        required>
 
     </div>
 
@@ -788,7 +531,9 @@ header{
       <input
         type="password"
         id="password"
-        placeholder="Enter admin password">
+        placeholder="Enter admin password"
+        autocomplete="current-password"
+        required>
 
     </div>
 
@@ -796,7 +541,9 @@ header{
       class="login-btn"
       id="loginBtn"
       onclick="loginAdmin()">
+
       Login to Admin Panel
+
     </button>
 
   </div>
@@ -806,22 +553,16 @@ header{
 
 <!-- ADMIN -->
 
-<div
-  class="admin-page"
-  id="adminPage">
+<div class="admin-page" id="adminPage">
 
   <div class="admin-title">
 
     <h1>Admin Dashboard</h1>
 
-    <p>
-      Add medicines and manage customer orders.
-    </p>
+    <p>Add and manage medicines available on MEDI POINT.</p>
 
   </div>
 
-
-  <!-- ADD MEDICINE -->
 
   <div class="form-section">
 
@@ -830,13 +571,8 @@ header{
       <div class="section-icon">💊</div>
 
       <div>
-
         <h2>Add New Medicine</h2>
-
-        <p>
-          Enter medicine information below
-        </p>
-
+        <p>Enter medicine information below</p>
       </div>
 
     </div>
@@ -866,9 +602,7 @@ header{
 
         <select id="medicineCategory">
 
-          <option value="">
-            Select medicine category
-          </option>
+          <option value="">Select medicine category</option>
 
           <option value="antibiotic">Antibiotic</option>
           <option value="cough-cold">Cough & Cold</option>
@@ -881,24 +615,14 @@ header{
           <option value="allergy">Allergy</option>
           <option value="multi-vitamin">Multi Vitamin</option>
           <option value="sexual-wellness">Sexual Wellness</option>
-          <option value="feminine-care-hygiene">
-            Feminine Care / Hygiene
-          </option>
+          <option value="feminine-care-hygiene">Feminine Care / Hygiene</option>
           <option value="period-care">Period Care</option>
           <option value="fracture-care">Fracture Care</option>
-          <option value="sanitary-antiseptic">
-            Sanitary & Antiseptic
-          </option>
+          <option value="sanitary-antiseptic">Sanitary & Antiseptic</option>
           <option value="baby-food">Baby Food</option>
-          <option value="gastric-acidity">
-            Gastric & Acidity
-          </option>
-          <option value="diabetes-bp-care">
-            Diabetes & BP Care
-          </option>
-          <option value="calcium-iron">
-            Calcium & Iron
-          </option>
+          <option value="gastric-acidity">Gastric & Acidity</option>
+          <option value="diabetes-bp-care">Diabetes & BP Care</option>
+          <option value="calcium-iron">Calcium & Iron</option>
           <option value="first-aid-medical-supplies">
             First Aid & Medical Supplies
           </option>
@@ -950,9 +674,7 @@ header{
 
           <h3>Upload Medicine Image</h3>
 
-          <p>
-            Use a clear JPG, PNG or WEBP image
-          </p>
+          <p>Use a clear JPG, PNG or WEBP image</p>
 
           <label
             for="medicineImage"
@@ -968,7 +690,6 @@ header{
             onchange="previewImage(event)">
 
         </div>
-
 
         <div
           class="preview"
@@ -1001,8 +722,6 @@ header{
   </div>
 
 
-  <!-- MEDICINES -->
-
   <div class="products-section">
 
     <h2>📦 Added Medicines</h2>
@@ -1010,43 +729,6 @@ header{
     <div
       class="product-list"
       id="productList">
-    </div>
-
-  </div>
-
-
-  <!-- ORDERS -->
-
-  <div class="orders-section">
-
-    <div class="orders-header">
-
-      <div>
-
-        <h2>📦 Customer Orders</h2>
-
-        <p>
-          Confirm and manage customer orders
-        </p>
-
-      </div>
-
-      <button
-        class="refresh-orders"
-        onclick="loadOrders()">
-
-        🔄 Refresh Orders
-
-      </button>
-
-    </div>
-
-
-    <div id="ordersList">
-
-      <div class="orders-empty">
-        ⏳ Loading customer orders...
-      </div>
 
     </div>
 
@@ -1054,8 +736,6 @@ header{
 
 </div>
 
-
-<!-- MESSAGE -->
 
 <div
   class="message"
@@ -1071,12 +751,19 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+import {
   getFirestore,
   collection,
   addDoc,
   deleteDoc,
   doc,
-  updateDoc,
   onSnapshot,
   query,
   orderBy,
@@ -1089,94 +776,197 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
 
-  apiKey:
-    "AIzaSyDDY8sEtMapyVhiQd5fAcrB599dsgFwMcE",
+  apiKey: "AIzaSyDDY8sEtMapyVhiQd5fAcrB599dsgFwMcE",
 
-  authDomain:
-    "medipoint-f4616.firebaseapp.com",
+  authDomain: "medipoint-f4616.firebaseapp.com",
 
-  projectId:
-    "medipoint-f4616",
+  projectId: "medipoint-f4616",
 
-  storageBucket:
-    "medipoint-f4616.firebasestorage.app",
+  storageBucket: "medipoint-f4616.firebasestorage.app",
 
-  messagingSenderId:
-    "108492737336",
+  messagingSenderId: "108492737336",
 
-  appId:
-    "1:180492737336:web:5ebf5565666ddd63ed43a12f0d",
+  appId: "1:180492737336:web:5ebf5565666ddd63ed43a12f0d",
 
-  measurementId:
-    "G-Q8X32M4CKF"
+  measurementId: "G-Q8X32M4CKF"
 
 };
 
 
-const app =
-  initializeApp(firebaseConfig);
+/* INITIALIZE FIREBASE */
 
-const db =
-  getFirestore(app);
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
 
 
-/* GLOBAL FUNCTIONS */
+/* MAKE FUNCTIONS GLOBAL */
 
 window.loginAdmin = loginAdmin;
-window.logout = logout;
+window.logoutAdmin = logoutAdmin;
 window.previewImage = previewImage;
 window.addMedicine = addMedicine;
 window.deleteMedicine = deleteMedicine;
-window.loadOrders = loadOrders;
-window.updateOrderStatus = updateOrderStatus;
 
 
-/* LOGIN */
+/* =========================
+   FIREBASE AUTH LOGIN
+========================= */
 
-function loginAdmin(){
+async function loginAdmin(){
 
-  const username =
-    document.getElementById(
-      "username"
-    ).value.trim();
+  const email =
+    document.getElementById("username").value.trim();
 
   const password =
-    document.getElementById(
-      "password"
-    ).value;
+    document.getElementById("password").value;
 
   const error =
-    document.getElementById(
-      "loginError"
-    );
+    document.getElementById("loginError");
+
+  const loginBtn =
+    document.getElementById("loginBtn");
 
 
-  if(
-    username === "admin" &&
-    password === "1234"
-  ){
+  error.style.display = "none";
 
-    sessionStorage.setItem(
-      "mediPointAdmin",
-      "true"
-    );
 
-    showAdmin();
-
-  }else{
+  if(!email || !password){
 
     error.textContent =
-      "❌ Invalid username or password";
+      "Please enter email and password.";
 
-    error.style.display =
-      "block";
+    error.style.display = "block";
+
+    return;
+
+  }
+
+
+  try{
+
+    loginBtn.disabled = true;
+
+    loginBtn.textContent = "⏳ Logging in...";
+
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+
+    showMessage(
+      "✅ Admin login successful!"
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "LOGIN ERROR:",
+      error
+    );
+
+
+    let message =
+      "Login failed. Please check your email and password.";
+
+
+    if(error.code === "auth/invalid-credential"){
+      message =
+        "❌ Invalid admin email or password.";
+    }
+
+    else if(error.code === "auth/user-not-found"){
+      message =
+        "❌ Admin account not found.";
+    }
+
+    else if(error.code === "auth/wrong-password"){
+      message =
+        "❌ Wrong password.";
+    }
+
+    else if(error.code === "auth/invalid-email"){
+      message =
+        "❌ Enter a valid email address.";
+    }
+
+    else if(error.code === "auth/too-many-requests"){
+      message =
+        "❌ Too many login attempts. Try again later.";
+    }
+
+
+    error.textContent = message;
+
+    error.style.display = "block";
+
+
+  }finally{
+
+    loginBtn.disabled = false;
+
+    loginBtn.textContent =
+      "Login to Admin Panel";
 
   }
 
 }
 
 
-/* SHOW ADMIN */
+/* =========================
+   AUTH STATE
+========================= */
+
+onAuthStateChanged(
+  auth,
+  (user)=>{
+
+    if(user){
+
+      showAdmin();
+
+    }else{
+
+      showLogin();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   SHOW LOGIN
+========================= */
+
+function showLogin(){
+
+  document.getElementById(
+    "loginPage"
+  ).style.display = "flex";
+
+
+  document.getElementById(
+    "adminPage"
+  ).style.display = "none";
+
+
+  document.getElementById(
+    "logoutBtn"
+  ).style.display = "none";
+
+}
+
+
+/* =========================
+   SHOW ADMIN
+========================= */
 
 function showAdmin(){
 
@@ -1184,173 +974,178 @@ function showAdmin(){
     "loginPage"
   ).style.display = "none";
 
+
   document.getElementById(
     "adminPage"
   ).style.display = "block";
+
 
   document.getElementById(
     "logoutBtn"
   ).style.display = "block";
 
+
   loadMedicines();
 
-  loadOrders();
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logoutAdmin(){
+
+  try{
+
+    await signOut(auth);
+
+    showMessage(
+      "✅ Logged out successfully."
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "❌ Logout failed."
+    );
+
+  }
 
 }
 
 
-/* LOGOUT */
-
-function logout(){
-
-  sessionStorage.removeItem(
-    "mediPointAdmin"
-  );
-
-  location.reload();
-
-}
-
-
-/* CHECK LOGIN */
-
-if(
-  sessionStorage.getItem(
-    "mediPointAdmin"
-  ) === "true"
-){
-
-  showAdmin();
-
-}
-
-
-/* IMAGE COMPRESS */
+/* =========================
+   IMAGE COMPRESS
+========================= */
 
 function compressImage(file){
 
-  return new Promise(
-    (resolve,reject)=>{
+  return new Promise((resolve,reject)=>{
 
-      const reader =
-        new FileReader();
-
-      reader.onload =
-      function(e){
-
-        const img =
-          new Image();
-
-        img.onload =
-        function(){
-
-          const canvas =
-            document.createElement(
-              "canvas"
-            );
-
-          const maxSize = 700;
-
-          let width =
-            img.width;
-
-          let height =
-            img.height;
+    const reader =
+      new FileReader();
 
 
-          if(width > height){
+    reader.onload = function(e){
 
-            if(width > maxSize){
+      const img =
+        new Image();
 
-              height =
-                height * maxSize / width;
 
-              width =
-                maxSize;
+      img.onload = function(){
 
-            }
+        const canvas =
+          document.createElement("canvas");
 
-          }else{
 
-            if(height > maxSize){
+        const maxSize = 700;
 
-              width =
-                width * maxSize / height;
 
-              height =
-                maxSize;
+        let width =
+          img.width;
 
-            }
+        let height =
+          img.height;
+
+
+        if(width > height){
+
+          if(width > maxSize){
+
+            height =
+              height * maxSize / width;
+
+            width =
+              maxSize;
 
           }
 
+        }else{
 
-          canvas.width =
-            width;
+          if(height > maxSize){
 
-          canvas.height =
-            height;
+            width =
+              width * maxSize / height;
+
+            height =
+              maxSize;
+
+          }
+
+        }
 
 
-          const ctx =
-            canvas.getContext(
-              "2d"
-            );
+        canvas.width =
+          width;
 
-          ctx.drawImage(
-            img,
-            0,
-            0,
-            width,
-            height
+        canvas.height =
+          height;
+
+
+        const ctx =
+          canvas.getContext("2d");
+
+
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          width,
+          height
+        );
+
+
+        const data =
+          canvas.toDataURL(
+            "image/jpeg",
+            0.70
           );
 
 
-          const data =
-            canvas.toDataURL(
-              "image/jpeg",
-              0.70
-            );
-
-
-          resolve(data);
-
-        };
-
-        img.onerror =
-          reject;
-
-        img.src =
-          e.target.result;
+        resolve(data);
 
       };
 
-      reader.onerror =
+
+      img.onerror =
         reject;
 
-      reader.readAsDataURL(file);
 
-    }
-  );
+      img.src =
+        e.target.result;
+
+    };
+
+
+    reader.onerror =
+      reject;
+
+
+    reader.readAsDataURL(file);
+
+  });
 
 }
 
 
-/* PREVIEW */
+/* =========================
+   PREVIEW IMAGE
+========================= */
 
 async function previewImage(event){
 
   const file =
     event.target.files[0];
 
-  if(!file) return;
+
+  if(!file)
+    return;
 
 
-  if(
-    !file.type.startsWith(
-      "image/"
-    )
-  ){
+  if(!file.type.startsWith("image/")){
 
     showMessage(
       "❌ Please select an image file."
@@ -1366,14 +1161,16 @@ async function previewImage(event){
     const image =
       await compressImage(file);
 
+
     document.getElementById(
       "previewImg"
     ).src = image;
 
+
     document.getElementById(
       "imagePreview"
-    ).style.display =
-      "block";
+    ).style.display = "block";
+
 
   }catch(error){
 
@@ -1388,14 +1185,27 @@ async function previewImage(event){
 }
 
 
-/* ADD MEDICINE */
+/* =========================
+   ADD MEDICINE
+========================= */
 
 async function addMedicine(){
 
-  const saveBtn =
-    document.getElementById(
-      "saveBtn"
+  /* SECURITY CHECK */
+
+  if(!auth.currentUser){
+
+    showMessage(
+      "❌ Please login first."
     );
+
+    return;
+
+  }
+
+
+  const saveBtn =
+    document.getElementById("saveBtn");
 
 
   const name =
@@ -1403,20 +1213,24 @@ async function addMedicine(){
       "medicineName"
     ).value.trim();
 
+
   const category =
     document.getElementById(
       "medicineCategory"
     ).value;
+
 
   const price =
     document.getElementById(
       "medicinePrice"
     ).value;
 
+
   const details =
     document.getElementById(
       "medicineDetails"
     ).value.trim();
+
 
   const imageFile =
     document.getElementById(
@@ -1434,6 +1248,7 @@ async function addMedicine(){
 
   }
 
+
   if(!category){
 
     showMessage(
@@ -1443,6 +1258,7 @@ async function addMedicine(){
     return;
 
   }
+
 
   if(!price){
 
@@ -1457,8 +1273,7 @@ async function addMedicine(){
 
   try{
 
-    saveBtn.disabled =
-      true;
+    saveBtn.disabled = true;
 
     saveBtn.textContent =
       "⏳ Saving Medicine...";
@@ -1489,8 +1304,10 @@ async function addMedicine(){
 
       image:image,
 
-      createdAt:
-        serverTimestamp()
+      createdAt:serverTimestamp(),
+
+      createdBy:
+        auth.currentUser.email
 
     };
 
@@ -1520,26 +1337,30 @@ async function addMedicine(){
       "medicineName"
     ).value = "";
 
+
     document.getElementById(
       "medicineCategory"
     ).value = "";
+
 
     document.getElementById(
       "medicinePrice"
     ).value = "";
 
+
     document.getElementById(
       "medicineDetails"
     ).value = "";
+
 
     document.getElementById(
       "medicineImage"
     ).value = "";
 
+
     document.getElementById(
       "imagePreview"
-    ).style.display =
-      "none";
+    ).style.display = "none";
 
 
   }catch(error){
@@ -1549,6 +1370,7 @@ async function addMedicine(){
       error
     );
 
+
     showMessage(
       "❌ Firebase Error: " +
       error.message
@@ -1557,8 +1379,7 @@ async function addMedicine(){
 
   }finally{
 
-    saveBtn.disabled =
-      false;
+    saveBtn.disabled = false;
 
     saveBtn.textContent =
       "💾 Add Medicine";
@@ -1568,7 +1389,9 @@ async function addMedicine(){
 }
 
 
-/* LOAD MEDICINES */
+/* =========================
+   LOAD MEDICINES
+========================= */
 
 function loadMedicines(){
 
@@ -1592,6 +1415,7 @@ function loadMedicines(){
 
 
   onSnapshot(
+
     q,
 
     (snapshot)=>{
@@ -1600,9 +1424,9 @@ function loadMedicines(){
 
         list.innerHTML = `
 
-          <div class="orders-empty">
+          <div class="empty-products">
 
-            💊 No medicines added yet.
+            No medicines added yet.
 
           </div>
 
@@ -1630,9 +1454,8 @@ function loadMedicines(){
 
             `<img
               src="${data.image}"
-              alt="${escapeHTML(
-                data.name
-              )}">`
+              alt="${escapeHTML(data.name)}"
+            >`
 
             :
 
@@ -1651,16 +1474,14 @@ function loadMedicines(){
 
           card.innerHTML = `
 
-            <div
-              class="admin-product-img">
+            <div class="admin-product-img">
 
               ${imageHTML}
 
             </div>
 
 
-            <div
-              class="admin-product-info">
+            <div class="admin-product-info">
 
               <h3>
                 ${escapeHTML(
@@ -1670,8 +1491,7 @@ function loadMedicines(){
               </h3>
 
 
-              <span
-                class="category-name">
+              <span class="category-name">
 
                 ${escapeHTML(
                   categoryName(
@@ -1682,8 +1502,7 @@ function loadMedicines(){
               </span>
 
 
-              <div
-                class="admin-price">
+              <div class="admin-price">
 
                 ₹${Number(
                   data.price || 0
@@ -1692,8 +1511,7 @@ function loadMedicines(){
               </div>
 
 
-              <div
-                class="admin-desc">
+              <div class="admin-desc">
 
                 ${escapeHTML(
                   data.details ||
@@ -1705,9 +1523,7 @@ function loadMedicines(){
 
               <button
                 class="delete-btn"
-                onclick="deleteMedicine(
-                  '${item.id}'
-                )">
+                onclick="deleteMedicine('${item.id}')">
 
                 🗑️ Delete Medicine
 
@@ -1718,9 +1534,7 @@ function loadMedicines(){
           `;
 
 
-          list.appendChild(
-            card
-          );
+          list.appendChild(card);
 
         }
       );
@@ -1737,11 +1551,9 @@ function loadMedicines(){
 
       list.innerHTML = `
 
-        <div
-          class="orders-empty">
+        <div class="empty-products">
 
           ❌ Firebase database error.
-
           <br><br>
 
           ${escapeHTML(
@@ -1759,19 +1571,31 @@ function loadMedicines(){
 }
 
 
-/* DELETE MEDICINE */
+/* =========================
+   DELETE MEDICINE
+========================= */
 
 async function deleteMedicine(id){
 
-  if(
-    !confirm(
-      "Are you sure you want to delete this medicine?"
-    )
-  ){
+  if(!auth.currentUser){
+
+    showMessage(
+      "❌ Please login first."
+    );
 
     return;
 
   }
+
+
+  const ok =
+    confirm(
+      "Are you sure you want to delete this medicine?"
+    );
+
+
+  if(!ok)
+    return;
 
 
   try{
@@ -1792,9 +1616,8 @@ async function deleteMedicine(id){
 
   }catch(error){
 
-    console.error(
-      error
-    );
+    console.error(error);
+
 
     showMessage(
       "❌ Delete failed: " +
@@ -1806,613 +1629,9 @@ async function deleteMedicine(id){
 }
 
 
-/* ==========================================
-   LOAD CUSTOMER ORDERS
-========================================== */
-
-function loadOrders(){
-
-  const list =
-    document.getElementById(
-      "ordersList"
-    );
-
-  if(!list) return;
-
-
-  list.innerHTML = `
-
-    <div class="orders-empty">
-
-      ⏳ Loading customer orders...
-
-    </div>
-
-  `;
-
-
-  const q =
-    query(
-      collection(
-        db,
-        "orders"
-      ),
-      orderBy(
-        "createdAt",
-        "desc"
-      )
-    );
-
-
-  onSnapshot(
-
-    q,
-
-    (snapshot)=>{
-
-      if(snapshot.empty){
-
-        list.innerHTML = `
-
-          <div class="orders-empty">
-
-            📦 No customer orders yet.
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      list.innerHTML = "";
-
-
-      snapshot.forEach(
-        (orderDoc)=>{
-
-          const o =
-            orderDoc.data();
-
-
-          const card =
-            document.createElement(
-              "div"
-            );
-
-          card.className =
-            "order-card";
-
-
-          let itemsHTML = "";
-
-
-          if(
-            Array.isArray(o.items)
-          ){
-
-            o.items.forEach(
-              (item)=>{
-
-                const qty =
-                  Number(
-                    item.quantity ||
-                    item.qty ||
-                    1
-                  );
-
-                const price =
-                  Number(
-                    item.price ||
-                    0
-                  );
-
-                const amount =
-                  Number(
-                    item.amount ||
-                    price * qty
-                  );
-
-
-                itemsHTML += `
-
-                  <div
-                    class="order-item">
-
-                    <span>
-
-                      ${escapeHTML(
-                        item.name ||
-                        item.medicineName ||
-                        "Medicine"
-                      )}
-
-                      × ${qty}
-
-                    </span>
-
-
-                    <b>
-                      ₹${amount.toFixed(2)}
-                    </b>
-
-                  </div>
-
-                `;
-
-              }
-            );
-
-          }
-
-
-          let dateText = "";
-
-
-          try{
-
-            if(o.createdAt){
-
-              const date =
-                o.createdAt.toDate
-                ? o.createdAt.toDate()
-                : new Date(
-                    o.createdAt
-                  );
-
-              dateText =
-                date.toLocaleString(
-                  "en-IN"
-                );
-
-            }
-
-          }catch(e){
-
-            dateText = "";
-
-          }
-
-
-          const status =
-            o.status ||
-            "Order Placed";
-
-
-          const statusClass =
-            getStatusClass(
-              status
-            );
-
-
-          const orderId =
-            o.orderId ||
-            o.id ||
-            orderDoc.id;
-
-
-          card.innerHTML = `
-
-            <div class="order-top">
-
-              <div>
-
-                <div class="order-id">
-
-                  🧾 ${escapeHTML(
-                    orderId
-                  )}
-
-                </div>
-
-
-                <div class="order-date">
-
-                  ${escapeHTML(
-                    dateText
-                  )}
-
-                </div>
-
-              </div>
-
-
-              <div
-                class="order-status ${statusClass}">
-
-                ${escapeHTML(
-                  status
-                )}
-
-              </div>
-
-            </div>
-
-
-            <div class="order-customer">
-
-              <h3>
-                👤 Customer Details
-              </h3>
-
-
-              <p>
-
-                <b>Name:</b>
-                ${escapeHTML(
-                  o.name ||
-                  o.customerName ||
-                  "-"
-                )}
-
-                <br>
-
-                <b>Mobile:</b>
-                ${escapeHTML(
-                  o.phone ||
-                  o.mobile ||
-                  "-"
-                )}
-
-                <br>
-
-                <b>Address:</b>
-                ${escapeHTML(
-                  o.address ||
-                  "-"
-                )}
-
-                <br>
-
-                <b>Payment:</b>
-                ${escapeHTML(
-                  o.payment ||
-                  o.paymentMethod ||
-                  "-"
-                )}
-
-                <br>
-
-                <b>Prescription:</b>
-                ${escapeHTML(
-                  o.prescription ||
-                  "Not uploaded"
-                )}
-
-              </p>
-
-            </div>
-
-
-            <div class="order-items">
-
-              <h4>
-                💊 Medicines
-              </h4>
-
-
-              ${
-                itemsHTML ||
-
-                `<div
-                  style="
-                    font-size:12px;
-                    color:#899;
-                  ">
-
-                  No medicine details
-
-                </div>`
-
-              }
-
-
-              <div class="order-total">
-
-                <span>
-                  Total
-                </span>
-
-                <span>
-
-                  ₹${Number(
-                    o.total ||
-                    0
-                  ).toFixed(2)}
-
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="order-actions">
-
-              <button
-                class="order-action confirm-btn"
-                onclick="updateOrderStatus(
-                  '${orderDoc.id}',
-                  'Order Confirmed'
-                )">
-
-                ✅ Confirm
-
-              </button>
-
-
-              <button
-                class="order-action prepare-btn"
-                onclick="updateOrderStatus(
-                  '${orderDoc.id}',
-                  'Preparing'
-                )">
-
-                🔧 Preparing
-
-              </button>
-
-
-              <button
-                class="order-action delivery-btn"
-                onclick="updateOrderStatus(
-                  '${orderDoc.id}',
-                  'Out for Delivery'
-                )">
-
-                🚚 Delivery
-
-              </button>
-
-
-              <button
-                class="order-action delivered-btn"
-                onclick="updateOrderStatus(
-                  '${orderDoc.id}',
-                  'Delivered'
-                )">
-
-                ✅ Delivered
-
-              </button>
-
-
-              <button
-                class="order-action reject-btn"
-                onclick="updateOrderStatus(
-                  '${orderDoc.id}',
-                  'Rejected'
-                )">
-
-                ❌ Reject
-
-              </button>
-
-            </div>
-
-          `;
-
-
-          list.appendChild(
-            card
-          );
-
-        }
-      );
-
-    },
-
-    (error)=>{
-
-      console.error(
-        "ORDERS ERROR:",
-        error
-      );
-
-
-      list.innerHTML = `
-
-        <div class="orders-empty">
-
-          ❌ Orders load nahi ho rahe.
-
-          <br><br>
-
-          ${escapeHTML(
-            error.message
-          )}
-
-        </div>
-
-      `;
-
-    }
-
-  );
-
-}
-
-
-/* ==========================================
-   UPDATE ORDER STATUS
-========================================== */
-
-async function updateOrderStatus(
-  orderDocId,
-  newStatus
-){
-
-  if(!orderDocId) return;
-
-
-  let question =
-    "Update order status?";
-
-
-  if(
-    newStatus ===
-    "Order Confirmed"
-  ){
-
-    question =
-      "Is order ko CONFIRM karna hai?";
-
-  }
-
-  if(
-    newStatus ===
-    "Preparing"
-  ){
-
-    question =
-      "Order ko PREPARING karna hai?";
-
-  }
-
-  if(
-    newStatus ===
-    "Out for Delivery"
-  ){
-
-    question =
-      "Order ko OUT FOR DELIVERY mark karna hai?";
-
-  }
-
-  if(
-    newStatus ===
-    "Delivered"
-  ){
-
-    question =
-      "Order ko DELIVERED mark karna hai?";
-
-  }
-
-  if(
-    newStatus ===
-    "Rejected"
-  ){
-
-    question =
-      "Order ko REJECT karna hai?";
-
-  }
-
-
-  if(!confirm(question)){
-
-    return;
-
-  }
-
-
-  try{
-
-    await updateDoc(
-
-      doc(
-        db,
-        "orders",
-        orderDocId
-      ),
-
-      {
-        status:newStatus,
-
-        updatedAt:
-          serverTimestamp()
-      }
-
-    );
-
-
-    showMessage(
-      "✅ Order updated: " +
-      newStatus
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "STATUS ERROR:",
-      error
-    );
-
-
-    showMessage(
-      "❌ Order update failed: " +
-      error.message
-    );
-
-  }
-
-}
-
-
-/* STATUS CLASS */
-
-function getStatusClass(status){
-
-  if(
-    status ===
-    "Order Confirmed"
-  ){
-
-    return "confirmed";
-
-  }
-
-
-  if(
-    status ===
-    "Preparing"
-  ){
-
-    return "preparing";
-
-  }
-
-
-  if(
-    status ===
-    "Out for Delivery"
-  ){
-
-    return "delivery";
-
-  }
-
-
-  if(
-    status ===
-    "Delivered"
-  ){
-
-    return "delivered";
-
-  }
-
-
-  if(
-    status ===
-    "Rejected"
-  ){
-
-    return "rejected";
-
-  }
-
-
-  return "";
-
-}
-
-
-/* CATEGORY NAME */
+/* =========================
+   CATEGORY NAME
+========================= */
 
 function categoryName(slug){
 
@@ -2490,43 +1709,45 @@ function categoryName(slug){
 }
 
 
-/* ESCAPE HTML */
+/* =========================
+   ESCAPE HTML
+========================= */
 
 function escapeHTML(value){
 
-  return String(
-    value ?? ""
-  )
+  return String(value)
 
-  .replaceAll(
-    "&",
-    "&amp;"
-  )
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
 
-  .replaceAll(
-    "<",
-    "&lt;"
-  )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
 
-  .replaceAll(
-    ">",
-    "&gt;"
-  )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
 
-  .replaceAll(
-    '"',
-    "&quot;"
-  )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
 
-  .replaceAll(
-    "'",
-    "&#039;"
-  );
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
 
 
-/* MESSAGE */
+/* =========================
+   MESSAGE
+========================= */
 
 function showMessage(text){
 
@@ -2539,14 +1760,17 @@ function showMessage(text){
   box.textContent =
     text;
 
+
   box.style.display =
     "block";
 
 
   setTimeout(
     ()=>{
+
       box.style.display =
         "none";
+
     },
     5000
   );
