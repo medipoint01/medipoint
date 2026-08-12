@@ -19,8 +19,6 @@ body{
   color:#173f46;
 }
 
-/* HEADER */
-
 header{
   height:72px;
   background:#fff;
@@ -71,12 +69,6 @@ header{
   font-weight:bold;
   cursor:pointer;
 }
-
-.logout:hover{
-  background:#d8eff1;
-}
-
-/* LOGIN */
 
 .login-page{
   min-height:calc(100vh - 72px);
@@ -134,8 +126,7 @@ header{
 }
 
 .form-group input,
-.form-group select,
-.form-group textarea{
+.form-group select{
   width:100%;
   border:1px solid #d8e7e8;
   border-radius:9px;
@@ -147,21 +138,9 @@ header{
 }
 
 .form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
+.form-group select:focus{
   border-color:#148d9e;
   box-shadow:0 0 0 3px rgba(20,141,158,.08);
-}
-
-.error{
-  display:none;
-  background:#fff0f0;
-  color:#c44;
-  padding:10px;
-  border-radius:7px;
-  font-size:12px;
-  margin-bottom:15px;
-  text-align:center;
 }
 
 .login-btn,
@@ -182,7 +161,22 @@ header{
   background:#0d7482;
 }
 
-/* ADMIN */
+.login-btn:disabled,
+.save-btn:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
+.error{
+  display:none;
+  background:#fff0f0;
+  color:#c44;
+  padding:10px;
+  border-radius:7px;
+  font-size:12px;
+  margin-bottom:15px;
+  text-align:center;
+}
 
 .admin-page{
   display:none;
@@ -204,8 +198,6 @@ header{
   color:#7b898b;
   font-size:13px;
 }
-
-/* FORM */
 
 .form-section{
   max-width:1000px;
@@ -239,12 +231,12 @@ header{
 .section-title h2{
   color:#174f58;
   font-size:22px;
-  margin-bottom:4px;
 }
 
 .section-title p{
   color:#7b898b;
   font-size:12px;
+  margin-top:4px;
 }
 
 .form-grid{
@@ -264,8 +256,6 @@ header{
   margin-top:6px;
 }
 
-/* PRICE */
-
 .price-box{
   position:relative;
 }
@@ -284,18 +274,12 @@ header{
   padding-left:34px;
 }
 
-/* IMAGE */
-
 .upload-box{
   border:2px dashed #cfe3e4;
   background:#f9fcfc;
   border-radius:14px;
   padding:28px 20px;
   text-align:center;
-}
-
-.upload-box:hover{
-  border-color:#148d9e;
 }
 
 .upload-icon{
@@ -326,10 +310,6 @@ header{
   cursor:pointer;
 }
 
-.choose-btn:hover{
-  background:#0d7482;
-}
-
 .preview{
   margin-top:15px;
   display:none;
@@ -342,10 +322,7 @@ header{
   object-fit:cover;
   border-radius:12px;
   border:1px solid #dce8e8;
-  box-shadow:0 5px 18px rgba(0,0,0,.08);
 }
-
-/* PRODUCTS */
 
 .products-section{
   max-width:1000px;
@@ -372,7 +349,7 @@ header{
 }
 
 .admin-product-img{
-  height:170px;
+  height:180px;
   background:#eef8f8;
   display:grid;
   place-items:center;
@@ -383,7 +360,7 @@ header{
 .admin-product-img img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
 }
 
 .admin-product-info{
@@ -393,7 +370,7 @@ header{
 .admin-product-info h3{
   color:#174f58;
   font-size:16px;
-  margin-bottom:6px;
+  margin-bottom:7px;
 }
 
 .category-name{
@@ -431,10 +408,6 @@ header{
   cursor:pointer;
 }
 
-.delete-btn:hover{
-  background:#ffe0e0;
-}
-
 .empty-products{
   background:#fff;
   border:1px solid #e1eeee;
@@ -444,12 +417,11 @@ header{
   color:#7b898b;
 }
 
-/* MESSAGE */
-
 .message{
   position:fixed;
   right:20px;
   bottom:20px;
+  max-width:400px;
   background:#123f47;
   color:#fff;
   padding:13px 18px;
@@ -458,8 +430,6 @@ header{
   z-index:100;
   box-shadow:0 6px 20px rgba(0,0,0,.15);
 }
-
-/* MOBILE */
 
 @media(max-width:800px){
 
@@ -494,10 +464,6 @@ header{
     padding:20px;
   }
 
-  .admin-title h1{
-    font-size:25px;
-  }
-
   .product-list{
     grid-template-columns:1fr;
   }
@@ -506,8 +472,6 @@ header{
 </head>
 
 <body>
-
-<!-- HEADER -->
 
 <header>
 
@@ -525,72 +489,53 @@ header{
   <button
     class="logout"
     id="logoutBtn"
-    style="display:none"
-  >
+    onclick="logout()"
+    style="display:none">
     Logout
   </button>
 
 </header>
 
 
-<!-- LOGIN PAGE -->
+<!-- LOGIN -->
 
 <div class="login-page" id="loginPage">
 
   <div class="login-box">
 
-    <div class="login-icon">
-      🔐
-    </div>
+    <div class="login-icon">🔐</div>
 
     <h1>Admin Login</h1>
 
-    <p>
-      Login to manage MEDI POINT medicines
-    </p>
+    <p>Login to manage MEDI POINT medicines</p>
 
-    <div
-      class="error"
-      id="loginError"
-    >
-      Incorrect username or password
-    </div>
+    <div class="error" id="loginError"></div>
 
     <div class="form-group">
 
-      <label for="username">
-        👤 Username
-      </label>
+      <label>👤 Username</label>
 
       <input
         type="text"
         id="username"
-        placeholder="Enter admin username"
-        autocomplete="username"
-      >
+        placeholder="Enter admin username">
 
     </div>
 
     <div class="form-group">
 
-      <label for="password">
-        🔐 Password
-      </label>
+      <label>🔐 Password</label>
 
       <input
         type="password"
         id="password"
-        placeholder="Enter admin password"
-        autocomplete="current-password"
-      >
+        placeholder="Enter admin password">
 
     </div>
 
     <button
-      type="button"
       class="login-btn"
-      id="loginBtn"
-    >
+      onclick="loginAdmin()">
       Login to Admin Panel
     </button>
 
@@ -599,42 +544,28 @@ header{
 </div>
 
 
-<!-- ADMIN PAGE -->
+<!-- ADMIN -->
 
-<div
-  class="admin-page"
-  id="adminPage"
->
+<div class="admin-page" id="adminPage">
 
   <div class="admin-title">
 
     <h1>Admin Dashboard</h1>
 
-    <p>
-      Add and manage medicines available on MEDI POINT.
-    </p>
+    <p>Add and manage medicines available on MEDI POINT.</p>
 
   </div>
 
-
-  <!-- ADD MEDICINE -->
 
   <div class="form-section">
 
     <div class="section-title">
 
-      <div class="section-icon">
-        💊
-      </div>
+      <div class="section-icon">💊</div>
 
       <div>
-
         <h2>Add New Medicine</h2>
-
-        <p>
-          Enter medicine information below
-        </p>
-
+        <p>Enter medicine information below</p>
       </div>
 
     </div>
@@ -642,19 +573,15 @@ header{
 
     <div class="form-grid">
 
-      <!-- MEDICINE NAME -->
 
       <div class="form-group">
 
-        <label for="medicineName">
-          💊 Medicine Name
-        </label>
+        <label>💊 Medicine Name</label>
 
         <input
           type="text"
           id="medicineName"
-          placeholder="Example: Paracetamol 500mg"
-        >
+          placeholder="Example: Paracetamol 500mg">
 
         <small>
           Enter complete medicine name and strength.
@@ -663,19 +590,13 @@ header{
       </div>
 
 
-      <!-- CATEGORY -->
-
       <div class="form-group">
 
-        <label for="medicineCategory">
-          🗂️ Category
-        </label>
+        <label>🗂️ Category</label>
 
         <select id="medicineCategory">
 
-          <option value="">
-            Select medicine category
-          </option>
+          <option value="">Select medicine category</option>
 
           <option value="antibiotic">Antibiotic</option>
           <option value="cough-cold">Cough & Cold</option>
@@ -688,24 +609,14 @@ header{
           <option value="allergy">Allergy</option>
           <option value="multi-vitamin">Multi Vitamin</option>
           <option value="sexual-wellness">Sexual Wellness</option>
-          <option value="feminine-care-hygiene">
-            Feminine Care / Hygiene
-          </option>
+          <option value="feminine-care-hygiene">Feminine Care / Hygiene</option>
           <option value="period-care">Period Care</option>
           <option value="fracture-care">Fracture Care</option>
-          <option value="sanitary-antiseptic">
-            Sanitary & Antiseptic
-          </option>
+          <option value="sanitary-antiseptic">Sanitary & Antiseptic</option>
           <option value="baby-food">Baby Food</option>
-          <option value="gastric-acidity">
-            Gastric & Acidity
-          </option>
-          <option value="diabetes-bp-care">
-            Diabetes & BP Care
-          </option>
-          <option value="calcium-iron">
-            Calcium & Iron
-          </option>
+          <option value="gastric-acidity">Gastric & Acidity</option>
+          <option value="diabetes-bp-care">Diabetes & BP Care</option>
+          <option value="calcium-iron">Calcium & Iron</option>
           <option value="first-aid-medical-supplies">
             First Aid & Medical Supplies
           </option>
@@ -715,13 +626,9 @@ header{
       </div>
 
 
-      <!-- PRICE -->
-
       <div class="form-group">
 
-        <label for="medicinePrice">
-          💰 Price
-        </label>
+        <label>💰 Price</label>
 
         <div class="price-box">
 
@@ -732,57 +639,40 @@ header{
             id="medicinePrice"
             placeholder="Enter price"
             min="0"
-            step="0.01"
-          >
+            step="0.01">
 
         </div>
 
       </div>
 
 
-      <!-- DETAILS -->
-
       <div class="form-group">
 
-        <label for="medicineDetails">
-          📝 Medicine Details
-        </label>
+        <label>📝 Medicine Details</label>
 
         <input
           type="text"
           id="medicineDetails"
-          placeholder="Example: Used for fever and mild pain"
-        >
+          placeholder="Example: Used for fever and mild pain">
 
       </div>
 
 
-      <!-- IMAGE -->
-
       <div class="form-group full">
 
-        <label>
-          🖼️ Medicine Picture
-        </label>
+        <label>🖼️ Medicine Picture</label>
 
         <div class="upload-box">
 
-          <div class="upload-icon">
-            📷
-          </div>
+          <div class="upload-icon">📷</div>
 
-          <h3>
-            Upload Medicine Image
-          </h3>
+          <h3>Upload Medicine Image</h3>
 
-          <p>
-            Use a clear JPG, PNG or WEBP image
-          </p>
+          <p>Use a clear JPG, PNG or WEBP image</p>
 
           <label
             for="medicineImage"
-            class="choose-btn"
-          >
+            class="choose-btn">
             Choose Image
           </label>
 
@@ -791,33 +681,33 @@ header{
             id="medicineImage"
             accept="image/*"
             hidden
-          >
+            onchange="previewImage(event)">
 
         </div>
 
+
         <div
           class="preview"
-          id="imagePreview"
-        >
+          id="imagePreview">
+
           <img
             id="previewImg"
-            alt="Medicine preview"
-          >
+            alt="Medicine preview">
+
         </div>
 
       </div>
 
 
-      <!-- SAVE -->
-
       <div class="form-group full">
 
         <button
           class="save-btn"
-          id="addMedicineBtn"
-          type="button"
-        >
+          id="saveBtn"
+          onclick="addMedicine()">
+
           💾 Add Medicine
+
         </button>
 
       </div>
@@ -827,30 +717,25 @@ header{
   </div>
 
 
-  <!-- MEDICINE LIST -->
-
   <div class="products-section">
 
-    <h2>
-      📦 Added Medicines
-    </h2>
+    <h2>📦 Added Medicines</h2>
 
     <div
       class="product-list"
-      id="productList"
-    ></div>
+      id="productList">
+
+    </div>
 
   </div>
 
 </div>
 
 
-<!-- MESSAGE -->
-
 <div
   class="message"
-  id="message"
-></div>
+  id="message">
+</div>
 
 
 <!-- FIREBASE -->
@@ -858,34 +743,27 @@ header{
 <script type="module">
 
 import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
   getFirestore,
   collection,
   addDoc,
-  getDocs,
   deleteDoc,
   doc,
+  onSnapshot,
+  query,
+  orderBy,
   serverTimestamp
 }
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
 /* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyDDY8sEtMapyVhjQd5fAcrB599dsgFwMCE",
+  apiKey: "AIzaSyDDY8sEtMapyVhiQd5fAcrB599dsgFwMcE",
 
   authDomain: "medipoint-f4616.firebaseapp.com",
 
@@ -893,73 +771,27 @@ const firebaseConfig = {
 
   storageBucket: "medipoint-f4616.firebasestorage.app",
 
-  messagingSenderId: "180492377336",
+  messagingSenderId: "108492737336",
 
-  appId: "1:180492377336:web:5bf6566cdd663ed43a12f0",
+  appId: "1:180492737336:web:5ebf5565666ddd63ed43a12f0d",
 
-  measurementId: "G-98X32M4CKF"
+  measurementId: "G-Q8X32M4CKF"
+
 };
 
-
-/* INITIALIZE */
 
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-const storage = getStorage(app);
 
+/* MAKE FUNCTIONS GLOBAL */
 
-/* ELEMENTS */
-
-const loginPage =
-  document.getElementById("loginPage");
-
-const adminPage =
-  document.getElementById("adminPage");
-
-const loginBtn =
-  document.getElementById("loginBtn");
-
-const logoutBtn =
-  document.getElementById("logoutBtn");
-
-const addMedicineBtn =
-  document.getElementById("addMedicineBtn");
-
-const medicineImage =
-  document.getElementById("medicineImage");
-
-const imagePreview =
-  document.getElementById("imagePreview");
-
-const previewImg =
-  document.getElementById("previewImg");
-
-const loginError =
-  document.getElementById("loginError");
-
-const productList =
-  document.getElementById("productList");
-
-const messageBox =
-  document.getElementById("message");
-
-
-/* MESSAGE */
-
-function showMessage(text){
-
-  messageBox.textContent = text;
-
-  messageBox.style.display = "block";
-
-  setTimeout(function(){
-
-    messageBox.style.display = "none";
-
-  },3000);
-}
+window.loginAdmin = loginAdmin;
+window.logout = logout;
+window.previewImage = previewImage;
+window.addMedicine = addMedicine;
+window.deleteMedicine = deleteMedicine;
 
 
 /* LOGIN */
@@ -967,42 +799,51 @@ function showMessage(text){
 function loginAdmin(){
 
   const username =
-    document.getElementById("username")
-    .value
-    .trim();
+    document.getElementById("username").value.trim();
 
   const password =
-    document.getElementById("password")
-    .value;
+    document.getElementById("password").value;
 
-  if(
-    username === "admin" &&
-    password === "1234"
-  ){
+  const error =
+    document.getElementById("loginError");
+
+
+  if(username === "admin" && password === "1234"){
 
     sessionStorage.setItem(
       "mediPointAdmin",
       "true"
     );
 
-    loginPage.style.display = "none";
-
-    adminPage.style.display = "block";
-
-    logoutBtn.style.display = "block";
-
-    loginError.style.display = "none";
-
-    loadMedicines();
+    showAdmin();
 
   }else{
 
-    loginError.textContent =
+    error.textContent =
       "Invalid username or password";
 
-    loginError.style.display = "block";
+    error.style.display = "block";
 
   }
+
+}
+
+
+/* SHOW ADMIN */
+
+function showAdmin(){
+
+  document.getElementById("loginPage").style.display =
+    "none";
+
+  document.getElementById("adminPage").style.display =
+    "block";
+
+  document.getElementById("logoutBtn").style.display =
+    "block";
+
+  loadMedicines();
+
 }
 
 
@@ -1014,275 +855,338 @@ function logout(){
     "mediPointAdmin"
   );
 
-  adminPage.style.display = "none";
-
-  loginPage.style.display = "flex";
-
-  logoutBtn.style.display = "none";
-
-  document.getElementById("username").value = "";
-
-  document.getElementById("password").value = "";
+  location.reload();
 
 }
 
 
-/* LOGIN BUTTON */
+/* CHECK LOGIN */
 
-loginBtn.addEventListener(
-  "click",
-  loginAdmin
-);
+if(
+  sessionStorage.getItem("mediPointAdmin") === "true"
+){
 
+  showAdmin();
 
-/* ENTER KEY LOGIN */
-
-document
-  .getElementById("password")
-  .addEventListener(
-    "keydown",
-    function(event){
-
-      if(event.key === "Enter"){
-
-        loginAdmin();
-
-      }
-
-    }
-  );
+}
 
 
-/* LOGOUT BUTTON */
+/* IMAGE COMPRESS */
 
-logoutBtn.addEventListener(
-  "click",
-  logout
-);
+function compressImage(file){
+
+  return new Promise((resolve,reject)=>{
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+      const img = new Image();
+
+      img.onload = function(){
+
+        const canvas =
+          document.createElement("canvas");
+
+        const maxSize = 700;
+
+        let width = img.width;
+        let height = img.height;
 
 
-/* IMAGE PREVIEW */
+        if(width > height){
 
-medicineImage.addEventListener(
-  "change",
-  function(){
+          if(width > maxSize){
 
-    const file =
-      medicineImage.files[0];
+            height =
+              height * maxSize / width;
 
-    if(!file){
+            width = maxSize;
 
-      imagePreview.style.display =
-        "none";
+          }
 
-      return;
-    }
+        }else{
 
-    if(!file.type.startsWith("image/")){
+          if(height > maxSize){
 
-      alert("Please select an image file.");
+            width =
+              width * maxSize / height;
 
-      medicineImage.value = "";
+            height = maxSize;
 
-      imagePreview.style.display =
-        "none";
+          }
 
-      return;
-    }
+        }
 
-    const reader =
-      new FileReader();
 
-    reader.onload =
-      function(event){
+        canvas.width = width;
+        canvas.height = height;
 
-        previewImg.src =
-          event.target.result;
 
-        imagePreview.style.display =
-          "block";
+        const ctx =
+          canvas.getContext("2d");
+
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          width,
+          height
+        );
+
+
+        const data =
+          canvas.toDataURL(
+            "image/jpeg",
+            0.70
+          );
+
+
+        resolve(data);
 
       };
 
+
+      img.onerror = reject;
+
+      img.src = e.target.result;
+
+    };
+
+
+    reader.onerror = reject;
+
     reader.readAsDataURL(file);
 
+  });
+
+}
+
+
+/* PREVIEW */
+
+async function previewImage(event){
+
+  const file =
+    event.target.files[0];
+
+  if(!file) return;
+
+
+  if(!file.type.startsWith("image/")){
+
+    showMessage(
+      "Please select an image file."
+    );
+
+    return;
+
   }
-);
+
+
+  try{
+
+    const image =
+      await compressImage(file);
+
+    document.getElementById(
+      "previewImg"
+    ).src = image;
+
+    document.getElementById(
+      "imagePreview"
+    ).style.display = "block";
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Image preview failed."
+    );
+
+  }
+
+}
 
 
 /* ADD MEDICINE */
 
 async function addMedicine(){
 
+  const saveBtn =
+    document.getElementById("saveBtn");
+
+
+  const name =
+    document.getElementById(
+      "medicineName"
+    ).value.trim();
+
+
+  const category =
+    document.getElementById(
+      "medicineCategory"
+    ).value;
+
+
+  const price =
+    document.getElementById(
+      "medicinePrice"
+    ).value;
+
+
+  const details =
+    document.getElementById(
+      "medicineDetails"
+    ).value.trim();
+
+
+  const imageFile =
+    document.getElementById(
+      "medicineImage"
+    ).files[0];
+
+
+  /* VALIDATION */
+
+  if(!name){
+
+    showMessage(
+      "❌ Medicine name required."
+    );
+
+    return;
+
+  }
+
+
+  if(!category){
+
+    showMessage(
+      "❌ Please select category."
+    );
+
+    return;
+
+  }
+
+
+  if(!price){
+
+    showMessage(
+      "❌ Medicine price required."
+    );
+
+    return;
+
+  }
+
+
   try{
 
-    const name =
-      document
-      .getElementById("medicineName")
-      .value
-      .trim();
+    saveBtn.disabled = true;
 
-    const category =
-      document
-      .getElementById("medicineCategory")
-      .value;
-
-    const price =
-      document
-      .getElementById("medicinePrice")
-      .value;
-
-    const details =
-      document
-      .getElementById("medicineDetails")
-      .value
-      .trim();
-
-    const file =
-      medicineImage.files[0];
-
-
-    /* VALIDATION */
-
-    if(!name){
-
-      alert("Please enter medicine name.");
-
-      return;
-    }
-
-    if(!category){
-
-      alert("Please select category.");
-
-      return;
-    }
-
-    if(price === ""){
-
-      alert("Please enter medicine price.");
-
-      return;
-    }
-
-    /* BUTTON */
-
-    addMedicineBtn.disabled = true;
-
-    addMedicineBtn.textContent =
+    saveBtn.textContent =
       "⏳ Saving Medicine...";
 
 
-    let imageUrl = "";
+    let image = "";
 
 
-    /* IMAGE UPLOAD */
+    /* IMAGE */
 
-    if(file){
+    if(imageFile){
 
-      const safeName =
-        name
-        .replace(/[^a-zA-Z0-9]/g,"-")
-        .toLowerCase();
-
-      const fileName =
-        "medicines/" +
-        Date.now() +
-        "-" +
-        safeName;
-
-      const imageRef =
-        ref(storage,fileName);
-
-      await uploadBytes(
-        imageRef,
-        file
-      );
-
-      imageUrl =
-        await getDownloadURL(imageRef);
+      image =
+        await compressImage(imageFile);
 
     }
 
 
     /* FIRESTORE */
 
-    await addDoc(
-      collection(db,"medicines"),
-      {
+    const medicine = {
 
-        name:name,
+      name: name,
 
-        category:category,
+      category: category,
 
-        price:Number(price),
+      price: Number(price),
 
-        details:details,
+      details: details,
 
-        image:imageUrl,
+      image: image,
 
-        createdAt:
-          serverTimestamp()
+      createdAt: serverTimestamp()
 
-      }
+    };
+
+
+    const result =
+      await addDoc(
+        collection(db,"medicines"),
+        medicine
+      );
+
+
+    console.log(
+      "Medicine saved:",
+      result.id
     );
 
 
-    /* SUCCESS */
-
     showMessage(
-      "Medicine added successfully!"
+      "✅ Medicine added successfully!"
     );
 
 
     /* RESET */
 
-    document
-      .getElementById("medicineName")
-      .value = "";
+    document.getElementById(
+      "medicineName"
+    ).value = "";
 
-    document
-      .getElementById("medicineCategory")
-      .value = "";
+    document.getElementById(
+      "medicineCategory"
+    ).value = "";
 
-    document
-      .getElementById("medicinePrice")
-      .value = "";
+    document.getElementById(
+      "medicinePrice"
+    ).value = "";
 
-    document
-      .getElementById("medicineDetails")
-      .value = "";
+    document.getElementById(
+      "medicineDetails"
+    ).value = "";
 
-    medicineImage.value = "";
+    document.getElementById(
+      "medicineImage"
+    ).value = "";
 
-    imagePreview.style.display =
-      "none";
-
-    previewImg.src = "";
-
-
-    /* RELOAD */
-
-    await loadMedicines();
+    document.getElementById(
+      "imagePreview"
+    ).style.display = "none";
 
 
   }catch(error){
 
     console.error(
-      "Add medicine error:",
+      "FIREBASE ERROR:",
       error
     );
 
-    alert(
-      "Medicine save nahi hui.\n\n" +
+
+    showMessage(
+      "❌ Firebase Error: " +
       error.message
     );
 
+
   }finally{
 
-    addMedicineBtn.disabled = false;
+    saveBtn.disabled = false;
 
-    addMedicineBtn.textContent =
+    saveBtn.textContent =
       "💾 Add Medicine";
 
   }
@@ -1290,260 +1194,156 @@ async function addMedicine(){
 }
 
 
-/* ADD BUTTON */
-
-addMedicineBtn.addEventListener(
-  "click",
-  addMedicine
-);
-
-
-/* CATEGORY NAME */
-
-function getCategoryName(category){
-
-  const categories = {
-
-    "antibiotic":
-      "Antibiotic",
-
-    "cough-cold":
-      "Cough & Cold",
-
-    "cut-pain":
-      "Cut & Pain",
-
-    "wound-fever":
-      "Wound & Fever",
-
-    "baby-care":
-      "Baby Care",
-
-    "eye-care":
-      "Eye Care",
-
-    "skin-hair-care":
-      "Skin & Hair Care",
-
-    "itching":
-      "Itching",
-
-    "allergy":
-      "Allergy",
-
-    "multi-vitamin":
-      "Multi Vitamin",
-
-    "sexual-wellness":
-      "Sexual Wellness",
-
-    "feminine-care-hygiene":
-      "Feminine Care / Hygiene",
-
-    "period-care":
-      "Period Care",
-
-    "fracture-care":
-      "Fracture Care",
-
-    "sanitary-antiseptic":
-      "Sanitary & Antiseptic",
-
-    "baby-food":
-      "Baby Food",
-
-    "gastric-acidity":
-      "Gastric & Acidity",
-
-    "diabetes-bp-care":
-      "Diabetes & BP Care",
-
-    "calcium-iron":
-      "Calcium & Iron",
-
-    "first-aid-medical-supplies":
-      "First Aid & Medical Supplies"
-
-  };
-
-  return categories[category] ||
-    category ||
-    "Other";
-
-}
-
-
 /* LOAD MEDICINES */
 
-async function loadMedicines(){
+function loadMedicines(){
 
-  productList.innerHTML =
-    '<div class="empty-products">⏳ Loading medicines...</div>';
-
-  try{
-
-    const snapshot =
-      await getDocs(
-        collection(db,"medicines")
-      );
-
-    if(snapshot.empty){
-
-      productList.innerHTML =
-        '<div class="empty-products">No medicines added yet.</div>';
-
-      return;
-    }
+  const list =
+    document.getElementById(
+      "productList"
+    );
 
 
-    productList.innerHTML = "";
+  const q =
+    query(
+      collection(db,"medicines"),
+      orderBy("createdAt","desc")
+    );
 
 
-    snapshot.forEach(function(item){
+  onSnapshot(
+    q,
 
-      const medicine =
-        item.data();
+    (snapshot)=>{
 
-      const id =
-        item.id;
+      if(snapshot.empty){
 
-
-      const card =
-        document.createElement("div");
-
-      card.className =
-        "admin-product";
-
-
-      let imageHTML =
-        '<div class="admin-product-img">💊</div>';
-
-
-      if(medicine.image){
-
-        imageHTML =
-          `
-          <div class="admin-product-img">
-
-            <img
-              src="${escapeHtml(medicine.image)}"
-              alt="${escapeHtml(medicine.name || "Medicine")}"
-              onerror="this.parentElement.innerHTML='💊'"
-            >
-
+        list.innerHTML = `
+          <div class="empty-products">
+            No medicines added yet.
           </div>
-          `;
+        `;
+
+        return;
 
       }
 
 
-      card.innerHTML = `
-
-        ${imageHTML}
-
-        <div class="admin-product-info">
-
-          <h3>
-            ${escapeHtml(
-              medicine.name || "Unnamed Medicine"
-            )}
-          </h3>
-
-          <span class="category-name">
-            ${escapeHtml(
-              getCategoryName(medicine.category)
-            )}
-          </span>
-
-          <div class="admin-price">
-            ₹${Number(
-              medicine.price || 0
-            ).toFixed(2)}
-          </div>
-
-          <div class="admin-desc">
-            ${escapeHtml(
-              medicine.details ||
-              "No details available."
-            )}
-          </div>
-
-          <button
-            class="delete-btn"
-            data-id="${id}"
-            data-image="${escapeHtml(medicine.image || "")}"
-          >
-            🗑️ Delete Medicine
-          </button>
-
-        </div>
-      `;
+      list.innerHTML = "";
 
 
-      const deleteButton =
-        card.querySelector(".delete-btn");
+      snapshot.forEach((item)=>{
+
+        const data =
+          item.data();
 
 
-      deleteButton.addEventListener(
-        "click",
-        function(){
+        const imageHTML =
+          data.image
+          ?
+          `<img
+             src="${data.image}"
+             alt="${escapeHTML(data.name)}"
+           >`
+          :
+          `💊`;
 
-          deleteMedicine(
-            id,
-            medicine.image || ""
+
+        const card =
+          document.createElement(
+            "div"
           );
 
-        }
+
+        card.className =
+          "admin-product";
+
+
+        card.innerHTML = `
+
+          <div class="admin-product-img">
+            ${imageHTML}
+          </div>
+
+          <div class="admin-product-info">
+
+            <h3>
+              ${escapeHTML(data.name || "Medicine")}
+            </h3>
+
+            <span class="category-name">
+              ${escapeHTML(
+                categoryName(data.category)
+              )}
+            </span>
+
+            <div class="admin-price">
+              ₹${Number(data.price || 0).toFixed(2)}
+            </div>
+
+            <div class="admin-desc">
+              ${escapeHTML(
+                data.details || "No details"
+              )}
+            </div>
+
+            <button
+              class="delete-btn"
+              onclick="deleteMedicine('${item.id}')">
+
+              🗑️ Delete Medicine
+
+            </button>
+
+          </div>
+
+        `;
+
+
+        list.appendChild(card);
+
+      });
+
+    },
+
+    (error)=>{
+
+      console.error(
+        "LOAD ERROR:",
+        error
       );
 
 
-      productList.appendChild(card);
+      list.innerHTML = `
 
-    });
+        <div class="empty-products">
 
+          ❌ Firebase database error.<br><br>
 
-  }catch(error){
+          ${escapeHTML(error.message)}
 
-    console.error(
-      "Load medicines error:",
-      error
-    );
+        </div>
 
-    productList.innerHTML = `
+      `;
 
-      <div class="empty-products">
+    }
 
-        ❌ Medicines load nahi hui.
-
-        <br><br>
-
-        ${escapeHtml(error.message)}
-
-      </div>
-
-    `;
-
-  }
+  );
 
 }
 
 
-/* DELETE MEDICINE */
+/* DELETE */
 
-async function deleteMedicine(
-  id,
-  imageUrl
-){
+async function deleteMedicine(id){
 
-  const confirmDelete =
+  const ok =
     confirm(
-      "Kya aap ye medicine delete karna chahte ho?"
+      "Are you sure you want to delete this medicine?"
     );
 
-  if(!confirmDelete){
 
-    return;
-  }
+  if(!ok) return;
 
 
   try{
@@ -1553,48 +1353,17 @@ async function deleteMedicine(
     );
 
 
-    /* DELETE IMAGE */
-
-    if(imageUrl){
-
-      try{
-
-        const imageRef =
-          ref(storage,imageUrl);
-
-        await deleteObject(
-          imageRef
-        );
-
-      }catch(imageError){
-
-        console.log(
-          "Image delete skipped:",
-          imageError
-        );
-
-      }
-
-    }
-
-
     showMessage(
-      "Medicine deleted successfully!"
+      "✅ Medicine deleted."
     );
-
-
-    await loadMedicines();
 
 
   }catch(error){
 
-    console.error(
-      "Delete error:",
-      error
-    );
+    console.error(error);
 
-    alert(
-      "Medicine delete nahi hui.\n\n" +
+    showMessage(
+      "❌ Delete failed: " +
       error.message
     );
 
@@ -1603,38 +1372,76 @@ async function deleteMedicine(
 }
 
 
-/* HTML SECURITY */
+/* CATEGORY NAME */
 
-function escapeHtml(value){
+function categoryName(slug){
 
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  const names = {
+
+    "antibiotic":"Antibiotic",
+    "cough-cold":"Cough & Cold",
+    "cut-pain":"Cut & Pain",
+    "wound-fever":"Wound & Fever",
+    "baby-care":"Baby Care",
+    "eye-care":"Eye Care",
+    "skin-hair-care":"Skin & Hair Care",
+    "itching":"Itching",
+    "allergy":"Allergy",
+    "multi-vitamin":"Multi Vitamin",
+    "sexual-wellness":"Sexual Wellness",
+    "feminine-care-hygiene":"Feminine Care / Hygiene",
+    "period-care":"Period Care",
+    "fracture-care":"Fracture Care",
+    "sanitary-antiseptic":"Sanitary & Antiseptic",
+    "baby-food":"Baby Food",
+    "gastric-acidity":"Gastric & Acidity",
+    "diabetes-bp-care":"Diabetes & BP Care",
+    "calcium-iron":"Calcium & Iron",
+    "first-aid-medical-supplies":
+      "First Aid & Medical Supplies"
+
+  };
+
+
+  return names[slug] || slug || "Other";
 
 }
 
 
-/* AUTO LOGIN */
+/* SECURITY FOR HTML */
 
-if(
-  sessionStorage.getItem(
-    "mediPointAdmin"
-  ) === "true"
-){
+function escapeHTML(value){
 
-  loginPage.style.display =
-    "none";
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
-  adminPage.style.display =
-    "block";
+}
 
-  logoutBtn.style.display =
-    "block";
 
-  loadMedicines();
+/* MESSAGE */
+
+function showMessage(text){
+
+  const box =
+    document.getElementById(
+      "message"
+    );
+
+
+  box.textContent = text;
+
+  box.style.display = "block";
+
+
+  setTimeout(()=>{
+
+    box.style.display = "none";
+
+  },5000);
 
 }
 
