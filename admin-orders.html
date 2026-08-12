@@ -1,26 +1,1007 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MEDI POINT | Order Admin</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MEDI POINT | Orders</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f9f9;color:#203b3d}.head{background:#fff;padding:16px 6%;border-bottom:1px solid #e2eeee}.brand{font-size:21px;font-weight:800;color:#087d80}.wrap{width:92%;max-width:1000px;margin:35px auto}.box{background:#fff;padding:24px;border-radius:17px;border:1px solid #e0ebeb;box-shadow:0 8px 28px #14464b10}h1{margin:0 0 6px;font-size:24px}p{color:#829294;font-size:12px}.search{display:flex;gap:10px;margin:20px 0}.search input{flex:1;padding:13px;border:1px solid #d6e4e5;border-radius:9px;text-transform:uppercase}.search button,.save{border:0;border-radius:9px;background:#087d80;color:white;padding:0 18px;font-weight:700;cursor:pointer}.card{border:1px solid #e2eeee;border-radius:12px;padding:16px;margin-top:15px}.row{display:flex;justify-content:space-between;gap:15px;margin:6px 0;font-size:12px}.status{margin-top:14px}.status select{width:100%;padding:12px;border:1px solid #d6e4e5;border-radius:9px}.save{margin-top:12px;width:100%;height:44px}.empty{text-align:center;padding:25px;color:#8a999b;font-size:13px}.ok{color:#26756b;background:#eefaf7;padding:10px;border-radius:8px;margin-top:10px;font-size:12px}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5fafb;
+  color:#173f46;
+}
+
+header{
+  height:72px;
+  background:#fff;
+  border-bottom:1px solid #e1eeee;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%;
+  position:sticky;
+  top:0;
+  z-index:20;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brand-mark{
+  width:42px;
+  height:42px;
+  border-radius:8px;
+  background:#148d9e;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:27px;
+  font-weight:bold;
+}
+
+.brand h2{
+  color:#174f58;
+  font-size:19px;
+}
+
+.brand small{
+  color:#7c898b;
+  font-size:9px;
+}
+
+.header-buttons{
+  display:flex;
+  gap:10px;
+}
+
+.header-btn{
+  border:0;
+  background:#eaf6f7;
+  color:#17606a;
+  padding:10px 16px;
+  border-radius:7px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.header-btn:hover{
+  background:#d8eff1;
+}
+
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:35px 20px 60px;
+}
+
+.title{
+  margin-bottom:25px;
+}
+
+.title h1{
+  color:#174f58;
+  font-size:30px;
+  margin-bottom:7px;
+}
+
+.title p{
+  color:#7b898b;
+  font-size:13px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.stat{
+  background:#fff;
+  border:1px solid #e1eeee;
+  border-radius:13px;
+  padding:20px;
+}
+
+.stat span{
+  display:block;
+  color:#7b898b;
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.stat strong{
+  font-size:25px;
+  color:#148d9e;
+}
+
+.orders{
+  display:grid;
+  gap:18px;
+}
+
+.order-card{
+  background:#fff;
+  border:1px solid #e1eeee;
+  border-radius:15px;
+  padding:22px;
+  box-shadow:0 6px 20px rgba(0,0,0,.05);
+}
+
+.order-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+  border-bottom:1px solid #e8eeee;
+  padding-bottom:15px;
+  margin-bottom:15px;
+}
+
+.order-id{
+  color:#174f58;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.date{
+  color:#899698;
+  font-size:11px;
+  margin-top:5px;
+}
+
+.status{
+  padding:7px 12px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+  background:#fff4d8;
+  color:#956b00;
+}
+
+.status.confirmed{
+  background:#e7f8ec;
+  color:#19733b;
+}
+
+.status.processing{
+  background:#e8f2ff;
+  color:#1764a0;
+}
+
+.status.delivery{
+  background:#eeeaff;
+  color:#6048a5;
+}
+
+.status.delivered{
+  background:#dff7ed;
+  color:#13724d;
+}
+
+.status.cancelled{
+  background:#ffeaea;
+  color:#b33a3a;
+}
+
+.customer{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  background:#f7fbfb;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.customer div{
+  font-size:13px;
+  color:#536c70;
+  line-height:1.6;
+}
+
+.customer b{
+  color:#174f58;
+}
+
+.items{
+  margin-bottom:15px;
+}
+
+.items h3{
+  color:#174f58;
+  font-size:15px;
+  margin-bottom:10px;
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  padding:9px 0;
+  border-bottom:1px dashed #dce8e8;
+  font-size:13px;
+}
+
+.item:last-child{
+  border-bottom:0;
+}
+
+.item-name{
+  font-weight:bold;
+}
+
+.item-price{
+  color:#148d9e;
+  font-weight:bold;
+}
+
+.total{
+  display:flex;
+  justify-content:space-between;
+  border-top:1px solid #e1eeee;
+  padding-top:15px;
+  margin-top:10px;
+  font-size:18px;
+  font-weight:bold;
+  color:#174f58;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+
+.action{
+  border:0;
+  padding:10px 14px;
+  border-radius:7px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.confirm{
+  background:#e5f7eb;
+  color:#19733b;
+}
+
+.processing{
+  background:#e8f2ff;
+  color:#1764a0;
+}
+
+.delivery{
+  background:#eeeaff;
+  color:#6048a5;
+}
+
+.delivered{
+  background:#dff7ed;
+  color:#13724d;
+}
+
+.cancel{
+  background:#fff0f0;
+  color:#c44;
+}
+
+.whatsapp{
+  background:#25d366;
+  color:#fff;
+}
+
+.action:hover{
+  opacity:.85;
+}
+
+.empty{
+  background:#fff;
+  border:1px solid #e1eeee;
+  border-radius:13px;
+  padding:50px 20px;
+  text-align:center;
+  color:#7b898b;
+}
+
+.loading{
+  text-align:center;
+  padding:40px;
+  color:#148d9e;
+}
+
+.message{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#123f47;
+  color:#fff;
+  padding:13px 18px;
+  border-radius:8px;
+  display:none;
+  z-index:100;
+}
+
+@media(max-width:800px){
+
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .customer{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:550px){
+
+  header{
+    padding:0 4%;
+  }
+
+  .brand small{
+    display:none;
+  }
+
+  .container{
+    padding:25px 14px 50px;
+  }
+
+  .title h1{
+    font-size:25px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .order-top{
+    flex-direction:column;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .action{
+    width:100%;
+  }
+}
 </style>
 </head>
+
 <body>
-<header class="head"><div class="brand">⚕️ MEDI POINT — Order Admin</div></header>
-<main class="wrap"><section class="box">
-<h1>📦 Manage Order Status</h1><p>Enter an Order ID to update its delivery status.</p>
-<div class="search"><input id="id" placeholder="MP-20260810-12345"><button onclick="find()">Search</button></div>
-<div id="out" class="empty">No order selected.</div>
-</section></main>
-<script>
-const statuses=["Order Placed","Order Confirmed","Preparing","Out for Delivery","Delivered"];
-let current=null;
-function find(){let id=document.getElementById("id").value.trim().toUpperCase(),raw=localStorage.getItem("mediPointOrder_"+id),o=document.getElementById("out");if(!raw){o.innerHTML="❌ Order not found.";return}current={key:"mediPointOrder_"+id,data:JSON.parse(raw)};render()}
-function render(){let o=current.data;document.getElementById("out").innerHTML=`<div class="card"><b>Order ID: ${esc(o.id)}</b><div class="row"><span>Customer</span><strong>${esc(o.name)}</strong></div><div class="row"><span>Mobile</span><strong>${esc(o.phone)}</strong></div><div class="row"><span>Total</span><strong>₹${Number(o.total||0).toFixed(2)}</strong></div><div class="status"><label>Status</label><select id="status">${statuses.map(s=>`<option ${s===o.status?"selected":""}>${s}</option>`).join("")}</select><button class="save" onclick="save()">💾 Update Order Status</button><div id="msg"></div></div></div>`}
-function save(){let status=document.getElementById("status").value;current.data.status=status;current.data.updatedAt=new Date().toISOString();localStorage.setItem(current.key,JSON.stringify(current.data));document.getElementById("msg").innerHTML='<div class="ok">✅ Status updated successfully. Customer tracking page will show the new status on the same browser/device.</div>'}
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+<header>
+
+  <div class="brand">
+
+    <div class="brand-mark">+</div>
+
+    <div>
+      <h2>MEDI POINT</h2>
+      <small>Order Management Panel</small>
+    </div>
+
+  </div>
+
+  <div class="header-buttons">
+
+    <button
+      class="header-btn"
+      onclick="location.href='admin.html'"
+    >
+      ⚙️ Admin
+    </button>
+
+    <button
+      class="header-btn"
+      onclick="loadOrders()"
+    >
+      🔄 Refresh
+    </button>
+
+  </div>
+
+</header>
+
+<main class="container">
+
+  <div class="title">
+
+    <h1>📦 Customer Orders</h1>
+
+    <p>
+      Manage and update customer medicine orders.
+    </p>
+
+  </div>
+
+  <div class="stats">
+
+    <div class="stat">
+      <span>Total Orders</span>
+      <strong id="totalOrders">0</strong>
+    </div>
+
+    <div class="stat">
+      <span>Pending</span>
+      <strong id="pendingOrders">0</strong>
+    </div>
+
+    <div class="stat">
+      <span>Confirmed</span>
+      <strong id="confirmedOrders">0</strong>
+    </div>
+
+    <div class="stat">
+      <span>Delivered</span>
+      <strong id="deliveredOrders">0</strong>
+    </div>
+
+  </div>
+
+  <div id="orders" class="orders">
+
+    <div class="loading">
+      Loading orders...
+    </div>
+
+  </div>
+
+</main>
+
+<div id="message" class="message"></div>
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  updateDoc,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+/*
+==================================================
+FIREBASE CONFIG
+==================================================
+
+IMPORTANT:
+
+YAHAN APNE FIREBASE PROJECT KA EXACT CONFIG PASTE KARO.
+
+Firebase Console:
+Project Settings
+→ General
+→ Your apps
+→ Web app
+→ Firebase SDK configuration
+
+*/
+
+const firebaseConfig = {
+
+  apiKey: "PASTE_YOUR_FIREBASE_API_KEY",
+
+  authDomain: "medipoint-f4616.firebaseapp.com",
+
+  projectId: "medipoint-f4616",
+
+  storageBucket: "medipoint-f4616.firebasestorage.app",
+
+  messagingSenderId: "18049237336",
+
+  appId: "PASTE_YOUR_FIREBASE_APP_ID"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+/* LOAD ORDERS */
+
+window.loadOrders = async function(){
+
+  const ordersBox =
+    document.getElementById("orders");
+
+  ordersBox.innerHTML =
+    '<div class="loading">Loading orders...</div>';
+
+  try{
+
+    const q = query(
+      collection(db,"orders"),
+      orderBy("createdAt","desc")
+    );
+
+    const snapshot =
+      await getDocs(q);
+
+    let orders = [];
+
+    snapshot.forEach(function(item){
+
+      orders.push({
+        id:item.id,
+        ...item.data()
+      });
+
+    });
+
+    renderOrders(orders);
+
+  }catch(error){
+
+    console.error(error);
+
+    ordersBox.innerHTML = `
+      <div class="empty">
+        <h3>Unable to load orders</h3>
+        <p style="margin-top:8px">
+          ${error.message}
+        </p>
+      </div>
+    `;
+
+  }
+
+};
+
+
+/* RENDER */
+
+function renderOrders(orders){
+
+  const box =
+    document.getElementById("orders");
+
+  document.getElementById("totalOrders").textContent =
+    orders.length;
+
+  document.getElementById("pendingOrders").textContent =
+    orders.filter(x => getStatus(x) === "Pending").length;
+
+  document.getElementById("confirmedOrders").textContent =
+    orders.filter(x => getStatus(x) === "Confirmed").length;
+
+  document.getElementById("deliveredOrders").textContent =
+    orders.filter(x => getStatus(x) === "Delivered").length;
+
+
+  if(!orders.length){
+
+    box.innerHTML = `
+      <div class="empty">
+
+        <div style="font-size:45px">
+          📦
+        </div>
+
+        <h3 style="margin-top:10px">
+          No orders yet
+        </h3>
+
+        <p style="margin-top:8px">
+          Customer orders will appear here.
+        </p>
+
+      </div>
+    `;
+
+    return;
+  }
+
+
+  box.innerHTML = orders.map(function(order){
+
+    const status =
+      getStatus(order);
+
+    const items =
+      Array.isArray(order.items)
+      ? order.items
+      : [];
+
+
+    const itemHTML =
+      items.length
+
+      ? items.map(function(item){
+
+          const name =
+            item.name ||
+            item.medicineName ||
+            "Medicine";
+
+          const qty =
+            item.qty ||
+            item.quantity ||
+            1;
+
+          const price =
+            Number(
+              item.price ||
+              item.medicinePrice ||
+              0
+            );
+
+          return `
+            <div class="item">
+
+              <div>
+                <span class="item-name">
+                  ${escapeHTML(name)}
+                </span>
+
+                <span>
+                  × ${qty}
+                </span>
+              </div>
+
+              <div class="item-price">
+                ₹${(price * qty).toFixed(2)}
+              </div>
+
+            </div>
+          `;
+
+        }).join("")
+
+      : `
+        <div class="item">
+          <div>Medicine order</div>
+        </div>
+      `;
+
+
+    const created =
+      order.createdAt
+      ? formatDate(order.createdAt)
+      : "Date not available";
+
+
+    return `
+
+      <div class="order-card">
+
+        <div class="order-top">
+
+          <div>
+
+            <div class="order-id">
+              Order #${escapeHTML(order.id)}
+            </div>
+
+            <div class="date">
+              ${created}
+            </div>
+
+          </div>
+
+          <div class="status ${statusClass(status)}">
+            ${status}
+          </div>
+
+        </div>
+
+
+        <div class="customer">
+
+          <div>
+            <b>👤 Customer</b><br>
+            ${escapeHTML(order.name || "Not provided")}
+          </div>
+
+          <div>
+            <b>📞 Phone</b><br>
+            ${escapeHTML(order.phone || "Not provided")}
+          </div>
+
+          <div>
+            <b>📍 Address</b><br>
+            ${escapeHTML(order.address || "Not provided")}
+          </div>
+
+          <div>
+            <b>💳 Payment</b><br>
+            ${escapeHTML(order.payment || "Cash on Delivery")}
+          </div>
+
+        </div>
+
+
+        <div class="items">
+
+          <h3>
+            💊 Medicines
+          </h3>
+
+          ${itemHTML}
+
+        </div>
+
+
+        <div class="total">
+
+          <span>
+            Total
+          </span>
+
+          <span>
+            ₹${Number(order.total || 0).toFixed(2)}
+          </span>
+
+        </div>
+
+
+        <div class="actions">
+
+          <button
+            class="action confirm"
+            onclick="changeStatus('${order.id}','Confirmed')"
+          >
+            ✅ Confirm Order
+          </button>
+
+          <button
+            class="action processing"
+            onclick="changeStatus('${order.id}','Processing')"
+          >
+            🔄 Processing
+          </button>
+
+          <button
+            class="action delivery"
+            onclick="changeStatus('${order.id}','Out for Delivery')"
+          >
+            🚚 Out for Delivery
+          </button>
+
+          <button
+            class="action delivered"
+            onclick="changeStatus('${order.id}','Delivered')"
+          >
+            ✔️ Delivered
+          </button>
+
+          <button
+            class="action cancel"
+            onclick="changeStatus('${order.id}','Cancelled')"
+          >
+            ❌ Cancel
+          </button>
+
+          <button
+            class="action whatsapp"
+            onclick="openWhatsApp('${escapeAttribute(order.phone || "")}','${escapeAttribute(order.id)}')"
+          >
+            💬 WhatsApp Customer
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+}
+
+
+/* CHANGE STATUS */
+
+window.changeStatus = async function(
+  orderId,
+  newStatus
+){
+
+  try{
+
+    await updateDoc(
+      doc(db,"orders",orderId),
+      {
+        status:newStatus,
+        updatedAt:new Date().toISOString()
+      }
+    );
+
+    showMessage(
+      "Order status updated: " + newStatus
+    );
+
+    loadOrders();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "Could not update order.\n\n" +
+      error.message
+    );
+
+  }
+
+};
+
+
+/* WHATSAPP */
+
+window.openWhatsApp = function(
+  phone,
+  orderId
+){
+
+  if(!phone){
+
+    alert(
+      "Customer phone number is not available."
+    );
+
+    return;
+  }
+
+
+  let number =
+    phone.replace(/\D/g,"");
+
+
+  if(number.length === 10){
+
+    number =
+      "91" + number;
+
+  }
+
+
+  const message =
+    "Hello MEDI POINT. Your order " +
+    orderId +
+    " has been received. " +
+    "Please contact us for order updates.";
+
+
+  window.open(
+    "https://wa.me/" +
+    number +
+    "?text=" +
+    encodeURIComponent(message),
+    "_blank"
+  );
+
+};
+
+
+/* HELPERS */
+
+function getStatus(order){
+
+  return order.status ||
+    order.orderStatus ||
+    "Pending";
+
+}
+
+
+function statusClass(status){
+
+  if(status === "Confirmed")
+    return "confirmed";
+
+  if(status === "Processing")
+    return "processing";
+
+  if(status === "Out for Delivery")
+    return "delivery";
+
+  if(status === "Delivered")
+    return "delivered";
+
+  if(status === "Cancelled")
+    return "cancelled";
+
+  return "";
+
+}
+
+
+function formatDate(value){
+
+  try{
+
+    const date =
+      value.toDate
+      ? value.toDate()
+      : new Date(value);
+
+    return date.toLocaleString(
+      "en-IN",
+      {
+        dateStyle:"medium",
+        timeStyle:"short"
+      }
+    );
+
+  }catch(e){
+
+    return "Date not available";
+
+  }
+
+}
+
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+  return String(value)
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/"/g,"&quot;");
+
+}
+
+
+function showMessage(text){
+
+  const message =
+    document.getElementById("message");
+
+  message.textContent = text;
+
+  message.style.display = "block";
+
+  setTimeout(function(){
+
+    message.style.display = "none";
+
+  },3000);
+
+}
+
+
+/* START */
+
+loadOrders();
+
 </script>
+
 </body>
 </html>
