@@ -50,7 +50,10 @@ function previewFile(){let f=document.getElementById("prescription").files[0];do
 function placeOrder(e){
  e.preventDefault();let name=document.getElementById("name").value.trim(),phone=document.getElementById("phone").value.trim(),address=document.getElementById("address").value.trim(),payment=document.getElementById("payment").value;
  if(!/^[6-9]\d{9}$/.test(phone)){alert("Enter a valid 10 digit mobile number.");return}
- if(PHARMACY_WHATSAPP.includes("X")){alert("Add pharmacy WhatsApp number in the code.");return}
+if(!/^[0-9]{10,15}$/.test(PHARMACY_WHATSAPP)){
+    alert("Pharmacy WhatsApp number is not configured correctly.");
+    return;
+}
  let d=new Date(),id="MP-"+d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+"-"+Math.floor(10000+Math.random()*90000),total=0,items="";
  cartData.forEach((x,n)=>{let i=item(x),a=i.price*i.qty;total+=a;items+=`${n+1}. ${i.name} | Qty: ${i.qty} | ₹${a.toFixed(2)}\n`});
  let p=document.getElementById("prescription").files[0]?.name||"Not uploaded";
