@@ -604,10 +604,7 @@ header{
     </div>
 
 
-    <button
-      class="login-btn"
-      onclick="login()"
-    >
+   <button type="button" onclick="loginAdmin()">
       Login to Admin Panel
     </button>
 
@@ -919,5 +916,43 @@ header{
 
 
 <script>
+  <script>
+function loginAdmin() {
+
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    const error = document.getElementById("loginError");
+
+    if (username === "admin" && password === "1234") {
+
+        sessionStorage.setItem("mediPointAdmin", "true");
+
+        document.getElementById("loginPage").style.display = "none";
+
+        document.getElementById("adminPage").style.display = "block";
+
+        const logoutBtn = document.getElementById("logoutBtn");
+
+        if (logoutBtn) {
+            logoutBtn.style.display = "block";
+        }
+
+        if (typeof window.renderProducts === "function") {
+            window.renderProducts();
+        }
+
+    } else {
+
+        if (error) {
+            error.textContent = "Invalid username or password";
+            error.style.display = "block";
+        } else {
+            alert("Invalid username or password");
+        }
+
+    }
+}
+</script>
 </body>
 </html>
