@@ -4,68 +4,1237 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MEDI POINT | Order</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f9f9;color:#203b3d}.header{background:#fff;padding:15px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e1eeee}.brand{font-size:21px;font-weight:800;color:#087d80}.badge{background:#eaf8f8;color:#087d80;padding:8px 13px;border-radius:20px;font-size:11px}.wrap{max-width:1100px;width:92%;margin:30px auto}.title{text-align:center;margin-bottom:25px}.title h1{font-size:28px;margin:0 0 7px}.title p{color:#789093;font-size:13px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.box{background:#fff;padding:24px;border-radius:17px;border:1px solid #e0ebeb;box-shadow:0 8px 28px #14464b12}.box h2{font-size:18px;margin:0 0 18px;color:#244548}.item{padding:12px;border:1px solid #e4eeee;border-radius:10px;margin-bottom:9px}.itemtop,.itembottom{display:flex;justify-content:space-between;gap:10px}.itemtop{font-weight:700;font-size:13px}.itemtop b{color:#078589}.itembottom{font-size:11px;color:#819294;margin-top:6px}.total{border-top:1px dashed #d6e4e5;margin-top:15px;padding-top:13px;display:flex;justify-content:space-between;font-size:18px;font-weight:700}label{display:block;font-size:13px;font-weight:700;margin:14px 0 7px}input,textarea,select{width:100%;border:1px solid #d6e4e5;border-radius:10px;padding:13px;font:inherit;outline:none}textarea{min-height:100px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:#0b9699;box-shadow:0 0 0 3px #0b969914}.submit{width:100%;border:0;border-radius:10px;background:linear-gradient(135deg,#14979a,#087579);color:#fff;padding:15px;margin-top:18px;font-weight:700;cursor:pointer}.note{font-size:11px;text-align:center;color:#829396}.tracking{margin-top:22px;text-align:center}.tracking a{display:inline-block;text-decoration:none;color:#087d80;font-weight:700}.success{display:none;background:#eefaf7;color:#34756b;padding:11px;border-radius:9px;font-size:12px;margin-top:12px}@media(max-width:800px){.grid{grid-template-columns:1fr}.wrap{width:94%}}
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f9f9;
+  color:#203b3d;
+}
+
+.header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #e1eeee;
+}
+
+.brand{
+  font-size:21px;
+  font-weight:800;
+  color:#087d80;
+}
+
+.badge{
+  background:#eaf8f8;
+  color:#087d80;
+  padding:8px 13px;
+  border-radius:20px;
+  font-size:11px;
+}
+
+.wrap{
+  max-width:1100px;
+  width:92%;
+  margin:30px auto;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h1{
+  font-size:28px;
+  margin:0 0 7px;
+}
+
+.title p{
+  color:#789093;
+  font-size:13px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+.box{
+  background:#fff;
+  padding:24px;
+  border-radius:17px;
+  border:1px solid #e0ebeb;
+  box-shadow:0 8px 28px #14464b12;
+}
+
+.box h2{
+  font-size:18px;
+  margin:0 0 18px;
+  color:#244548;
+}
+
+
+/* CART ITEM */
+
+.item{
+  padding:14px;
+  border:1px solid #e4eeee;
+  border-radius:10px;
+  margin-bottom:10px;
+  background:#fff;
+}
+
+.itemtop{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-weight:700;
+  font-size:13px;
+}
+
+.itemtop b{
+  color:#078589;
+}
+
+.itembottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  font-size:11px;
+  color:#819294;
+  margin-top:10px;
+}
+
+
+/* PLUS MINUS */
+
+.qty-control{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.qty-btn{
+  width:32px;
+  height:32px;
+  border:0;
+  border-radius:7px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.minus{
+  background:#eef7f7;
+  color:#087d80;
+  border:1px solid #d5e7e7;
+}
+
+.plus{
+  background:#087f83;
+  color:#fff;
+}
+
+.qty-btn:hover{
+  transform:scale(1.05);
+}
+
+.qty-number{
+  min-width:28px;
+  text-align:center;
+  font-size:14px;
+  font-weight:700;
+  color:#203b3d;
+}
+
+.remove-btn{
+  margin-top:10px;
+  width:100%;
+  border:0;
+  background:#fff1f1;
+  color:#c54b4b;
+  padding:7px;
+  border-radius:7px;
+  font-size:11px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.remove-btn:hover{
+  background:#ffe2e2;
+}
+
+
+/* TOTAL */
+
+.total{
+  border-top:1px dashed #d6e4e5;
+  margin-top:15px;
+  padding-top:13px;
+  display:flex;
+  justify-content:space-between;
+  font-size:18px;
+  font-weight:700;
+  color:#087d80;
+}
+
+
+/* FORM */
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin:14px 0 7px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+  border:1px solid #d6e4e5;
+  border-radius:10px;
+  padding:13px;
+  font:inherit;
+  outline:none;
+}
+
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#0b9699;
+  box-shadow:0 0 0 3px #0b969914;
+}
+
+.submit{
+  width:100%;
+  border:0;
+  border-radius:10px;
+  background:linear-gradient(135deg,#14979a,#087579);
+  color:#fff;
+  padding:15px;
+  margin-top:18px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.submit:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.note{
+  font-size:11px;
+  text-align:center;
+  color:#829396;
+}
+
+.tracking{
+  margin-top:22px;
+  text-align:center;
+}
+
+.tracking a{
+  display:inline-block;
+  text-decoration:none;
+  color:#087d80;
+  font-weight:700;
+}
+
+.success{
+  display:none;
+  background:#eefaf7;
+  color:#34756b;
+  padding:11px;
+  border-radius:9px;
+  font-size:12px;
+  margin-top:12px;
+}
+
+.empty-cart{
+  text-align:center;
+  color:#89999b;
+  font-size:13px;
+  padding:25px;
+}
+
+@media(max-width:800px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .wrap{
+    width:94%;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .header{
+    padding:13px 4%;
+  }
+
+  .brand{
+    font-size:18px;
+  }
+
+  .badge{
+    font-size:10px;
+    padding:7px 9px;
+  }
+
+  .box{
+    padding:18px;
+  }
+
+  .itembottom{
+    align-items:flex-end;
+  }
+
+}
 </style>
 </head>
+
 <body>
-<header class="header"><div class="brand">⚕️ MEDI POINT</div><div class="badge">🔒 Secure Order</div></header>
+
+<header class="header">
+
+  <div class="brand">
+    ⚕️ MEDI POINT
+  </div>
+
+  <div class="badge">
+    🔒 Secure Order
+  </div>
+
+</header>
+
+
 <main class="wrap">
-<div class="title"><h1>Order Online Medicine Now</h1><p>Review your medicines and enter your delivery details</p></div>
-<div class="grid">
-<section class="box"><h2>🛒 Order Summary</h2><div id="cart"></div></section>
-<section class="box">
-<h2>📍 Delivery Details</h2>
-<form onsubmit="placeOrder(event)">
-<label>Full Name *</label><input id="name" required minlength="2" placeholder="Enter your full name">
-<label>Mobile Number *</label><input id="phone" type="tel" maxlength="10" inputmode="numeric" pattern="[6-9][0-9]{9}" required placeholder="10 digit mobile number">
-<label>Delivery Address *</label><textarea id="address" required minlength="10" placeholder="House no., street, area, city, PIN"></textarea>
-<label>Prescription <small>(Optional)</small></label><input id="prescription" type="file" accept="image/*,.pdf" onchange="previewFile()"><div id="file" style="font-size:11px;color:#688;margin-top:6px"></div>
-<label>Payment Method *</label><select id="payment"><option>Cash on Delivery</option><option>UPI / Online Payment</option></select>
-<div style="margin-top:10px;padding:11px;background:#f0f9fa;border-radius:9px;font-size:11px;color:#557477">ℹ️ Prescription medicines may require a valid prescription.</div>
-<button class="submit" id="btn">💬 Confirm Order on WhatsApp</button>
-<p class="note">Your order will be prepared and opened in WhatsApp for confirmation.</p>
-<div class="success" id="success"></div>
-</form>
-</section>
-</div>
-<div class="box tracking"><h2>📦 Track Your Order</h2><p style="font-size:12px;color:#789">Already placed an order? Track it using your Order ID.</p><a href="tracking.html">🔎 Open Order Tracking</a></div>
+
+  <div class="title">
+
+    <h1>
+      Order Online Medicine Now
+    </h1>
+
+    <p>
+      Review your medicines and enter your delivery details
+    </p>
+
+  </div>
+
+
+  <div class="grid">
+
+
+    <!-- ORDER SUMMARY -->
+
+    <section class="box">
+
+      <h2>
+        🛒 Order Summary
+      </h2>
+
+      <div id="cart"></div>
+
+    </section>
+
+
+    <!-- DELIVERY -->
+
+    <section class="box">
+
+      <h2>
+        📍 Delivery Details
+      </h2>
+
+
+      <form onsubmit="placeOrder(event)">
+
+
+        <label>
+          Full Name *
+        </label>
+
+        <input
+          id="name"
+          required
+          minlength="2"
+          placeholder="Enter your full name"
+        >
+
+
+        <label>
+          Mobile Number *
+        </label>
+
+        <input
+          id="phone"
+          type="tel"
+          maxlength="10"
+          inputmode="numeric"
+          pattern="[6-9][0-9]{9}"
+          required
+          placeholder="10 digit mobile number"
+        >
+
+
+        <label>
+          Delivery Address *
+        </label>
+
+        <textarea
+          id="address"
+          required
+          minlength="10"
+          placeholder="House no., street, area, city, PIN"
+        ></textarea>
+
+
+        <label>
+          Prescription
+          <small>(Optional)</small>
+        </label>
+
+        <input
+          id="prescription"
+          type="file"
+          accept="image/*,.pdf"
+          onchange="previewFile()"
+        >
+
+        <div
+          id="file"
+          style="font-size:11px;color:#688;margin-top:6px"
+        ></div>
+
+
+        <label>
+          Payment Method *
+        </label>
+
+        <select id="payment">
+
+          <option>
+            Cash on Delivery
+          </option>
+
+          <option>
+            UPI / Online Payment
+          </option>
+
+        </select>
+
+
+        <div
+          style="
+          margin-top:10px;
+          padding:11px;
+          background:#f0f9fa;
+          border-radius:9px;
+          font-size:11px;
+          color:#557477
+          "
+        >
+          ℹ️ Prescription medicines may require a valid prescription.
+        </div>
+
+
+        <button
+          class="submit"
+          id="btn"
+          type="submit"
+        >
+          💬 Confirm Order on WhatsApp
+        </button>
+
+
+        <p class="note">
+          Your order will be prepared and opened in WhatsApp for confirmation.
+        </p>
+
+
+        <div
+          class="success"
+          id="success"
+        ></div>
+
+
+      </form>
+
+    </section>
+
+  </div>
+
+
+  <!-- TRACKING -->
+
+  <div class="box tracking">
+
+    <h2>
+      📦 Track Your Order
+    </h2>
+
+    <p style="font-size:12px;color:#789">
+      Already placed an order? Track it using your Order ID.
+    </p>
+
+    <a href="tracking.html">
+      🔎 Open Order Tracking
+    </a>
+
+  </div>
+
 </main>
+
+
 <script>
+
 const PHARMACY_WHATSAPP = "916206408813";
-let cartData=[];
+
+let cartData = [];
+
+
+/* ================================
+   READ CART
+================================ */
+
 function readCart(){
- let found=null;
- ["cart","Cart","cartItems","medicinesCart","medicineCart","mediPointCart"].some(k=>{
-  try{let x=JSON.parse(localStorage.getItem(k));if(Array.isArray(x)&&x.length){found=x;return true}}catch(e){} return false;
- });
- try{if(!found&&typeof cart!=="undefined"&&Array.isArray(cart))found=cart}catch(e){}
- cartData=found||[]; renderCart();
+
+  let found = null;
+
+  const keys = [
+    "cart",
+    "Cart",
+    "cartItems",
+    "medicinesCart",
+    "medicineCart",
+    "mediPointCart"
+  ];
+
+
+  keys.some(function(key){
+
+    try{
+
+      const data =
+        JSON.parse(localStorage.getItem(key));
+
+      if(
+        Array.isArray(data) &&
+        data.length
+      ){
+
+        found = data;
+
+        return true;
+      }
+
+    }catch(error){}
+
+    return false;
+
+  });
+
+
+  cartData = found || [];
+
+  renderCart();
+
 }
-function item(x){return{name:String(x.name||x.medicineName||x.title||x.productName||"Medicine"),price:Number(x.price||x.medicinePrice||x.amount||0)||0,qty:Number(x.quantity||x.qty||x.count||1)||1}}
+
+
+/* ================================
+   NORMALIZE ITEM
+================================ */
+
+function getItem(x){
+
+  return {
+
+    name:String(
+      x.name ||
+      x.medicineName ||
+      x.title ||
+      x.productName ||
+      "Medicine"
+    ),
+
+    price:Number(
+      x.price ||
+      x.medicinePrice ||
+      x.amount ||
+      0
+    ) || 0,
+
+    qty:Number(
+      x.quantity ||
+      x.qty ||
+      x.count ||
+      1
+    ) || 1
+
+  };
+
+}
+
+
+/* ================================
+   SAVE CART
+================================ */
+
+function saveCart(){
+
+  localStorage.setItem(
+    "cart",
+    JSON.stringify(cartData)
+  );
+
+}
+
+
+/* ================================
+   CALCULATE TOTAL
+================================ */
+
+function getCartTotal(){
+
+  let total = 0;
+
+  cartData.forEach(function(x){
+
+    const i = getItem(x);
+
+    total += i.price * i.qty;
+
+  });
+
+  return total;
+
+}
+
+
+/* ================================
+   RENDER CART
+================================ */
+
 function renderCart(){
- let el=document.getElementById("cart");if(!cartData.length){el.innerHTML='<p style="text-align:center;color:#89999b;font-size:13px;padding:25px">🛒 No medicines found in cart.</p>';return}
- let total=0,html="";cartData.forEach(x=>{let i=item(x),a=i.price*i.qty;total+=a;html+=`<div class="item"><div class="itemtop"><span>${esc(i.name)}</span><b>₹${a.toFixed(2)}</b></div><div class="itembottom"><span>Price: ₹${i.price.toFixed(2)}</span><span>Qty: ${i.qty}</span></div></div>`});html+=`<div class="total"><span>Total</span><span>₹${total.toFixed(2)}</span></div>`;el.innerHTML=html}
-function previewFile(){let f=document.getElementById("prescription").files[0];document.getElementById("file").textContent=f?`📎 ${f.name}`:"";if(f&&f.size>5*1024*1024){alert("Prescription must be under 5MB.");document.getElementById("prescription").value="";document.getElementById("file").textContent=""}}
-function placeOrder(e){
- e.preventDefault();let name=document.getElementById("name").value.trim(),phone=document.getElementById("phone").value.trim(),address=document.getElementById("address").value.trim(),payment=document.getElementById("payment").value;
- if(!/^[6-9]\d{9}$/.test(phone)){alert("Enter a valid 10 digit mobile number.");return}
-if(!/^[0-9]{10,15}$/.test(PHARMACY_WHATSAPP)){
-    alert("Pharmacy WhatsApp number is not configured correctly.");
+
+  const el =
+    document.getElementById("cart");
+
+
+  if(!cartData.length){
+
+    el.innerHTML = `
+
+      <div class="empty-cart">
+
+        🛒
+
+        <br><br>
+
+        No medicines found in cart.
+
+      </div>
+
+    `;
+
     return;
+
+  }
+
+
+  let html = "";
+
+
+  cartData.forEach(function(x,index){
+
+    const i =
+      getItem(x);
+
+    const itemTotal =
+      i.price * i.qty;
+
+
+    html += `
+
+      <div class="item">
+
+        <div class="itemtop">
+
+          <span>
+            ${esc(i.name)}
+          </span>
+
+          <b>
+            ₹${itemTotal.toFixed(2)}
+          </b>
+
+        </div>
+
+
+        <div class="itembottom">
+
+          <span>
+            ₹${i.price.toFixed(2)} / item
+          </span>
+
+
+          <div class="qty-control">
+
+            <button
+              type="button"
+              class="qty-btn minus"
+              onclick="changeQty(${index},-1)"
+              aria-label="Decrease quantity"
+            >
+              −
+            </button>
+
+
+            <span class="qty-number">
+              ${i.qty}
+            </span>
+
+
+            <button
+              type="button"
+              class="qty-btn plus"
+              onclick="changeQty(${index},1)"
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="remove-btn"
+          onclick="removeItem(${index})"
+        >
+          🗑 Remove Medicine
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+
+  const total =
+    getCartTotal();
+
+
+  html += `
+
+    <div class="total">
+
+      <span>
+        Total
+      </span>
+
+      <span>
+        ₹${total.toFixed(2)}
+      </span>
+
+    </div>
+
+  `;
+
+
+  el.innerHTML = html;
+
 }
- let d=new Date(),id="MP-"+d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+"-"+Math.floor(10000+Math.random()*90000),total=0,items="";
- cartData.forEach((x,n)=>{let i=item(x),a=i.price*i.qty;total+=a;items+=`${n+1}. ${i.name} | Qty: ${i.qty} | ₹${a.toFixed(2)}\n`});
- let p=document.getElementById("prescription").files[0]?.name||"Not uploaded";
- let order={id,name,phone,address,payment,prescription:p,items:cartData,total,status:"Order Placed",createdAt:d.toISOString(),updatedAt:d.toISOString()};
- localStorage.setItem("mediPointOrder_"+id,JSON.stringify(order));
- localStorage.setItem("lastMediPointOrder",id);
- let msg=`🏥 *MEDI POINT - NEW ORDER*\n\n🧾 Order ID: *${id}*\n📅 ${d.toLocaleDateString("en-IN")}\n⏰ ${d.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"})}\n\n👤 *CUSTOMER*\nName: ${name}\nMobile: ${phone}\n\n📍 *ADDRESS*\n${address}\n\n💊 *MEDICINES*\n${items||"No cart details"}\n💰 *TOTAL:* ₹${total.toFixed(2)}\n\n💳 *PAYMENT:* ${payment}\n📄 *PRESCRIPTION:* ${p}\n\nPlease confirm this order.`;
- document.getElementById("success").style.display="block";document.getElementById("success").innerHTML=`✅ Order <b>${id}</b> created. <a href="tracking.html?id=${id}">Track Order</a>`;
- document.getElementById("btn").disabled=true;window.open("https://wa.me/"+PHARMACY_WHATSAPP+"?text="+encodeURIComponent(msg),"_blank");setTimeout(()=>document.getElementById("btn").disabled=false,1000);
+
+
+/* ================================
+   PLUS / MINUS
+================================ */
+
+function changeQty(index,change){
+
+  if(!cartData[index]){
+    return;
+  }
+
+
+  const current =
+    getItem(cartData[index]);
+
+
+  let newQty =
+    current.qty + change;
+
+
+  /* Minimum quantity = 1 */
+
+  if(newQty < 1){
+    newQty = 1;
+  }
+
+
+  /*
+    Update original cart object
+  */
+
+  cartData[index].qty =
+    newQty;
+
+
+  /*
+    Some carts use quantity instead
+    of qty.
+  */
+
+  if(
+    Object.prototype.hasOwnProperty.call(
+      cartData[index],
+      "quantity"
+    )
+  ){
+
+    cartData[index].quantity =
+      newQty;
+
+  }
+
+
+  saveCart();
+
+  renderCart();
+
 }
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-document.addEventListener("DOMContentLoaded",()=>{document.getElementById("phone").addEventListener("input",function(){this.value=this.value.replace(/\D/g,"").slice(0,10)});readCart()});
+
+
+/* ================================
+   REMOVE MEDICINE
+================================ */
+
+function removeItem(index){
+
+  if(!cartData[index]){
+    return;
+  }
+
+
+  const item =
+    getItem(cartData[index]);
+
+
+  const ok =
+    confirm(
+      "Remove " +
+      item.name +
+      " from your order?"
+    );
+
+
+  if(!ok){
+    return;
+  }
+
+
+  cartData.splice(index,1);
+
+  saveCart();
+
+  renderCart();
+
+}
+
+
+/* ================================
+   PRESCRIPTION
+================================ */
+
+function previewFile(){
+
+  const input =
+    document.getElementById("prescription");
+
+  const file =
+    input.files[0];
+
+
+  document.getElementById("file").textContent =
+    file
+    ? "📎 " + file.name
+    : "";
+
+
+  if(
+    file &&
+    file.size > 5 * 1024 * 1024
+  ){
+
+    alert(
+      "Prescription must be under 5MB."
+    );
+
+
+    input.value = "";
+
+    document.getElementById("file")
+      .textContent = "";
+
+  }
+
+}
+
+
+/* ================================
+   PLACE ORDER
+================================ */
+
+function placeOrder(e){
+
+  e.preventDefault();
+
+
+  if(!cartData.length){
+
+    alert(
+      "Your cart is empty. Please select a medicine first."
+    );
+
+    return;
+
+  }
+
+
+  const name =
+    document
+      .getElementById("name")
+      .value
+      .trim();
+
+
+  const phone =
+    document
+      .getElementById("phone")
+      .value
+      .trim();
+
+
+  const address =
+    document
+      .getElementById("address")
+      .value
+      .trim();
+
+
+  const payment =
+    document
+      .getElementById("payment")
+      .value;
+
+
+  if(
+    !/^[6-9]\d{9}$/.test(phone)
+  ){
+
+    alert(
+      "Enter a valid 10 digit mobile number."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !/^[0-9]{10,15}$/.test(
+      PHARMACY_WHATSAPP
+    )
+  ){
+
+    alert(
+      "Pharmacy WhatsApp number is not configured correctly."
+    );
+
+    return;
+
+  }
+
+
+  const d =
+    new Date();
+
+
+  const id =
+    "MP-" +
+    d.getFullYear() +
+    String(
+      d.getMonth()+1
+    ).padStart(2,"0") +
+    String(
+      d.getDate()
+    ).padStart(2,"0") +
+    "-" +
+    Math.floor(
+      10000 +
+      Math.random()*90000
+    );
+
+
+  let total = 0;
+
+  let itemsText = "";
+
+
+  cartData.forEach(function(x,n){
+
+    const i =
+      getItem(x);
+
+
+    const amount =
+      i.price * i.qty;
+
+
+    total += amount;
+
+
+    itemsText +=
+      `${n+1}. ${i.name} | Qty: ${i.qty} | ₹${amount.toFixed(2)}\n`;
+
+  });
+
+
+  const prescription =
+    document
+      .getElementById("prescription")
+      .files[0]?.name ||
+    "Not uploaded";
+
+
+  /*
+    SAVE ORDER LOCALLY
+  */
+
+  const order = {
+
+    id:id,
+
+    name:name,
+
+    phone:phone,
+
+    address:address,
+
+    payment:payment,
+
+    prescription:prescription,
+
+    items:cartData,
+
+    total:total,
+
+    status:"Order Placed",
+
+    createdAt:d.toISOString(),
+
+    updatedAt:d.toISOString()
+
+  };
+
+
+  localStorage.setItem(
+    "mediPointOrder_" + id,
+    JSON.stringify(order)
+  );
+
+
+  localStorage.setItem(
+    "lastMediPointOrder",
+    id
+  );
+
+
+  /*
+    WHATSAPP MESSAGE
+  */
+
+  const msg =
+
+`🏥 *MEDI POINT - NEW ORDER*
+
+🧾 Order ID: *${id}*
+
+📅 ${d.toLocaleDateString("en-IN")}
+
+⏰ ${d.toLocaleTimeString(
+  "en-IN",
+  {
+    hour:"2-digit",
+    minute:"2-digit"
+  }
+)}
+
+👤 *CUSTOMER*
+
+Name: ${name}
+
+Mobile: ${phone}
+
+📍 *ADDRESS*
+
+${address}
+
+💊 *MEDICINES*
+
+${itemsText}
+
+💰 *TOTAL:* ₹${total.toFixed(2)}
+
+💳 *PAYMENT:* ${payment}
+
+📄 *PRESCRIPTION:* ${prescription}
+
+Please confirm this order.`;
+
+
+  const success =
+    document.getElementById("success");
+
+
+  success.style.display =
+    "block";
+
+
+  success.innerHTML = `
+
+    ✅ Order
+
+    <b>${id}</b>
+
+    created.
+
+    <br><br>
+
+    <a
+      href="tracking.html?id=${encodeURIComponent(id)}"
+      style="color:#087d80;font-weight:bold"
+    >
+      Track Order
+    </a>
+
+  `;
+
+
+  const btn =
+    document.getElementById("btn");
+
+
+  btn.disabled = true;
+
+
+  window.open(
+
+    "https://wa.me/" +
+    PHARMACY_WHATSAPP +
+    "?text=" +
+    encodeURIComponent(msg),
+
+    "_blank"
+
+  );
+
+
+  setTimeout(function(){
+
+    btn.disabled = false;
+
+  },1000);
+
+}
+
+
+/* ================================
+   ESCAPE HTML
+================================ */
+
+function esc(s){
+
+  return String(s)
+    .replace(
+      /[&<>"']/g,
+      function(m){
+
+        return {
+
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#039;"
+
+        }[m];
+
+      }
+    );
+
+}
+
+
+/* ================================
+   START
+================================ */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    const phone =
+      document.getElementById("phone");
+
+
+    phone.addEventListener(
+      "input",
+      function(){
+
+        this.value =
+          this.value
+            .replace(/\D/g,"")
+            .slice(0,10);
+
+      }
+    );
+
+
+    readCart();
+
+  }
+);
+
 </script>
+
 </body>
 </html>
