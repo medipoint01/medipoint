@@ -13,7 +13,7 @@
 
 body{
   margin:0;
-  font-family:Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   background:#f4f9f9;
   color:#203b3d;
 }
@@ -41,7 +41,7 @@ body{
   border:1px solid #e0ebeb;
   border-radius:18px;
   padding:25px;
-  box-shadow:0 8px 28px #14464b12;
+  box-shadow:0 8px 28px rgba(20,70,75,.08);
 }
 
 h1{
@@ -76,7 +76,7 @@ input{
 
 input:focus{
   border-color:#087d80;
-  box-shadow:0 0 0 3px #087d8014;
+  box-shadow:0 0 0 3px rgba(8,125,128,.08);
 }
 
 button{
@@ -121,7 +121,7 @@ button:disabled{
 .status-head small{
   display:block;
   margin-top:6px;
-  color:#688;
+  color:#718789;
 }
 
 .timeline{
@@ -167,6 +167,10 @@ button:disabled{
   border-color:#087d80;
 }
 
+.step:last-child{
+  padding-bottom:0;
+}
+
 .step h3{
   margin:4px 0 3px;
   font-size:14px;
@@ -186,35 +190,24 @@ button:disabled{
   line-height:1.8;
 }
 
-.details-box{
+.medicines{
+  margin-top:12px;
+  padding:12px;
   background:#f7fbfb;
-  padding:13px;
-  border-radius:10px;
-  margin-top:10px;
+  border-radius:9px;
 }
 
-.medicine{
+.medicine-row{
   display:flex;
   justify-content:space-between;
   gap:10px;
-  padding:8px 0;
-  border-bottom:1px solid #e8eeee;
-}
-
-.medicine:last-child{
-  border-bottom:0;
-}
-
-.back{
-  text-align:center;
-  margin-top:18px;
-}
-
-.back a{
-  color:#087d80;
+  padding:7px 0;
+  border-bottom:1px solid #e5eeee;
   font-size:12px;
-  font-weight:700;
-  text-decoration:none;
+}
+
+.medicine-row:last-child{
+  border-bottom:0;
 }
 
 .error{
@@ -229,17 +222,30 @@ button:disabled{
 .loading{
   text-align:center;
   padding:20px;
-  color:#087d80;
-  font-size:13px;
+  color:#718789;
+  font-size:12px;
 }
 
-.success{
+.back{
   text-align:center;
-  padding:20px;
-  background:#eefaf7;
-  color:#34756b;
-  border-radius:10px;
+  margin-top:18px;
+}
+
+.back a{
+  color:#087d80;
   font-size:12px;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.refresh{
+  margin-top:12px;
+  background:#eaf8f8;
+  color:#087d80;
+}
+
+.refresh:hover{
+  background:#d9f0f0;
 }
 
 @media(max-width:550px){
@@ -250,7 +256,11 @@ button:disabled{
   }
 
   .box{
-    padding:18px;
+    padding:20px;
+  }
+
+  h1{
+    font-size:24px;
   }
 }
 </style>
@@ -259,13 +269,8 @@ button:disabled{
 <body>
 
 <header class="header">
-
-  <div class="brand">
-    ⚕️ MEDI POINT
-  </div>
-
+  <div class="brand">⚕️ MEDI POINT</div>
 </header>
-
 
 <main class="wrap">
 
@@ -277,41 +282,33 @@ button:disabled{
 Enter your Medi Point Order ID
 </p>
 
-
 <form onsubmit="trackOrder(event)">
 
-  <label>
-    Order ID
-  </label>
+<label>
+Order ID
+</label>
 
-  <input
-    id="orderId"
-    placeholder="Example: MP-20260810-12345"
-    required
-  >
+<input
+  id="orderId"
+  placeholder="Example: MP-20260810-12345"
+  required
+>
 
-  <button
-    id="trackBtn"
-    type="submit"
-  >
-    🔎 Track Order
-  </button>
+<button
+  id="trackBtn"
+  type="submit"
+>
+🔎 Track Order
+</button>
 
 </form>
 
-
-<div
-  id="result"
-  class="result">
-</div>
-
+<div id="result" class="result"></div>
 
 <div class="back">
-
-  <a href="order.html">
-    ← Back to Order Page
-  </a>
-
+<a href="order.html">
+← Back to Order Page
+</a>
 </div>
 
 </section>
@@ -321,65 +318,53 @@ Enter your Medi Point Order ID
 
 <script type="module">
 
-/* =========================
+/* =========================================
    FIREBASE
-========================= */
+========================================= */
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
   getFirestore,
-  collection,
-  query,
-  where,
-  getDocs,
   doc,
+  getDoc,
   onSnapshot
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-/* =========================
+/* =========================================
    FIREBASE CONFIG
-========================= */
+========================================= */
 
 const firebaseConfig = {
 
-  apiKey:
-    "AIzaSyDDY8sEtMapyVhiQd5AfcRb599dsgFwMcE",
+  apiKey: "AIzaSyDDY8sEtMapyVhiQd5AfcRb599dsgFwMcE",
 
-  authDomain:
-    "medipoint-f4616.firebaseapp.com",
+  authDomain: "medipoint-f4616.firebaseapp.com",
 
-  projectId:
-    "medipoint-f4616",
+  projectId: "medipoint-f4616",
 
-  storageBucket:
-    "medipoint-f4616.firebasestorage.app",
+  storageBucket: "medipoint-f4616.firebasestorage.app",
 
-  messagingSenderId:
-    "180492377336",
+  messagingSenderId: "180492377336",
 
-  appId:
-    "1:180492377336:web:5f6566cd6663ed43a12f0d",
+  appId: "1:180492377336:web:5f6566cd6663ed43a12f0d",
 
-  measurementId:
-    "G-C8X32M4CKF"
+  measurementId: "G-C8X32M4CKF"
 
 };
 
 
-const app =
-  initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const db =
-  getFirestore(app);
+const db = getFirestore(app);
 
 
-/* =========================
-   STATUS
-========================= */
+/* =========================================
+   ORDER STATUS
+========================================= */
 
 const steps = [
 
@@ -396,17 +381,13 @@ const steps = [
 ];
 
 
-let unsubscribeOrder = null;
-
-
-/* =========================
+/* =========================================
    TRACK ORDER
-========================= */
+========================================= */
 
-window.trackOrder = async function(event){
+async function trackOrder(event){
 
   event.preventDefault();
-
 
   const input =
     document.getElementById("orderId");
@@ -429,57 +410,30 @@ window.trackOrder = async function(event){
   }
 
 
-  /*
-    Previous realtime listener
-    ko stop karo.
-  */
-
-  if(unsubscribeOrder){
-
-    unsubscribeOrder();
-
-    unsubscribeOrder = null;
-
-  }
-
-
   button.disabled = true;
 
-  button.textContent =
-    "⏳ Searching...";
+  button.textContent = "⏳ Searching...";
 
 
   result.innerHTML = `
-
     <div class="loading">
-
       🔎 Searching your order...
-
     </div>
-
   `;
 
 
   try{
 
-    const q =
-      query(
+    const orderRef =
+      doc(db,"orders",id);
 
-        collection(db,"orders"),
-
-        where("orderId","==",id)
-
-      );
+    const snap =
+      await getDoc(orderRef);
 
 
-    const snapshot =
-      await getDocs(q);
-
-
-    if(snapshot.empty){
+    if(!snap.exists()){
 
       result.innerHTML = `
-
         <div class="error">
 
           ❌ Order not found.
@@ -490,7 +444,6 @@ window.trackOrder = async function(event){
           and try again.
 
         </div>
-
       `;
 
       button.disabled = false;
@@ -503,105 +456,61 @@ window.trackOrder = async function(event){
     }
 
 
-    const orderDoc =
-      snapshot.docs[0];
-
-
     /*
-      First render
+      First display the order
     */
 
     renderOrder({
-
-      id:orderDoc.id,
-
-      ...orderDoc.data()
-
+      id:id,
+      ...snap.data()
     });
 
 
     /*
       REAL-TIME LISTENER
 
-      Admin status change karega
-      to customer page automatically
-      update hogi.
+      Admin changes status
+      → customer tracking updates
     */
 
-    const orderRef =
-      doc(
-        db,
-        "orders",
-        orderDoc.id
-      );
+    onSnapshot(
+      orderRef,
+      (updatedSnap)=>{
 
-
-    unsubscribeOrder =
-      onSnapshot(
-
-        orderRef,
-
-        liveSnapshot=>{
-
-          if(!liveSnapshot.exists()){
-
-            result.innerHTML = `
-
-              <div class="error">
-
-                ❌ This order is no longer available.
-
-              </div>
-
-            `;
-
-            return;
-
-          }
-
+        if(updatedSnap.exists()){
 
           renderOrder({
 
-            id:liveSnapshot.id,
+            id:id,
 
-            ...liveSnapshot.data()
+            ...updatedSnap.data()
 
           });
 
-        },
-
-        error=>{
-
-          console.error(
-            "REALTIME ERROR:",
-            error
-          );
-
         }
 
-      );
+      }
+    );
 
 
   }catch(error){
 
     console.error(
-      "TRACK ERROR:",
+      "TRACKING ERROR:",
       error
     );
 
 
     result.innerHTML = `
-
       <div class="error">
 
-        ❌ Firebase Error
+        ❌ Unable to load order.
 
         <br><br>
 
         ${escapeHTML(error.message)}
 
       </div>
-
     `;
 
   }
@@ -612,12 +521,12 @@ window.trackOrder = async function(event){
   button.textContent =
     "🔎 Track Order";
 
-};
+}
 
 
-/* =========================
+/* =========================================
    RENDER ORDER
-========================= */
+========================================= */
 
 function renderOrder(order){
 
@@ -626,8 +535,7 @@ function renderOrder(order){
 
 
   const status =
-    order.status ||
-    "Order Placed";
+    order.status || "Order Placed";
 
 
   let current =
@@ -641,7 +549,24 @@ function renderOrder(order){
   }
 
 
-  let timeline = "";
+  let html = `
+
+    <div class="status-head">
+
+      Current Status
+
+      <b>
+        ${escapeHTML(status)}
+      </b>
+
+      <small>
+        Order ID: ${escapeHTML(order.id)}
+      </small>
+
+    </div>
+
+    <div class="timeline">
+  `;
 
 
   steps.forEach((step,index)=>{
@@ -650,7 +575,7 @@ function renderOrder(order){
       index <= current;
 
 
-    timeline += `
+    html += `
 
       <div class="step ${active ? "active" : ""}">
 
@@ -660,15 +585,11 @@ function renderOrder(order){
 
         </div>
 
-
         ${
           index < steps.length - 1
-          ?
-          `<div class="line"></div>`
-          :
-          ""
+          ? `<div class="line"></div>`
+          : ""
         }
-
 
         <div>
 
@@ -680,14 +601,10 @@ function renderOrder(order){
 
             ${
               index === current
-              ?
-              "Current order status"
-              :
-              index < current
-              ?
-              "Completed"
-              :
-              "Waiting"
+              ? "Current order status"
+              : index < current
+              ? "Completed"
+              : "Order progress"
 
             }
 
@@ -702,214 +619,129 @@ function renderOrder(order){
   });
 
 
-  let medicines = "";
+  html += `
 
+    </div>
+
+    <div class="details">
+
+      <b>👤 Customer:</b>
+      ${escapeHTML(order.name || "N/A")}
+
+      <br>
+
+      <b>📱 Mobile:</b>
+      ${escapeHTML(order.phone || "N/A")}
+
+      <br>
+
+      <b>💳 Payment:</b>
+      ${escapeHTML(order.payment || "N/A")}
+
+      <br>
+
+      <b>💰 Total:</b>
+      ₹${Number(order.total || 0).toFixed(2)}
+
+  `;
+
+
+  /*
+    MEDICINES
+  */
 
   if(
     Array.isArray(order.items) &&
     order.items.length
   ){
 
-    medicines =
-      order.items.map(item=>{
+    html += `
 
-        const name =
-          item.name ||
-          item.medicineName ||
-          item.title ||
-          "Medicine";
+      <div class="medicines">
 
-
-        const qty =
-          Number(
-            item.quantity ||
-            item.qty ||
-            1
-          );
-
-
-        const price =
-          Number(
-            item.price ||
-            item.medicinePrice ||
-            0
-          );
-
-
-        return `
-
-          <div class="medicine">
-
-            <span>
-
-              ${escapeHTML(name)}
-              × ${qty}
-
-            </span>
-
-            <b>
-              ₹${price.toFixed(2)}
-            </b>
-
-          </div>
-
-        `;
-
-      }).join("");
-
-  }else{
-
-    medicines = `
-
-      <div class="medicine">
-
-        <span>
-          Medicines
-        </span>
-
-        <span>
-          Order details
-        </span>
-
-      </div>
+        <b>💊 Medicines</b>
 
     `;
+
+
+    order.items.forEach(item=>{
+
+      const name =
+        item.name ||
+        item.medicineName ||
+        item.title ||
+        "Medicine";
+
+
+      const qty =
+        Number(
+          item.quantity ||
+          item.qty ||
+          item.count ||
+          1
+        );
+
+
+      const price =
+        Number(
+          item.price ||
+          item.medicinePrice ||
+          item.amount ||
+          0
+        );
+
+
+      html += `
+
+        <div class="medicine-row">
+
+          <span>
+            ${escapeHTML(name)}
+            × ${qty}
+          </span>
+
+          <b>
+            ₹${(price * qty).toFixed(2)}
+          </b>
+
+        </div>
+
+      `;
+
+    });
+
+
+    html += `</div>`;
 
   }
 
 
-  result.innerHTML = `
+  html += `
 
-    <div class="status-head">
-
-      Current Status
-
-      <b>
-        ${escapeHTML(status)}
-      </b>
-
-      <small>
-
-        Order ID:
-        ${escapeHTML(
-          order.orderId ||
-          order.id ||
-          ""
-        )}
-
-      </small>
-
-    </div>
-
-
-    <div class="timeline">
-
-      ${timeline}
-
-    </div>
-
-
-    <div class="details">
-
-      <b>👤 Customer</b>
-
-      <div class="details-box">
-
-        ${escapeHTML(
-          order.name ||
-          order.customerName ||
-          "Not available"
-        )}
-
-      </div>
-
-
-      <br>
-
-
-      <b>📱 Mobile</b>
-
-      <div class="details-box">
-
-        ${escapeHTML(
-          order.phone ||
-          order.mobile ||
-          "Not available"
-        )}
-
-      </div>
-
-
-      <br>
-
-
-      <b>📍 Delivery Address</b>
-
-      <div class="details-box">
-
-        ${escapeHTML(
-          order.address ||
-          "Not available"
-        )}
-
-      </div>
-
-
-      <br>
-
-
-      <b>💊 Medicines</b>
-
-      <div class="details-box">
-
-        ${medicines}
-
-      </div>
-
-
-      <br>
-
-
-      <b>💳 Payment</b>
-
-      <div class="details-box">
-
-        ${escapeHTML(
-          order.payment ||
-          order.paymentMethod ||
-          "Not available"
-        )}
-
-      </div>
-
-
-      <br>
-
-
-      <b>💰 Total</b>
-
-      <div class="details-box">
-
-        ₹${Number(
-          order.total || 0
-        ).toFixed(2)}
-
-      </div>
+      <button
+        class="refresh"
+        onclick="location.reload()"
+      >
+        🔄 Refresh Tracking
+      </button>
 
     </div>
 
   `;
 
+
+  result.innerHTML = html;
+
 }
 
 
-/* =========================
+/* =========================================
    ESCAPE HTML
-========================= */
+========================================= */
 
 function escapeHTML(value){
 
-  return String(value ?? "")
+  return String(value)
 
     .replaceAll("&","&amp;")
 
@@ -924,9 +756,17 @@ function escapeHTML(value){
 }
 
 
-/* =========================
+/* =========================================
+   MAKE GLOBAL
+========================================= */
+
+window.trackOrder =
+  trackOrder;
+
+
+/* =========================================
    AUTO TRACK FROM URL
-========================= */
+========================================= */
 
 const params =
   new URLSearchParams(
@@ -934,35 +774,22 @@ const params =
   );
 
 
-const urlOrderId =
+const urlId =
   params.get("id");
 
 
-if(urlOrderId){
+if(urlId){
 
-  document.getElementById(
-    "orderId"
-  ).value =
-    urlOrderId.toUpperCase();
-
+  document.getElementById("orderId").value =
+    urlId.toUpperCase();
 
   /*
-    Page open hote hi order
-    automatically track hoga.
+    Automatically track order
   */
 
-  setTimeout(()=>{
-
-    const form =
-      document.querySelector("form");
-
-    if(form){
-
-      form.requestSubmit();
-
-    }
-
-  },300);
+  trackOrder(
+    new Event("submit")
+  );
 
 }
 
