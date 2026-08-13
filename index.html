@@ -354,6 +354,10 @@ section{
 }
 
 .search-result-item{
+  width:100%;
+  text-align:left;
+  font:inherit;
+  cursor:pointer;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -378,6 +382,14 @@ section{
   border-radius:20px;
   padding:5px 9px;
   white-space:nowrap;
+}
+
+
+.search-result-price{
+  margin-top:3px;
+  font-size:12px;
+  font-weight:700;
+  color:#148d9e;
 }
 
 .search-empty{
@@ -1486,13 +1498,6 @@ desc:"Feminine hygiene and personal care products.",
 image:"https://images.unsplash.com/photo-1556229010-aa3f7ff66b2b?auto=format&fit=crop&w=900&q=85"
 },
 
-{
-slug:"period-care",
-name:"Period Care",
-icon:"🩷",
-desc:"Period care and menstrual hygiene products.",
-image:"https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=900&q=85"
-},
 
 {
 slug:"fracture-care",
@@ -1556,22 +1561,7 @@ image:"https://images.unsplash.com/photo-1603398938378-e54eab446446?auto=format&
 
 /* MEDICINE SEARCH */
 
-const medicines = [
-  {name:"Paracetamol 500mg", category:"Wound & Fever", slug:"wound-fever"},
-  {name:"Azithromycin 500mg", category:"Antibiotic", slug:"antibiotic"},
-  {name:"Cough Syrup", category:"Cough & Cold", slug:"cough-cold"},
-  {name:"Cold Relief Tablets", category:"Cough & Cold", slug:"cough-cold"},
-  {name:"Pain Relief Tablet", category:"Cut & Pain", slug:"cut-pain"},
-  {name:"Antiseptic Cream", category:"Sanitary & Antiseptic", slug:"sanitary-antiseptic"},
-  {name:"Fever Relief Medicine", category:"Wound & Fever", slug:"wound-fever"},
-  {name:"Baby Care Lotion", category:"Baby Care", slug:"baby-care"},
-  {name:"Eye Drops", category:"Eye Care", slug:"eye-care"},
-  {name:"Multivitamin Tablets", category:"Multi Vitamin", slug:"multi-vitamin"},
-  {name:"Calcium Tablets", category:"Calcium & Iron", slug:"calcium-iron"},
-  {name:"Iron Tablets", category:"Calcium & Iron", slug:"calcium-iron"},
-  {name:"Acidity Relief", category:"Gastric & Acidity", slug:"gastric-acidity"},
-  {name:"Diabetes Care", category:"Diabetes & BP Care", slug:"diabetes-bp-care"}
-];
+let medicines = [];
 
 function renderCategoryBox(){
 
@@ -1583,6 +1573,7 @@ function renderCategoryBox(){
       <button
         type="button"
         class="category-box-item"
+        data-slug="${c.slug}"
         onclick="selectSearchCategory('${c.slug}')"
       >
         <span class="box-icon">${c.icon}</span>
@@ -1593,13 +1584,20 @@ function renderCategoryBox(){
   }).join("");
 }
 
+function openMedicineInCategory(name, slug){
+  const params=new URLSearchParams();
+  params.set("search",decodeURIComponent(name));
+  if(slug) params.set("cat",decodeURIComponent(slug));
+  window.location.href="category.html?"+params.toString();
+}
+
 function renderSearchResults(query, categorySlug=""){
 
   const results=document.getElementById("searchResults");
   const list=document.getElementById("searchResultsList");
   const value=(query || "").trim().toLowerCase();
 
-  let matches=medicines.filter(function(m){
+  let matches=(medicines || []).filter(function(m){
 
     const textMatch =
       !value ||
@@ -1628,10 +1626,19 @@ function renderSearchResults(query, categorySlug=""){
   list.innerHTML=matches.map(function(m){
 
     return `
-      <div class="search-result-item">
-        <div class="search-result-name">${m.name}</div>
-        <div class="search-result-category">${m.category}</div>
-      </div>
+      <button
+        type="button"
+        class="search-result-item"
+        onclick="openMedicineInCategory('${encodeURIComponent(m.name)}','${encodeURIComponent(m.slug || "")}')"
+      >
+        <div>
+          <div class="search-result-name">${escapeSearchText(m.name)}</div>
+          ${m.price !== undefined && m.price !== null && m.price !== ""
+            ? `<div class="search-result-price">₹${Number(m.price).toLocaleString("en-IN")}</div>`
+            : ""}
+        </div>
+        <div class="search-result-category">${escapeSearchText(m.category)}</div>
+      </button>
     `;
 
   }).join("");
@@ -1645,8 +1652,7 @@ function selectSearchCategory(slug){
 
   if(!category) return;
 
-  document.getElementById("medicineSearch").value="";
-  renderSearchResults("", slug);
+  window.location.href="category.html?cat="+encodeURIComponent(slug);
 }
 
 document.addEventListener("DOMContentLoaded",function(){
@@ -1725,6 +1731,110 @@ window.location.href=
 
 renderProducts();
 
+</script>
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDOY8sEtMapyVhiQdSAfCrb699dsgFmMC",
+  authDomain: "medipoint-f4616.firebaseapp.com",
+  projectId: "medipoint-f4616",
+  storageBucket: "medipoint-f4616.firebasestorage.app",
+  messagingSenderId: "180492377336",
+  appId: "1:180492377336:web:5f6566ccd6663ed43a12f0d",
+  measurementId: "G-C8X32M4CKF"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+function categoryDisplay(value){
+  const map = {
+    "antibiotic":"Antibiotic",
+    "cough-cold":"Cough & Cold",
+    "cut-pain":"Cut & Pain",
+    "wound-fever":"Wound & Fever",
+    "baby-care":"Baby Care",
+    "eye-care":"Eye Care",
+    "skin-hair-care":"Skin & Hair Care",
+    "itching":"Itching",
+    "allergy":"Allergy",
+    "multi-vitamin":"Multi Vitamin",
+    "sexual-wellness":"Sexual Wellness",
+    "feminine-care-hygiene":"Feminine Care / Hygiene",
+    "fracture-care":"Fracture Care",
+    "sanitary-antiseptic":"Sanitary & Antiseptic",
+    "baby-food":"Baby Food",
+    "gastric-acidity":"Gastric & Acidity",
+    "diabetes-bp-care":"Diabetes & BP Care",
+    "calcium-iron":"Calcium & Iron",
+    "first-aid-medical-supplies":"First Aid & Medical Supplies"
+  };
+
+  const raw=String(value || "").trim();
+  return map[raw] || raw || "Medicine";
+}
+
+function refreshSearchResults(){
+  const search=document.getElementById("medicineSearch");
+  const active=document.querySelector(".category-box-item.active");
+  const activeSlug=active ? active.dataset.slug : "";
+  renderSearchResults(search.value, activeSlug);
+}
+
+window.escapeSearchText=function(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+};
+
+onSnapshot(
+  query(collection(db,"products"),orderBy("createdAt","desc")),
+  (snapshot)=>{
+    medicines=snapshot.docs.map(doc=>{
+      const p=doc.data();
+      return {
+        id:doc.id,
+        name:p.name || "Medicine",
+        category:p.category || "",
+        price:p.price,
+        desc:p.desc || p.description || "",
+        image:p.image || "",
+        categoryName:categoryDisplay(p.category),
+        slug:String(p.category || "").toLowerCase().trim()
+      };
+    }).map(p=>({
+      ...p,
+      category:p.categoryName
+    }));
+
+    renderSearchResults(
+      document.getElementById("medicineSearch").value,
+      document.querySelector(".category-box-item.active")?.dataset.slug || ""
+    );
+  },
+  (error)=>{
+    console.error("Firebase products error:",error);
+    const list=document.getElementById("searchResultsList");
+    const results=document.getElementById("searchResults");
+    if(list && results){
+      results.classList.add("show");
+      list.innerHTML='<div class="search-empty">Medicine load nahi ho paayi. Firebase connection check karo.</div>';
+    }
+  }
+);
 </script>
 
 </body>
