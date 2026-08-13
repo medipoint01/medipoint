@@ -15,12 +15,16 @@
 <div id="result" class="result"></div>
 <div class="back"><a href="order.html">← Back to Order Page</a></div>
 </section></main>
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getFirestore, doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyDOY8sEtMapyVhiQdSAfCrb699dsgFmMC",authDomain:"medipoint-f4616.firebaseapp.com",projectId:"medipoint-f4616",storageBucket:"medipoint-f4616.firebasestorage.app",messagingSenderId:"180492377336",appId:"1:180492377336:web:5f6566ccd6663ed43a12f0d",measurementId:"G-C8X32M4CKF"};
+const app=initializeApp(firebaseConfig);const db=getFirestore(app);
 const steps=["Order Placed","Order Confirmed","Preparing","Out for Delivery","Delivered"];
-function track(e){e.preventDefault();let id=document.getElementById("id").value.trim().toUpperCase(),raw=localStorage.getItem("mediPointOrder_"+id),r=document.getElementById("result");if(!raw){r.innerHTML='<div class="error">❌ Order not found.<br>Please check your Order ID.</div>';return}let o=JSON.parse(raw);render(o)}
+async function track(e){e.preventDefault();const id=document.getElementById("id").value.trim().toUpperCase(),r=document.getElementById("result");if(!id)return;r.innerHTML='<div class="status-head">⏳ Loading order...</div>';try{const snap=await getDoc(doc(db,"orders",id));if(!snap.exists()){r.innerHTML='<div class="error">❌ Order not found.<br>Please check your Order ID.</div>';return}render({id:snap.id,...snap.data()});onSnapshot(doc(db,"orders",id),live=>{if(live.exists())render({id:live.id,...live.data()})})}catch(error){console.error(error);r.innerHTML='<div class="error">❌ Firebase error.<br>'+esc(error.message)+'</div>'}}
 function render(o){let current=Math.max(0,steps.indexOf(o.status)),html=`<div class="status-head">Current Status<b>${o.status}</b><small>Order ID: ${o.id}</small></div><div class="timeline">`;steps.forEach((s,i)=>{let active=i<=current;html+=`<div class="step ${active?"active":""}"><div class="dot">${active?"✓":i+1}</div>${i<steps.length-1?'<div class="line"></div>':""}<div><h3>${s}</h3><p>${i===current?"Current order status":"Order progress"}</p></div></div>`});html+=`</div><div class="details"><b>Customer:</b> ${esc(o.name)}<br><b>Mobile:</b> ${esc(o.phone)}<br><b>Payment:</b> ${esc(o.payment)}<br><b>Total:</b> ₹${Number(o.total||0).toFixed(2)}</div>`;document.getElementById("result").innerHTML=html}
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-const q=new URLSearchParams(location.search).get("id");if(q){document.getElementById("id").value=q;let x=localStorage.getItem("mediPointOrder_"+q.toUpperCase());if(x)render(JSON.parse(x))}
+const q=new URLSearchParams(location.search).get("id");if(q){document.getElementById("id").value=q.toUpperCase();track(new Event("submit"))}
 </script>
 </body>
 </html>
