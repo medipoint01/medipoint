@@ -243,6 +243,150 @@ section{
   font-size:14px;
 }
 
+
+/* SEARCH + CATEGORY BOX */
+
+.medicine-search-area{
+  width:90%;
+  margin:0 auto 28px;
+  padding:18px;
+  background:#fff;
+  border:1px solid #e1eded;
+  border-radius:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,.06);
+}
+
+.medicine-search{
+  position:relative;
+  margin-bottom:16px;
+}
+
+.medicine-search input{
+  width:100%;
+  height:48px;
+  padding:0 48px 0 16px;
+  border:1px solid #d9e7e8;
+  border-radius:10px;
+  outline:none;
+  font-size:14px;
+  color:#173f46;
+  background:#f9fcfc;
+}
+
+.medicine-search input:focus{
+  border-color:#148d9e;
+  background:#fff;
+  box-shadow:0 0 0 3px rgba(20,141,158,.08);
+}
+
+.medicine-search-icon{
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:20px;
+  pointer-events:none;
+}
+
+.category-box-title{
+  font-size:14px;
+  font-weight:700;
+  color:#174f58;
+  margin-bottom:12px;
+}
+
+.category-box-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.category-box-item{
+  border:1px solid #e1eded;
+  background:#f8fbfb;
+  border-radius:10px;
+  min-height:72px;
+  padding:8px 5px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  cursor:pointer;
+  transition:.2s;
+  color:#34595f;
+}
+
+.category-box-item:hover,
+.category-box-item.active{
+  background:#eaf8f9;
+  border-color:#8fcfd5;
+}
+
+.category-box-item .box-icon{
+  font-size:23px;
+  line-height:1;
+  margin-bottom:6px;
+}
+
+.category-box-item span:last-child{
+  font-size:11px;
+  line-height:1.2;
+  font-weight:700;
+}
+
+.search-results{
+  display:none;
+  margin-top:16px;
+  border-top:1px solid #e8eeee;
+  padding-top:14px;
+}
+
+.search-results.show{
+  display:block;
+}
+
+.search-results-title{
+  font-size:13px;
+  font-weight:700;
+  color:#174f58;
+  margin-bottom:10px;
+}
+
+.search-result-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 12px;
+  border:1px solid #e5eeee;
+  border-radius:9px;
+  margin-bottom:8px;
+  background:#fff;
+}
+
+.search-result-name{
+  font-size:13px;
+  font-weight:700;
+  color:#174f58;
+}
+
+.search-result-category{
+  font-size:11px;
+  color:#148d9e;
+  background:#eaf8f9;
+  border-radius:20px;
+  padding:5px 9px;
+  white-space:nowrap;
+}
+
+.search-empty{
+  font-size:12px;
+  color:#7b898b;
+  text-align:center;
+  padding:12px 0 4px;
+}
+
 /* CATEGORIES */
 
 .products{
@@ -251,8 +395,8 @@ section{
 
 .product-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
+  grid-template-columns:repeat(6,1fr);
+  gap:12px;
 }
 
 .product{
@@ -271,7 +415,7 @@ section{
 }
 
 .product-img{
-  height:175px;
+  height:115px;
   background:#f0f9fa;
   overflow:hidden;
   display:grid;
@@ -285,35 +429,36 @@ section{
 }
 
 .product-info{
-  padding:16px;
+  padding:10px;
   flex:1;
   display:flex;
   flex-direction:column;
 }
 
 .product h3{
-  font-size:16px;
-  margin-bottom:7px;
+  font-size:14px;
+  margin-bottom:4px;
   color:#174f58;
 }
 
 .product p{
-  font-size:12px;
+  font-size:10px;
   color:#77878a;
-  line-height:1.5;
-  margin-bottom:12px;
+  line-height:1.3;
+  margin-bottom:8px;
 }
 
 .view-category-btn{
   width:100%;
   margin-top:auto;
-  padding:10px;
+  padding:7px;
   border:0;
   border-radius:7px;
   background:#148d9e;
   color:#fff;
   font-weight:700;
   cursor:pointer;
+  font-size:11px;
 }
 
 .view-category-btn:hover{
@@ -345,7 +490,7 @@ section{
   border-radius:15px;
 
   background:
-  url("https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=85")
+  url("my-photo.png")
   center/cover;
 }
 
@@ -544,6 +689,11 @@ footer{
 
 /* MOBILE */
 
+/* OLD CATEGORY CARDS HIDDEN - SEARCH/CATEGORY BOX IS USED */
+.product-grid{
+  display:none;
+}
+
 @media(max-width:900px){
 
   nav{
@@ -559,7 +709,8 @@ footer{
   }
 
   .product-grid{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
   }
 
   .footer-grid{
@@ -584,10 +735,125 @@ footer{
     margin-top:-15px;
   }
 
+
+  .medicine-search-area{
+    width:100%;
+    padding:12px;
+    margin-bottom:22px;
+    border-radius:12px;
+  }
+
+  .medicine-search input{
+    height:44px;
+    font-size:13px;
+    padding-left:13px;
+  }
+
+  .category-box-title{
+    font-size:13px;
+    margin-bottom:10px;
+  }
+
+  .category-box-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:8px;
+  }
+
+  .category-box-item{
+    min-height:65px;
+    border-radius:9px;
+    padding:6px 2px;
+  }
+
+  .category-box-item .box-icon{
+    font-size:20px;
+    margin-bottom:4px;
+  }
+
+  .category-box-item span:last-child{
+    font-size:9px;
+  }
+
+  /* MOBILE CATEGORIES - COMPACT, CLEAN, BLINKIT-STYLE */
+  .products{
+    padding:42px 12px 52px;
+  }
+
+  .products .title{
+    text-align:left;
+    margin:0 4px 18px;
+  }
+
+  .products .title h2{
+    font-size:23px;
+    margin-bottom:5px;
+  }
+
+  .products .title p{
+    font-size:12px;
+    line-height:1.4;
+  }
+
+  .product-grid{
+    display:none;
+  }
+
+  .product{
+    min-width:0;
+    border:0;
+    border-radius:0;
+    background:transparent;
+    overflow:visible;
+    box-shadow:none;
+  }
+
+  .product:hover{
+    transform:none;
+    box-shadow:none;
+  }
+
+  .product-img{
+    width:100%;
+    height:auto;
+    aspect-ratio:1/1;
+    border-radius:12px;
+    background:#f5f8f8;
+    overflow:hidden;
+  }
+
+  .product-img img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+
+  .product-info{
+    padding:7px 1px 0;
+    text-align:center;
+  }
+
+  .product h3{
+    font-size:11px;
+    line-height:1.25;
+    font-weight:700;
+    color:#174f58;
+    margin:0;
+    min-height:28px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+  }
+
+  .product p,
+  .view-category-btn,
+  .no-products{
+    display:none;
+  }
+
   .grid,
   .about-wrap,
   .contact-wrap,
-  .product-grid,
   .footer-grid{
     grid-template-columns:1fr;
   }
@@ -761,8 +1027,31 @@ Healthcare<br>Products
 <h2>Healthcare Categories</h2>
 
 <p>
-Choose a category to explore medicines and healthcare products.
+Choose a category or search for a medicine.
 </p>
+
+</div>
+
+<div class="medicine-search-area">
+
+  <div class="medicine-search">
+    <input
+      type="search"
+      id="medicineSearch"
+      placeholder="Search medicine..."
+      autocomplete="off"
+    >
+    <span class="medicine-search-icon">🔍</span>
+  </div>
+
+  <div class="category-box-title">Categories</div>
+
+  <div id="categoryBox" class="category-box-grid"></div>
+
+  <div id="searchResults" class="search-results">
+    <div class="search-results-title">Medicine Results</div>
+    <div id="searchResultsList"></div>
+  </div>
 
 </div>
 
@@ -1262,6 +1551,115 @@ image:"https://images.unsplash.com/photo-1603398938378-e54eab446446?auto=format&
 }
 
 ];
+
+
+
+/* MEDICINE SEARCH */
+
+const medicines = [
+  {name:"Paracetamol 500mg", category:"Wound & Fever", slug:"wound-fever"},
+  {name:"Azithromycin 500mg", category:"Antibiotic", slug:"antibiotic"},
+  {name:"Cough Syrup", category:"Cough & Cold", slug:"cough-cold"},
+  {name:"Cold Relief Tablets", category:"Cough & Cold", slug:"cough-cold"},
+  {name:"Pain Relief Tablet", category:"Cut & Pain", slug:"cut-pain"},
+  {name:"Antiseptic Cream", category:"Sanitary & Antiseptic", slug:"sanitary-antiseptic"},
+  {name:"Fever Relief Medicine", category:"Wound & Fever", slug:"wound-fever"},
+  {name:"Baby Care Lotion", category:"Baby Care", slug:"baby-care"},
+  {name:"Eye Drops", category:"Eye Care", slug:"eye-care"},
+  {name:"Multivitamin Tablets", category:"Multi Vitamin", slug:"multi-vitamin"},
+  {name:"Calcium Tablets", category:"Calcium & Iron", slug:"calcium-iron"},
+  {name:"Iron Tablets", category:"Calcium & Iron", slug:"calcium-iron"},
+  {name:"Acidity Relief", category:"Gastric & Acidity", slug:"gastric-acidity"},
+  {name:"Diabetes Care", category:"Diabetes & BP Care", slug:"diabetes-bp-care"}
+];
+
+function renderCategoryBox(){
+
+  const box=document.getElementById("categoryBox");
+
+  box.innerHTML=categories.map(function(c){
+
+    return `
+      <button
+        type="button"
+        class="category-box-item"
+        onclick="selectSearchCategory('${c.slug}')"
+      >
+        <span class="box-icon">${c.icon}</span>
+        <span>${c.name}</span>
+      </button>
+    `;
+
+  }).join("");
+}
+
+function renderSearchResults(query, categorySlug=""){
+
+  const results=document.getElementById("searchResults");
+  const list=document.getElementById("searchResultsList");
+  const value=(query || "").trim().toLowerCase();
+
+  let matches=medicines.filter(function(m){
+
+    const textMatch =
+      !value ||
+      m.name.toLowerCase().includes(value) ||
+      m.category.toLowerCase().includes(value);
+
+    const categoryMatch =
+      !categorySlug || m.slug===categorySlug;
+
+    return textMatch && categoryMatch;
+  });
+
+  if(!value && !categorySlug){
+    results.classList.remove("show");
+    list.innerHTML="";
+    return;
+  }
+
+  results.classList.add("show");
+
+  if(!matches.length){
+    list.innerHTML='<div class="search-empty">No medicine found.</div>';
+    return;
+  }
+
+  list.innerHTML=matches.map(function(m){
+
+    return `
+      <div class="search-result-item">
+        <div class="search-result-name">${m.name}</div>
+        <div class="search-result-category">${m.category}</div>
+      </div>
+    `;
+
+  }).join("");
+}
+
+function selectSearchCategory(slug){
+
+  const category=categories.find(function(c){
+    return c.slug===slug;
+  });
+
+  if(!category) return;
+
+  document.getElementById("medicineSearch").value="";
+  renderSearchResults("", slug);
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+
+  renderCategoryBox();
+
+  const search=document.getElementById("medicineSearch");
+
+  search.addEventListener("input",function(){
+    renderSearchResults(this.value);
+  });
+
+});
 
 
 /* RENDER CATEGORIES */
