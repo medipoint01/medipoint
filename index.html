@@ -133,36 +133,69 @@
         .dots { text-align: center; padding: 10px 0; color: #d1d5db; }
         .dots .active { color: var(--primary-blue); }
 
-        /* --- Icon Nav Categories --- */
-        .icon-categories { display: flex; justify-content: space-around; padding: 20px 10px; text-align: center; }
-        .icon-cat-item { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 20%; cursor: pointer; text-decoration: none; }
-        .icon-circle {
-            width: 45px; height: 45px; background-color: var(--primary-blue); color: var(--white);
-            border-radius: 12px 12px 0 12px; display: flex; justify-content: center; align-items: center;
-            font-size: 20px; transform: rotate(-10deg); transition: transform 0.2s;
+        /* --- Quick Categories --- */
+        .icon-categories {
+            display:grid; grid-template-columns:repeat(5,1fr); gap:8px;
+            padding:18px 8px 16px; text-align:center; background:#fff;
         }
-        .icon-cat-item:active .icon-circle { transform: scale(0.9) rotate(-10deg); }
-        .icon-circle i { transform: rotate(10deg); }
-        .icon-cat-item span { font-size: 11px; font-weight: 500; color: var(--text-dark); line-height: 1.2; pointer-events: none; }
+        .icon-cat-item {
+            display:flex; flex-direction:column; align-items:center; gap:7px;
+            width:100%; cursor:pointer; text-decoration:none; min-width:0;
+        }
+        .icon-circle {
+            width:44px; height:44px; background:linear-gradient(145deg,#0b7896,#0b5f78);
+            color:#fff; border-radius:14px 14px 5px 14px;
+            display:flex; justify-content:center; align-items:center;
+            font-size:18px; transform:rotate(-7deg); transition:.2s;
+            box-shadow:0 5px 12px rgba(8,107,140,.16);
+        }
+        .icon-cat-item:active .icon-circle { transform:scale(.92) rotate(-7deg); }
+        .icon-circle i { transform:rotate(7deg); }
+        .icon-cat-item span {
+            font-size:10px; font-weight:600; color:var(--text-dark);
+            line-height:1.15; pointer-events:none;
+        }
+        .icon-cat-item.more .icon-circle { background:linear-gradient(145deg,#1692a2,#127386); }
 
-        /* --- Shop by Category Section --- */
-        .shop-section { padding: 20px; }
-        .section-title { text-align: center; color: var(--primary-blue); font-size: 18px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
-        .section-title::before, .section-title::after { content: ''; height: 1px; width: 30px; background-color: var(--primary-blue); margin: 0 10px; }
+        /* --- Quick Services --- */
+        .quick-services { padding:18px 14px 22px; background:linear-gradient(180deg,#f8fcfd 0%,#eef8f9 100%); }
+        .service-head { text-align:center; margin-bottom:14px; }
+        .service-head h2 { margin:0; color:#174f58; font-size:18px; }
+        .service-head p { margin:5px 0 0; color:#7c8c8f; font-size:11px; }
+        .service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
+        .service-card {
+            text-decoration:none; background:#fff; border:1px solid #dfeef0;
+            border-radius:14px; padding:14px 9px; text-align:center;
+            box-shadow:0 5px 16px rgba(18,63,71,.06);
+            transition:transform .18s, box-shadow .18s;
+        }
+        .service-card:active { transform:scale(.97); }
+        .service-card .service-icon {
+            width:38px; height:38px; margin:0 auto 8px; border-radius:12px;
+            display:grid; place-items:center; background:#e8f7f8; color:#148d9e; font-size:17px;
+        }
+        .service-card strong { display:block; color:#173f46; font-size:11px; }
+        .service-card span { display:block; margin-top:4px; color:#829094; font-size:9px; line-height:1.25; }
 
-        .product-grid-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
-        .product-grid-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-
-        .category-card { background-color: var(--bg-light); border-radius: 12px; padding: 15px 10px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: background 0.2s; text-decoration: none; }
-        .category-card:active { background-color: #e5edf0; }
-        .card-horizontal { flex-direction: row; justify-content: space-between; padding: 15px; }
-        .card-horizontal .card-text { text-align: left; pointer-events: none; }
-
-        .category-card img { width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; pointer-events: none; }
-        .card-horizontal img { width: 50px; height: 50px; margin-bottom: 0; order: -1; }
-
-        .category-card h3 { font-size: 12px; font-weight: 600; color: var(--text-dark); margin-bottom: 5px; line-height: 1.3; pointer-events: none; }
-        .view-all { font-size: 11px; color: var(--primary-blue); text-decoration: none; font-weight: 500; pointer-events: none; }
+        /* --- More Categories Sheet --- */
+        .category-sheet {
+            position:fixed; left:50%; bottom:0; transform:translate(-50%,110%);
+            width:100%; max-width:414px; background:#fff; z-index:80;
+            border-radius:22px 22px 0 0; padding:18px 16px 24px;
+            box-shadow:0 -12px 35px rgba(0,0,0,.18); transition:transform .28s ease;
+        }
+        .category-sheet.active { transform:translate(-50%,0); }
+        .sheet-handle { width:42px; height:4px; border-radius:20px; background:#d5e3e5; margin:0 auto 14px; }
+        .sheet-title { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+        .sheet-title h3 { margin:0; color:#174f58; font-size:17px; }
+        .sheet-close { width:34px; height:34px; border:0; border-radius:10px; background:#eef7f8; color:#17606a; font-size:18px; cursor:pointer; }
+        .all-cat-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; max-height:58vh; overflow:auto; padding-right:2px; }
+        .all-cat-link {
+            display:flex; align-items:center; gap:8px; text-decoration:none; background:#f7fbfb;
+            border:1px solid #e1eeee; border-radius:11px; padding:10px 9px; color:#234f56;
+            font-size:10px; font-weight:600;
+        }
+        .all-cat-link i { color:#148d9e; width:18px; text-align:center; }
 
         /* --- Bottom Navigation --- */
         .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 414px; background-color: var(--white); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid var(--border-color); z-index: 40; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
@@ -286,70 +319,110 @@
             <i class="fa-solid fa-circle" style="font-size: 6px;"></i>
         </div>
 
-        <!-- Quick Icon Categories (All linked to category.html) -->
+        <!-- Quick Category Strip -->
         <section class="icon-categories">
-            <a href="category.html?category=prescription-medicines" class="icon-cat-item">
-                <div class="icon-circle"><i class="fa-solid fa-prescription-bottle-medical"></i></div>
-                <span>Prescription<br>Medicines</span>
-            </a>
-            <a href="category.html?category=otc-medicines" class="icon-cat-item">
+            <a href="category.html?category=antibiotic" class="icon-cat-item">
                 <div class="icon-circle"><i class="fa-solid fa-capsules"></i></div>
-                <span>OTC<br>Medicines</span>
+                <span>Antibiotic</span>
+            </a>
+            <a href="category.html?category=cough-cold" class="icon-cat-item">
+                <div class="icon-circle"><i class="fa-solid fa-temperature-half"></i></div>
+                <span>Cough &amp;<br>Cold</span>
             </a>
             <a href="category.html?category=multi-vitamin" class="icon-cat-item">
-                <div class="icon-circle"><i class="fa-solid fa-bottle-droplet"></i></div>
-                <span>Vitamins &<br>Supplements</span>
+                <div class="icon-circle"><i class="fa-solid fa-pills"></i></div>
+                <span>Multi<br>Vitamin</span>
             </a>
             <a href="category.html?category=baby-care" class="icon-cat-item">
                 <div class="icon-circle"><i class="fa-solid fa-baby"></i></div>
-                <span>Baby Care</span>
+                <span>Baby<br>Care</span>
             </a>
-            <a href="category.html?category=skin-hair-care" class="icon-cat-item">
-                <div class="icon-circle"><i class="fa-solid fa-pump-soap"></i></div>
-                <span>Personal<br>Care</span>
+            <a href="#" id="quickMore" class="icon-cat-item more">
+                <div class="icon-circle"><i class="fa-solid fa-grip"></i></div>
+                <span>More<br>Categories</span>
             </a>
         </section>
 
-        <!-- Shop By Category (All linked to category.html) -->
-        <section class="shop-section">
-            <h2 class="section-title">Shop by Category</h2>
-            
-            <div class="product-grid-top">
-                <a href="category.html" class="category-card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/822/822108.png" alt="Prescription">
-                    <h3>Prescription<br>Medicines</h3>
-                    <span class="view-all">View All &rarr;</span>
-                </a>
-                <a href="category.html" class="category-card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3004/3004128.png" alt="OTC">
-                    <h3>OTC<br>Medicines</h3>
-                    <span class="view-all">View All &rarr;</span>
-                </a>
-                <a href="category.html" class="category-card">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="Vitamins">
-                    <h3>Vitamins &<br>Supplements</h3>
-                    <span class="view-all">View All &rarr;</span>
-                </a>
+        <!-- Useful services instead of duplicate category cards -->
+        <section class="quick-services">
+            <div class="service-head">
+                <h2>Healthcare Made Simple</h2>
+                <p>Everything you need, right at your fingertips</p>
             </div>
-
-            <div class="product-grid-bottom">
-                <a href="category.html" class="category-card card-horizontal">
-                    <div class="card-text">
-                        <h3>Baby Care</h3>
-                        <span class="view-all">View All &rarr;</span>
-                    </div>
-                    <img src="https://cdn-icons-png.flaticon.com/512/2747/2747441.png" alt="Baby Care">
+            <div class="service-grid">
+                <a href="order.html" class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <strong>Order Medicine</strong>
+                    <span>Place your order quickly</span>
                 </a>
-                <a href="category.html" class="category-card card-horizontal">
-                    <div class="card-text">
-                        <h3>Personal Care</h3>
-                        <span class="view-all">View All &rarr;</span>
-                    </div>
-                    <img src="https://cdn-icons-png.flaticon.com/512/2554/2554034.png" alt="Personal Care">
+                <a href="track-order.html" class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <strong>Track Order</strong>
+                    <span>Check delivery status</span>
+                </a>
+                <a href="https://wa.me/916206408813?text=Hello%20Medi%20Point,%20I%20need%20help%20with%20my%20medicine%20order." target="_blank" class="service-card">
+                    <div class="service-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <strong>WhatsApp Help</strong>
+                    <span>Chat with Medi Point</span>
                 </a>
             </div>
         </section>
+
     </main>
+
+    <!-- All Categories Sheet -->
+    <div class="category-sheet" id="categorySheet">
+        <div class="sheet-handle"></div>
+        <div class="sheet-title">
+            <h3>All Medicine Categories</h3>
+            <button class="sheet-close" id="sheetClose" type="button"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="all-cat-grid">
+            <a class="all-cat-link" href="category.html?category=antibiotic"><i class="fa-solid fa-capsules"></i>Antibiotic</a>
+            <a class="all-cat-link" href="category.html?category=cough-cold"><i class="fa-solid fa-temperature-half"></i>Cough &amp; Cold</a>
+            <a class="all-cat-link" href="category.html?category=cut-pain"><i class="fa-solid fa-bandage"></i>Cut &amp; Pain</a>
+            <a class="all-cat-link" href="category.html?category=wound-fever"><i class="fa-solid fa-kit-medical"></i>Wound &amp; Fever</a>
+            <a class="all-cat-link" href="category.html?category=baby-care"><i class="fa-solid fa-baby"></i>Baby Care</a>
+            <a class="all-cat-link" href="category.html?category=eye-care"><i class="fa-solid fa-eye"></i>Eye Care</a>
+            <a class="all-cat-link" href="category.html?category=skin-hair-care"><i class="fa-solid fa-pump-soap"></i>Skin &amp; Hair Care</a>
+            <a class="all-cat-link" href="category.html?category=itching"><i class="fa-solid fa-hand-dots"></i>Itching</a>
+            <a class="all-cat-link" href="category.html?category=allergy"><i class="fa-solid fa-head-side-cough"></i>Allergy</a>
+            <a class="all-cat-link" href="category.html?category=multi-vitamin"><i class="fa-solid fa-pills"></i>Multi Vitamin</a>
+            <a class="all-cat-link" href="category.html?category=sexual-wellness"><i class="fa-solid fa-heart"></i>Sexual Wellness</a>
+            <a class="all-cat-link" href="category.html?category=feminine-care-hygiene"><i class="fa-solid fa-person-dress"></i>Feminine Care / Hygiene</a>
+            <a class="all-cat-link" href="category.html?category=period-care"><i class="fa-solid fa-droplet"></i>Period Care</a>
+            <a class="all-cat-link" href="category.html?category=fracture-care"><i class="fa-solid fa-bone"></i>Fracture Care</a>
+            <a class="all-cat-link" href="category.html?category=sanitary-antiseptic"><i class="fa-solid fa-spray-can-sparkles"></i>Sanitary &amp; Antiseptic</a>
+            <a class="all-cat-link" href="category.html?category=baby-food"><i class="fa-solid fa-bottle-baby"></i>Baby Food</a>
+            <a class="all-cat-link" href="category.html?category=gastric-acidity"><i class="fa-solid fa-leaf"></i>Gastric &amp; Acidity</a>
+            <a class="all-cat-link" href="category.html?category=diabetes-bp-care"><i class="fa-solid fa-heart-pulse"></i>Diabetes &amp; BP Care</a>
+            <a class="all-cat-link" href="category.html?category=calcium-iron"><i class="fa-solid fa-tablets"></i>Calcium &amp; Iron</a>
+            <a class="all-cat-link" href="category.html?category=first-aid-medical-supplies"><i class="fa-solid fa-kit-medical"></i>First Aid &amp; Medical Supplies</a>
+        </div>
+    </div>
+
+
+    <script>
+        const quickMoreBtn = document.getElementById('quickMore');
+        const categorySheet = document.getElementById('categorySheet');
+        const sheetClose = document.getElementById('sheetClose');
+        if (quickMoreBtn && categorySheet) {
+            quickMoreBtn.addEventListener('click', function(e){
+                e.preventDefault();
+                categorySheet.classList.add('active');
+            });
+        }
+        if (sheetClose && categorySheet) {
+            sheetClose.addEventListener('click', function(){
+                categorySheet.classList.remove('active');
+            });
+        }
+        document.querySelectorAll('.all-cat-link').forEach(function(link){
+            link.addEventListener('click', function(){
+                categorySheet.classList.remove('active');
+            });
+        });
+    </script>
 
     <!-- Bottom Navigation (Linked with Repo files) -->
     <nav class="bottom-nav">
