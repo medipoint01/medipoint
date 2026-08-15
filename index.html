@@ -67,6 +67,21 @@
             color: var(--primary-blue);
         }
 
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 550px) {
+            .brand-logo {
+                width: 42px;
+                height: 42px;
+            }
+        }
+
         .logo-icon { font-size: 30px; }
         .logo-text h1 { font-size: 18px; font-weight: 700; line-height: 1; letter-spacing: 1px; }
         .logo-text span { font-size: 10px; letter-spacing: 3px; font-weight: 500; }
@@ -196,7 +211,7 @@
     <!-- Header -->
     <header>
         <div class="logo-container">
-            <i class="fa-solid fa-plus-square logo-icon"></i>
+            <img src="medi-point-logo.png" alt="MEDI POINT Logo" class="brand-logo">
             <div class="logo-text">
                 <h1>MEDI POINT</h1>
                 <span>— MEDICAL —</span>
@@ -268,23 +283,23 @@
 
         <!-- Quick Icon Categories (All linked to category.html) -->
         <section class="icon-categories">
-            <a href="category.html" class="icon-cat-item">
+            <a href="category.html?category=prescription-medicines" class="icon-cat-item">
                 <div class="icon-circle"><i class="fa-solid fa-prescription-bottle-medical"></i></div>
                 <span>Prescription<br>Medicines</span>
             </a>
-            <a href="category.html" class="icon-cat-item">
+            <a href="category.html?category=otc-medicines" class="icon-cat-item">
                 <div class="icon-circle"><i class="fa-solid fa-capsules"></i></div>
                 <span>OTC<br>Medicines</span>
             </a>
-            <a href="category.html" class="icon-cat-item">
+            <a href="category.html?category=multi-vitamin" class="icon-cat-item">
                 <div class="icon-circle"><i class="fa-solid fa-bottle-droplet"></i></div>
                 <span>Vitamins &<br>Supplements</span>
             </a>
-            <a href="category.html" class="icon-cat-item">
+            <a href="category.html?category=baby-care" class="icon-cat-item">
                 <div class="icon-circle"><i class="fa-solid fa-baby"></i></div>
                 <span>Baby Care</span>
             </a>
-            <a href="category.html" class="icon-cat-item">
+            <a href="category.html?category=skin-hair-care" class="icon-cat-item">
                 <div class="icon-circle"><i class="fa-solid fa-pump-soap"></i></div>
                 <span>Personal<br>Care</span>
             </a>
