@@ -468,8 +468,10 @@ const names = {
 function normalizeCategory(value){
 
   return String(value || "")
+    .normalize("NFKC")
     .toLowerCase()
     .trim()
+    .replace(/%26/g,"and")
     .replace(/&/g,"and")
     .replace(/\//g,"-")
     .replace(/\s+/g,"-")
@@ -484,35 +486,32 @@ function normalizeCategory(value){
    GET CATEGORY FROM URL
 ========================================= */
 
-const params =
-  new URLSearchParams(
-    window.location.search
-  );
+const params = new URLSearchParams(window.location.search);
 
+/* Accept both ?cat= and ?category= */
+let urlCategory = params.get("category") || params.get("cat") || "";
 
-/*
-   Ab:
-   ?cat=antibiotic
-   ?category=antibiotic
-   dono chalega
-*/
+/* Decode safely in case a full category name was passed */
+try {
+  urlCategory = decodeURIComponent(urlCategory);
+} catch (e) {}
 
-let urlCategory =
-  params.get("cat") ||
-  params.get("category") ||
-  "";
-
-
-const selectedCategory =
-  normalizeCategory(urlCategory);
-
+const selectedCategory = normalizeCategory(urlCategory);
 
 /* =========================================
    PAGE TITLE
 ========================================= */
 
+const titleAliases = {
+  "prescription-medicines": "Prescription Medicines",
+  "otc-medicines": "OTC Medicines",
+  "multi-vitamin": "Multi Vitamin",
+  "skin-hair-care": "Skin & Hair Care"
+};
+
 const categoryTitle =
   names[selectedCategory] ||
+  titleAliases[selectedCategory] ||
   urlCategory ||
   "Medicines";
 
@@ -562,58 +561,26 @@ function money(value){
 
 function categoryMatches(productCategory){
 
-  const productCat =
-    normalizeCategory(productCategory);
+  // No category in URL = show all medicines
+  if(!selectedCategory) return true;
 
-  if(!selectedCategory){
-    return true;
-  }
+  const productCat = normalizeCategory(productCategory);
 
-  /*
-     Direct match
-  */
+  // Exact normalized match
+  if(productCat === selectedCategory) return true;
 
-  if(productCat === selectedCategory){
-    return true;
-  }
+  // Common aliases used by admin data
+  const aliases = {
+    "prescription-medicines": ["prescription", "prescription-medicine", "prescription-medicines"],
+    "otc-medicines": ["otc", "otc-medicine", "otc-medicines"],
+    "multi-vitamin": ["multivitamin", "multi-vitamin", "vitamins-supplements", "vitamins-and-supplements", "supplements"],
+    "skin-hair-care": ["personal-care", "personalcare", "skin-and-hair-care", "skin-hair-care"]
+  };
 
-  /*
-     Name se match
-     Example:
-     "Cough & Cold"
-     vs
-     "cough-cold"
-  */
-
-  const selectedName =
-    normalizeCategory(
-      names[selectedCategory] ||
-      selectedCategory
-    );
-
-  if(productCat === selectedName){
-    return true;
-  }
-
-  /*
-     Extra fallback
-  */
-
-  const productName =
-    names[productCat] ||
-    productCat;
-
-  if(
-    normalizeCategory(productName) ===
-    selectedCategory
-  ){
-    return true;
-  }
-
-  return false;
+  const allowed = aliases[selectedCategory] || [selectedCategory];
+  return allowed.map(normalizeCategory).includes(productCat);
 
 }
-
 
 /* =========================================
    LOAD FIREBASE MEDICINES
