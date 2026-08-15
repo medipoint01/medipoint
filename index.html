@@ -1,1840 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MEDI POINT | Good Health, Better Life</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  color:#173f46;
-  background:#fff;
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-/* HEADER */
-
-header{
-  height:72px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 6%;
-  background:#fff;
-  border-bottom:1px solid #e5eeee;
-  position:sticky;
-  top:0;
-  z-index:20;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.brand-mark{
-  width:36px;
-  height:36px;
-  border-radius:5px;
-  background:#1692a2;
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-size:27px;
-  font-weight:700;
-}
-
-.brand h2{
-  font-size:18px;
-  letter-spacing:.5px;
-  color:#174b53;
-}
-
-.brand small{
-  display:block;
-  font-size:7px;
-  color:#77888a;
-  letter-spacing:.3px;
-  margin-top:1px;
-}
-
-nav{
-  display:flex;
-  align-items:center;
-  gap:28px;
-  font-size:13px;
-  font-weight:600;
-}
-
-nav a:hover{
-  color:#118899;
-}
-
-.call{
-  background:#13899a;
-  color:#fff;
-  border:0;
-  border-radius:6px;
-  padding:10px 22px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-  .admin-link{
-  color:#148d9e;
-  font-weight:700;
-}
-
-.admin-link:hover{
-  color:#0d7482;
-}
-.menu{
-  display:none;
-  border:0;
-  background:none;
-  font-size:27px;
-  color:#174b53;
-  cursor:pointer;
-}
-
-/* HERO */
-
-.hero{
-  min-height:375px;
-  display:flex;
-  align-items:center;
-  padding:42px 7%;
-
-  background:
-  linear-gradient(
-    90deg,
-    #e4f6f7 0%,
-    rgba(228,246,247,.94) 34%,
-    rgba(228,246,247,.38) 68%,
-    rgba(228,246,247,.15) 100%
-  ),
-  url("https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=1800&q=85");
-
-  background-size:cover;
-  background-position:center;
-}
-
-.hero-content{
-  max-width:450px;
-}
-
-.hero h1{
-  font-size:48px;
-  line-height:1.02;
-  color:#145766;
-  margin-bottom:15px;
-}
-
-.hero p{
-  font-size:14px;
-  line-height:1.6;
-  color:#3e6268;
-  max-width:320px;
-  margin-bottom:19px;
-}
-
-.actions{
-  display:flex;
-  gap:9px;
-}
-
-.btn{
-  border:0;
-  border-radius:5px;
-  padding:11px 20px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-.primary{
-  background:#148d9e;
-  color:#fff;
-}
-
-.wa{
-  background:#fff;
-  color:#167a69;
-  border:1px solid #d5e2e2;
-}
-
-/* QUICK */
-
-.quick{
-  width:90%;
-  margin:-30px auto 0;
-  position:relative;
-  z-index:5;
-  background:#fff;
-  border-radius:7px;
-  box-shadow:0 8px 28px rgba(0,0,0,.12);
-
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  overflow:hidden;
-}
-
-.quick-item{
-  min-height:92px;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  padding:12px 5px;
-  border-right:1px solid #e6eeee;
-  font-size:11px;
-  font-weight:700;
-  color:#34595f;
-  transition:.2s;
-}
-
-.quick-item:last-child{
-  border:0;
-}
-
-.quick-item:hover{
-  background:#f0fbfc;
-}
-
-.icon{
-  font-size:23px;
-  margin-bottom:6px;
-}
-
-/* SECTIONS */
-
-section{
-  padding:72px 7%;
-}
-
-.title{
-  text-align:center;
-  margin-bottom:38px;
-}
-
-.title h2{
-  font-size:31px;
-  color:#174f58;
-  margin-bottom:8px;
-}
-
-.title p{
-  color:#718387;
-  font-size:14px;
-}
-
-
-/* SEARCH + CATEGORY BOX */
-
-.medicine-search-area{
-  width:90%;
-  margin:0 auto 28px;
-  padding:18px;
-  background:#fff;
-  border:1px solid #e1eded;
-  border-radius:14px;
-  box-shadow:0 6px 20px rgba(0,0,0,.06);
-}
-
-.medicine-search{
-  position:relative;
-  margin-bottom:16px;
-}
-
-.medicine-search input{
-  width:100%;
-  height:48px;
-  padding:0 48px 0 16px;
-  border:1px solid #d9e7e8;
-  border-radius:10px;
-  outline:none;
-  font-size:14px;
-  color:#173f46;
-  background:#f9fcfc;
-}
-
-.medicine-search input:focus{
-  border-color:#148d9e;
-  background:#fff;
-  box-shadow:0 0 0 3px rgba(20,141,158,.08);
-}
-
-.medicine-search-icon{
-  position:absolute;
-  right:16px;
-  top:50%;
-  transform:translateY(-50%);
-  font-size:20px;
-  pointer-events:none;
-}
-
-.category-box-title{
-  font-size:14px;
-  font-weight:700;
-  color:#174f58;
-  margin-bottom:12px;
-}
-
-.category-box-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-
-.category-box-item{
-  border:1px solid #e1eded;
-  background:#f8fbfb;
-  border-radius:10px;
-  min-height:72px;
-  padding:8px 5px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  cursor:pointer;
-  transition:.2s;
-  color:#34595f;
-}
-
-.category-box-item:hover,
-.category-box-item.active{
-  background:#eaf8f9;
-  border-color:#8fcfd5;
-}
-
-.category-box-item .box-icon{
-  font-size:23px;
-  line-height:1;
-  margin-bottom:6px;
-}
-
-.category-box-item span:last-child{
-  font-size:11px;
-  line-height:1.2;
-  font-weight:700;
-}
-
-.search-results{
-  display:none;
-  margin-top:16px;
-  border-top:1px solid #e8eeee;
-  padding-top:14px;
-}
-
-.search-results.show{
-  display:block;
-}
-
-.search-results-title{
-  font-size:13px;
-  font-weight:700;
-  color:#174f58;
-  margin-bottom:10px;
-}
-
-.search-result-item{
-  width:100%;
-  text-align:left;
-  font:inherit;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:10px 12px;
-  border:1px solid #e5eeee;
-  border-radius:9px;
-  margin-bottom:8px;
-  background:#fff;
-}
-
-.search-result-name{
-  font-size:13px;
-  font-weight:700;
-  color:#174f58;
-}
-
-.search-result-category{
-  font-size:11px;
-  color:#148d9e;
-  background:#eaf8f9;
-  border-radius:20px;
-  padding:5px 9px;
-  white-space:nowrap;
-}
-
-
-.search-result-price{
-  margin-top:3px;
-  font-size:12px;
-  font-weight:700;
-  color:#148d9e;
-}
-
-.search-empty{
-  font-size:12px;
-  color:#7b898b;
-  text-align:center;
-  padding:12px 0 4px;
-}
-
-/* CATEGORIES */
-
-.products{
-  background:#fff;
-}
-
-.product-grid{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:12px;
-}
-
-.product{
-  border:1px solid #e1eded;
-  border-radius:12px;
-  overflow:hidden;
-  background:#fff;
-  display:flex;
-  flex-direction:column;
-  transition:.25s;
-}
-
-.product:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 28px rgba(0,0,0,.09);
-}
-
-.product-img{
-  height:115px;
-  background:#f0f9fa;
-  overflow:hidden;
-  display:grid;
-  place-items:center;
-}
-
-.product-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.product-info{
-  padding:10px;
-  flex:1;
-  display:flex;
-  flex-direction:column;
-}
-
-.product h3{
-  font-size:14px;
-  margin-bottom:4px;
-  color:#174f58;
-}
-
-.product p{
-  font-size:10px;
-  color:#77878a;
-  line-height:1.3;
-  margin-bottom:8px;
-}
-
-.view-category-btn{
-  width:100%;
-  margin-top:auto;
-  padding:7px;
-  border:0;
-  border-radius:7px;
-  background:#148d9e;
-  color:#fff;
-  font-weight:700;
-  cursor:pointer;
-  font-size:11px;
-}
-
-.view-category-btn:hover{
-  background:#0d7482;
-}
-
-.no-products{
-  text-align:center;
-  color:#7b898b;
-  display:none;
-  padding:30px;
-}
-
-/* ABOUT */
-
-.about{
-  background:#eaf8f9;
-}
-
-.about-wrap{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:45px;
-  align-items:center;
-}
-
-.about-img{
-  height:330px;
-  border-radius:15px;
-
-  background:
-  url("my-photo.png")
-  center/cover;
-}
-
-.about h2{
-  font-size:34px;
-  color:#174f58;
-  margin-bottom:15px;
-}
-
-.about p{
-  color:#64797c;
-  line-height:1.75;
-  margin-bottom:12px;
-}
-
-.ticks{
-  list-style:none;
-  margin-top:17px;
-}
-
-.ticks li{
-  margin:10px 0;
-  font-weight:700;
-  color:#345e64;
-}
-
-.ticks li:before{
-  content:"✓";
-  color:#118e9e;
-  margin-right:9px;
-}
-
-/* BLOG */
-
-#blog{
-  background:#fff;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.card{
-  background:#fff;
-  border:1px solid #e5eeee;
-  border-radius:12px;
-  padding:25px;
-  box-shadow:0 5px 18px rgba(0,0,0,.05);
-  transition:.25s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 12px 28px rgba(0,0,0,.09);
-}
-
-.card-icon{
-  width:54px;
-  height:54px;
-  border-radius:12px;
-  background:#e4f6f7;
-  display:grid;
-  place-items:center;
-  font-size:26px;
-  margin-bottom:16px;
-}
-
-.card h3{
-  font-size:18px;
-  color:#174f58;
-  margin-bottom:8px;
-}
-
-.card p{
-  font-size:13px;
-  color:#718286;
-  line-height:1.65;
-}
-
-/* CONTACT */
-
-.contact{
-  background:#f7fbfb;
-}
-
-.contact-wrap{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:25px;
-}
-
-.contact-box{
-  background:#e8f7f8;
-  border-radius:13px;
-  padding:28px;
-}
-
-.contact-box h3{
-  font-size:25px;
-  margin-bottom:16px;
-  color:#174f58;
-}
-
-.contact-box p{
-  color:#667c80;
-  line-height:1.7;
-  margin:13px 0;
-}
-
-.form{
-  background:#fff;
-  padding:28px;
-  border-radius:13px;
-}
-
-.form input,
-.form textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #dce9e9;
-  border-radius:7px;
-  margin-bottom:13px;
-  outline:none;
-}
-
-.form textarea{
-  height:120px;
-  resize:none;
-}
-
-.form button{
-  background:#148d9e;
-  color:#fff;
-  border:0;
-  padding:12px 24px;
-  border-radius:7px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-/* FOOTER */
-
-footer{
-  background:#123f47;
-  color:#fff;
-  padding:40px 7% 18px;
-}
-
-.footer-grid{
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr 1fr;
-  gap:30px;
-  margin-bottom:30px;
-}
-
-.footer-grid h3{
-  margin-bottom:12px;
-}
-
-.footer-grid p,
-.footer-grid li{
-  font-size:13px;
-  color:#b9ced1;
-  line-height:1.7;
-  list-style:none;
-  margin:5px 0;
-}
-
-.copy{
-  text-align:center;
-  border-top:1px solid #ffffff22;
-  padding-top:17px;
-  color:#aac1c4;
-  font-size:12px;
-}
-
-/* WHATSAPP */
-
-.float{
-  position:fixed;
-  right:22px;
-  bottom:22px;
-  width:53px;
-  height:53px;
-  border-radius:50%;
-  background:#25d366;
-  color:#fff;
-  display:grid;
-  place-items:center;
-  font-size:25px;
-  box-shadow:0 6px 18px #0002;
-  z-index:30;
-}
-
-/* MOBILE */
-
-/* OLD CATEGORY CARDS HIDDEN - SEARCH/CATEGORY BOX IS USED */
-.product-grid{
-  display:none;
-}
-
-@media(max-width:900px){
-
-  nav{
-    display:none;
-  }
-
-  .menu{
-    display:block;
-  }
-
-  .quick{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .product-grid{
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-  }
-
-  .footer-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:650px){
-
-  .hero{
-    min-height:500px;
-    padding:45px 7%;
-    background-position:65% center;
-  }
-
-  .hero h1{
-    font-size:39px;
-  }
-
-  .quick{
-    grid-template-columns:repeat(2,1fr);
-    margin-top:-15px;
-  }
-
-
-  .medicine-search-area{
-    width:100%;
-    padding:12px;
-    margin-bottom:22px;
-    border-radius:12px;
-  }
-
-  .medicine-search input{
-    height:44px;
-    font-size:13px;
-    padding-left:13px;
-  }
-
-  .category-box-title{
-    font-size:13px;
-    margin-bottom:10px;
-  }
-
-  .category-box-grid{
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:8px;
-  }
-
-  .category-box-item{
-    min-height:65px;
-    border-radius:9px;
-    padding:6px 2px;
-  }
-
-  .category-box-item .box-icon{
-    font-size:20px;
-    margin-bottom:4px;
-  }
-
-  .category-box-item span:last-child{
-    font-size:9px;
-  }
-
-  /* MOBILE CATEGORIES - COMPACT, CLEAN, BLINKIT-STYLE */
-  .products{
-    padding:42px 12px 52px;
-  }
-
-  .products .title{
-    text-align:left;
-    margin:0 4px 18px;
-  }
-
-  .products .title h2{
-    font-size:23px;
-    margin-bottom:5px;
-  }
-
-  .products .title p{
-    font-size:12px;
-    line-height:1.4;
-  }
-
-  .product-grid{
-    display:none;
-  }
-
-  .product{
-    min-width:0;
-    border:0;
-    border-radius:0;
-    background:transparent;
-    overflow:visible;
-    box-shadow:none;
-  }
-
-  .product:hover{
-    transform:none;
-    box-shadow:none;
-  }
-
-  .product-img{
-    width:100%;
-    height:auto;
-    aspect-ratio:1/1;
-    border-radius:12px;
-    background:#f5f8f8;
-    overflow:hidden;
-  }
-
-  .product-img img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-  }
-
-  .product-info{
-    padding:7px 1px 0;
-    text-align:center;
-  }
-
-  .product h3{
-    font-size:11px;
-    line-height:1.25;
-    font-weight:700;
-    color:#174f58;
-    margin:0;
-    min-height:28px;
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-  }
-
-  .product p,
-  .view-category-btn,
-  .no-products{
-    display:none;
-  }
-
-  .grid,
-  .about-wrap,
-  .contact-wrap,
-  .footer-grid{
-    grid-template-columns:1fr;
-  }
-
-  .about-img{
-    height:260px;
-  }
-
-  section{
-    padding:58px 6%;
-  }
-
-  .title h2{
-    font-size:27px;
-  }
-
-  nav.open{
-    display:flex;
-    position:absolute;
-    top:72px;
-    left:0;
-    width:100%;
-    background:#fff;
-    flex-direction:column;
-    align-items:stretch;
-    gap:0;
-    padding:8px 0;
-    box-shadow:0 10px 20px #0001;
-  }
-
-  nav.open a{
-    padding:14px 6%;
-    border-bottom:1px solid #eee;
-  }
-
-  nav.open .call{
-    margin:10px 6%;
-  }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medi Point Medical</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables for Theme Colors */
+        :root {
+            --primary-blue: #086b8c;
+            --secondary-green: #25a863;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f5f9fa;
+            --white: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Mobile Container */
+        .mobile-app {
+            width: 100%;
+            max-width: 414px;
+            background-color: var(--white);
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            overflow-x: hidden;
+            padding-bottom: 70px;
+            min-height: 100vh;
+        }
+
+        /* --- Header --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-blue);
+        }
+
+        .logo-icon { font-size: 30px; }
+        .logo-text h1 { font-size: 18px; font-weight: 700; line-height: 1; letter-spacing: 1px; }
+        .logo-text span { font-size: 10px; letter-spacing: 3px; font-weight: 500; }
+
+        .header-icons { display: flex; gap: 15px; align-items: center; }
+
+        .icon-btn {
+            width: 35px; height: 35px; border-radius: 8px;
+            border: 1px solid var(--border-color); display: flex;
+            justify-content: center; align-items: center;
+            color: var(--primary-blue); text-decoration: none; font-size: 16px;
+            transition: background 0.2s;
+        }
+        .icon-btn:active { background: #f0f0f0; }
+
+        .hamburger { font-size: 20px; color: var(--primary-blue); cursor: pointer; }
+
+        /* --- Hero Section --- */
+        .hero { position: relative; background-color: #e6f4f8; padding: 20px; min-height: 320px; overflow: hidden; }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80');
+            background-size: cover; background-position: center; opacity: 0.15; z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; width: 60%; }
+        .trust-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; color: var(--primary-blue); font-weight: 600; margin-bottom: 10px; }
+        .hero h2 { font-size: 28px; color: var(--primary-blue); line-height: 1.2; margin-bottom: 10px; }
+        .hero p { font-size: 12px; color: var(--text-dark); margin-bottom: 20px; line-height: 1.5; }
+
+        .btn {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 140px; padding: 10px; border-radius: 6px; font-size: 13px;
+            font-weight: 500; text-decoration: none; margin-bottom: 10px; cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .btn:active { transform: scale(0.95); }
+        .btn-primary { background-color: var(--primary-blue); color: var(--white); border: none; }
+        .btn-outline { background-color: transparent; color: var(--secondary-green); border: 1px solid var(--secondary-green); }
+
+        .hero-image { position: absolute; bottom: 0; right: -20px; width: 250px; z-index: 2; pointer-events: none; }
+
+        /* --- Features Section --- */
+        .features { display: flex; justify-content: space-between; padding: 20px 10px; background: var(--white); border-bottom: 1px solid var(--border-color); }
+        .feature-item { display: flex; align-items: center; gap: 8px; }
+        .feature-icon { color: var(--primary-blue); font-size: 18px; }
+        .feature-text { display: flex; flex-direction: column; }
+        .feature-text span:first-child { font-size: 10px; font-weight: 600; color: var(--text-dark); }
+        .feature-text span:last-child { font-size: 9px; color: var(--text-light); }
+        .dots { text-align: center; padding: 10px 0; color: #d1d5db; }
+        .dots .active { color: var(--primary-blue); }
+
+        /* --- Icon Nav Categories --- */
+        .icon-categories { display: flex; justify-content: space-around; padding: 20px 10px; text-align: center; }
+        .icon-cat-item { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 20%; cursor: pointer; text-decoration: none; }
+        .icon-circle {
+            width: 45px; height: 45px; background-color: var(--primary-blue); color: var(--white);
+            border-radius: 12px 12px 0 12px; display: flex; justify-content: center; align-items: center;
+            font-size: 20px; transform: rotate(-10deg); transition: transform 0.2s;
+        }
+        .icon-cat-item:active .icon-circle { transform: scale(0.9) rotate(-10deg); }
+        .icon-circle i { transform: rotate(10deg); }
+        .icon-cat-item span { font-size: 11px; font-weight: 500; color: var(--text-dark); line-height: 1.2; pointer-events: none; }
+
+        /* --- Shop by Category Section --- */
+        .shop-section { padding: 20px; }
+        .section-title { text-align: center; color: var(--primary-blue); font-size: 18px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
+        .section-title::before, .section-title::after { content: ''; height: 1px; width: 30px; background-color: var(--primary-blue); margin: 0 10px; }
+
+        .product-grid-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+        .product-grid-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+        .category-card { background-color: var(--bg-light); border-radius: 12px; padding: 15px 10px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+        .category-card:active { background-color: #e5edf0; }
+        .card-horizontal { flex-direction: row; justify-content: space-between; padding: 15px; }
+        .card-horizontal .card-text { text-align: left; pointer-events: none; }
+
+        .category-card img { width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; pointer-events: none; }
+        .card-horizontal img { width: 50px; height: 50px; margin-bottom: 0; order: -1; }
+
+        .category-card h3 { font-size: 12px; font-weight: 600; color: var(--text-dark); margin-bottom: 5px; line-height: 1.3; pointer-events: none; }
+        .view-all { font-size: 11px; color: var(--primary-blue); text-decoration: none; font-weight: 500; pointer-events: none; }
+
+        /* --- Bottom Navigation --- */
+        .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 414px; background-color: var(--white); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid var(--border-color); z-index: 40; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--text-light); text-decoration: none; width: 20%; transition: color 0.3s; }
+        .nav-item.active { color: var(--primary-blue); }
+        .nav-item i { font-size: 20px; transition: transform 0.2s; }
+        .nav-item:active i { transform: scale(0.8); }
+        .nav-item span { font-size: 10px; font-weight: 500; }
+
+        /* --- Interactive UI Elements (Side Menu & Toast) --- */
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 60; opacity: 0; visibility: hidden; transition: 0.3s; }
+        .overlay.active { opacity: 1; visibility: visible; }
+
+        .side-menu { position: absolute; top: 0; right: -250px; width: 250px; height: 100%; background: var(--white); z-index: 70; box-shadow: -5px 0 15px rgba(0,0,0,0.1); transition: right 0.3s ease; display: flex; flex-direction: column; }
+        .side-menu.active { right: 0; }
+        .menu-header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); color: var(--primary-blue); }
+        .menu-header h2 { font-size: 18px; }
+        .close-menu { font-size: 24px; cursor: pointer; }
+        .menu-links { list-style: none; padding: 20px 0; }
+        .menu-links li a { display: block; padding: 15px 20px; color: var(--text-dark); text-decoration: none; font-size: 14px; font-weight: 500; border-bottom: 1px solid #f0f0f0; }
+        .menu-links li a:active { background: var(--bg-light); color: var(--primary-blue); }
+
+    </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
-
-<header>
-
-<a class="brand" href="#home">
-
-<div class="brand-mark">+</div>
-
-<div>
-<h2>MEDI POINT</h2>
-<small>Your Trusted Healthcare Partner</small>
-</div>
-
-</a>
-
-<button class="menu" onclick="toggleMenu()">☰</button>
-
-<nav id="nav">
-
-<a href="#home">Home</a>
-<a href="#about">About Us</a>
-<a href="#services">Services</a>
-<a href="#products">Products</a>
-<a href="#blog">Blog</a>
-<a href="login.html">Account</a>
-<a href="#contact">Contact</a>
-  <a href="admin.html" class="admin-link">⚙️ Admin</a>
-
-<button class="call" onclick="callNow()">
-Call Now
-</button>
-
-</nav>
-
-</header>
-
-
-<main id="home">
-
-<!-- HERO -->
-
-<section class="hero">
-
-<div class="hero-content">
-
-<h1>
-Good Health,<br>
-Better Life
-</h1>
-
-<p>
-Your one-stop solution for medicines and healthcare needs.
-</p>
-
-<div class="actions">
-
-<button class="btn primary" onclick="orderNow()">
-Order Now
-</button>
-
-<button class="btn wa" onclick="whatsapp()">
-◉ WhatsApp
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- QUICK SERVICES -->
-
-<div class="quick">
-
-<div class="quick-item">
-<div>
-<div class="icon">💊</div>
-Prescription<br>Medicines
-</div>
-</div>
-
-<div class="quick-item">
-<div>
-<div class="icon">💉</div>
-OTC<br>Medicines
-</div>
-</div>
-
-<div class="quick-item">
-<div>
-<div class="icon">🔬</div>
-Lab Test<br>Booking
-</div>
-</div>
-
-<div class="quick-item">
-<div>
-<div class="icon">🩸</div>
-Home Blood<br>Collection
-</div>
-</div>
-
-<div class="quick-item">
-<div>
-<div class="icon">🏠</div>
-Home<br>Delivery
-</div>
-</div>
-
-<div class="quick-item">
-<div>
-<div class="icon">🩺</div>
-Healthcare<br>Products
-</div>
-</div>
-
-</div>
-
-
-<!-- CATEGORIES -->
-
-<section class="products" id="products">
-
-<div class="title">
-
-<h2>Healthcare Categories</h2>
-
-<p>
-Choose a category or search for a medicine.
-</p>
-
-</div>
-
-<div class="medicine-search-area">
-
-  <div class="medicine-search">
-    <input
-      type="search"
-      id="medicineSearch"
-      placeholder="Search medicine..."
-      autocomplete="off"
-    >
-    <span class="medicine-search-icon">🔍</span>
-  </div>
-
-  <div class="category-box-title">Categories</div>
-
-  <div id="categoryBox" class="category-box-grid"></div>
-
-  <div id="searchResults" class="search-results">
-    <div class="search-results-title">Medicine Results</div>
-    <div id="searchResultsList"></div>
-  </div>
-
-</div>
-
-<div id="productGrid" class="product-grid"></div>
-
-<p id="noProducts" class="no-products">
-No categories found.
-</p>
-
-</section>
-
-
-<!-- ABOUT -->
-
-<section class="about" id="about">
-
-<div class="about-wrap">
-
-<div class="about-img"></div>
-
-<div>
-
-<h2>Your Health Is Our Priority</h2>
-
-<p>
-At MEDI POINT, we believe healthcare should be simple,
-reliable and accessible.
-</p>
-
-<p>
-We provide medicines, healthcare products, diagnostic
-services and convenient home delivery solutions.
-</p>
-
-<ul class="ticks">
-
-<li>Genuine Healthcare Products</li>
-<li>Easy Medicine Ordering</li>
-<li>Fast Home Delivery</li>
-<li>Trusted Healthcare Support</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- BLOG -->
-
-<section id="blog">
-
-<div class="title">
-
-<h2>Health & Wellness</h2>
-
-<p>
-Helpful information for a healthier lifestyle.
-</p>
-
-</div>
-
-<div class="grid">
-
-<article class="card">
-
-<div class="card-icon">🥗</div>
-
-<h3>Healthy Eating</h3>
-
-<p>
-Simple habits that can support a healthy lifestyle.
-</p>
-
-</article>
-
-
-<article class="card">
-
-<div class="card-icon">🏃</div>
-
-<h3>Stay Active</h3>
-
-<p>
-Regular physical activity is an important part of
-overall wellness.
-</p>
-
-</article>
-
-
-<article class="card">
-
-<div class="card-icon">😴</div>
-
-<h3>Better Sleep</h3>
-
-<p>
-Create a healthy and consistent sleep routine.
-</p>
-
-</article>
-
-</div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section class="contact" id="contact">
-
-<div class="title">
-
-<h2>Contact MEDI POINT</h2>
-
-<p>
-Have a question? We are here to help.
-</p>
-
-</div>
-
-
-<div class="contact-wrap">
-
-
-<div class="contact-box">
-
-<h3>Get In Touch</h3>
-
-<p>
-<b>📍 Address</b><br>
-Your Medical Store Address, Your City, India
-</p>
-
-<p>
-<b>📞 Phone</b><br>
-6206408813
-</p>
-
-<p>
-<b>📧 Email</b><br>
-medicalpointt001@gmail.com
-</p>
-
-<p>
-<b>🕒 Opening Hours</b><br>
-Monday - Sunday: 8:00 AM - 10:00 PM
-</p>
-
-</div>
-
-
-<form class="form" onsubmit="sendMessage(event)">
-
-<input
-type="text"
-placeholder="Your Name"
-required
->
-
-<input
-type="tel"
-placeholder="Phone Number"
-required
->
-
-<input
-type="email"
-placeholder="Email Address"
->
-
-<textarea
-placeholder="Your Message"
-required
-></textarea>
-
-<button type="submit">
-Send Message
-</button>
-
-</form>
-
-</div>
-
-</section>
-
-</main>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-<div class="footer-grid">
-
-
-<div>
-
-<h3>MEDI POINT</h3>
-
-<p>
-Your trusted healthcare partner for quality medicines
-and healthcare services.
-</p>
-
-</div>
-
-
-<div>
-
-<h3>Quick Links</h3>
-
-<ul>
-
-<li><a href="#home">Home</a></li>
-<li><a href="#about">About Us</a></li>
-<li><a href="#products">Products</a></li>
-<li><a href="#contact">Contact</a></li>
-
-</ul>
-
-</div>
-
-
-<div>
-
-<h3>Services</h3>
-
-<ul>
-
-<li>Medicines</li>
-<li>Lab Tests</li>
-<li>Home Delivery</li>
-<li>Healthcare</li>
-
-</ul>
-
-</div>
-
-
-<div>
-
-<h3>Contact</h3>
-
-<p>📞 6206408813</p>
-<p>📧 medicalpointt001@gmail.com</p>
-
-</div>
-
-
-</div>
-
-
-<div class="copy">
-© 2026 MEDI POINT. All Rights Reserved.
-</div>
-
-</footer>
-
-
-<!-- WHATSAPP -->
-
-<a
-class="float"
-href="https://wa.me/916206408813"
-target="_blank"
->
-💬
-</a>
-
-
-<script>
-
-/* MENU */
-
-function toggleMenu(){
-
-document
-.getElementById("nav")
-.classList
-.toggle("open");
-
-}
-
-
-/* CALL */
-
-function callNow(){
-
-location.href="tel:+916206408813";
-
-}
-
-
-/* ORDER */
-
-function orderNow(){
-
-window.open(
-"https://wa.me/916206408813?text=Hello%20MEDI%20POINT%2C%20I%20want%20to%20order%20medicine",
-"_blank"
-);
-
-}
-
-
-/* WHATSAPP */
-
-function whatsapp(){
-
-window.open(
-"https://wa.me/916206408813?text=Hello%20MEDI%20POINT%2C%20I%20need%20help",
-"_blank"
-);
-
-}
-
-
-/* CONTACT FORM */
-
-function sendMessage(e){
-
-e.preventDefault();
-
-alert("Thank you! Your message has been submitted.");
-
-e.target.reset();
-
-}
-
-
-/* CATEGORIES */
-
-const categories = [
-
-{
-slug:"antibiotic",
-name:"Antibiotic",
-icon:"💊",
-desc:"Antibiotic medicines and healthcare products.",
-image:"https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"cough-cold",
-name:"Cough & Cold",
-icon:"🤧",
-desc:"Medicines and care products for cough and cold.",
-image:"https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"cut-pain",
-name:"Cut & Pain",
-icon:"🩹",
-desc:"Care products for cuts, minor pain and injuries.",
-image:"https://images.unsplash.com/photo-1603398938378-e54eab446446?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"wound-fever",
-name:"Wound & Fever",
-icon:"🌡️",
-desc:"Wound care and fever-related healthcare products.",
-image:"https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"baby-care",
-name:"Baby Care",
-icon:"👶",
-desc:"Gentle healthcare and personal care for babies.",
-image:"https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"eye-care",
-name:"Eye Care",
-icon:"👁️",
-desc:"Everyday eye care and related healthcare products.",
-image:"https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"skin-hair-care",
-name:"Skin & Hair Care",
-icon:"🧴",
-desc:"Skin and hair care healthcare products.",
-image:"https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"itching",
-name:"Itching",
-icon:"🌿",
-desc:"Products for everyday itching and skin comfort.",
-image:"https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"allergy",
-name:"Allergy",
-icon:"🤧",
-desc:"Healthcare products for common allergy care.",
-image:"https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"multi-vitamin",
-name:"Multi Vitamin",
-icon:"💊",
-desc:"Multivitamin and daily nutritional support.",
-image:"https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"sexual-wellness",
-name:"Sexual Wellness",
-icon:"❤️",
-desc:"Personal wellness and intimate care products.",
-image:"https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"feminine-care-hygiene",
-name:"Feminine Care / Hygiene",
-icon:"🌸",
-desc:"Feminine hygiene and personal care products.",
-image:"https://images.unsplash.com/photo-1556229010-aa3f7ff66b2b?auto=format&fit=crop&w=900&q=85"
-},
-
-
-{
-slug:"fracture-care",
-name:"Fracture Care",
-icon:"🦴",
-desc:"Supports, braces and fracture-care supplies.",
-image:"https://images.unsplash.com/photo-1559757175-0eb30cd8c063?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"sanitary-antiseptic",
-name:"Sanitary & Antiseptic",
-icon:"🧴",
-desc:"Sanitary, disinfectant and antiseptic supplies.",
-image:"https://images.unsplash.com/photo-1584483766114-2cea6facdf57?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"baby-food",
-name:"Baby Food",
-icon:"🍼",
-desc:"Baby nutrition and feeding products.",
-image:"https://images.unsplash.com/photo-1519340333755-c1aa5571fd46?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"gastric-acidity",
-name:"Gastric & Acidity",
-icon:"🍃",
-desc:"Healthcare products for gastric and acidity care.",
-image:"https://images.unsplash.com/photo-1603398938378-e54eab446446?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"diabetes-bp-care",
-name:"Diabetes & BP Care",
-icon:"🩺",
-desc:"Diabetes, blood pressure and monitoring care.",
-image:"https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"calcium-iron",
-name:"Calcium & Iron",
-icon:"💊",
-desc:"Calcium, iron and nutritional supplements.",
-image:"https://images.unsplash.com/photo-1550572017-edd951b55104?auto=format&fit=crop&w=900&q=85"
-},
-
-{
-slug:"first-aid-medical-supplies",
-name:"First Aid & Medical Supplies",
-icon:"🧰",
-desc:"First-aid kits and essential medical supplies.",
-image:"https://images.unsplash.com/photo-1603398938378-e54eab446446?auto=format&fit=crop&w=900&q=85"
-}
-
-];
-
-
-
-/* MEDICINE SEARCH */
-
-let medicines = [];
-
-function renderCategoryBox(){
-
-  const box=document.getElementById("categoryBox");
-
-  box.innerHTML=categories.map(function(c){
-
-    return `
-      <button
-        type="button"
-        class="category-box-item"
-        data-slug="${c.slug}"
-        onclick="selectSearchCategory('${c.slug}')"
-      >
-        <span class="box-icon">${c.icon}</span>
-        <span>${c.name}</span>
-      </button>
-    `;
-
-  }).join("");
-}
-
-function openMedicineInCategory(name, slug){
-  const params=new URLSearchParams();
-  params.set("search",decodeURIComponent(name));
-  if(slug) params.set("cat",decodeURIComponent(slug));
-  window.location.href="category.html?"+params.toString();
-}
-
-function renderSearchResults(query, categorySlug=""){
-
-  const results=document.getElementById("searchResults");
-  const list=document.getElementById("searchResultsList");
-  const value=(query || "").trim().toLowerCase();
-
-  let matches=(medicines || []).filter(function(m){
-
-    const textMatch =
-      !value ||
-      m.name.toLowerCase().includes(value) ||
-      m.category.toLowerCase().includes(value);
-
-    const categoryMatch =
-      !categorySlug || m.slug===categorySlug;
-
-    return textMatch && categoryMatch;
-  });
-
-  if(!value && !categorySlug){
-    results.classList.remove("show");
-    list.innerHTML="";
-    return;
-  }
-
-  results.classList.add("show");
-
-  if(!matches.length){
-    list.innerHTML='<div class="search-empty">No medicine found.</div>';
-    return;
-  }
-
-  list.innerHTML=matches.map(function(m){
-
-    return `
-      <button
-        type="button"
-        class="search-result-item"
-        onclick="openMedicineInCategory('${encodeURIComponent(m.name)}','${encodeURIComponent(m.slug || "")}')"
-      >
-        <div>
-          <div class="search-result-name">${escapeSearchText(m.name)}</div>
-          ${m.price !== undefined && m.price !== null && m.price !== ""
-            ? `<div class="search-result-price">₹${Number(m.price).toLocaleString("en-IN")}</div>`
-            : ""}
+<div class="mobile-app">
+    
+    <!-- Dark Overlay for Side Menu -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Side Navigation Menu (Linked with Repo files) -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <h2>Menu</h2>
+            <i class="fa-solid fa-xmark close-menu" id="closeMenu"></i>
         </div>
-        <div class="search-result-category">${escapeSearchText(m.category)}</div>
-      </button>
-    `;
+        <ul class="menu-links">
+            <li><a href="login.html"><i class="fa-regular fa-user" style="width:25px"></i> Login / Account</a></li>
+            <li><a href="track-order.html"><i class="fa-solid fa-location-dot" style="width:25px"></i> Track Order</a></li>
+            <li><a href="category.html"><i class="fa-solid fa-pills" style="width:25px"></i> All Categories</a></li>
+            <li><a href="tel:+916206408813"><i class="fa-solid fa-headset" style="width:25px"></i> Customer Support</a></li>
+        </ul>
+    </div>
 
-  }).join("");
-}
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <i class="fa-solid fa-plus-square logo-icon"></i>
+            <div class="logo-text">
+                <h1>MEDI POINT</h1>
+                <span>— MEDICAL —</span>
+            </div>
+        </div>
+        <div class="header-icons">
+            <!-- Connected Phone Link -->
+            <a href="tel:+916206408813" class="icon-btn" title="Call Us"><i class="fa-solid fa-phone-volume"></i></a>
+            <!-- Hamburger Toggle -->
+            <i class="fa-solid fa-bars hamburger" id="menuToggle"></i>
+        </div>
+    </header>
 
-function selectSearchCategory(slug){
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            
+            <div class="hero-content">
+                <div class="trust-badge">
+                    <i class="fa-regular fa-shield-check"></i> YOUR TRUSTED<br>HEALTHCARE PARTNER
+                </div>
+                <h2>Good Health,<br>Better Life</h2>
+                <p>Your one-stop solution for medicines and healthcare needs. Order online, we deliver care to your door.</p>
+                
+                <!-- Linked to order.html -->
+                <a href="order.html" class="btn btn-primary">
+                    <i class="fa-solid fa-cart-shopping"></i> Order Now
+                </a>
+                <!-- Connected WhatsApp Link -->
+                <a href="https://wa.me/916206408813?text=Hello%20Medi%20Point,%20I%20want%20to%20order%20medicines." target="_blank" class="btn btn-outline">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
 
-  const category=categories.find(function(c){
-    return c.slug===slug;
-  });
+            <!-- Fetching my-photo.png from your GitHub repo directly -->
+            <img src="my-photo.png" alt="Pharmacist" class="hero-image">
+        </section>
 
-  if(!category) return;
+        <!-- Features Row -->
+        <section class="features">
+            <div class="feature-item">
+                <i class="fa-solid fa-truck-fast feature-icon"></i>
+                <div class="feature-text">
+                    <span>Fast Delivery</span>
+                    <span>On time, every time</span>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-shield-halved feature-icon"></i>
+                <div class="feature-text">
+                    <span>100% Genuine</span>
+                    <span>Original Medicines</span>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-lock feature-icon"></i>
+                <div class="feature-text">
+                    <span>Secure Shopping</span>
+                    <span>Your data is safe</span>
+                </div>
+            </div>
+        </section>
+        <div class="dots">
+            <i class="fa-solid fa-circle active" style="font-size: 6px;"></i>
+            <i class="fa-solid fa-circle" style="font-size: 6px;"></i>
+            <i class="fa-solid fa-circle" style="font-size: 6px;"></i>
+        </div>
 
-  window.location.href="category.html?cat="+encodeURIComponent(slug);
-}
+        <!-- Quick Icon Categories (All linked to category.html) -->
+        <section class="icon-categories">
+            <a href="category.html" class="icon-cat-item">
+                <div class="icon-circle"><i class="fa-solid fa-prescription-bottle-medical"></i></div>
+                <span>Prescription<br>Medicines</span>
+            </a>
+            <a href="category.html" class="icon-cat-item">
+                <div class="icon-circle"><i class="fa-solid fa-capsules"></i></div>
+                <span>OTC<br>Medicines</span>
+            </a>
+            <a href="category.html" class="icon-cat-item">
+                <div class="icon-circle"><i class="fa-solid fa-bottle-droplet"></i></div>
+                <span>Vitamins &<br>Supplements</span>
+            </a>
+            <a href="category.html" class="icon-cat-item">
+                <div class="icon-circle"><i class="fa-solid fa-baby"></i></div>
+                <span>Baby Care</span>
+            </a>
+            <a href="category.html" class="icon-cat-item">
+                <div class="icon-circle"><i class="fa-solid fa-pump-soap"></i></div>
+                <span>Personal<br>Care</span>
+            </a>
+        </section>
 
-document.addEventListener("DOMContentLoaded",function(){
+        <!-- Shop By Category (All linked to category.html) -->
+        <section class="shop-section">
+            <h2 class="section-title">Shop by Category</h2>
+            
+            <div class="product-grid-top">
+                <a href="category.html" class="category-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/822/822108.png" alt="Prescription">
+                    <h3>Prescription<br>Medicines</h3>
+                    <span class="view-all">View All &rarr;</span>
+                </a>
+                <a href="category.html" class="category-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3004/3004128.png" alt="OTC">
+                    <h3>OTC<br>Medicines</h3>
+                    <span class="view-all">View All &rarr;</span>
+                </a>
+                <a href="category.html" class="category-card">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="Vitamins">
+                    <h3>Vitamins &<br>Supplements</h3>
+                    <span class="view-all">View All &rarr;</span>
+                </a>
+            </div>
 
-  renderCategoryBox();
+            <div class="product-grid-bottom">
+                <a href="category.html" class="category-card card-horizontal">
+                    <div class="card-text">
+                        <h3>Baby Care</h3>
+                        <span class="view-all">View All &rarr;</span>
+                    </div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2747/2747441.png" alt="Baby Care">
+                </a>
+                <a href="category.html" class="category-card card-horizontal">
+                    <div class="card-text">
+                        <h3>Personal Care</h3>
+                        <span class="view-all">View All &rarr;</span>
+                    </div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2554/2554034.png" alt="Personal Care">
+                </a>
+            </div>
+        </section>
+    </main>
 
-  const search=document.getElementById("medicineSearch");
-
-  search.addEventListener("input",function(){
-    renderSearchResults(this.value);
-  });
-
-});
-
-
-/* RENDER CATEGORIES */
-
-function renderProducts(){
-
-const grid=document.getElementById("productGrid");
-
-grid.innerHTML=categories.map(function(c){
-
-return `
-
-<article class="product">
-
-<div class="product-img">
-
-<img
-src="${c.image}"
-alt="${c.name}"
-onerror="this.style.display='none';this.parentElement.innerHTML='<span style=&quot;font-size:60px&quot;>${c.icon}</span>'"
->
+    <!-- Bottom Navigation (Linked with Repo files) -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="category.html" class="nav-item">
+            <i class="fa-solid fa-border-all"></i>
+            <span>Categories</span>
+        </a>
+        <a href="order.html" class="nav-item">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Orders</span>
+        </a>
+        <a href="login.html" class="nav-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Account</span>
+        </a>
+        <a href="#" class="nav-item" onclick="document.getElementById('menuToggle').click(); return false;">
+            <i class="fa-solid fa-ellipsis"></i>
+            <span>More</span>
+        </a>
+    </nav>
 
 </div>
 
-<div class="product-info">
+<!-- JavaScript for Functionality -->
+<script>
+    // --- Side Menu Logic ---
+    const menuToggle = document.getElementById('menuToggle');
+    const sideMenu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('overlay');
+    const closeMenuBtn = document.getElementById('closeMenu');
 
-<h3>${c.name}</h3>
-
-<p>${c.desc}</p>
-
-<button
-class="view-category-btn"
-onclick="viewCategory('${c.slug}')"
->
-View
-</button>
-
-</div>
-
-</article>
-
-`;
-
-}).join("");
-
-document.getElementById("noProducts").style.display=
-categories.length ? "none" : "block";
-
-}
-
-
-/* OPEN CATEGORY */
-
-function viewCategory(category){
-
-window.location.href=
-"category.html?cat="+encodeURIComponent(category);
-
-}
-
-
-/* START */
-
-renderProducts();
-
-</script>
-
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  onSnapshot,
-  query,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDOY8sEtMapyVhiQdSAfCrb699dsgFmMC",
-  authDomain: "medipoint-f4616.firebaseapp.com",
-  projectId: "medipoint-f4616",
-  storageBucket: "medipoint-f4616.firebasestorage.app",
-  messagingSenderId: "180492377336",
-  appId: "1:180492377336:web:5f6566ccd6663ed43a12f0d",
-  measurementId: "G-C8X32M4CKF"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-function categoryDisplay(value){
-  const map = {
-    "antibiotic":"Antibiotic",
-    "cough-cold":"Cough & Cold",
-    "cut-pain":"Cut & Pain",
-    "wound-fever":"Wound & Fever",
-    "baby-care":"Baby Care",
-    "eye-care":"Eye Care",
-    "skin-hair-care":"Skin & Hair Care",
-    "itching":"Itching",
-    "allergy":"Allergy",
-    "multi-vitamin":"Multi Vitamin",
-    "sexual-wellness":"Sexual Wellness",
-    "feminine-care-hygiene":"Feminine Care / Hygiene",
-    "fracture-care":"Fracture Care",
-    "sanitary-antiseptic":"Sanitary & Antiseptic",
-    "baby-food":"Baby Food",
-    "gastric-acidity":"Gastric & Acidity",
-    "diabetes-bp-care":"Diabetes & BP Care",
-    "calcium-iron":"Calcium & Iron",
-    "first-aid-medical-supplies":"First Aid & Medical Supplies"
-  };
-
-  const raw=String(value || "").trim();
-  return map[raw] || raw || "Medicine";
-}
-
-function refreshSearchResults(){
-  const search=document.getElementById("medicineSearch");
-  const active=document.querySelector(".category-box-item.active");
-  const activeSlug=active ? active.dataset.slug : "";
-  renderSearchResults(search.value, activeSlug);
-}
-
-window.escapeSearchText=function(value){
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-};
-
-onSnapshot(
-  query(collection(db,"products"),orderBy("createdAt","desc")),
-  (snapshot)=>{
-    medicines=snapshot.docs.map(doc=>{
-      const p=doc.data();
-      return {
-        id:doc.id,
-        name:p.name || "Medicine",
-        category:p.category || "",
-        price:p.price,
-        desc:p.desc || p.description || "",
-        image:p.image || "",
-        categoryName:categoryDisplay(p.category),
-        slug:String(p.category || "").toLowerCase().trim()
-      };
-    }).map(p=>({
-      ...p,
-      category:p.categoryName
-    }));
-
-    renderSearchResults(
-      document.getElementById("medicineSearch").value,
-      document.querySelector(".category-box-item.active")?.dataset.slug || ""
-    );
-  },
-  (error)=>{
-    console.error("Firebase products error:",error);
-    const list=document.getElementById("searchResultsList");
-    const results=document.getElementById("searchResults");
-    if(list && results){
-      results.classList.add("show");
-      list.innerHTML='<div class="search-empty">Medicine load nahi ho paayi. Firebase connection check karo.</div>';
+    function openMenuFunc() {
+        sideMenu.classList.add('active');
+        overlay.classList.add('active');
     }
-  }
-);
+
+    function closeMenuFunc() {
+        sideMenu.classList.remove('active');
+        overlay.classList.remove('active');
+    }
+
+    menuToggle.addEventListener('click', openMenuFunc);
+    closeMenuBtn.addEventListener('click', closeMenuFunc);
+    overlay.addEventListener('click', closeMenuFunc);
 </script>
 
 </body>
