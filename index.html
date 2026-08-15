@@ -99,29 +99,47 @@
 
         .hamburger { font-size: 20px; color: var(--primary-blue); cursor: pointer; }
 
-        /* --- Hero Section --- */
-        .hero { position: relative; background-color: #e6f4f8; padding: 20px; min-height: 320px; overflow: hidden; }
-        .hero-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80');
-            background-size: cover; background-position: center; opacity: 0.15; z-index: 1;
+        /* --- Hero Slider --- */
+        .hero { position: relative; min-height: 330px; overflow: hidden; background: #e8f6f8; }
+        .hero-slider { position: relative; width: 100%; height: 330px; }
+        .hero-slide {
+            position: absolute; inset: 0; opacity: 0; visibility: hidden;
+            transition: opacity .7s ease, visibility .7s ease;
         }
-        .hero-content { position: relative; z-index: 2; width: 60%; }
-        .trust-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; color: var(--primary-blue); font-weight: 600; margin-bottom: 10px; }
-        .hero h2 { font-size: 28px; color: var(--primary-blue); line-height: 1.2; margin-bottom: 10px; }
-        .hero p { font-size: 12px; color: var(--text-dark); margin-bottom: 20px; line-height: 1.5; }
-
-        .btn {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            width: 140px; padding: 10px; border-radius: 6px; font-size: 13px;
-            font-weight: 500; text-decoration: none; margin-bottom: 10px; cursor: pointer;
-            transition: transform 0.1s;
+        .hero-slide.active { opacity: 1; visibility: visible; }
+        .hero-slide img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: contain; object-position: center;
+            background: linear-gradient(135deg,#dff5f7,#f7fcfd);
         }
-        .btn:active { transform: scale(0.95); }
-        .btn-primary { background-color: var(--primary-blue); color: var(--white); border: none; }
-        .btn-outline { background-color: transparent; color: var(--secondary-green); border: 1px solid var(--secondary-green); }
-
-        .hero-image { position: absolute; bottom: 0; right: -20px; width: 250px; z-index: 2; pointer-events: none; }
+        .hero-slide::after {
+            content:''; position:absolute; inset:0;
+            background:linear-gradient(90deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.08) 38%, rgba(255,255,255,0) 72%);
+            z-index:1; pointer-events:none;
+        }
+        .hero-content {
+            position:absolute; left:16px; bottom:20px; z-index:2; width:74%;
+            padding:14px 15px; border-radius:16px;
+            background:transparent;
+            backdrop-filter:none;
+            box-shadow:none;
+            text-shadow:0 2px 8px rgba(255,255,255,.45);
+        }
+        .trust-badge { display:inline-flex; align-items:center; gap:5px; font-size:9px; color:var(--primary-blue); font-weight:700; margin-bottom:6px; }
+        .hero h2 { font-size:25px; color:var(--primary-blue); line-height:1.12; margin-bottom:7px; }
+        .hero p { font-size:10.5px; color:var(--text-dark); margin-bottom:12px; line-height:1.45; }
+        .hero .btn-row { display:flex; gap:8px; flex-wrap:wrap; }
+        .hero .btn {
+            display:flex; align-items:center; justify-content:center; gap:7px;
+            width:128px; padding:9px; border-radius:7px; font-size:11px;
+            font-weight:600; text-decoration:none; cursor:pointer; transition:transform .1s; margin:0;
+        }
+        .hero .btn:active { transform:scale(.95); }
+        .btn-primary { background-color:var(--primary-blue); color:var(--white); border:none; }
+        .btn-outline { background:#fff; color:var(--secondary-green); border:1px solid var(--secondary-green); }
+        .hero-dots { position:absolute; left:0; right:0; bottom:8px; z-index:4; display:flex; justify-content:center; gap:5px; }
+        .hero-dot { width:6px; height:6px; border-radius:50%; background:#c9dfe4; cursor:pointer; transition:.25s; }
+        .hero-dot.active { width:18px; border-radius:99px; background:var(--primary-blue); }
 
         /* --- Features Section --- */
         .features { display: flex; justify-content: space-between; padding: 20px 10px; background: var(--white); border-bottom: 1px solid var(--border-color); }
@@ -133,69 +151,38 @@
         .dots { text-align: center; padding: 10px 0; color: #d1d5db; }
         .dots .active { color: var(--primary-blue); }
 
-        /* --- Quick Categories --- */
-        .icon-categories {
-            display:grid; grid-template-columns:repeat(5,1fr); gap:8px;
-            padding:18px 8px 16px; text-align:center; background:#fff;
-        }
-        .icon-cat-item {
-            display:flex; flex-direction:column; align-items:center; gap:7px;
-            width:100%; cursor:pointer; text-decoration:none; min-width:0;
-        }
+        /* --- Quick Category Pictures --- */
+        .icon-categories { display:flex; justify-content:space-around; gap:7px; padding:18px 8px 16px; text-align:center; background:#fff; }
+        .icon-cat-item { display:flex; flex-direction:column; align-items:center; gap:6px; width:20%; cursor:pointer; text-decoration:none; }
         .icon-circle {
-            width:44px; height:44px; background:linear-gradient(145deg,#0b7896,#0b5f78);
-            color:#fff; border-radius:14px 14px 5px 14px;
-            display:flex; justify-content:center; align-items:center;
-            font-size:18px; transform:rotate(-7deg); transition:.2s;
-            box-shadow:0 5px 12px rgba(8,107,140,.16);
+            width:49px; height:49px; background:#eaf7f9; border:1px solid #d2eaee;
+            border-radius:14px; display:flex; justify-content:center; align-items:center;
+            overflow:hidden; box-shadow:0 4px 12px rgba(8,107,140,.08); transition:transform .2s, box-shadow .2s;
         }
-        .icon-cat-item:active .icon-circle { transform:scale(.92) rotate(-7deg); }
-        .icon-circle i { transform:rotate(7deg); }
-        .icon-cat-item span {
-            font-size:10px; font-weight:600; color:var(--text-dark);
-            line-height:1.15; pointer-events:none;
-        }
-        .icon-cat-item.more .icon-circle { background:linear-gradient(145deg,#1692a2,#127386); }
+        .icon-circle img { width:100%; height:100%; object-fit:cover; padding:6px; }
+        .icon-cat-item:active .icon-circle { transform:translateY(2px) scale(.95); box-shadow:none; }
+        .icon-cat-item span { font-size:9.5px; font-weight:600; color:var(--text-dark); line-height:1.18; pointer-events:none; min-height:22px; }
+        .more-cat-item .icon-circle { background:linear-gradient(135deg,#0b7b97,#086b8c); }
+        .more-cat-item .icon-circle img { filter:brightness(0) invert(1); padding:10px; }
 
-        /* --- Quick Services --- */
-        .quick-services { padding:18px 14px 22px; background:linear-gradient(180deg,#f8fcfd 0%,#eef8f9 100%); }
-        .service-head { text-align:center; margin-bottom:14px; }
-        .service-head h2 { margin:0; color:#174f58; font-size:18px; }
-        .service-head p { margin:5px 0 0; color:#7c8c8f; font-size:11px; }
-        .service-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
-        .service-card {
-            text-decoration:none; background:#fff; border:1px solid #dfeef0;
-            border-radius:14px; padding:14px 9px; text-align:center;
-            box-shadow:0 5px 16px rgba(18,63,71,.06);
-            transition:transform .18s, box-shadow .18s;
-        }
-        .service-card:active { transform:scale(.97); }
-        .service-card .service-icon {
-            width:38px; height:38px; margin:0 auto 8px; border-radius:12px;
-            display:grid; place-items:center; background:#e8f7f8; color:#148d9e; font-size:17px;
-        }
-        .service-card strong { display:block; color:#173f46; font-size:11px; }
-        .service-card span { display:block; margin-top:4px; color:#829094; font-size:9px; line-height:1.25; }
+        /* --- Shop by Category Section --- */
+        .shop-section { padding: 20px; }
+        .section-title { text-align: center; color: var(--primary-blue); font-size: 18px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; }
+        .section-title::before, .section-title::after { content: ''; height: 1px; width: 30px; background-color: var(--primary-blue); margin: 0 10px; }
 
-        /* --- More Categories Sheet --- */
-        .category-sheet {
-            position:fixed; left:50%; bottom:0; transform:translate(-50%,110%);
-            width:100%; max-width:414px; background:#fff; z-index:80;
-            border-radius:22px 22px 0 0; padding:18px 16px 24px;
-            box-shadow:0 -12px 35px rgba(0,0,0,.18); transition:transform .28s ease;
-        }
-        .category-sheet.active { transform:translate(-50%,0); }
-        .sheet-handle { width:42px; height:4px; border-radius:20px; background:#d5e3e5; margin:0 auto 14px; }
-        .sheet-title { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
-        .sheet-title h3 { margin:0; color:#174f58; font-size:17px; }
-        .sheet-close { width:34px; height:34px; border:0; border-radius:10px; background:#eef7f8; color:#17606a; font-size:18px; cursor:pointer; }
-        .all-cat-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; max-height:58vh; overflow:auto; padding-right:2px; }
-        .all-cat-link {
-            display:flex; align-items:center; gap:8px; text-decoration:none; background:#f7fbfb;
-            border:1px solid #e1eeee; border-radius:11px; padding:10px 9px; color:#234f56;
-            font-size:10px; font-weight:600;
-        }
-        .all-cat-link i { color:#148d9e; width:18px; text-align:center; }
+        .product-grid-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+        .product-grid-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+        .category-card { background-color: var(--bg-light); border-radius: 12px; padding: 15px 10px; display: flex; flex-direction: column; align-items: center; text-align: center; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+        .category-card:active { background-color: #e5edf0; }
+        .card-horizontal { flex-direction: row; justify-content: space-between; padding: 15px; }
+        .card-horizontal .card-text { text-align: left; pointer-events: none; }
+
+        .category-card img { width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; pointer-events: none; }
+        .card-horizontal img { width: 50px; height: 50px; margin-bottom: 0; order: -1; }
+
+        .category-card h3 { font-size: 12px; font-weight: 600; color: var(--text-dark); margin-bottom: 5px; line-height: 1.3; pointer-events: none; }
+        .view-all { font-size: 11px; color: var(--primary-blue); text-decoration: none; font-weight: 500; pointer-events: none; }
 
         /* --- Bottom Navigation --- */
         .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 414px; background-color: var(--white); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid var(--border-color); z-index: 40; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
@@ -264,29 +251,51 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
+        <!-- Hero Slider -->
         <section class="hero">
-            <div class="hero-bg"></div>
-            
-            <div class="hero-content">
-                <div class="trust-badge">
-                    <i class="fa-regular fa-shield-check"></i> YOUR TRUSTED<br>HEALTHCARE PARTNER
+            <div class="hero-slider" id="heroSlider">
+                <div class="hero-slide active">
+                    <img src="my-photo.png" alt="Medi Point Pharmacist">
+                    <div class="hero-content">
+                        <div class="trust-badge"><i class="fa-solid fa-shield-heart"></i> YOUR TRUSTED<br>HEALTHCARE PARTNER</div>
+                        <h2>Good Health,<br>Better Life</h2>
+                        <p>Your one-stop solution for medicines and healthcare needs. Order online, we deliver care to your door.</p>
+                        <div class="btn-row">
+                            <a href="order.html" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Order Now</a>
+                            <a href="https://wa.me/916206408813?text=Hello%20Medi%20Point,%20I%20want%20to%20order%20medicines." target="_blank" class="btn btn-outline"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                        </div>
+                    </div>
                 </div>
-                <h2>Good Health,<br>Better Life</h2>
-                <p>Your one-stop solution for medicines and healthcare needs. Order online, we deliver care to your door.</p>
-                
-                <!-- Linked to order.html -->
-                <a href="order.html" class="btn btn-primary">
-                    <i class="fa-solid fa-cart-shopping"></i> Order Now
-                </a>
-                <!-- Connected WhatsApp Link -->
-                <a href="https://wa.me/916206408813?text=Hello%20Medi%20Point,%20I%20want%20to%20order%20medicines." target="_blank" class="btn btn-outline">
-                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                </a>
+                <div class="hero-slide">
+                    <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?auto=format&fit=crop&w=900&q=85" alt="Pharmacy medicines">
+                    <div class="hero-content">
+                        <div class="trust-badge"><i class="fa-solid fa-capsules"></i> QUALITY MEDICINES</div>
+                        <h2>Medicines<br>Made Easy</h2>
+                        <p>Find the right healthcare products quickly and order from the comfort of your home.</p>
+                        <div class="btn-row">
+                            <a href="category.html" class="btn btn-primary"><i class="fa-solid fa-pills"></i> Browse Now</a>
+                            <a href="track-order.html" class="btn btn-outline"><i class="fa-solid fa-location-dot"></i> Track Order</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-slide">
+                    <img src="https://images.unsplash.com/photo-1580281657527-47f249e8f0df?auto=format&fit=crop&w=900&q=85" alt="Healthcare support">
+                    <div class="hero-content">
+                        <div class="trust-badge"><i class="fa-solid fa-heart-pulse"></i> CARE THAT COMES TO YOU</div>
+                        <h2>Healthcare<br>At Your Door</h2>
+                        <p>Easy ordering, trusted products and simple delivery support from MEDI POINT.</p>
+                        <div class="btn-row">
+                            <a href="order.html" class="btn btn-primary"><i class="fa-solid fa-bag-shopping"></i> Order Medicine</a>
+                            <a href="tel:+916206408813" class="btn btn-outline"><i class="fa-solid fa-phone"></i> Call Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-dots" id="heroDots">
+                    <span class="hero-dot active" data-slide="0"></span>
+                    <span class="hero-dot" data-slide="1"></span>
+                    <span class="hero-dot" data-slide="2"></span>
+                </div>
             </div>
-
-            <!-- Fetching my-photo.png from your GitHub repo directly -->
-            <img src="my-photo.png" alt="Pharmacist" class="hero-image">
         </section>
 
         <!-- Features Row -->
@@ -319,110 +328,41 @@
             <i class="fa-solid fa-circle" style="font-size: 6px;"></i>
         </div>
 
-        <!-- Quick Category Strip -->
+        <!-- Quick Categories With Pictures -->
         <section class="icon-categories">
             <a href="category.html?category=antibiotic" class="icon-cat-item">
-                <div class="icon-circle"><i class="fa-solid fa-capsules"></i></div>
+                <div class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="Antibiotic"></div>
                 <span>Antibiotic</span>
             </a>
             <a href="category.html?category=cough-cold" class="icon-cat-item">
-                <div class="icon-circle"><i class="fa-solid fa-temperature-half"></i></div>
+                <div class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/3004/3004128.png" alt="Cough & Cold"></div>
                 <span>Cough &amp;<br>Cold</span>
             </a>
             <a href="category.html?category=multi-vitamin" class="icon-cat-item">
-                <div class="icon-circle"><i class="fa-solid fa-pills"></i></div>
+                <div class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/2966/2966485.png" alt="Multi Vitamin"></div>
                 <span>Multi<br>Vitamin</span>
             </a>
             <a href="category.html?category=baby-care" class="icon-cat-item">
-                <div class="icon-circle"><i class="fa-solid fa-baby"></i></div>
+                <div class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/2747/2747441.png" alt="Baby Care"></div>
                 <span>Baby<br>Care</span>
             </a>
-            <a href="#" id="quickMore" class="icon-cat-item more">
-                <div class="icon-circle"><i class="fa-solid fa-grip"></i></div>
+            <a href="category.html" class="icon-cat-item more-cat-item" id="moreCategoryBtn">
+                <div class="icon-circle"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="More Categories"></div>
                 <span>More<br>Categories</span>
             </a>
         </section>
 
-        <!-- Useful services instead of duplicate category cards -->
-        <section class="quick-services">
-            <div class="service-head">
-                <h2>Healthcare Made Simple</h2>
-                <p>Everything you need, right at your fingertips</p>
-            </div>
-            <div class="service-grid">
-                <a href="order.html" class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-bag-shopping"></i></div>
-                    <strong>Order Medicine</strong>
-                    <span>Place your order quickly</span>
-                </a>
-                <a href="track-order.html" class="service-card">
-                    <div class="service-icon"><i class="fa-solid fa-location-dot"></i></div>
-                    <strong>Track Order</strong>
-                    <span>Check delivery status</span>
-                </a>
-                <a href="https://wa.me/916206408813?text=Hello%20Medi%20Point,%20I%20need%20help%20with%20my%20medicine%20order." target="_blank" class="service-card">
-                    <div class="service-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                    <strong>WhatsApp Help</strong>
-                    <span>Chat with Medi Point</span>
-                </a>
+        <!-- Clean service section -->
+        <section class="shop-section" style="padding:18px 14px 24px; text-align:center;">
+            <div style="font-size:17px;font-weight:700;color:var(--primary-blue);">Healthcare Made Simple</div>
+            <p style="font-size:10px;color:var(--text-light);margin:6px 0 14px;">Everything you need, right at your fingertips</p>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+                <a href="order.html" style="text-decoration:none;background:#f7fbfc;border:1px solid #e0eef0;border-radius:12px;padding:12px 5px;color:var(--text-dark);font-size:9px;font-weight:600;"><i class="fa-solid fa-bag-shopping" style="font-size:18px;color:var(--primary-blue);display:block;margin-bottom:5px;"></i>Order Medicine</a>
+                <a href="track-order.html" style="text-decoration:none;background:#f7fbfc;border:1px solid #e0eef0;border-radius:12px;padding:12px 5px;color:var(--text-dark);font-size:9px;font-weight:600;"><i class="fa-solid fa-location-dot" style="font-size:18px;color:var(--primary-blue);display:block;margin-bottom:5px;"></i>Track Order</a>
+                <a href="https://wa.me/916206408813?text=Hello%20Medi%20Point,%20I%20need%20help%20with%20my%20medicine%20order." target="_blank" style="text-decoration:none;background:#f7fbfc;border:1px solid #e0eef0;border-radius:12px;padding:12px 5px;color:var(--text-dark);font-size:9px;font-weight:600;"><i class="fa-brands fa-whatsapp" style="font-size:18px;color:#25a863;display:block;margin-bottom:5px;"></i>WhatsApp Help</a>
             </div>
         </section>
-
     </main>
-
-    <!-- All Categories Sheet -->
-    <div class="category-sheet" id="categorySheet">
-        <div class="sheet-handle"></div>
-        <div class="sheet-title">
-            <h3>All Medicine Categories</h3>
-            <button class="sheet-close" id="sheetClose" type="button"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="all-cat-grid">
-            <a class="all-cat-link" href="category.html?category=antibiotic"><i class="fa-solid fa-capsules"></i>Antibiotic</a>
-            <a class="all-cat-link" href="category.html?category=cough-cold"><i class="fa-solid fa-temperature-half"></i>Cough &amp; Cold</a>
-            <a class="all-cat-link" href="category.html?category=cut-pain"><i class="fa-solid fa-bandage"></i>Cut &amp; Pain</a>
-            <a class="all-cat-link" href="category.html?category=wound-fever"><i class="fa-solid fa-kit-medical"></i>Wound &amp; Fever</a>
-            <a class="all-cat-link" href="category.html?category=baby-care"><i class="fa-solid fa-baby"></i>Baby Care</a>
-            <a class="all-cat-link" href="category.html?category=eye-care"><i class="fa-solid fa-eye"></i>Eye Care</a>
-            <a class="all-cat-link" href="category.html?category=skin-hair-care"><i class="fa-solid fa-pump-soap"></i>Skin &amp; Hair Care</a>
-            <a class="all-cat-link" href="category.html?category=itching"><i class="fa-solid fa-hand-dots"></i>Itching</a>
-            <a class="all-cat-link" href="category.html?category=allergy"><i class="fa-solid fa-head-side-cough"></i>Allergy</a>
-            <a class="all-cat-link" href="category.html?category=multi-vitamin"><i class="fa-solid fa-pills"></i>Multi Vitamin</a>
-            <a class="all-cat-link" href="category.html?category=sexual-wellness"><i class="fa-solid fa-heart"></i>Sexual Wellness</a>
-            <a class="all-cat-link" href="category.html?category=feminine-care-hygiene"><i class="fa-solid fa-person-dress"></i>Feminine Care / Hygiene</a>
-            <a class="all-cat-link" href="category.html?category=period-care"><i class="fa-solid fa-droplet"></i>Period Care</a>
-            <a class="all-cat-link" href="category.html?category=fracture-care"><i class="fa-solid fa-bone"></i>Fracture Care</a>
-            <a class="all-cat-link" href="category.html?category=sanitary-antiseptic"><i class="fa-solid fa-spray-can-sparkles"></i>Sanitary &amp; Antiseptic</a>
-            <a class="all-cat-link" href="category.html?category=baby-food"><i class="fa-solid fa-bottle-baby"></i>Baby Food</a>
-            <a class="all-cat-link" href="category.html?category=gastric-acidity"><i class="fa-solid fa-leaf"></i>Gastric &amp; Acidity</a>
-            <a class="all-cat-link" href="category.html?category=diabetes-bp-care"><i class="fa-solid fa-heart-pulse"></i>Diabetes &amp; BP Care</a>
-            <a class="all-cat-link" href="category.html?category=calcium-iron"><i class="fa-solid fa-tablets"></i>Calcium &amp; Iron</a>
-            <a class="all-cat-link" href="category.html?category=first-aid-medical-supplies"><i class="fa-solid fa-kit-medical"></i>First Aid &amp; Medical Supplies</a>
-        </div>
-    </div>
-
-
-    <script>
-        const quickMoreBtn = document.getElementById('quickMore');
-        const categorySheet = document.getElementById('categorySheet');
-        const sheetClose = document.getElementById('sheetClose');
-        if (quickMoreBtn && categorySheet) {
-            quickMoreBtn.addEventListener('click', function(e){
-                e.preventDefault();
-                categorySheet.classList.add('active');
-            });
-        }
-        if (sheetClose && categorySheet) {
-            sheetClose.addEventListener('click', function(){
-                categorySheet.classList.remove('active');
-            });
-        }
-        document.querySelectorAll('.all-cat-link').forEach(function(link){
-            link.addEventListener('click', function(){
-                categorySheet.classList.remove('active');
-            });
-        });
-    </script>
 
     <!-- Bottom Navigation (Linked with Repo files) -->
     <nav class="bottom-nav">
@@ -452,6 +392,33 @@
 
 <!-- JavaScript for Functionality -->
 <script>
+    // --- Hero Slider ---
+    const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+    const heroDots = Array.from(document.querySelectorAll('.hero-dot'));
+    let heroIndex = 0;
+    let heroTimer;
+
+    function showHeroSlide(index){
+        heroIndex = (index + heroSlides.length) % heroSlides.length;
+        heroSlides.forEach((slide,i)=>slide.classList.toggle('active', i===heroIndex));
+        heroDots.forEach((dot,i)=>dot.classList.toggle('active', i===heroIndex));
+    }
+
+    function startHeroSlider(){
+        clearInterval(heroTimer);
+        heroTimer = setInterval(()=>showHeroSlide(heroIndex+1), 4200);
+    }
+
+    heroDots.forEach((dot)=>{
+        dot.addEventListener('click', ()=>{
+            showHeroSlide(Number(dot.dataset.slide));
+            startHeroSlider();
+        });
+    });
+
+    showHeroSlide(0);
+    startHeroSlider();
+
     // --- Side Menu Logic ---
     const menuToggle = document.getElementById('menuToggle');
     const sideMenu = document.getElementById('sideMenu');
