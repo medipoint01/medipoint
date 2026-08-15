@@ -186,6 +186,175 @@
         .category-card h3 { font-size: 12px; font-weight: 600; color: var(--text-dark); margin-bottom: 5px; line-height: 1.3; pointer-events: none; }
         .view-all { font-size: 11px; color: var(--primary-blue); text-decoration: none; font-weight: 500; pointer-events: none; }
 
+
+        /* --- Professional Health Tips & Contact Section --- */
+        .health-contact-section{
+            padding:26px 14px 34px;
+            background:linear-gradient(180deg,#f7fcfd 0%,#ffffff 70%);
+            border-top:1px solid #e4eff1;
+        }
+        .hc-heading{
+            text-align:center;
+            margin-bottom:16px;
+        }
+        .hc-kicker{
+            display:inline-flex;
+            align-items:center;
+            gap:5px;
+            font-size:8px;
+            font-weight:700;
+            letter-spacing:.8px;
+            color:var(--secondary-green);
+            text-transform:uppercase;
+            margin-bottom:5px;
+        }
+        .hc-title{
+            margin:0;
+            color:var(--primary-blue);
+            font-size:20px;
+            font-weight:700;
+            line-height:1.2;
+        }
+        .hc-subtitle{
+            margin:5px 0 0;
+            color:var(--text-light);
+            font-size:9.5px;
+            line-height:1.45;
+        }
+        .health-tips{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:9px;
+            margin-bottom:18px;
+        }
+        .health-tip{
+            position:relative;
+            background:#fff;
+            border:1px solid #dfecef;
+            border-radius:14px;
+            padding:12px 10px;
+            box-shadow:0 5px 16px rgba(8,107,140,.055);
+            overflow:hidden;
+        }
+        .health-tip::after{
+            content:"";
+            position:absolute;
+            width:34px;
+            height:34px;
+            right:-8px;
+            top:-8px;
+            border-radius:50%;
+            background:#eef8fa;
+        }
+        .tip-icon{
+            width:30px;
+            height:30px;
+            display:grid;
+            place-items:center;
+            border-radius:9px;
+            background:#edf8fa;
+            color:var(--primary-blue);
+            font-size:14px;
+            margin-bottom:8px;
+        }
+        .health-tip strong{
+            display:block;
+            color:var(--text-dark);
+            font-size:10px;
+            margin-bottom:3px;
+        }
+        .health-tip span{
+            display:block;
+            color:var(--text-light);
+            font-size:8.4px;
+            line-height:1.4;
+        }
+        .contact-box{
+            position:relative;
+            background:linear-gradient(135deg,#086b8c 0%,#0b7898 55%,#25a863 140%);
+            color:#fff;
+            border-radius:18px;
+            padding:18px 13px 15px;
+            overflow:hidden;
+            box-shadow:0 10px 25px rgba(8,107,140,.18);
+        }
+        .contact-box::before,
+        .contact-box::after{
+            content:"";
+            position:absolute;
+            border-radius:50%;
+            background:rgba(255,255,255,.08);
+            pointer-events:none;
+        }
+        .contact-box::before{width:90px;height:90px;right:-35px;top:-35px;}
+        .contact-box::after{width:55px;height:55px;left:-25px;bottom:-22px;}
+        .contact-head{
+            position:relative;
+            z-index:1;
+            display:flex;
+            align-items:center;
+            gap:9px;
+            margin-bottom:11px;
+        }
+        .contact-main-icon{
+            width:34px;
+            height:34px;
+            border-radius:10px;
+            display:grid;
+            place-items:center;
+            background:rgba(255,255,255,.14);
+            border:1px solid rgba(255,255,255,.2);
+            font-size:15px;
+            flex:none;
+        }
+        .contact-box h3{
+            margin:0 0 2px;
+            font-size:15px;
+            font-weight:700;
+        }
+        .contact-box p{
+            margin:0;
+            font-size:8.6px;
+            opacity:.9;
+            line-height:1.4;
+        }
+        .contact-links{
+            position:relative;
+            z-index:1;
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:7px;
+        }
+        .contact-link{
+            display:flex;
+            align-items:center;
+            gap:6px;
+            min-height:36px;
+            padding:7px 8px;
+            border-radius:9px;
+            background:rgba(255,255,255,.1);
+            border:1px solid rgba(255,255,255,.2);
+            color:#fff;
+            text-decoration:none;
+            font-size:8px;
+            font-weight:600;
+        }
+        .contact-link i{font-size:12px;width:14px;text-align:center;}
+        .contact-footer{
+            position:relative;
+            z-index:1;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:8px;
+            margin-top:11px;
+            padding-top:9px;
+            border-top:1px solid rgba(255,255,255,.16);
+            font-size:7.5px;
+            opacity:.82;
+        }
+        .contact-footer strong{font-size:8px;opacity:1;}
+
         /* --- Bottom Navigation --- */
         .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 414px; background-color: var(--white); display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid var(--border-color); z-index: 40; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
         .nav-item { display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--text-light); text-decoration: none; width: 20%; transition: color 0.3s; }
@@ -394,7 +563,7 @@
         <section class="hero">
             <div class="hero-slider" id="heroSlider">
                 <div class="hero-slide active">
-                    <img src="my-photo.png" alt="Medi Point Pharmacist">
+                    <img src="medicine1.png" alt="Medi Point Pharmacist">
                     <div class="hero-content">
                         <div class="trust-badge"><i class="fa-solid fa-shield-heart"></i> YOUR TRUSTED<br>HEALTHCARE PARTNER</div>
                         <h2>Good Health,<br>Better Life</h2>
@@ -406,8 +575,8 @@
                     </div>
                 </div>
                 <div class="hero-slide">
-                    <!-- USER IMAGE: upload your medicine banner to GitHub as medicine-banner.jpg -->
-                    <img src="medicine-banner.jpg" alt="Medicine Banner" onerror="this.style.opacity='0';">
+                    <!-- User uploaded medicine image -->
+                    <img src="medicine2.png" alt="Medicine Banner" onerror="this.style.opacity='0';">
                     <div class="hero-content">
                         <div class="trust-badge"><i class="fa-solid fa-capsules"></i> QUALITY MEDICINES</div>
                         <h2>Medicines<br>Made Easy</h2>
@@ -419,7 +588,7 @@
                     </div>
                 </div>
                 <div class="hero-slide">
-                    <img src="https://images.unsplash.com/photo-1580281657527-47f249e8f0df?auto=format&fit=crop&w=900&q=85" alt="Healthcare support">
+                    <img src="medicine3.png" alt="Healthcare support">
                     <div class="hero-content">
                         <div class="trust-badge"><i class="fa-solid fa-heart-pulse"></i> CARE THAT COMES TO YOU</div>
                         <h2>Healthcare<br>At Your Door</h2>
@@ -502,6 +671,61 @@
                 <a href="https://wa.me/916206408813?text=Hello%20Medi%20Point,%20I%20need%20help%20with%20my%20medicine%20order." target="_blank" style="text-decoration:none;background:#f7fbfc;border:1px solid #e0eef0;border-radius:12px;padding:12px 5px;color:var(--text-dark);font-size:9px;font-weight:600;"><i class="fa-brands fa-whatsapp" style="font-size:18px;color:#25a863;display:block;margin-bottom:5px;"></i>WhatsApp Help</a>
             </div>
         </section>
+
+        <!-- Professional Health Tips & Contact -->
+        <section class="health-contact-section">
+            <div class="hc-heading">
+                <div class="hc-kicker"><i class="fa-solid fa-heart-pulse"></i> HEALTH & WELLNESS</div>
+                <h2 class="hc-title">Smart Health, Better Life</h2>
+                <p class="hc-subtitle">Simple everyday habits to support your health and wellbeing.</p>
+            </div>
+
+            <div class="health-tips">
+                <div class="health-tip">
+                    <div class="tip-icon"><i class="fa-solid fa-glass-water"></i></div>
+                    <strong>Stay Hydrated</strong>
+                    <span>Keep water nearby and stay hydrated through the day.</span>
+                </div>
+                <div class="health-tip">
+                    <div class="tip-icon"><i class="fa-solid fa-apple-whole"></i></div>
+                    <strong>Eat Balanced</strong>
+                    <span>Choose a balanced mix of fruits, vegetables and meals.</span>
+                </div>
+                <div class="health-tip">
+                    <div class="tip-icon"><i class="fa-solid fa-person-walking"></i></div>
+                    <strong>Keep Moving</strong>
+                    <span>Regular walking and movement can support overall wellness.</span>
+                </div>
+                <div class="health-tip">
+                    <div class="tip-icon"><i class="fa-solid fa-moon"></i></div>
+                    <strong>Sleep Well</strong>
+                    <span>Give your body enough time for rest and recovery.</span>
+                </div>
+            </div>
+
+            <div class="contact-box">
+                <div class="contact-head">
+                    <div class="contact-main-icon"><i class="fa-solid fa-headset"></i></div>
+                    <div>
+                        <h3>Need Healthcare Support?</h3>
+                        <p>Reach MEDI POINT for orders, assistance and quick help.</p>
+                    </div>
+                </div>
+
+                <div class="contact-links">
+                    <a class="contact-link" href="tel:+916206408813"><i class="fa-solid fa-phone"></i><span>Call Us</span></a>
+                    <a class="contact-link" href="https://wa.me/916206408813?text=Hello%20Medi%20Point,%20I%20need%20healthcare%20help." target="_blank"><i class="fa-brands fa-whatsapp"></i><span>WhatsApp</span></a>
+                    <a class="contact-link" href="mailto:medicalpointt001@gmail.com"><i class="fa-solid fa-envelope"></i><span>Email Us</span></a>
+                    <a class="contact-link" href="track-order.html"><i class="fa-solid fa-location-dot"></i><span>Track Order</span></a>
+                </div>
+
+                <div class="contact-footer">
+                    <span><strong>MEDI POINT</strong> • Your Trusted Healthcare Partner</span>
+                    <span>Good Health, Better Life</span>
+                </div>
+            </div>
+        </section>
+
     </main>
 
 
