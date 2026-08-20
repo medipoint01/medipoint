@@ -56,7 +56,7 @@ body{font-family:Arial,Helvetica,sans-serif;color:#16474d;}
 .medicine-name{font-size:12px;font-weight:700;color:#28545a}
 .medicine-price{font-size:12px;font-weight:800;color:#07829a}
 .cart-item-bottom{margin-top:6px;font-size:9px;color:#81969b}.qty-control{display:flex;align-items:center;gap:7px}
-.qty-btn{width:26px;height:26px;border:1px solid #cfe3e6;background:#fff;border-radius:8px;color:#08799a;font-size:17px;font-weight:800;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.18s;box-shadow:0 2px 6px rgba(7,121,153,.08)}
+.qty-btn{width:28px;height:28px;border:1px solid #cfe3e6;background:#fff;border-radius:8px;color:#08799a;font-size:17px;font-weight:800;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.18s;box-shadow:0 2px 6px rgba(7,121,153,.08)}
 .qty-btn:hover{background:#eaf8fa;transform:translateY(-1px)}
 .qty-btn:active{transform:scale(.94)}
 .qty-value{min-width:18px;text-align:center;font-size:11px;font-weight:800;color:#244548}
@@ -227,9 +227,10 @@ function saveCurrentCart(){
 
 function changeQuantity(index, delta){
   if(!Number.isInteger(index) || !orderCart[index]) return;
+
   const item = orderCart[index];
-  const current = Number(item.quantity || item.qty || item.count || 1);
-  const next = Math.max(1, current + delta);
+  const current = Math.max(0, Number(item.quantity || item.qty || item.count || 0));
+  const next = Math.max(0, current + Number(delta || 0));
 
   item.quantity = next;
   delete item.qty;
@@ -257,15 +258,31 @@ function renderCart(){
   const container = document.getElementById("cartContainer");
   if(!container) return;
 
+  // Automatically remove medicines whose quantity reaches 0.
+  const before = orderCart.length;
+  orderCart = orderCart.filter(rawItem => {
+    const q = Number(rawItem.quantity || rawItem.qty || rawItem.count || 0);
+    return q > 0;
+  });
+
+  if(orderCart.length !== before){
+    saveCurrentCart();
+  }
+
   if(!orderCart.length){
-    container.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><strong>No medicines found</strong><p style="margin-top:6px;">Please add medicines to your cart first.</p></div>`;
+    container.innerHTML = `<div class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <strong>Your cart is empty</strong>
+      <p style="margin-top:6px;">Add medicines from All Medicines to continue.</p>
+    </div>`;
+    updateCartBadge();
     return;
   }
 
   let subtotal = 0;
   let html = "";
 
-  orderCart.forEach(rawItem=>{
+  orderCart.forEach((rawItem,index)=>{
     const item = normalizeItem(rawItem);
     const itemTotal = item.price * item.quantity;
     subtotal += itemTotal;
@@ -278,9 +295,9 @@ function renderCart(){
       <div class="cart-item-bottom">
         <span>Price: ₹${item.price.toFixed(2)}</span>
         <div class="qty-control" aria-label="Quantity controls">
-          <button type="button" class="qty-btn" onclick="changeQuantity(${orderCart.indexOf(rawItem)}, -1)" aria-label="Decrease quantity">−</button>
+          <button type="button" class="qty-btn" onclick="changeQuantity(${index}, -1)" aria-label="Decrease quantity">−</button>
           <span class="qty-value">${item.quantity}</span>
-          <button type="button" class="qty-btn" onclick="changeQuantity(${orderCart.indexOf(rawItem)}, 1)" aria-label="Increase quantity">+</button>
+          <button type="button" class="qty-btn" onclick="changeQuantity(${index}, 1)" aria-label="Increase quantity">+</button>
         </div>
       </div>
     </div>`;
@@ -293,6 +310,7 @@ function renderCart(){
   </div>`;
 
   container.innerHTML = html;
+  updateCartBadge();
 }
 
 function showPrescription(){
