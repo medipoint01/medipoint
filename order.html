@@ -2,862 +2,528 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MEDI POINT | Order</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Cart | MEDI POINT</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f4f9f9;
-  color:#203b3d
-}
-.header{
-  background:#fff;
-  padding:15px 6%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #e1eeee
-}
-.brand{
-  font-size:21px;
-  font-weight:800;
-  color:#087d80
-}
-.badge{
-  background:#eaf8f8;
-  color:#087d80;
-  padding:8px 13px;
-  border-radius:20px;
-  font-size:11px
-}
-.wrap{
-  max-width:1100px;
-  width:92%;
-  margin:30px auto
-}
-.title{
-  text-align:center;
-  margin-bottom:25px
-}
-.title h1{
-  font-size:28px;
-  margin:0 0 7px
-}
-.title p{
-  color:#789093;
-  font-size:13px
-}
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:22px
-}
-.box{
-  background:#fff;
-  padding:24px;
-  border-radius:17px;
-  border:1px solid #e0ebeb;
-  box-shadow:0 8px 28px #14464b12
-}
-.box h2{
-  font-size:18px;
-  margin:0 0 18px;
-  color:#244548
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f9f9;color:#203b3d}
+.header{width:100%;background:#fff;border-bottom:1px solid #e3eeee;padding:16px 6%;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}.logo-icon{width:42px;height:42px;background:#0c8588;color:#fff;border-radius:11px;display:flex;justify-content:center;align-items:center;font-size:21px}.logo-text h1{font-size:20px;color:#0b7477}.logo-text p{font-size:10px;color:#84999b;margin-top:2px}.header-badge{background:#eaf8f8;color:#08787b;padding:8px 13px;border-radius:20px;font-size:11px;font-weight:600}
+.container{width:92%;max-width:1150px;margin:35px auto 60px}.page-title{text-align:center;margin-bottom:28px}.page-title h2{font-size:28px;color:#173b3d;margin-bottom:7px}.page-title p{font-size:13px;color:#789093}
+.order-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.box{background:#fff;border:1px solid #e0ebeb;border-radius:17px;padding:24px;box-shadow:0 8px 28px rgba(20,70,75,.07)}
+.box-title{display:flex;align-items:center;gap:12px;padding-bottom:17px;margin-bottom:20px;border-bottom:1px solid #edf2f2}.box-icon{width:42px;height:42px;border-radius:10px;background:#eaf8f8;display:flex;justify-content:center;align-items:center;font-size:19px}.box-title h3{font-size:18px;color:#244548}.box-title p{font-size:11px;color:#8a9b9d;margin-top:3px}
+.cart-empty{padding:35px 15px;text-align:center;color:#8a9a9c;font-size:13px}.cart-empty-icon{font-size:38px;margin-bottom:10px}
+.cart-item{border:1px solid #e5eeee;border-radius:11px;padding:13px;margin-bottom:10px;background:#fbfdfd}.cart-item-top{display:flex;justify-content:space-between;gap:10px}.medicine-name{font-size:14px;font-weight:700;color:#244548}.medicine-price{font-size:13px;font-weight:700;color:#0a8588;white-space:nowrap}.cart-item-bottom{display:flex;justify-content:space-between;margin-top:7px;font-size:11px;color:#829396}
+.cart-total{margin-top:17px;padding-top:16px;border-top:1px dashed #d9e6e7}.total-row{display:flex;justify-content:space-between;margin-bottom:7px;font-size:13px;color:#6e8183}.total-row.final{margin-top:9px;font-size:19px;color:#173b3d;font-weight:700}
+.form-group{margin-bottom:17px}.form-group label{display:block;margin-bottom:7px;font-size:13px;font-weight:600;color:#294b4f}.required{color:#df4d4d}.optional{color:#8a9b9d;font-weight:400}
+.input-wrap{position:relative}.input-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:14px;z-index:2}.input-wrap input,.input-wrap textarea,.input-wrap select{width:100%;border:1px solid #d8e5e6;background:#fbfdfd;border-radius:10px;outline:none;font-family:inherit;color:#203b3d;font-size:13px;transition:.2s}.input-wrap input,.input-wrap select{height:47px;padding:0 13px 0 39px}.input-wrap textarea{min-height:105px;padding:13px 13px 13px 39px;resize:vertical}.input-wrap input:focus,.input-wrap textarea:focus,.input-wrap select:focus{border-color:#0d9699;background:#fff;box-shadow:0 0 0 3px rgba(13,150,153,.09)}.input-wrap input::placeholder,.input-wrap textarea::placeholder{color:#a1afb0}.help{display:block;margin-top:5px;color:#8a9b9d;font-size:10px}
+.upload-wrapper{position:relative}#prescription{position:absolute;width:1px;height:1px;opacity:0}.upload-label{min-height:76px;padding:12px;border:1.5px dashed #b9d6d7;border-radius:11px;display:flex;align-items:center;gap:11px;background:#f8fcfc;cursor:pointer;transition:.2s}.upload-label:hover{border-color:#0d9699;background:#f1fbfb}.upload-icon{width:42px;height:42px;border-radius:10px;background:#e5f7f7;display:flex;justify-content:center;align-items:center;font-size:20px}.upload-info strong{display:block;font-size:12px;color:#294b4f}.upload-info small{display:block;font-size:10px;color:#87999b;margin-top:4px}.choose-btn{margin-left:auto;padding:8px 11px;background:#fff;border:1px solid #d5e4e5;border-radius:7px;color:#087c7f;font-size:10px;font-weight:700}
+.file-preview{margin-top:8px}.file-success{background:#eefaf8;border:1px solid #d1ece9;padding:9px 11px;border-radius:8px;color:#347375;font-size:11px}.file-error{background:#fff4f4;border:1px solid #f0d2d2;padding:9px 11px;border-radius:8px;color:#c94c4c;font-size:11px}
+.notice{margin-top:10px;padding:11px 12px;background:#f0f9fa;border-radius:9px;color:#557477;font-size:11px;line-height:1.5}
+.submit-btn{width:100%;height:51px;margin-top:5px;border:none;border-radius:11px;background:linear-gradient(135deg,#14979a,#087579);color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 7px 20px rgba(8,117,121,.22);transition:.2s}.submit-btn:hover{transform:translateY(-1px);box-shadow:0 10px 25px rgba(8,117,121,.28)}.submit-btn:disabled{opacity:.65;cursor:not-allowed;transform:none}.secure-note{text-align:center;margin-top:10px;color:#8a9b9d;font-size:10px;line-height:1.5}.success-message{display:none;margin-top:15px;padding:13px;border-radius:10px;background:#effaf7;border:1px solid #d1eee7;color:#34756b;font-size:12px;text-align:center}
+@media(max-width:800px){.order-grid{grid-template-columns:1fr}.container{width:94%;margin-top:25px}.page-title h2{font-size:23px}}
+@media(max-width:500px){.header{padding:12px 4%}.header-badge{display:none}.box{padding:17px;border-radius:14px}.upload-label{padding:10px}.choose-btn{padding:7px 8px}}
 
-.item{
-  padding:13px;
-  border:1px solid #e4eeee;
-  border-radius:10px;
-  margin-bottom:10px
-}
-.itemtop{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  font-weight:700;
-  font-size:13px
-}
-.itemtop b{
-  color:#078589;
-  white-space:nowrap
-}
-.itembottom{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  font-size:11px;
-  color:#819294;
-  margin-top:9px
-}
+/* ===== HOME PAGE MATCH / MOBILE APP STYLE ===== */
+html,body{background:#eef3f6;}
+body{font-family:Arial,Helvetica,sans-serif;color:#16474d;}
+.mobile-shell{width:100%;max-width:720px;margin:0 auto;background:#fff;min-height:100vh;box-shadow:0 0 28px rgba(0,0,0,.08);padding-bottom:78px;}
+.header{height:64px;background:#fff;border-bottom:1px solid #e6eef0;padding:8px 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo-container{display:flex;align-items:center;gap:8px;min-width:0}
+.brand-logo{width:34px;height:34px;object-fit:contain;border-radius:8px;}
+.logo-text h1{font-size:16px;line-height:1.05;color:#067596;letter-spacing:.4px;margin:0;font-weight:800}
+.logo-text span{display:block;color:#73929a;font-size:7px;letter-spacing:2px;margin-top:4px}
+.header-icons{display:flex;align-items:center;gap:10px}
+.icon-btn{width:30px;height:30px;border:1px solid #d7e9ec;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#087895;background:#fbfefe;text-decoration:none;font-size:13px}
+.hamburger{font-size:16px;color:#007895;cursor:pointer}
+.container{width:100%;max-width:720px;margin:0 auto;padding:18px 12px 20px;background:linear-gradient(180deg,#f8fcfc 0%,#fff 36%);}
+.page-title{text-align:left;margin:4px 6px 14px;padding:2px 0 4px}
+.page-title h2{font-size:20px;color:#075f77;margin-bottom:5px;font-weight:800}
+.page-title p{font-size:10px;color:#799196;line-height:1.45}
+.order-grid{display:block}
+.box{background:#fff;border:1px solid #dcebed;border-radius:13px;padding:14px;margin-bottom:12px;box-shadow:0 5px 18px rgba(21,91,101,.06);animation:fadeUp .45s ease both}
+.box:nth-child(2){animation-delay:.08s}
+.box-title{gap:9px;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #edf3f4}
+.box-icon{width:34px;height:34px;border-radius:9px;background:#eaf8fa;color:#087b99;display:flex;justify-content:center;align-items:center;font-size:16px}
+.box-title h3{font-size:14px;color:#16474d}
+.box-title p{font-size:9px;color:#8aa0a4;margin-top:2px}
+.cart-empty{padding:28px 10px;text-align:center;color:#8ca0a4;font-size:11px}
+.cart-empty-icon{font-size:34px;margin-bottom:8px;animation:floatCart 2s ease-in-out infinite}
+.cart-item{border:1px solid #e1edef;border-radius:10px;padding:11px;margin-bottom:8px;background:#fbfefe;transition:transform .2s ease,box-shadow .2s ease}
+.cart-item:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(7,121,153,.08)}
+.medicine-name{font-size:12px;font-weight:700;color:#28545a}
+.medicine-price{font-size:12px;font-weight:800;color:#07829a}
+.cart-item-bottom{margin-top:6px;font-size:9px;color:#81969b}
+.cart-total{margin-top:11px;padding-top:12px;border-top:1px dashed #cfe0e3}
+.total-row{font-size:11px;color:#72878b;margin-bottom:5px}.total-row.final{font-size:16px;color:#075e74;margin-top:8px}
+.form-group{margin-bottom:12px}.form-group label{font-size:10px;margin-bottom:5px;color:#315860}.input-wrap input,.input-wrap textarea,.input-wrap select{font-size:11px;border-radius:9px;border-color:#d7e8ea;background:#fbfdfd}.input-wrap input,.input-wrap select{height:42px;padding-left:35px}.input-wrap textarea{min-height:85px;padding-left:35px}.input-icon{left:11px;font-size:12px}.help{font-size:8px}.upload-label{min-height:65px;padding:9px;border-radius:10px;background:#f8fcfc}.upload-icon{width:34px;height:34px;font-size:17px;border-radius:9px}.upload-info strong{font-size:10px}.upload-info small{font-size:8px}.choose-btn{font-size:8px;padding:7px 9px}.notice{font-size:9px;padding:9px 10px;line-height:1.45}.submit-btn{height:46px;border-radius:10px;font-size:12px;box-shadow:0 7px 18px rgba(8,117,121,.18);animation:pulseSoft 2.6s infinite}.secure-note{font-size:8px}.success-message{font-size:10px}
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:720px;height:61px;background:rgba(255,255,255,.97);border-top:1px solid #dbe8ea;display:flex;align-items:center;justify-content:space-around;z-index:200;box-shadow:0 -5px 16px rgba(21,72,80,.08)}
+.nav-item{flex:1;text-align:center;text-decoration:none;color:#71878c;font-size:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;position:relative;transition:.2s}
+.nav-item i{font-size:16px}.nav-item.active,.nav-item.cart-active{color:#08799a}.nav-item.active i,.nav-item.cart-active i{transform:translateY(-1px)}
+.cart-badge{position:absolute;top:2px;right:calc(50% - 16px);min-width:15px;height:15px;padding:0 4px;border-radius:10px;background:#e94f5a;color:#fff;font-size:8px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes floatCart{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes pulseSoft{0%,100%{box-shadow:0 7px 18px rgba(8,117,121,.18)}50%{box-shadow:0 9px 23px rgba(8,117,121,.29)}}
+@media(max-width:500px){.header{padding:8px 11px}.brand-logo{width:33px;height:33px}.logo-text h1{font-size:15px}.container{padding:15px 10px 20px}.box{padding:13px}.page-title h2{font-size:19px}}
 
-.qty-box{
-  display:flex;
-  align-items:center;
-  gap:8px
-}
-.qty-btn{
-  width:30px;
-  height:30px;
-  border:0;
-  border-radius:7px;
-  background:#eaf8f8;
-  color:#087d80;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer
-}
-.qty-btn:hover{
-  background:#d5eeee
-}
-.qty{
-  min-width:25px;
-  text-align:center;
-  font-size:13px;
-  font-weight:bold;
-  color:#244548
-}
-
-.total{
-  border-top:1px dashed #d6e4e5;
-  margin-top:15px;
-  padding-top:13px;
-  display:flex;
-  justify-content:space-between;
-  font-size:18px;
-  font-weight:700
-}
-
-label{
-  display:block;
-  font-size:13px;
-  font-weight:700;
-  margin:14px 0 7px
-}
-input,textarea,select{
-  width:100%;
-  border:1px solid #d6e4e5;
-  border-radius:10px;
-  padding:13px;
-  font:inherit;
-  outline:none
-}
-textarea{
-  min-height:100px;
-  resize:vertical
-}
-input:focus,textarea:focus,select:focus{
-  border-color:#0b9699;
-  box-shadow:0 0 0 3px #0b969914
-}
-.submit{
-  width:100%;
-  border:0;
-  border-radius:10px;
-  background:linear-gradient(135deg,#14979a,#087579);
-  color:#fff;
-  padding:15px;
-  margin-top:18px;
-  font-weight:700;
-  cursor:pointer
-}
-.submit:disabled{
-  opacity:.6;
-  cursor:not-allowed
-}
-.note{
-  font-size:11px;
-  text-align:center;
-  color:#829396
-}
-.success{
-  display:none;
-  background:#eefaf7;
-  color:#34756b;
-  padding:13px;
-  border-radius:9px;
-  font-size:12px;
-  margin-top:12px;
-  line-height:1.6
-}
-.tracking{
-  margin-top:22px;
-  text-align:center
-}
-.tracking a{
-  display:inline-block;
-  text-decoration:none;
-  color:#087d80;
-  font-weight:700
-}
-.empty{
-  text-align:center;
-  color:#89999b;
-  font-size:13px;
-  padding:25px
-}
-
-@media(max-width:800px){
-  .grid{grid-template-columns:1fr}
-  .wrap{width:94%}
-}
+.order-history{margin-top:22px}.history-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.history-head h3{font-size:18px;color:#244548}.history-count{font-size:11px;background:#eaf8f8;color:#087c7f;padding:6px 9px;border-radius:999px;font-weight:700}.history-empty{padding:24px 14px;text-align:center;color:#8a9a9c;font-size:12px;border:1px dashed #d7e4e4;border-radius:12px;background:#fbfdfd}.history-card{border:1px solid #e1eeee;border-radius:12px;padding:13px;margin-top:10px;background:linear-gradient(180deg,#fff,#fbfefe);animation:historyIn .35s ease both}.history-card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.history-id{font-size:12px;font-weight:800;color:#0a8588}.history-date{font-size:10px;color:#8a9b9d;margin-top:3px}.history-total{font-size:14px;font-weight:800;color:#173b3d;white-space:nowrap}.history-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.history-pill{font-size:10px;color:#557477;background:#f1f9f9;border:1px solid #dcebec;border-radius:999px;padding:5px 8px}.history-items{margin-top:10px;padding-top:9px;border-top:1px dashed #d8e5e6;font-size:11px;color:#5f7679;line-height:1.55}.history-status{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#2f766c;font-weight:700}.history-dot{width:7px;height:7px;border-radius:50%;background:#39a98f;box-shadow:0 0 0 4px rgba(57,169,143,.10)}
+@keyframes historyIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.clear-history{border:0;background:#fff3f3;color:#c84b4b;border:1px solid #f0d2d2;padding:7px 10px;border-radius:8px;font-size:10px;font-weight:700;cursor:pointer}.clear-history:hover{background:#ffeaea}
+@media(max-width:800px){.order-history{margin-top:16px}.history-head h3{font-size:16px}}
+.my-orders-link{display:block;text-align:center;margin-top:12px;padding:11px 14px;border-radius:11px;background:#eaf8f8;color:#08787b;text-decoration:none;font-size:12px;font-weight:700;border:1px solid #cfe8e8;transition:.2s}.my-orders-link:hover{transform:translateY(-1px);background:#def4f4}
 </style>
 </head>
-
 <body>
-
+<div class="mobile-shell">
 <header class="header">
-  <div class="brand">⚕️ MEDI POINT</div>
-  <div class="badge">🔒 Secure Order</div>
+  <div class="logo-container">
+    <img src="medi-point-logo.png" alt="MEDI POINT Logo" class="brand-logo">
+    <div class="logo-text">
+      <h1>MEDI POINT</h1>
+      <span>— MEDICAL —</span>
+    </div>
+  </div>
+  <div class="header-icons">
+    <a href="tel:+916206408813" class="icon-btn" title="Call Us"><i class="fa-solid fa-phone-volume"></i></a>
+    <i class="fa-solid fa-bars hamburger" aria-hidden="true"></i>
+  </div>
 </header>
 
-<main class="wrap">
+<main class="container">
+  <div class="page-title">
+    <h2>Order Online Medicine Now</h2>
+    <p>Review your medicines and enter your delivery details</p>
+  </div>
 
-<div class="title">
-  <h1>Order Online Medicine Now</h1>
-  <p>Review your medicines and enter your delivery details</p>
-</div>
+  <div class="order-grid">
+    <section class="box">
+      <div class="box-title">
+        <div class="box-icon">🛒</div>
+        <div><h3>Order Summary</h3><p>Your selected medicines</p></div>
+      </div>
+      <div id="cartContainer">
+        <div class="cart-empty"><div class="cart-empty-icon">🛒</div>Loading your medicines...</div>
+      </div>
+    </section>
 
-<div class="grid">
+    <section class="box">
+      <div class="box-title">
+        <div class="box-icon">📍</div>
+        <div><h3>Delivery Details</h3><p>Enter your details to place the order</p></div>
+      </div>
 
-<section class="box">
+      <form id="orderForm" onsubmit="placeOrder(event)">
+        <div class="form-group">
+          <label for="name">Full Name <span class="required">*</span></label>
+          <div class="input-wrap"><span class="input-icon">👤</span><input type="text" id="name" placeholder="Enter your full name" minlength="2" maxlength="60" autocomplete="name" required></div>
+        </div>
 
-<h2>🛒 Order Summary</h2>
+        <div class="form-group">
+          <label for="phone">Mobile Number <span class="required">*</span></label>
+          <div class="input-wrap"><span class="input-icon">📱</span><input type="tel" id="phone" placeholder="Enter 10 digit mobile number" maxlength="10" pattern="[6-9][0-9]{9}" inputmode="numeric" autocomplete="tel" required></div>
+          <small class="help">Enter a valid 10 digit Indian mobile number.</small>
+        </div>
 
-<div id="cart">
-  <div class="empty">Loading medicines...</div>
-</div>
+        <div class="form-group">
+          <label for="address">Delivery Address <span class="required">*</span></label>
+          <div class="input-wrap"><span class="input-icon">🏠</span><textarea id="address" rows="4" minlength="10" maxlength="300" placeholder="House no., street, area, city, PIN" autocomplete="street-address" required></textarea></div>
+        </div>
 
+        <div class="form-group">
+          <label for="prescription">Prescription <span class="optional">(Optional)</span></label>
+          <div class="upload-wrapper">
+            <input type="file" id="prescription" accept="image/jpeg,image/png,image/webp,.pdf" onchange="showPrescription()">
+            <label for="prescription" class="upload-label">
+              <div class="upload-icon">📄</div>
+              <div class="upload-info"><strong>Upload Prescription</strong><small>JPG, PNG, WEBP or PDF • Max 5MB</small></div>
+              <span class="choose-btn">Choose File</span>
+            </label>
+          </div>
+          <div id="filePreview" class="file-preview"></div>
+          <div class="notice">ℹ️ <strong>Prescription Notice:</strong> Prescription medicines may require a valid prescription. Please upload it when applicable.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="payment">Payment Method <span class="required">*</span></label>
+          <div class="input-wrap"><span class="input-icon">💳</span><select id="payment" required><option value="Cash on Delivery">Cash on Delivery</option><option value="UPI / Online Payment">UPI / Online Payment</option></select></div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="orderButton">💬 Confirm Order on WhatsApp</button>
+        <p class="secure-note">🔒 Your details are used only to process your medicine order.</p>
+        <div id="successMessage" class="success-message">✅ Order details prepared successfully.</div>
+        <a href="my-orders.html" class="my-orders-link">📦 View My Orders</a>
+      </form>
+    </section>
+  </div>
+
+<section class="box order-history">
+  <div class="history-head">
+    <h3>📦 My Orders</h3>
+    <div style="display:flex;align-items:center;gap:7px"><span class="history-count" id="orderCount">0 Orders</span><button type="button" class="clear-history" onclick="clearOrderHistory()">Clear</button></div>
+  </div>
+  <div id="orderHistory"></div>
 </section>
-
-
-<section class="box">
-
-<h2>📍 Delivery Details</h2>
-
-<form id="orderForm">
-
-<label>Full Name *</label>
-<input id="name" required minlength="2" placeholder="Enter your full name">
-
-<label>Mobile Number *</label>
-<input
-  id="phone"
-  type="tel"
-  maxlength="10"
-  inputmode="numeric"
-  pattern="[6-9][0-9]{9}"
-  required
-  placeholder="10 digit mobile number"
->
-
-<label>Delivery Address *</label>
-<textarea
-  id="address"
-  required
-  minlength="10"
-  placeholder="House no., street, area, city, PIN"
-></textarea>
-
-<label>Prescription <small>(Optional)</small></label>
-<input id="prescription" type="file" accept="image/*,.pdf">
-<div id="file" style="font-size:11px;color:#688;margin-top:6px"></div>
-
-<label>Payment Method *</label>
-<select id="payment">
-  <option>Cash on Delivery</option>
-  <option>UPI / Online Payment</option>
-</select>
-
-<div style="margin-top:10px;padding:11px;background:#f0f9fa;border-radius:9px;font-size:11px;color:#557477">
-ℹ️ Prescription medicines may require a valid prescription.
-</div>
-
-<button class="submit" id="btn" type="submit">
-💬 Confirm Order on WhatsApp
-</button>
-
-<p class="note">
-Your order will be saved and sent to MEDI POINT for confirmation.
-</p>
-
-<div class="success" id="success"></div>
-
-</form>
-
-</section>
-
-</div>
-
-<div class="box tracking">
-
-<h2>📦 Track Your Order</h2>
-
-<p style="font-size:12px;color:#789">
-Already placed an order? Track it using your Order ID.
-</p>
-
-<a href="tracking.html">
-🔎 Open Order Tracking
-</a>
-
-</div>
-
 </main>
 
+<nav class="bottom-nav">
+  <a href="index.html" class="nav-item"><i class="fa-solid fa-house"></i><span>Home</span></a>
+  <a href="category.html" class="nav-item"><i class="fa-solid fa-border-all"></i><span>All Medicines</span></a>
+  <a href="order.html" class="nav-item cart-active"><i class="fa-solid fa-bag-shopping"></i><span>View Cart</span><span class="cart-badge" id="cartBadge">0</span></a>
+  <a href="login.html" class="nav-item"><i class="fa-regular fa-user"></i><span>Account</span></a>
+  <a href="javascript:void(0)" class="nav-item"><i class="fa-solid fa-ellipsis"></i><span>More</span></a>
+</nav>
+</div>
 
-<script type="module">
+<script>
+/* =====================================================
+   MEDI POINT ORDER SYSTEM
+   IMPORTANT: replace this with your fixed pharmacy
+   WhatsApp number, country code included.
+   Example: 919876543210
+===================================================== */
+const PHARMACY_WHATSAPP = "91XXXXXXXXXX";
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+let orderCart = [];
 
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+function loadCartData(){
+  let localCart = null;
+  const possibleKeys = ["cart","Cart","cartItems","medicinesCart","medicineCart","mediPointCart"];
 
-
-const firebaseConfig = {
-
-  apiKey:"AIzaSyDDY8sEtMapyVhiQd5fAcrB599dsgFwMcE",
-
-  authDomain:"medipoint-f4616.firebaseapp.com",
-
-  projectId:"medipoint-f4616",
-
-  storageBucket:"medipoint-f4616.firebasestorage.app",
-
-  messagingSenderId:"108492737336",
-
-  appId:"1:180492737336:web:5ebf5565666ddd63ed43a12f0d",
-
-  measurementId:"G-Q8X32M4CKF"
-
-};
-
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-const PHARMACY_WHATSAPP = "916206408813";
-
-let cartData = [];
-
-
-/* =========================
-   READ CART
-========================= */
-
-function readCart(){
-
-  let found = null;
-
-  const keys = [
-    "cart",
-    "Cart",
-    "cartItems",
-    "medicinesCart",
-    "medicineCart",
-    "mediPointCart"
-  ];
-
-  for(const key of keys){
-
+  for(const key of possibleKeys){
     try{
-
-      const data = JSON.parse(localStorage.getItem(key));
-
-      if(Array.isArray(data) && data.length){
-
-        found = data;
-        break;
-
-      }
-
+      const stored = localStorage.getItem(key);
+      if(!stored) continue;
+      const parsed = JSON.parse(stored);
+      if(Array.isArray(parsed) && parsed.length){ localCart = parsed; break; }
     }catch(error){}
-
   }
 
-  cartData = found || [];
+  let jsCart = null;
+  try{
+    if(typeof cart !== "undefined" && Array.isArray(cart)) jsCart = cart;
+  }catch(error){}
 
+  orderCart = localCart?.length ? localCart : (jsCart?.length ? jsCart : []);
   renderCart();
+  updateCartBadge();
 }
 
+function updateCartBadge(){
+  const badge = document.getElementById("cartBadge");
+  if(!badge) return;
+  const count = orderCart.reduce((sum,item)=>sum + Number(item.quantity || item.qty || item.count || 1), 0);
+  badge.textContent = count > 99 ? "99+" : String(count);
+  badge.style.display = count > 0 ? "flex" : "none";
+}
 
-/* =========================
-   NORMALIZE ITEM
-========================= */
-
-function normalizeItem(x){
-
+function normalizeItem(item){
+  const name = item.name || item.medicineName || item.title || item.productName || "Medicine";
+  const price = Number(item.price || item.medicinePrice || item.amount || 0);
+  const quantity = Number(item.quantity || item.qty || item.count || 1);
   return {
-
-    name:String(
-      x.name ||
-      x.medicineName ||
-      x.title ||
-      x.productName ||
-      "Medicine"
-    ),
-
-    price:Number(
-      x.price ||
-      x.medicinePrice ||
-      x.amount ||
-      0
-    ) || 0,
-
-    qty:Number(
-      x.quantity ||
-      x.qty ||
-      x.count ||
-      1
-    ) || 1
-
+    name:String(name),
+    price:isNaN(price) ? 0 : price,
+    quantity:isNaN(quantity) || quantity < 1 ? 1 : quantity
   };
-
 }
-
-
-/* =========================
-   RENDER CART
-========================= */
 
 function renderCart(){
+  const container = document.getElementById("cartContainer");
+  if(!container) return;
 
-  const el = document.getElementById("cart");
-
-  if(!cartData.length){
-
-    el.innerHTML = `
-      <div class="empty">
-        🛒 No medicines found in cart.
-      </div>
-    `;
-
+  if(!orderCart.length){
+    container.innerHTML = `<div class="cart-empty"><div class="cart-empty-icon">🛒</div><strong>No medicines found</strong><p style="margin-top:6px;">Please add medicines to your cart first.</p></div>`;
     return;
   }
 
-  let total = 0;
-
+  let subtotal = 0;
   let html = "";
 
-  cartData.forEach((x,index)=>{
+  orderCart.forEach(rawItem=>{
+    const item = normalizeItem(rawItem);
+    const itemTotal = item.price * item.quantity;
+    subtotal += itemTotal;
 
-    const item = normalizeItem(x);
-
-    const amount = item.price * item.qty;
-
-    total += amount;
-
-    html += `
-
-      <div class="item">
-
-        <div class="itemtop">
-
-          <span>
-            ${esc(item.name)}
-          </span>
-
-          <b>
-            ₹${amount.toFixed(2)}
-          </b>
-
-        </div>
-
-        <div class="itembottom">
-
-          <span>
-            ₹${item.price.toFixed(2)} each
-          </span>
-
-          <div class="qty-box">
-
-            <button
-              type="button"
-              class="qty-btn"
-              onclick="changeQty(${index},-1)"
-            >
-              −
-            </button>
-
-            <span class="qty">
-              ${item.qty}
-            </span>
-
-            <button
-              type="button"
-              class="qty-btn"
-              onclick="changeQty(${index},1)"
-            >
-              +
-            </button>
-
-          </div>
-
-        </div>
-
+    html += `<div class="cart-item">
+      <div class="cart-item-top">
+        <div class="medicine-name">${escapeHTML(item.name)}</div>
+        <div class="medicine-price">₹${itemTotal.toFixed(2)}</div>
       </div>
-    `;
-
+      <div class="cart-item-bottom">
+        <span>Price: ₹${item.price.toFixed(2)}</span>
+        <span>Quantity: ${item.quantity}</span>
+      </div>
+    </div>`;
   });
 
-  html += `
+  html += `<div class="cart-total">
+    <div class="total-row"><span>Subtotal</span><strong>₹${subtotal.toFixed(2)}</strong></div>
+    <div class="total-row"><span>Delivery</span><strong>${subtotal > 0 ? "Free" : "—"}</strong></div>
+    <div class="total-row final"><span>Total</span><strong>₹${subtotal.toFixed(2)}</strong></div>
+  </div>`;
 
-    <div class="total">
-
-      <span>Total</span>
-
-      <span>
-        ₹${total.toFixed(2)}
-      </span>
-
-    </div>
-
-  `;
-
-  el.innerHTML = html;
+  container.innerHTML = html;
 }
 
+function showPrescription(){
+  const input = document.getElementById("prescription");
+  const preview = document.getElementById("filePreview");
+  preview.innerHTML = "";
 
-/* =========================
-   PLUS / MINUS
-========================= */
+  if(!input?.files?.length) return;
 
-window.changeQty = function(index,change){
+  const file = input.files[0];
+  const maxSize = 5 * 1024 * 1024;
+  const allowedTypes = ["image/jpeg","image/png","image/webp","application/pdf"];
 
-  if(!cartData[index]) return;
-
-  const item = normalizeItem(cartData[index]);
-
-  item.qty += change;
-
-  if(item.qty <= 0){
-
-    cartData.splice(index,1);
-
-  }else{
-
-    cartData[index].quantity = item.qty;
-
-  }
-
-  localStorage.setItem(
-    "mediPointCart",
-    JSON.stringify(cartData)
-  );
-
-  renderCart();
-
-};
-
-
-/* =========================
-   PRESCRIPTION
-========================= */
-
-document
-.getElementById("prescription")
-.addEventListener("change",function(){
-
-  const file = this.files[0];
-
-  document.getElementById("file").textContent =
-    file ? "📎 " + file.name : "";
-
-  if(file && file.size > 5 * 1024 * 1024){
-
-    alert("Prescription must be under 5MB.");
-
-    this.value = "";
-
-    document.getElementById("file").textContent = "";
-
-  }
-
-});
-
-
-/* =========================
-   PLACE ORDER
-========================= */
-
-document
-.getElementById("orderForm")
-.addEventListener("submit",placeOrder);
-
-
-async function placeOrder(e){
-
-  e.preventDefault();
-
-  if(!cartData.length){
-
-    alert("Your cart is empty.");
-
+  if(file.size > maxSize){
+    preview.innerHTML = `<div class="file-error">❌ File size must be less than 5MB.</div>`;
+    input.value = "";
     return;
   }
 
-
-  const name =
-    document.getElementById("name").value.trim();
-
-  const phone =
-    document.getElementById("phone").value.trim();
-
-  const address =
-    document.getElementById("address").value.trim();
-
-  const payment =
-    document.getElementById("payment").value;
-
-
-  if(!/^[6-9]\d{9}$/.test(phone)){
-
-    alert("Enter a valid 10 digit mobile number.");
-
+  if(!allowedTypes.includes(file.type)){
+    preview.innerHTML = `<div class="file-error">❌ Only JPG, PNG, WEBP and PDF files are allowed.</div>`;
+    input.value = "";
     return;
   }
 
+  const sizeKB = Math.round(file.size / 1024);
+  preview.innerHTML = `<div class="file-success">📎 <strong>${escapeHTML(file.name)}</strong> <span>(${sizeKB} KB)</span></div>`;
+}
 
-  const btn =
-    document.getElementById("btn");
-
-  btn.disabled = true;
-
-  btn.textContent = "⏳ Creating Order...";
-
-
+function saveOrderToMyOrders(orderData){
   try{
+    const key = "mediPointOrders";
+    const existing = JSON.parse(localStorage.getItem(key) || "[]");
+    existing.unshift(orderData);
+    localStorage.setItem(key, JSON.stringify(existing));
+    return true;
+  }catch(error){
+    console.error("Could not save order", error);
+    return false;
+  }
+}
 
-    const date = new Date();
+function placeOrder(event){
+  event.preventDefault();
 
-    const orderId =
-      "MP-" +
-      date.getFullYear() +
-      String(date.getMonth()+1).padStart(2,"0") +
-      String(date.getDate()).padStart(2,"0") +
-      "-" +
-      Math.floor(10000 + Math.random()*90000);
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const payment = document.getElementById("payment").value;
+  const prescription = document.getElementById("prescription");
+  const button = document.getElementById("orderButton");
+  const success = document.getElementById("successMessage");
 
+  if(name.length < 2){
+    alert("Please enter your full name.");
+    document.getElementById("name").focus();
+    return;
+  }
 
-    let total = 0;
+  if(!/^[6-9][0-9]{9}$/.test(phone)){
+    alert("Please enter a valid 10 digit Indian mobile number.");
+    document.getElementById("phone").focus();
+    return;
+  }
 
-    const items = cartData.map(x=>{
+  if(address.length < 10){
+    alert("Please enter your complete delivery address.");
+    document.getElementById("address").focus();
+    return;
+  }
 
-      const item = normalizeItem(x);
+  if(!PHARMACY_WHATSAPP || PHARMACY_WHATSAPP.includes("X")){
+    alert("Please add the pharmacy WhatsApp number in the code first.");
+    return;
+  }
 
-      const amount =
-        item.price * item.qty;
+  const now = new Date();
+  const orderID = "MP-" + now.getFullYear() +
+    String(now.getMonth()+1).padStart(2,"0") +
+    String(now.getDate()).padStart(2,"0") + "-" +
+    Math.floor(10000 + Math.random()*90000);
 
-      total += amount;
+  const orderDate = now.toLocaleDateString("en-IN");
+  const orderTime = now.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"});
 
-      return {
+  let prescriptionName = "Not uploaded";
+  if(prescription?.files?.length) prescriptionName = prescription.files[0].name;
 
-        name:item.name,
+  let itemsMessage = "";
+  let total = 0;
 
-        price:item.price,
-
-        quantity:item.qty,
-
-        amount:amount
-
-      };
-
+  if(orderCart.length){
+    orderCart.forEach((rawItem,index)=>{
+      const item = normalizeItem(rawItem);
+      const itemTotal = item.price * item.quantity;
+      total += itemTotal;
+      itemsMessage += `${index+1}. ${item.name}\n   Qty: ${item.quantity}\n   Price: ₹${item.price.toFixed(2)}\n   Amount: ₹${itemTotal.toFixed(2)}\n\n`;
     });
+  }else{
+    itemsMessage = "No cart item details available.\n";
+  }
 
+  const message = `🏥 *MEDI POINT*
+━━━━━━━━━━━━━━━━━━━━
 
-    const prescription =
-      document.getElementById("prescription").files[0]?.name ||
-      "Not uploaded";
+🧾 *NEW MEDICINE ORDER*
 
+🔖 Order ID: *${orderID}*
+📅 Date: ${orderDate}
+⏰ Time: ${orderTime}
 
-    const order = {
+👤 *CUSTOMER DETAILS*
 
-      orderId:orderId,
-
-      customerName:name,
-
-      phone:phone,
-
-      address:address,
-
-      payment:payment,
-
-      prescription:prescription,
-
-      items:items,
-
-      total:total,
-
-      status:"Order Placed",
-
-      createdAt:serverTimestamp(),
-
-      updatedAt:serverTimestamp()
-
-    };
-
-
-    /* SAVE FIREBASE */
-
-    await addDoc(
-      collection(db,"orders"),
-      order
-    );
-
-
-    /* WHATSAPP MESSAGE */
-
-    let medicineText = "";
-
-    items.forEach((item,index)=>{
-
-      medicineText +=
-        `${index+1}. ${item.name} | Qty: ${item.quantity} | ₹${item.amount.toFixed(2)}\n`;
-
-    });
-
-
-    const message =
-
-`🏥 *MEDI POINT - NEW ORDER*
-
-🧾 Order ID: *${orderId}*
-
-👤 *CUSTOMER*
 Name: ${name}
 Mobile: ${phone}
 
-📍 *ADDRESS*
+📍 *DELIVERY ADDRESS*
+
 ${address}
 
 💊 *MEDICINES*
-${medicineText}
 
-💰 *TOTAL:* ₹${total.toFixed(2)}
+${itemsMessage}
+💰 *TOTAL AMOUNT*
 
-💳 *PAYMENT:* ${payment}
+₹${total.toFixed(2)}
 
-📄 *PRESCRIPTION:* ${prescription}
+💳 *PAYMENT METHOD*
 
-Please confirm this order.`;
+${payment}
 
+📄 *PRESCRIPTION*
 
-    const whatsappURL =
-      "https://wa.me/" +
-      PHARMACY_WHATSAPP +
-      "?text=" +
-      encodeURIComponent(message);
+${prescriptionName}
 
+━━━━━━━━━━━━━━━━━━━━
 
-    document.getElementById("success").style.display = "block";
+Please confirm my medicine order.
 
-    document.getElementById("success").innerHTML = `
+Thank you,
+*MEDI POINT*`;
 
-      ✅ <b>Order Created Successfully!</b><br>
+  const savedItems = orderCart.map(rawItem=>{
+    const item=normalizeItem(rawItem);
+    return {name:item.name, price:item.price, quantity:item.quantity, amount:item.price*item.quantity};
+  });
 
-      Order ID:
-      <b>${orderId}</b><br><br>
+  saveOrderRecord({
+    orderID,
+    date:orderDate,
+    time:orderTime,
+    name,
+    phone,
+    address,
+    payment,
+    prescriptionName,
+    items:savedItems,
+    total,
+    status:"Order Saved"
+  });
 
-      <a
-        href="tracking.html?id=${orderId}"
-        style="color:#087d80;font-weight:bold"
-      >
-        📦 Track Order
-      </a>
+  const orderData = {
+    orderID,
+    date: orderDate,
+    time: orderTime,
+    customer: { name, phone, address },
+    items: orderCart.map(normalizeItem),
+    total,
+    payment,
+    prescription: prescriptionName,
+    status: "Order Placed",
+    createdAt: new Date().toISOString()
+  };
 
-    `;
+  saveOrderToMyOrders(orderData);
 
+  const whatsappURL = "https://wa.me/" + PHARMACY_WHATSAPP + "?text=" + encodeURIComponent(message);
 
-    /* CLEAR CART */
+  button.disabled = true;
+  button.innerHTML = "⏳ Opening WhatsApp...";
+  success.style.display = "block";
 
-    localStorage.removeItem("cart");
+  setTimeout(()=>{
+    window.open(whatsappURL,"_blank");
+    button.disabled = false;
+    button.innerHTML = "💬 Confirm Order on WhatsApp";
+  },500);
+}
 
-    localStorage.removeItem("Cart");
+function escapeHTML(value){
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 
-    localStorage.removeItem("cartItems");
+function getSavedOrders(){
+  try{
+    const raw=localStorage.getItem("mediPointOrders");
+    const parsed=raw?JSON.parse(raw):[];
+    return Array.isArray(parsed)?parsed:[];
+  }catch(e){return [];}
+}
 
-    localStorage.removeItem("medicinesCart");
+function saveOrderRecord(order){
+  const orders=getSavedOrders();
+  orders.unshift(order);
+  localStorage.setItem("mediPointOrders",JSON.stringify(orders));
+  renderOrderHistory();
+}
 
-    localStorage.removeItem("medicineCart");
-
-    localStorage.setItem(
-      "mediPointCart",
-      JSON.stringify([])
-    );
-
-
-    cartData = [];
-
-    renderCart();
-
-
-    /* OPEN WHATSAPP */
-
-    window.open(
-      whatsappURL,
-      "_blank"
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      "Order save nahi hua.\n\nFirebase Error:\n" +
-      error.message
-    );
-
-  }finally{
-
-    btn.disabled = false;
-
-    btn.textContent =
-      "💬 Confirm Order on WhatsApp";
-
+function renderOrderHistory(){
+  const box=document.getElementById("orderHistory");
+  const count=document.getElementById("orderCount");
+  if(!box||!count) return;
+  const orders=getSavedOrders();
+  count.textContent=orders.length+" Order"+(orders.length===1?"":"s");
+  if(!orders.length){
+    box.innerHTML='<div class="history-empty">🧾 No order history yet.<br>Your confirmed orders will be saved here automatically.</div>';
+    return;
   }
-
+  box.innerHTML=orders.map((o)=>{
+    const itemLines=(o.items||[]).map(i=>`${escapeHTML(i.name)} × ${Number(i.quantity)||1}`).join(" • ")||"Medicine order";
+    return `<div class="history-card">
+      <div class="history-card-top">
+        <div><div class="history-id">${escapeHTML(o.orderID||"MEDI POINT")}</div><div class="history-date">${escapeHTML(o.date||"")} • ${escapeHTML(o.time||"")}</div></div>
+        <div class="history-total">₹${Number(o.total||0).toFixed(2)}</div>
+      </div>
+      <div class="history-meta">
+        <span class="history-pill">${escapeHTML(o.name||"Customer")}</span>
+        <span class="history-pill">${escapeHTML(o.payment||"Payment")}</span>
+        <span class="history-status"><span class="history-dot"></span>${escapeHTML(o.status||"Order Saved")}</span>
+      </div>
+      <div class="history-items">💊 ${itemLines}</div>
+    </div>`;
+  }).join("");
 }
 
-
-/* =========================
-   ESCAPE HTML
-========================= */
-
-function esc(s){
-
-  return String(s).replace(
-    /[&<>"']/g,
-    m=>({
-
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#039;"
-
-    }[m])
-  );
-
+function clearOrderHistory(){
+  const orders=getSavedOrders();
+  if(!orders.length) return;
+  if(confirm("Delete all saved orders from this browser?")){
+    localStorage.removeItem("mediPointOrders");
+    renderOrderHistory();
+  }
 }
 
-
-document.addEventListener(
-  "DOMContentLoaded",
-  readCart
-);
-
+document.addEventListener("DOMContentLoaded",()=>{
+  const phone = document.getElementById("phone");
+  if(phone){
+    phone.addEventListener("input",function(){
+      this.value = this.value.replace(/\D/g,"").slice(0,10);
+    });
+  }
+  loadCartData();
+  renderOrderHistory();
+});
 </script>
-
 </body>
 </html>
