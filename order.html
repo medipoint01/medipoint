@@ -55,7 +55,11 @@ body{font-family:Arial,Helvetica,sans-serif;color:#16474d;}
 .cart-item:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(7,121,153,.08)}
 .medicine-name{font-size:12px;font-weight:700;color:#28545a}
 .medicine-price{font-size:12px;font-weight:800;color:#07829a}
-.cart-item-bottom{margin-top:6px;font-size:9px;color:#81969b}
+.cart-item-bottom{margin-top:6px;font-size:9px;color:#81969b}.qty-control{display:flex;align-items:center;gap:7px}
+.qty-btn{width:26px;height:26px;border:1px solid #cfe3e6;background:#fff;border-radius:8px;color:#08799a;font-size:17px;font-weight:800;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.18s;box-shadow:0 2px 6px rgba(7,121,153,.08)}
+.qty-btn:hover{background:#eaf8fa;transform:translateY(-1px)}
+.qty-btn:active{transform:scale(.94)}
+.qty-value{min-width:18px;text-align:center;font-size:11px;font-weight:800;color:#244548}
 .cart-total{margin-top:11px;padding-top:12px;border-top:1px dashed #cfe0e3}
 .total-row{font-size:11px;color:#72878b;margin-bottom:5px}.total-row.final{font-size:16px;color:#075e74;margin-top:8px}
 .form-group{margin-bottom:12px}.form-group label{font-size:10px;margin-bottom:5px;color:#315860}.input-wrap input,.input-wrap textarea,.input-wrap select{font-size:11px;border-radius:9px;border-color:#d7e8ea;background:#fbfdfd}.input-wrap input,.input-wrap select{height:42px;padding-left:35px}.input-wrap textarea{min-height:85px;padding-left:35px}.input-icon{left:11px;font-size:12px}.help{font-size:8px}.upload-label{min-height:65px;padding:9px;border-radius:10px;background:#f8fcfc}.upload-icon{width:34px;height:34px;font-size:17px;border-radius:9px}.upload-info strong{font-size:10px}.upload-info small{font-size:8px}.choose-btn{font-size:8px;padding:7px 9px}.notice{font-size:9px;padding:9px 10px;line-height:1.45}.submit-btn{height:46px;border-radius:10px;font-size:12px;box-shadow:0 7px 18px rgba(8,117,121,.18);animation:pulseSoft 2.6s infinite}.secure-note{font-size:8px}.success-message{font-size:10px}
@@ -68,11 +72,6 @@ body{font-family:Arial,Helvetica,sans-serif;color:#16474d;}
 @keyframes pulseSoft{0%,100%{box-shadow:0 7px 18px rgba(8,117,121,.18)}50%{box-shadow:0 9px 23px rgba(8,117,121,.29)}}
 @media(max-width:500px){.header{padding:8px 11px}.brand-logo{width:33px;height:33px}.logo-text h1{font-size:15px}.container{padding:15px 10px 20px}.box{padding:13px}.page-title h2{font-size:19px}}
 
-.order-history{margin-top:22px}.history-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.history-head h3{font-size:18px;color:#244548}.history-count{font-size:11px;background:#eaf8f8;color:#087c7f;padding:6px 9px;border-radius:999px;font-weight:700}.history-empty{padding:24px 14px;text-align:center;color:#8a9a9c;font-size:12px;border:1px dashed #d7e4e4;border-radius:12px;background:#fbfdfd}.history-card{border:1px solid #e1eeee;border-radius:12px;padding:13px;margin-top:10px;background:linear-gradient(180deg,#fff,#fbfefe);animation:historyIn .35s ease both}.history-card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.history-id{font-size:12px;font-weight:800;color:#0a8588}.history-date{font-size:10px;color:#8a9b9d;margin-top:3px}.history-total{font-size:14px;font-weight:800;color:#173b3d;white-space:nowrap}.history-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.history-pill{font-size:10px;color:#557477;background:#f1f9f9;border:1px solid #dcebec;border-radius:999px;padding:5px 8px}.history-items{margin-top:10px;padding-top:9px;border-top:1px dashed #d8e5e6;font-size:11px;color:#5f7679;line-height:1.55}.history-status{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#2f766c;font-weight:700}.history-dot{width:7px;height:7px;border-radius:50%;background:#39a98f;box-shadow:0 0 0 4px rgba(57,169,143,.10)}
-@keyframes historyIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.clear-history{border:0;background:#fff3f3;color:#c84b4b;border:1px solid #f0d2d2;padding:7px 10px;border-radius:8px;font-size:10px;font-weight:700;cursor:pointer}.clear-history:hover{background:#ffeaea}
-@media(max-width:800px){.order-history{margin-top:16px}.history-head h3{font-size:16px}}
-.my-orders-link{display:block;text-align:center;margin-top:12px;padding:11px 14px;border-radius:11px;background:#eaf8f8;color:#08787b;text-decoration:none;font-size:12px;font-weight:700;border:1px solid #cfe8e8;transition:.2s}.my-orders-link:hover{transform:translateY(-1px);background:#def4f4}
 </style>
 </head>
 <body>
@@ -101,7 +100,7 @@ body{font-family:Arial,Helvetica,sans-serif;color:#16474d;}
     <section class="box">
       <div class="box-title">
         <div class="box-icon">🛒</div>
-        <div><h3>Order Summary</h3><p>Your selected medicines</p></div>
+        <div><h3>Order Summary</h3><p>Adjust quantity before placing your order</p></div>
       </div>
       <div id="cartContainer">
         <div class="cart-empty"><div class="cart-empty-icon">🛒</div>Loading your medicines...</div>
@@ -158,13 +157,6 @@ body{font-family:Arial,Helvetica,sans-serif;color:#16474d;}
     </section>
   </div>
 
-<section class="box order-history">
-  <div class="history-head">
-    <h3>📦 My Orders</h3>
-    <div style="display:flex;align-items:center;gap:7px"><span class="history-count" id="orderCount">0 Orders</span><button type="button" class="clear-history" onclick="clearOrderHistory()">Clear</button></div>
-  </div>
-  <div id="orderHistory"></div>
-</section>
 </main>
 
 <nav class="bottom-nav">
@@ -217,6 +209,38 @@ function updateCartBadge(){
   badge.textContent = count > 99 ? "99+" : String(count);
   badge.style.display = count > 0 ? "flex" : "none";
 }
+function saveCurrentCart(){
+  const keys = ["cart","Cart","cartItems","medicinesCart","medicineCart","mediPointCart"];
+  let keyToSave = "cart";
+  for(const key of keys){
+    try{
+      if(localStorage.getItem(key) !== null){
+        keyToSave = key;
+        break;
+      }
+    }catch(error){}
+  }
+  try{
+    localStorage.setItem(keyToSave, JSON.stringify(orderCart));
+  }catch(error){}
+}
+
+function changeQuantity(index, delta){
+  if(!Number.isInteger(index) || !orderCart[index]) return;
+  const item = orderCart[index];
+  const current = Number(item.quantity || item.qty || item.count || 1);
+  const next = Math.max(1, current + delta);
+
+  item.quantity = next;
+  delete item.qty;
+  delete item.count;
+
+  orderCart[index] = item;
+  saveCurrentCart();
+  renderCart();
+  updateCartBadge();
+}
+
 
 function normalizeItem(item){
   const name = item.name || item.medicineName || item.title || item.productName || "Medicine";
@@ -253,7 +277,11 @@ function renderCart(){
       </div>
       <div class="cart-item-bottom">
         <span>Price: ₹${item.price.toFixed(2)}</span>
-        <span>Quantity: ${item.quantity}</span>
+        <div class="qty-control" aria-label="Quantity controls">
+          <button type="button" class="qty-btn" onclick="changeQuantity(${orderCart.indexOf(rawItem)}, -1)" aria-label="Decrease quantity">−</button>
+          <span class="qty-value">${item.quantity}</span>
+          <button type="button" class="qty-btn" onclick="changeQuantity(${orderCart.indexOf(rawItem)}, 1)" aria-label="Increase quantity">+</button>
+        </div>
       </div>
     </div>`;
   });
@@ -412,20 +440,6 @@ Thank you,
     return {name:item.name, price:item.price, quantity:item.quantity, amount:item.price*item.quantity};
   });
 
-  saveOrderRecord({
-    orderID,
-    date:orderDate,
-    time:orderTime,
-    name,
-    phone,
-    address,
-    payment,
-    prescriptionName,
-    items:savedItems,
-    total,
-    status:"Order Saved"
-  });
-
   const orderData = {
     orderID,
     date: orderDate,
@@ -463,56 +477,6 @@ function escapeHTML(value){
     .replace(/'/g,"&#039;");
 }
 
-function getSavedOrders(){
-  try{
-    const raw=localStorage.getItem("mediPointOrders");
-    const parsed=raw?JSON.parse(raw):[];
-    return Array.isArray(parsed)?parsed:[];
-  }catch(e){return [];}
-}
-
-function saveOrderRecord(order){
-  const orders=getSavedOrders();
-  orders.unshift(order);
-  localStorage.setItem("mediPointOrders",JSON.stringify(orders));
-  renderOrderHistory();
-}
-
-function renderOrderHistory(){
-  const box=document.getElementById("orderHistory");
-  const count=document.getElementById("orderCount");
-  if(!box||!count) return;
-  const orders=getSavedOrders();
-  count.textContent=orders.length+" Order"+(orders.length===1?"":"s");
-  if(!orders.length){
-    box.innerHTML='<div class="history-empty">🧾 No order history yet.<br>Your confirmed orders will be saved here automatically.</div>';
-    return;
-  }
-  box.innerHTML=orders.map((o)=>{
-    const itemLines=(o.items||[]).map(i=>`${escapeHTML(i.name)} × ${Number(i.quantity)||1}`).join(" • ")||"Medicine order";
-    return `<div class="history-card">
-      <div class="history-card-top">
-        <div><div class="history-id">${escapeHTML(o.orderID||"MEDI POINT")}</div><div class="history-date">${escapeHTML(o.date||"")} • ${escapeHTML(o.time||"")}</div></div>
-        <div class="history-total">₹${Number(o.total||0).toFixed(2)}</div>
-      </div>
-      <div class="history-meta">
-        <span class="history-pill">${escapeHTML(o.name||"Customer")}</span>
-        <span class="history-pill">${escapeHTML(o.payment||"Payment")}</span>
-        <span class="history-status"><span class="history-dot"></span>${escapeHTML(o.status||"Order Saved")}</span>
-      </div>
-      <div class="history-items">💊 ${itemLines}</div>
-    </div>`;
-  }).join("");
-}
-
-function clearOrderHistory(){
-  const orders=getSavedOrders();
-  if(!orders.length) return;
-  if(confirm("Delete all saved orders from this browser?")){
-    localStorage.removeItem("mediPointOrders");
-    renderOrderHistory();
-  }
-}
 
 document.addEventListener("DOMContentLoaded",()=>{
   const phone = document.getElementById("phone");
@@ -522,7 +486,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
   }
   loadCartData();
-  renderOrderHistory();
 });
 </script>
 </body>
